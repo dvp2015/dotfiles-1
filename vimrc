@@ -61,6 +61,7 @@ set background=dark
 silent! colorscheme solarized8_dark
 
 set hidden
+set hls
 
 " Plugin configuration {{{1
 " netrw.vim {{{2
@@ -291,3 +292,5 @@ if has('nvim')
   tnoremap <a-l> <c-\><c-n><c-w>l
   tnoremap <Esc> <C-\><C-n>
 endif
+
+
