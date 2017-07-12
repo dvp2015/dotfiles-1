@@ -22,6 +22,9 @@ if has('mouse')
 endif
 set diffopt=filler,vertical
 set ruler
+set ignorecase
+set smartcase
+set incsearch
 
 if has('nvim')
   set inccommand=nosplit
@@ -54,8 +57,8 @@ endif
 
 " Colorscheme
 set termguicolors
-set background=light
-silent! colorscheme solarized8_light
+set background=dark
+silent! colorscheme solarized8_dark
 
 set hidden
 
@@ -253,16 +256,16 @@ augroup emoji_complete
   autocmd FileType markdown setlocal completefunc=emoji#complete
 augroup END
 
-if exists(':terminal')
-  tnoremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+" if exists(':terminal')
+"   noremap <expr> <C-\><C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
-  autocmd vimrc TermOpen * nnoremap <buffer> I I<C-a>
-  autocmd vimrc TermOpen * nnoremap <buffer> A A<C-e>
-  autocmd vimrc TermOpen * nnoremap <buffer> C i<C-k>
-  autocmd vimrc TermOpen * nnoremap <buffer> D i<C-k><C-\><C-n>
-  autocmd vimrc TermOpen * nnoremap <buffer> cc i<C-e><C-u>
-  autocmd vimrc TermOpen * nnoremap <buffer> dd i<C-e><C-u><C-\><C-n>
-endif
+"   autocmd vimrc TermOpen * nnoremap <buffer> I I<C-a>
+"   autocmd vimrc TermOpen * nnoremap <buffer> A A<C-e>
+"   autocmd vimrc TermOpen * nnoremap <buffer> C i<C-k>
+"   autocmd vimrc TermOpen * nnoremap <buffer> D i<C-k><C-\><C-n>
+"   autocmd vimrc TermOpen * nnoremap <buffer> cc i<C-e><C-u>
+"   autocmd vimrc TermOpen * nnoremap <buffer> dd i<C-e><C-u><C-\><C-n>
+" endif
 
 " https://github.com/neovim/neovim/pull/2076#issuecomment-76998265
 nnoremap <a-h> <c-w>h
