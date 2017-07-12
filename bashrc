@@ -101,3 +101,4 @@ if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
 else
   export VISUAL="nvim"
 fi
+eval "$(dircolors -b ~/.dircolors)" 
