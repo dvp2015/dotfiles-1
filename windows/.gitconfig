@@ -1,0 +1,7 @@
+[user]
+	name = Dmitry Portnov
+	email = dmitri_portnov@yahoo.com
+[core]
+	editor = notepad++.exe
+[push]
+	default = simple
