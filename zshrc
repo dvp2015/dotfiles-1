@@ -5,6 +5,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
+if [[ ! -d ~/.linuxbrew ]]; then
+  git clone https://github.com/Linuxbrew/brew.git ~/.linuxbrew
+fi
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$(brew --prefix)/share/man:$MANPATH"
 export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
@@ -76,7 +79,9 @@ zplug "plugins/python", from:oh-my-zsh
 zplug "plugins/pylint", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
+# ZSH_THEME="fino-time"
 # zplug "themes/amuse", as:theme, from:oh-my-zsh
+# zplug "themes/fino-time", as:theme, from:oh-my-zsh
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme 
 
 # plugins=(git gitfast git-extras python pylint tmux tmuxinator)
