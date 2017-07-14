@@ -26,6 +26,19 @@ set ignorecase
 set smartcase
 set incsearch
 
+" Python helping options
+" http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
+set textwidth=79  " lines longer than 79 columns will be broken
+set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
+set tabstop=4     " a hard TAB displays as 4 columns
+set expandtab     " insert spaces when hitting TABs
+set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround    " round indent to multiple of 'shiftwidth'
+set autoindent    " align the new line indent with the previous line 
+
+
+
+
 if has('nvim')
   set inccommand=nosplit
 endif
@@ -176,6 +189,7 @@ xnoremap . :normal .<CR>
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
+
   echo '@'.getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
@@ -293,4 +307,11 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" Againg python
+autocmd BufWritePost *.py call Flake8()
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5

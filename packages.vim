@@ -34,6 +34,7 @@ call minpac#add('tommcdo/vim-exchange')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('szw/vim-g')
 call minpac#add('kana/vim-smartinput')
+call minpac#add('vim-syntastic/syntastic')
 
 " Custom textobjects
 call minpac#add('kana/vim-textobj-user')
@@ -56,6 +57,9 @@ call minpac#add('nelstrom/vim-docopen')
 call minpac#add('tpope/vim-markdown')
 call minpac#add('nelstrom/vim-markdown-folding')
 call minpac#add('junegunn/vim-emoji', {'type': 'opt'})
+
+" Python
+call minpac#add('python-mode/python-mode', {'type': 'opt'})
 
 " " JavaScript
 " call minpac#add('pangloss/vim-javascript')
