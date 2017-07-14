@@ -92,3 +92,9 @@ call minpac#add('reedes/vim-colors-pencil', {'type': 'opt'})
 " else
 call minpac#add('Shougo/unite.vim', {'type': 'opt'})
 " endif
+
+" Status line
+call minpac#add('majutsushi/tagbar')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+

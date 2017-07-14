@@ -307,7 +307,7 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" Againg python
+" Again python
 autocmd BufWritePost *.py call Flake8()
 
 set statusline+=%#warningmsg#
@@ -315,3 +315,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
+
+" Status line
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
