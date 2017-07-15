@@ -324,3 +324,6 @@ let g:airline_solarized_bg='dark'
 nnoremap gm m
 let g:EasyClipUseSubstituteDefaults=1
 let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end
+ 
+" From vim../doc/russian.txt: enables standar keys in Russian keyboard
+:set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
