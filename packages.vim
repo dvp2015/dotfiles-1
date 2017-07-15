@@ -93,8 +93,20 @@ call minpac#add('reedes/vim-colors-pencil', {'type': 'opt'})
 call minpac#add('Shougo/unite.vim', {'type': 'opt'})
 " endif
 
+" Clipboard ring
+call minpac#add('svermeulen/vim-easyclip')
+
+" File list and open
+call minpac#add('jeetsukumaran/vim-filebeagle')
+
+" Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+call minpac#add('ctrlpvim/ctrlp.vim')
+
+" code/project navigation ===-------------
+call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
+call minpac#add('majutsushi/tagbar')          	" Class/module browser
+
 " Status line
-call minpac#add('majutsushi/tagbar')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 

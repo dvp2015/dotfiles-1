@@ -319,3 +319,8 @@ let g:syntastic_loc_list_height=5
 " Status line
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
+
+" Easyclip 
+nnoremap gm m
+let g:EasyClipUseSubstituteDefaults=1
+let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end
