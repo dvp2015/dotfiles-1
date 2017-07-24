@@ -60,6 +60,19 @@ call minpac#add('junegunn/vim-emoji', {'type': 'opt'})
 
 " Python
 call minpac#add('python-mode/python-mode', {'type': 'opt'})
+call minpac#add('davidhalter/jedi-vim') 		" Jedi-vim autocomplete plugin
+call minpac#add('mitsuhiko/vim-jinja')		" Jinja support for vim
+call minpac#add('mitsuhiko/vim-python-combined')  " Combined Python 2/3 for Vim
+call minpac#add('g2boojum/vim-mcnp')              " MCNP syntax
+
+" yank - Highlight copied area
+" https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
+
+call minpac#add('kana/vim-operator-user')            " Lets user define their own operators.
+call minpac#add('thinca/vim-operator-sequence')      " Operator to do two or more operators.
+call minpac#add('osyo-manga/vim-operator-highlight') " the plugin for this.
+
+call minpac#add('thanthese/Tortoise-Typing')         " touch typing tutor
 
 " " JavaScript
 " call minpac#add('pangloss/vim-javascript')
@@ -93,8 +106,20 @@ call minpac#add('reedes/vim-colors-pencil', {'type': 'opt'})
 call minpac#add('Shougo/unite.vim', {'type': 'opt'})
 " endif
 
+" Clipboard ring
+call minpac#add('svermeulen/vim-easyclip')
+
+" File list and open
+call minpac#add('jeetsukumaran/vim-filebeagle')
+
+" Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+call minpac#add('ctrlpvim/ctrlp.vim')
+
+" code/project navigation ===-------------
+call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
+call minpac#add('majutsushi/tagbar')          	" Class/module browser
+
 " Status line
-call minpac#add('majutsushi/tagbar')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 
