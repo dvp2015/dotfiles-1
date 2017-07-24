@@ -52,3 +52,10 @@ alias tree='tree -Csu'          # альтернатива 'ls'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 
+# Return if requirements are not found.
+if (( $+commands[todo.sh] )); then
+  alias todo='todo.sh'
+  alias todol="todo.sh ls -someday"
+fi
+
+
