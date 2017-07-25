@@ -63,7 +63,13 @@ call minpac#add('python-mode/python-mode', {'type': 'opt'})
 call minpac#add('davidhalter/jedi-vim') 		" Jedi-vim autocomplete plugin
 call minpac#add('mitsuhiko/vim-jinja')		" Jinja support for vim
 call minpac#add('mitsuhiko/vim-python-combined')  " Combined Python 2/3 for Vim
+call minpac#add('nvie/vim-flake8')  " Static syntax and code checker Flake8 
+" call minpac#add('ervandew/supertab ')  " use <Tab> for all your insert completion needs (:h ins-completion). 
+call minpac#add('rosenfeld/conque-term')  " Consoles as buffers
+
+" MCNP
 call minpac#add('g2boojum/vim-mcnp')              " MCNP syntax
+
 
 " yank - Highlight copied area
 " https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
@@ -96,15 +102,15 @@ call minpac#add('rakr/vim-one', {'type': 'opt'})
 call minpac#add('NLKNguyen/papercolor-theme', {'type': 'opt'})
 call minpac#add('reedes/vim-colors-pencil', {'type': 'opt'})
 
-" " Plugins for either Vim8 or NeoVim
-" if has('nvim')
-"   call minpac#add('Shougo/denite.nvim', {})
-"   call minpac#add('machakann/vim-highlightedyank', {})
-"   call minpac#add('kassio/neoterm', {'type': 'opt'})
-"   call minpac#add('Shougo/neomru.vim', {'type': 'opt'})
-" else
-call minpac#add('Shougo/unite.vim', {'type': 'opt'})
-" endif
+" Plugins for either Vim8 or NeoVim
+if has('nvim')
+   call minpac#add('Shougo/denite.nvim', {})
+   call minpac#add('machakann/vim-highlightedyank', {})
+   call minpac#add('kassio/neoterm', {'type': 'opt'})
+   call minpac#add('Shougo/neomru.vim', {'type': 'opt'})
+else
+  call minpac#add('Shougo/unite.vim', {'type': 'opt'}) " Navigation between buffers and files
+endif
 
 " Clipboard ring
 call minpac#add('svermeulen/vim-easyclip')
