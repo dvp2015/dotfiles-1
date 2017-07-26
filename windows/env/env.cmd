@@ -1,6 +1,6 @@
 @echo off
 
-set DVP_ENV=%USERPROFILE%\OneDrive\env
+set DVP_ENV=%USERPROFILE%\dotfiles\windows\env
 set DVP_TOOLS=c:\tools
 
 :: Temporary system path at cmd startup
