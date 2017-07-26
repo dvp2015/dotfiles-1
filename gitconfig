@@ -1,0 +1,9 @@
+[url "git://anongit.kde.org/"]
+	insteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
+[user]
+	name = dvp
+	email = dmitri_portnov@yahoo.com
+[push]
+	default = simple

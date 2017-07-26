@@ -34,6 +34,7 @@ call minpac#add('tommcdo/vim-exchange')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('szw/vim-g')
 call minpac#add('kana/vim-smartinput')
+call minpac#add('vim-syntastic/syntastic')
 
 " Custom textobjects
 call minpac#add('kana/vim-textobj-user')
@@ -57,20 +58,42 @@ call minpac#add('tpope/vim-markdown')
 call minpac#add('nelstrom/vim-markdown-folding')
 call minpac#add('junegunn/vim-emoji', {'type': 'opt'})
 
-" JavaScript
-call minpac#add('pangloss/vim-javascript')
-call minpac#add('elzr/vim-json')
+" Python
+call minpac#add('python-mode/python-mode', {'type': 'opt'})
+call minpac#add('davidhalter/jedi-vim') 		" Jedi-vim autocomplete plugin
+call minpac#add('mitsuhiko/vim-jinja')		" Jinja support for vim
+call minpac#add('mitsuhiko/vim-python-combined')  " Combined Python 2/3 for Vim
+call minpac#add('nvie/vim-flake8')  " Static syntax and code checker Flake8 
+" call minpac#add('ervandew/supertab ')  " use <Tab> for all your insert completion needs (:h ins-completion). 
+call minpac#add('rosenfeld/conque-term')  " Consoles as buffers
 
-" Ruby
-call minpac#add('tpope/vim-bundler')
-call minpac#add('tpope/vim-endwise')
-call minpac#add('tpope/vim-rails')
-call minpac#add('tpope/vim-rake')
-call minpac#add('vim-ruby/vim-ruby')
+" MCNP
+call minpac#add('g2boojum/vim-mcnp')              " MCNP syntax
 
-" Support for rare and exotic languages
-call minpac#add('nelstrom/vim-pml')
-call minpac#add('nelstrom/vim-subrip')
+
+" yank - Highlight copied area
+" https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
+
+call minpac#add('kana/vim-operator-user')            " Lets user define their own operators.
+call minpac#add('thinca/vim-operator-sequence')      " Operator to do two or more operators.
+call minpac#add('osyo-manga/vim-operator-highlight') " the plugin for this.
+
+call minpac#add('thanthese/Tortoise-Typing')         " touch typing tutor
+
+" " JavaScript
+" call minpac#add('pangloss/vim-javascript')
+" call minpac#add('elzr/vim-json')
+
+" " Ruby
+" call minpac#add('tpope/vim-bundler')
+" call minpac#add('tpope/vim-endwise')
+" call minpac#add('tpope/vim-rails')
+" call minpac#add('tpope/vim-rake')
+" call minpac#add('vim-ruby/vim-ruby')
+
+" " Support for rare and exotic languages
+" call minpac#add('nelstrom/vim-pml')
+" call minpac#add('nelstrom/vim-subrip')
 
 " Colorschemes
 call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
@@ -81,10 +104,28 @@ call minpac#add('reedes/vim-colors-pencil', {'type': 'opt'})
 
 " Plugins for either Vim8 or NeoVim
 if has('nvim')
-  call minpac#add('Shougo/denite.nvim', {})
-  call minpac#add('machakann/vim-highlightedyank', {})
-  call minpac#add('kassio/neoterm', {'type': 'opt'})
-  call minpac#add('Shougo/neomru.vim', {'type': 'opt'})
+   call minpac#add('Shougo/denite.nvim', {})
+   call minpac#add('machakann/vim-highlightedyank', {})
+   call minpac#add('kassio/neoterm', {'type': 'opt'})
+   call minpac#add('Shougo/neomru.vim', {'type': 'opt'})
 else
-  call minpac#add('Shougo/unite.vim', {'type': 'opt'})
+  call minpac#add('Shougo/unite.vim', {'type': 'opt'}) " Navigation between buffers and files
 endif
+
+" Clipboard ring
+call minpac#add('svermeulen/vim-easyclip')
+
+" File list and open
+call minpac#add('jeetsukumaran/vim-filebeagle')
+
+" Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+call minpac#add('ctrlpvim/ctrlp.vim')
+
+" code/project navigation ===-------------
+call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
+call minpac#add('majutsushi/tagbar')          	" Class/module browser
+
+" Status line
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+
