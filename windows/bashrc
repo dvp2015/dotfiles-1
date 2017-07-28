@@ -12,22 +12,11 @@ function get_hostname {
   export SHORTNAME=${HOSTNAME}
 }
 
-function user_color {
-  id | grep "Admin" > /dev/null
-  RETVAL=$?
-  if [[ $RETVAL == 0 ]]; then
-    usercolor="[0;32m";
-  else
-    usercolor="[0;32m";
-  fi
-}
-
 function settitle() {
   u=${USERNAME}
   h="$u@${HOSTNAME}"
   echo -ne "\e]2;$h\a\e]1;$h\a";
-}
-
+} 
 # Set directory colors
 eval `dircolors ~/.dir_colors`
 
@@ -36,9 +25,8 @@ inputcolor='[0;37m'
 cwdcolor='[0;34m'
 host_name='[1;31m'
 git_color='[0;33m'
-user_color
 PROMPT_COMMAND='settitle; get_hostname; history -a;'
-export PS1='\n\[\e${cwdcolor}\][$PWD]\n\[\e${usercolor}\][\u]\[\e${host_name}\][${SHORTNAME}]\[\e${git_color}\]`__git_ps1`\[\e${inputcolor}\]\n$ '
+export PS1='\n\[\e${cwdcolor}\][$PWD]\[\e${git_color}\]`__git_ps1`\[\e${inputcolor}\]\n$ '
 
 # Aliases for "colorized" commands
 alias ls='ls -s --color'
@@ -46,6 +34,7 @@ alias ll='ls -l --color'
 
 alias grep='grep -n --color'
 export EDITOR="vim"
+export VISUAL="vim"
 export MY_ORIGINAL_PATH=$PATH
 export PATH="~/bin:$PATH"
 
@@ -68,9 +57,15 @@ if ! shopt -oq posix; then
   fi
 fi 
 
-for p in ~/.bash.d/*.sh; do
-	. $p
-done
+if [[ -d ~/.bash.d ]]; then
+	for p in ~/.bash.d/*.sh; do
+		. $p  # The scripts from the user directory may call scripts from the dotfiles
+	done
+else
+	for p in ~/dotfiles/windows/bash.d/*.sh; do
+		. $p
+	done
+fi
 
 # Load local bash session configuration files (order of loading is arbitrary)
 if [[ $(pwd) != ~ && -d ".bash.d" ]]; then

@@ -5,7 +5,7 @@ if !exists('*minpac#init')
   finish
 endif
 
-call minpac#init({'verbose': 0})
+call minpac#init({'verbose': 1})
 
 " minpac must have {'type': 'opt'} so that it can be loaded with
 " `packadd`.
