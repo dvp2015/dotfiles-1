@@ -1,20 +1,20 @@
 echo off
 
-set DVP_ENV=%USERPROFILE%\dotfiles\windows\env
 set DVP_TOOLS=c:\tools
 
 :: Temporary system path at cmd startup
 set DVP_ORIGINAL_PATH=%PATH%
-:: set PATH=%PATH%;"%DVP_ENV%"
 set PATH=%PATH%;"%ProgramFiles%\7-Zip"
 set PATH=%PATH%;"%DVP_TOOLS%\Tools-1.8.0"
 
 if "%USER_ENV%"=="" goto skip_user_env 
 
-echo Loading user environment from %USER_ENV%
+::echo Loading user environment from %USER_ENV%
 
 for %%f in ( %USER_ENV%\*.cmd ) do (
-	call "%%f" $*
+	if	not "%%f"=="%USER_ENV%\env.cmd" (
+		call "%%f" $*
+	)
 )
 
 :skip_user_env
