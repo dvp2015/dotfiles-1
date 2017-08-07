@@ -10,6 +10,9 @@ if !has('nvim')
   source $VIMRUNTIME/defaults.vim
 endif
 
+" Julia
+:let g:latex_to_unicode_auto = 1
+
 source ~/dotfiles/packages.vim
 
 " Personal preferences not set by sensible.vim
