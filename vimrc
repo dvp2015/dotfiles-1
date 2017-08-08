@@ -589,3 +589,7 @@ noremap <expr> <Plug>(yank-highlight) operator#sequence#map("y", "\<Plug>(operat
 nmap <Leader>y <Plug>(yank-highlight)
 vmap <Leader>y <Plug>(yank-highlight)
 let g:operator#highlight#clear_time=2.0
+
+if filereadable(".init.vim")
+  source ".init.vim"  " Load local vim settings
+endif
