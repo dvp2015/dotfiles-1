@@ -275,13 +275,13 @@ let g:syntastic_python_checkers = ['flake8', 'python']
 let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
 \ --max-line-length=80'
 
-" --- Rust ---
-set hidden
-let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
-let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
-autocmd BufRead,BufNewFile *.rs set filetype=rust
-autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
-autocmd FileType rust setlocal commentstring=//\ %s
+"" --- Rust ---
+" set hidden
+" let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
+" let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
+" autocmd BufRead,BufNewFile *.rs set filetype=rust
+" autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+" autocmd FileType rust setlocal commentstring=//\ %s
 
 " --- Vim ---
 autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
