@@ -466,17 +466,6 @@ function! EchoTags()
   echo join(split(&tags, ','), "\n")
 endfunction
 
-
-" let g:EasyClipUseSubstituteDefaults = 1
-" nmap <silent> gs <plug>SubstituteOverMotionMap
-" nmap gss <plug>SubstituteLine
-" xmap gs p
-
-" let g:EasyClipUseCutDefaults = 0
-" nmap x <Plug>MoveMotionPlug
-" xmap x <Plug>MoveMotionXPlug
-" nmap xx <Plug>MoveMotionLinePlug
-
 nmap cp <Plug>TransposeCharacters
 nnoremap  <Plug>TransposeCharacters xp
 \:call repeat#set("\<Plug>TransposeCharacters")<CR>
@@ -576,9 +565,21 @@ let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 
 " Easyclip 
-nnoremap gm m
-let g:EasyClipUseSubstituteDefaults=1
+set clipboard=unnamed
+let g:EasyClipAutoFormat=1
+let g:EasyClipCopyExplicitRegisterToDefault=1
+let g:EasyClipShareYanks=0
+" let g:EasyClipUseSubstituteDefaults=1
 let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end
+nmap <silent> gs <plug>SubstituteOverMotionMap
+nmap gss <plug>SubstituteLine
+" xmap gs p
+xmap gs <plug>XEasyClipPaste
+nnoremap gm m
+" let g:EasyClipUseCutDefaults = 0
+" nmap x <Plug>MoveMotionPlug
+" xmap x <Plug>MoveMotionXPlug
+" nmap xx <Plug>MoveMotionLinePlug
  
 " From vim../doc/russian.txt: enables standar keys in Russian keyboard
 :set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
