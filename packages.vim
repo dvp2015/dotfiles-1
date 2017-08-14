@@ -129,3 +129,6 @@ call minpac#add('majutsushi/tagbar')          	" Class/module browser
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 
+" Julia
+call minpac#add('JuliaEditorSupport/julia-vim')
+

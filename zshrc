@@ -1,14 +1,18 @@
 export DEFAULT_USER=dvp
 TERM=xterm-256color
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Make path array entries unique
+typeset -U path
+path=("$HOME/bin" $path)
+path=("/usr/local/bin" $path)
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
 if [[ ! -d ~/.linuxbrew ]]; then
   git clone https://github.com/Linuxbrew/brew.git ~/.linuxbrew
 fi
-export PATH="$HOME/.linuxbrew/bin:$PATH"
+path=("$HOME/.linuxbrew/bin" $path)
+export PATH
 export MANPATH="$(brew --prefix)/share/man:$MANPATH"
 export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 
@@ -80,6 +84,7 @@ zplug "plugins/python", from:oh-my-zsh
 zplug "plugins/pylint", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
 # ZSH_THEME="fino-time"
 # zplug "themes/amuse", as:theme, from:oh-my-zsh
 # zplug "themes/fino-time", as:theme, from:oh-my-zsh
@@ -150,10 +155,10 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -221,3 +226,8 @@ source ~/.bin/tmuxinator.zsh
 
 # Directory colors (like in bash)
 eval "$(dircolors -b ~/.dircolors)" 
+
+
+# This forces julia PyCall and IJulia to use "standard" python and jupyter
+export PYTHON="/opt/anaconda3/bin/python"
+export JUPYTER="/opt/anaconda3/bin/jupyter"

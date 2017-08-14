@@ -37,6 +37,10 @@ export EDITOR="vim"
 export VISUAL="vim"
 export MY_ORIGINAL_PATH=$PATH
 export PATH="~/bin:$PATH"
+export HISTORSIZE=1000
+export SAVEHIST=1000
+export HISTFILE=~/.history
+ 
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -57,19 +61,17 @@ if ! shopt -oq posix; then
   fi
 fi 
 
-if [[ -d ~/.bash.d ]]; then
+# Load bash session configuration files 
+if [[ -d ".bash.d" ]]; then # Load local files
+	if [[ -r ".bash.d/__init__.sh" ]]; then
+		. ".bash.d/__init__.sh" # The __init__.sh defines the order of loading
+	else
+		for p in .bash.d/*.sh; do # order of loading is arbitrary
+			. $p # Local scipts may call or not to call the generic ones
+		done
+	fi
+else # Load generic scripts for the user configuration
 	for p in ~/.bash.d/*.sh; do
-		. $p  # The scripts from the user directory may call scripts from the dotfiles
-	done
-else
-	for p in ~/dotfiles/windows/bash.d/*.sh; do
-		. $p
-	done
-fi
-
-# Load local bash session configuration files (order of loading is arbitrary)
-if [[ $(pwd) != ~ && -d ".bash.d" ]]; then
-	for p in .bash.d/*.sh; do
 		. $p
 	done
 fi

@@ -24,7 +24,7 @@ doskey xls="C:\Program Files\Microsoft Office\Office15\EXCEL.exe" $*
 doskey ppt="C:\Program Files\Microsoft Office\Office15\POWERPNT.exe" $*
 
 :: Open git bash console
-doskey gb="C:\tools\git\gb.cmd" $*
+doskey gb="%GIT_HOME%\git-bash.exe" $*
 
 
 ::doskey dropbox=cd "%USERPROFILE%\Dropbox\$*"

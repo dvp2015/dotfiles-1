@@ -10,6 +10,9 @@ if !has('nvim')
   source $VIMRUNTIME/defaults.vim
 endif
 
+" Julia
+:let g:latex_to_unicode_auto = 1
+
 source ~/dotfiles/packages.vim
 
 " Personal preferences not set by sensible.vim
@@ -272,13 +275,13 @@ let g:syntastic_python_checkers = ['flake8', 'python']
 let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
 \ --max-line-length=80'
 
-" --- Rust ---
-set hidden
-let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
-let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
-autocmd BufRead,BufNewFile *.rs set filetype=rust
-autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
-autocmd FileType rust setlocal commentstring=//\ %s
+"" --- Rust ---
+" set hidden
+" let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
+" let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
+" autocmd BufRead,BufNewFile *.rs set filetype=rust
+" autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+" autocmd FileType rust setlocal commentstring=//\ %s
 
 " --- Vim ---
 autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
@@ -463,17 +466,6 @@ function! EchoTags()
   echo join(split(&tags, ','), "\n")
 endfunction
 
-
-" let g:EasyClipUseSubstituteDefaults = 1
-" nmap <silent> gs <plug>SubstituteOverMotionMap
-" nmap gss <plug>SubstituteLine
-" xmap gs p
-
-" let g:EasyClipUseCutDefaults = 0
-" nmap x <Plug>MoveMotionPlug
-" xmap x <Plug>MoveMotionXPlug
-" nmap xx <Plug>MoveMotionLinePlug
-
 nmap cp <Plug>TransposeCharacters
 nnoremap  <Plug>TransposeCharacters xp
 \:call repeat#set("\<Plug>TransposeCharacters")<CR>
@@ -573,9 +565,21 @@ let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 
 " Easyclip 
-nnoremap gm m
-let g:EasyClipUseSubstituteDefaults=1
+set clipboard=unnamed
+let g:EasyClipAutoFormat=1
+let g:EasyClipCopyExplicitRegisterToDefault=1
+let g:EasyClipShareYanks=0
+" let g:EasyClipUseSubstituteDefaults=1
 let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end
+nmap <silent> gs <plug>SubstituteOverMotionMap
+nmap gss <plug>SubstituteLine
+" xmap gs p
+xmap gs <plug>XEasyClipPaste
+nnoremap gm m
+" let g:EasyClipUseCutDefaults = 0
+" nmap x <Plug>MoveMotionPlug
+" xmap x <Plug>MoveMotionXPlug
+" nmap xx <Plug>MoveMotionLinePlug
  
 " From vim../doc/russian.txt: enables standar keys in Russian keyboard
 :set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -586,3 +590,7 @@ noremap <expr> <Plug>(yank-highlight) operator#sequence#map("y", "\<Plug>(operat
 nmap <Leader>y <Plug>(yank-highlight)
 vmap <Leader>y <Plug>(yank-highlight)
 let g:operator#highlight#clear_time=2.0
+
+if filereadable(".init.vim")
+  source ".init.vim"  " Load local vim settings
+endif
