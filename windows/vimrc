@@ -86,6 +86,7 @@ Plugin 'davidhalter/jedi-vim' 		" Jedi-vim autocomplete plugin
 Plugin 'mitsuhiko/vim-jinja'		" Jinja support for vim
 Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
 Plugin 'g2boojum/vim-mcnp'              " MCNP syntax
+Plugin 'freitass/todo.txt-vim'          " TODO.txt syntax
 
 
 " All of your Plugins must be added before the following line
