@@ -132,3 +132,5 @@ call minpac#add('vim-airline/vim-airline-themes')
 " Julia
 call minpac#add('JuliaEditorSupport/julia-vim')
 
+" to-do.txt
+call minpac#add('freitass/todo.txt-vim')
