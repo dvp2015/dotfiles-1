@@ -36,3 +36,6 @@ alias 2misc='cd ~/misc'
 alias ek='vim ~/misc/keys/generic.txt'
 
 alias path='echo -e ${PATH//:/\\n}'
+
+alias todo='~/misc/todo/todo.sh $*'
+alias etodo='vim ~/misc/todo/todo.txt'

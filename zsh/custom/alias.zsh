@@ -56,6 +56,7 @@ alias getclip="xclip -selection c -o"
 if (( $+commands[todo.sh] )); then
   alias todo='todo.sh'
   alias todol="todo.sh ls -someday"
+  alias etodo="vim ~/misc/todo/todo.txt"
 fi
 
 
