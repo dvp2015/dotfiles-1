@@ -30,6 +30,7 @@ alias g='git'
 alias gp='git push'
 alias gl='git pull'
 alias gst='git status'
+alias gcam='git commit -am"
 
 alias 2misc='cd ~/misc'
 alias ek='vim ~/misc/keys/generic.txt'
