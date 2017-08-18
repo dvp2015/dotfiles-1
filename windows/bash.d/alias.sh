@@ -17,6 +17,8 @@ alias grep='grep -n --color'
 # files/directories handling
 alias rm='rm -i'
 alias md='mkdir -p'
+alias '..'='cd ..'
+alias '...'='cd ../..'
 
 function 2dir() {
 	[ "$(pwd)" != "$1" ] && pushd "$1" >/dev/null
@@ -30,12 +32,12 @@ alias g='git'
 alias gp='git push'
 alias gl='git pull'
 alias gst='git status'
-alias gcam='git commit -am"
+alias gcam='git commit -am'
 
 alias 2misc='cd ~/misc'
 alias ek='vim ~/misc/keys/generic.txt'
 
 alias path='echo -e ${PATH//:/\\n}'
 
-alias todo='~/misc/todo/todo.sh $*'
+alias todo='~/misc/todo/todo.sh'
 alias etodo='vim ~/misc/todo/todo.txt'
