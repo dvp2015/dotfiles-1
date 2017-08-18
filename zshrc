@@ -231,3 +231,10 @@ eval "$(dircolors -b ~/.dircolors)"
 # This forces julia PyCall and IJulia to use "standard" python and jupyter
 export PYTHON="/opt/anaconda3/bin/python"
 export JUPYTER="/opt/anaconda3/bin/jupyter"
+
+function o() {
+  for i in $* 
+  do
+    xdg-open $i
+  done
+}
