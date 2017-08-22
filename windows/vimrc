@@ -88,6 +88,13 @@ Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
 Plugin 'g2boojum/vim-mcnp'              " MCNP syntax
 Plugin 'freitass/todo.txt-vim'          " TODO.txt syntax
 
+" --- Markdown ---
+Plugin 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
+Plugin 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
+Plugin 'vim-pandoc/vim-pandoc-syntax' 
+Plugin 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
+Plugin 'dhruvasagar/vim-table-mode'    " Automates table creation
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
