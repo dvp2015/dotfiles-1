@@ -59,4 +59,5 @@ if (( $+commands[todo.sh] )); then
   alias etodo="vim ~/misc/todo/todo.txt"
 fi
 
-
+# Chrome
+alias chrome='/opt/google/chrome/chrome'
