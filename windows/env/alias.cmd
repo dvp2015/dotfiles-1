@@ -11,7 +11,7 @@ doskey ee="%ProgramFiles%\Notepad++\notepad++.exe" "%USERPROFILE%\dotfiles\windo
 doskey ea="%ProgramFiles%\Notepad++\notepad++.exe" "%USERPROFILE%\dotfiles\windows\env\alias.cmd" $*
 doskey ele="%ProgramFiles%\Notepad++\notepad++.exe" "%USERPROFILE%\OneDrive\env\env.cmd" $*
 doskey ela="%ProgramFiles%\Notepad++\notepad++.exe" "%USERPROFILE%\OneDrive\env\alias.cmd" $*
-doskey pycharm="%ProgramFiles%\JetBrains\PyCharm Community Edition 2017.1.3\bin\pycharm64.exe" $*
+doskey pycharm="%ProgramFiles%\JetBrains\PyCharm Community Edition 2017.2.3\bin\pycharm64.exe" $*
 
 :: Common directories
 
