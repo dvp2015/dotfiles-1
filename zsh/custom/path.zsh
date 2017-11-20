@@ -13,4 +13,4 @@ export TRIPOLI_HOME=/opt/tripoli
 export PATH=$PATH:$TRIPOLI_HOME/bin
 export PATH=$PATH:/opt/pycharm-community-2017.1.2/bin
 export PATH=$PATH:~/misc/todo
-export PATH=$PATH:/opt/JuliaPro-0.6.0.1
+path=(/opt/JuliaPro-0.5.2.2 $path)
