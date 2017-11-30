@@ -600,3 +600,7 @@ endif
 " Julia
 :let g:latex_to_unicode_auto = 1
 
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep' " ag is faster
+endif
