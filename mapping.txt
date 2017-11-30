@@ -1,0 +1,439 @@
+v  ["          *@:<C-U>exe "normal! gv"|call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")<CR>
+n  ["          *@:call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")<CR>
+v  []          *@m':<C-U>exe "normal! gv"|call search('^\s*endf*\%[unction]\>', "bW")<CR>
+n  []          *@m':call search('^\s*endf*\%[unction]\>', "bW")<CR>
+v  [[          *@m':<C-U>exe "normal! gv"|call search('^\s*fu\%[nction]\>', "bW")<CR>
+n  [[          *@m':call search('^\s*fu\%[nction]\>', "bW")<CR>
+v  ]"          *@:<C-U>exe "normal! gv"|call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")<CR>
+n  ]"          *@:call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")<CR>
+v  ][          *@m':<C-U>exe "normal! gv"|call search('^\s*endf*\%[unction]\>', "W")<CR>
+n  ][          *@m':call search('^\s*endf*\%[unction]\>', "W")<CR>
+v  ]]          *@m':<C-U>exe "normal! gv"|call search('^\s*fu\%[nction]\>', "W")<CR>
+n  ]]          *@m':call search('^\s*fu\%[nction]\>', "W")<CR>
+n  y<C-G>      *@:call setreg(v:register, <SNR>17_recall())<CR>
+x  <Tab>         <Plug>snipMateVisual
+s  <Tab>         <Plug>snipMateNextOrTrigger
+n  <C-N>         <Plug>EasyClipSwapPasteBackwards
+   <C-P>         <Plug>(ctrlp)
+   <C-Q>         :bd<CR> <Tab>   " CTRL+Q - зак@ыть текущий буффе@
+n  <C-R>         <Plug>(RepeatRedo)
+s  <Space>     * <C-O>"_c<Space>
+s  !           * <C-O>"_c!
+s  "           * <C-O>"_c"
+s  #           * <C-O>"_c#
+s  $           * <C-O>"_c$
+s  %           * <C-O>"_c%
+s  &           * <C-O>"_c&
+s  '           * <C-O>"_c'
+s  (           * <C-O>"_c(
+s  )           * <C-O>"_c)
+s  *           * <C-O>"_c*
+s  +           * <C-O>"_c+
+s  ,           * <C-O>"_c,
+   -             <Plug>FileBeagleOpenCurrentBufferDir
+n  .             <Plug>(RepeatDot)
+s  .           * <C-O>"_c.
+s  /           * <C-O>"_c/
+s  0           * <C-O>"_c0
+s  1           * <C-O>"_c1
+s  2           * <C-O>"_c2
+s  3           * <C-O>"_c3
+s  4           * <C-O>"_c4
+s  5           * <C-O>"_c5
+s  6           * <C-O>"_c6
+s  7           * <C-O>"_c7
+s  8           * <C-O>"_c8
+s  9           * <C-O>"_c9
+s  :           * <C-O>"_c:
+s  ;           * <C-O>"_c;
+s  <           * <C-O>"_c<
+n  <p          & :call <SNR>20_putline(']p', 'Below')<CR><']
+n  <P          & :call <SNR>20_putline('[p', 'Above')<CR><']
+s  =           * <C-O>"_c=
+n  =p          & :call <SNR>20_putline(']p', 'Below')<CR>=']
+n  =P          & :call <SNR>20_putline('[p', 'Above')<CR>=']
+n  =ox         & :set <C-R>=<SNR>20_cursor_options()<CR><CR>
+n  =ov         & :set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>
+n  =ow         & :setlocal <C-R>=<SNR>20_toggle("wrap")<CR><CR>
+n  =os         & :setlocal <C-R>=<SNR>20_toggle("spell")<CR><CR>
+n  =or         & :setlocal <C-R>=<SNR>20_toggle("relativenumber")<CR><CR>
+n  =on         & :setlocal <C-R>=<SNR>20_toggle("number")<CR><CR>
+n  =ol         & :setlocal <C-R>=<SNR>20_toggle("list")<CR><CR>
+n  =oi         & :set <C-R>=<SNR>20_toggle("ignorecase")<CR><CR>
+n  =oh         & :set <C-R>=<SNR>20_toggle("hlsearch")<CR><CR>
+n  =od         & :<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>
+n  =ou         & :setlocal <C-R>=<SNR>20_toggle("cursorcolumn")<CR><CR>
+n  =oc         & :setlocal <C-R>=<SNR>20_toggle("cursorline")<CR><CR>
+n  =ob         & :set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>
+s  >           * <C-O>"_c>
+n  >p          & :call <SNR>20_putline(']p', 'Below')<CR>>']
+n  >P          & :call <SNR>20_putline('[p', 'Above')<CR>>']
+s  ?           * <C-O>"_c?
+s  @           * <C-O>"_c@
+s  A           * <C-O>"_cA
+s  B           * <C-O>"_cB
+s  C           * <C-O>"_cC
+x  C           * "_C
+n  C           * "_C
+s  D           * <C-O>"_cD
+x  D           * "_D
+n  D           * "_D
+s  E           * <C-O>"_cE
+s  F           * <C-O>"_cF
+s  G           * <C-O>"_cG
+s  H           * <C-O>"_cH
+s  I           * <C-O>"_cI
+s  J           * <C-O>"_cJ
+s  K           * <C-O>"_cK
+s  L           * <C-O>"_cL
+s  M           * <C-O>"_cM
+s  N           * <C-O>"_cN
+s  O           * <C-O>"_cO
+s  P           * <C-O>"_cP
+n  P             <Plug>EasyClipPasteBefore
+x  P             <Plug>XEasyClipPaste
+s  Q           * <C-O>"_cQ
+s  R           * <C-O>"_cR
+s  S           * <C-O>"_cS
+n  S           * "_S
+x  S             <Plug>VSurround
+s  T           * <C-O>"_cT
+n  U             <Plug>(RepeatUndoLine)
+s  U           * <C-O>"_cU
+s  V           * <C-O>"_cV
+s  W           * <C-O>"_cW
+s  X           * <C-O>"_cX
+x  X           * "_X
+n  X           * "_X
+s  Y           * <C-O>"_cY
+n  Y           * :EasyClipBeforeYank<CR>y$:EasyClipOnYanksChanged<CR>
+s  Z           * <C-O>"_cZ
+s  [           * <C-O>"_c[
+n  [xx           <Plug>unimpaired_line_xml_encode
+x  [x            <Plug>unimpaired_xml_encode
+n  [x            <Plug>unimpaired_xml_encode
+n  [uu           <Plug>unimpaired_line_url_encode
+x  [u            <Plug>unimpaired_url_encode
+n  [u            <Plug>unimpaired_url_encode
+n  [yy           <Plug>unimpaired_line_string_encode
+x  [y            <Plug>unimpaired_string_encode
+n  [y            <Plug>unimpaired_string_encode
+n  [p            <Plug>unimpairedPutAbove
+n  [ox         & :set cursorline cursorcolumn<CR>
+n  [ov         & :set virtualedit+=all<CR>
+n  [ow         & :setlocal wrap<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [os         & :setlocal spell<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [or         & :setlocal relativenumber<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [on         & :setlocal number<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [ol         & :setlocal list<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [oi         & :set ignorecase<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [oh         & :set hlsearch<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [od         & :diffthis<CR>
+n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [oc         & :setlocal cursorline<C-R>=<SNR>20_statusbump()<CR><CR>
+n  [ob         & :set background=light<CR>
+x  [e            <Plug>unimpairedMoveSelectionUp
+n  [e            <Plug>unimpairedMoveUp
+n  [<Space>      <Plug>unimpairedBlankUp
+o  [n            <Plug>unimpairedContextPrevious
+n  [n            <Plug>unimpairedContextPrevious
+n  [o            <Plug>unimpairedOPrevious
+n  [f            <Plug>unimpairedDirectoryPrevious
+n  [T            <Plug>unimpairedTFirst
+n  [t            <Plug>unimpairedTPrevious
+n  [<C-Q>        <Plug>unimpairedQPFile
+n  [Q            <Plug>unimpairedQFirst
+n  [q            <Plug>unimpairedQPrevious
+n  [<C-L>        <Plug>unimpairedLPFile
+n  [L            <Plug>unimpairedLFirst
+n  [l            <Plug>unimpairedLPrevious
+n  [B            <Plug>unimpairedBFirst
+n  [b            <Plug>unimpairedBPrevious
+n  [A            <Plug>unimpairedAFirst
+n  [a            <Plug>unimpairedAPrevious
+x  \T            <Plug>(table-mode-tableize-delimiter)
+x  \tt           <Plug>(table-mode-tableize)
+n  \tt           <Plug>(table-mode-tableize)
+n  \tm         * :<C-U>call tablemode#Toggle()<CR>
+   \t            <Plug>TaskList
+   \f            <Plug>FileBeagleOpenCurrentWorkingDir
+s  \           * <C-O>"_c\
+n  \P            <Plug>EasyClipPasteUnformattedBefore
+n  \p            <Plug>EasyClipPasteUnformattedAfter
+x  \P            <Plug>XEasyClipPasteUnformatted
+x  \p            <Plug>XEasyClipPasteUnformatted
+n  \Td         * :set ft=django<CR>
+n  \Tc         * :set ft=css<CR>
+n  \Tj         * :set ft=javascript<CR>
+n  \Tp         * :set ft=python<CR>
+n  \Th         * :set ft=htmljinja<CR>
+s  ]           * <C-O>"_c]
+n  ]xx           <Plug>unimpaired_line_xml_decode
+x  ]x            <Plug>unimpaired_xml_decode
+n  ]x            <Plug>unimpaired_xml_decode
+n  ]uu           <Plug>unimpaired_line_url_decode
+x  ]u            <Plug>unimpaired_url_decode
+n  ]u            <Plug>unimpaired_url_decode
+n  ]yy           <Plug>unimpaired_line_string_decode
+x  ]y            <Plug>unimpaired_string_decode
+n  ]y            <Plug>unimpaired_string_decode
+n  ]p            <Plug>unimpairedPutBelow
+n  ]ox         & :set nocursorline nocursorcolumn<CR>
+n  ]ov         & :set virtualedit-=all<CR>
+n  ]ow         & :setlocal nowrap<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]os         & :setlocal nospell<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]or         & :setlocal norelativenumber<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]on         & :setlocal nonumber<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]ol         & :setlocal nolist<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]oi         & :set noignorecase<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]oh         & :set nohlsearch<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]od         & :diffoff<CR>
+n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]oc         & :setlocal nocursorline<C-R>=<SNR>20_statusbump()<CR><CR>
+n  ]ob         & :set background=dark<CR>
+x  ]e            <Plug>unimpairedMoveSelectionDown
+n  ]e            <Plug>unimpairedMoveDown
+n  ]<Space>      <Plug>unimpairedBlankDown
+o  ]n            <Plug>unimpairedContextNext
+n  ]n            <Plug>unimpairedContextNext
+n  ]o            <Plug>unimpairedONext
+n  ]f            <Plug>unimpairedDirectoryNext
+n  ]T            <Plug>unimpairedTLast
+n  ]t            <Plug>unimpairedTNext
+n  ]<C-Q>        <Plug>unimpairedQNFile
+n  ]Q            <Plug>unimpairedQLast
+n  ]q            <Plug>unimpairedQNext
+n  ]<C-L>        <Plug>unimpairedLNFile
+n  ]L            <Plug>unimpairedLLast
+n  ]l            <Plug>unimpairedLNext
+n  ]B            <Plug>unimpairedBLast
+n  ]b            <Plug>unimpairedBNext
+n  ]A            <Plug>unimpairedALast
+n  ]a            <Plug>unimpairedANext
+s  ^           * <C-O>"_c^
+s  _           * <C-O>"_c_
+s  `           * <C-O>"_c`
+s  a           * <C-O>"_ca
+s  b           * <C-O>"_cb
+s  c           * <C-O>"_cc
+n  cc          * "_S
+x  c           * "_c
+n  c           * "_c
+n  cS            <Plug>CSurround
+n  cs            <Plug>Csurround
+n  co            =o
+n  cgc           <Plug>ChangeCommentary
+n  cr            <Plug>Coerce
+s  d           * <C-O>"_cd
+n  dD          * 0"_d$
+n  dd          * "_dd
+x  d           * "_d
+n  d           * "_d
+n  ds            <Plug>Dsurround
+s  e           * <C-O>"_ce
+s  f           * <C-O>"_cf
+v  gx            <Plug>NetrwBrowseXVis
+n  gx            <Plug>NetrwBrowseX
+s  g           * <C-O>"_cg
+n  g\P           <Plug>G_EasyClipPasteUnformattedBefore
+n  g\p           <Plug>G_EasyClipPasteUnformattedAfter
+n  gP            <Plug>G_EasyClipPasteBefore
+n  gp            <Plug>G_EasyClipPasteAfter
+x  gP            <Plug>XG_EasyClipPaste
+x  gp            <Plug>XG_EasyClipPaste
+x  gS            <Plug>VgSurround
+n  gcu           <Plug>Commentary<Plug>Commentary
+n  gcc           <Plug>CommentaryLine
+o  gc            <Plug>Commentary
+n  gc            <Plug>Commentary
+x  gc            <Plug>Commentary
+s  h           * <C-O>"_ch
+s  i           * <C-O>"_ci
+s  j           * <C-O>"_cj
+s  k           * <C-O>"_ck
+s  l           * <C-O>"_cl
+s  m           * <C-O>"_cm
+x  m             <Plug>MoveMotionXPlug
+n  mm            <Plug>MoveMotionLinePlug
+n  m             <Plug>MoveMotionPlug
+s  n           * <C-O>"_cn
+s  o           * <C-O>"_co
+s  p           * <C-O>"_cp
+n  p             <Plug>EasyClipPasteAfter
+x  p             <Plug>XEasyClipPaste
+s  q           * <C-O>"_cq
+s  r           * <C-O>"_cr
+s  s           * <C-O>"_cs
+x  s           * "_s
+n  s           * "_s
+s  t           * <C-O>"_ct
+n  u             <Plug>(RepeatUndo)
+s  u           * <C-O>"_cu
+s  v           * <C-O>"_cv
+s  w           * <C-O>"_cw
+s  x           * <C-O>"_cx
+x  x           * "_x
+n  x           * "_x
+s  y           * <C-O>"_cy
+x  y             <Plug>VisualModeYank
+n  yy            <Plug>YankLinePreserveCursorPosition
+n  y             <Plug>YankPreserveCursorPosition
+n  ySS           <Plug>YSsurround
+n  ySs           <Plug>YSsurround
+n  yss           <Plug>Yssurround
+n  yS            <Plug>YSurround
+n  ys            <Plug>Ysurround
+n  yO          & :call <SNR>20_setup_paste()<CR>O
+n  yo          & :call <SNR>20_setup_paste()<CR>o
+s  z           * <C-O>"_cz
+s  {           * <C-O>"_c{
+s  |           * <C-O>"_c
+s  }           * <C-O>"_c}
+s  ~           * <C-O>"_c~
+n  <Plug>(RepeatRedo) * :<C-U>call repeat#wrap("\<C-R>",v:count)<CR>
+n  <Plug>(RepeatUndoLine) * :<C-U>call repeat#wrap('U',v:count)<CR>
+n  <Plug>(RepeatUndo) * :<C-U>call repeat#wrap('u',v:count)<CR>
+n  <Plug>(RepeatDot) * :<C-U>exe repeat#run(v:count)<CR>
+s  <S-Tab>       <Plug>snipMateBack
+v  <Plug>NetrwBrowseXVis * :<C-U>call netrw#BrowseXVis()<CR>
+n  <Plug>NetrwBrowseX * :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<CR>
+n  <Plug>(table-mode-sort) * :call tablemode#spreadsheet#Sort('')<CR>
+n  <Plug>(table-mode-echo-cell) * :call <SNR>71_TableEchoCell()<CR>
+n  <Plug>(table-mode-eval-formula) * :call tablemode#spreadsheet#formula#EvaluateFormulaLine()<CR>
+n  <Plug>(table-mode-add-formula) * :call tablemode#spreadsheet#formula#Add()<CR>
+n  <Plug>(table-mode-delete-column) * :call tablemode#spreadsheet#DeleteColumn()<CR>
+n  <Plug>(table-mode-delete-row) * :call tablemode#spreadsheet#DeleteRow()<CR>
+x  <Plug>(table-mode-cell-text-object-i) * :<C-U>call tablemode#spreadsheet#cell#TextObject(1)<CR>
+x  <Plug>(table-mode-cell-text-object-a) * :<C-U>call tablemode#spreadsheet#cell#TextObject(0)<CR>
+o  <Plug>(table-mode-cell-text-object-i) * :<C-U>call tablemode#spreadsheet#cell#TextObject(1)<CR>
+o  <Plug>(table-mode-cell-text-object-a) * :<C-U>call tablemode#spreadsheet#cell#TextObject(0)<CR>
+n  <Plug>(table-mode-motion-right) * :<C-U>call tablemode#spreadsheet#cell#Motion('l')<CR>
+n  <Plug>(table-mode-motion-left) * :<C-U>call tablemode#spreadsheet#cell#Motion('h')<CR>
+n  <Plug>(table-mode-motion-down) * :<C-U>call tablemode#spreadsheet#cell#Motion('j')<CR>
+n  <Plug>(table-mode-motion-up) * :<C-U>call tablemode#spreadsheet#cell#Motion('k')<CR>
+n  <Plug>(table-mode-realign) * :call tablemode#table#Realign('.')<CR>
+x  <Plug>(table-mode-tableize-delimiter) * :<C-U>call tablemode#TableizeByDelimiter()<CR>
+x  <Plug>(table-mode-tableize) * :Tableize<CR>
+n  <Plug>(table-mode-tableize) * :Tableize<CR>
+x  <Plug>snipMateVisual * :<C-U>call <SNR>60_grab_visual()<CR>gv"_c
+s  <Plug>snipMateBack * <Esc>a<C-R>=snipMate#BackwardsSnippet()<CR>
+s  <Plug>snipMateNextOrTrigger * <Esc>a<C-R>=snipMate#TriggerSnippet()<CR>
+n  <F11>       * :call conque_term#exec_file()<CR>
+n  <Plug>TaskList & :TaskList<CR>
+n  <Plug>(ctrlp) * :<C-U>CtrlP<CR>
+n  <Plug>FileBeagleOpenCurrentBufferDir * :FileBeagleBufferDir<CR>
+n  <Plug>FileBeagleOpenCurrentWorkingDir * :FileBeagle<CR>
+s  <BS>        * <C-O>"_c
+x  <Plug>VisualModeYank * :<C-U>call <SNR>27_VisualModeYank(v:register)<CR>
+n  <Plug>YankPreserveCursorPosition * ":<C-U>call EasyClip#Yank#PreYankMotion()<CR>:set opfunc=EasyClip#Yank#YankMotion<CR>" . (v:count > 0 ? v:count : '') . "g@"
+n  <Plug>YankLinePreserveCursorPosition * :<C-U>call EasyClip#Yank#PreYankMotion()<CR>:call EasyClip#Yank#YankLine()<CR>
+n  <Plug>EasyClipRotateYanksBackward * :<C-U>call EasyClip#Yank#ManuallyRotateYanks(-1)<CR>
+n  <Plug>EasyClipRotateYanksForward * :<C-U>call EasyClip#Yank#ManuallyRotateYanks(1)<CR>
+n  <Plug>YankMotionEndOfLinePlug * :<C-U>EasyClipBeforeYank<CR>y$:EasyClipOnYanksChanged<CR>
+n  <Plug>SubstituteLine * :<C-U>call EasyClip#Substitute#SubstituteLine(v:register, v:count)<CR>:call repeat#set("\<Plug>SubstituteLine")<CR>
+n  <Plug>G_SubstituteToEndOfLine * :<C-U>call EasyClip#Substitute#SubstituteToEndOfLine(v:register, 0)<CR>:call repeat#set("\<Plug>G_SubstituteToEndOfLine")<CR>
+n  <Plug>SubstituteToEndOfLine * :<C-U>call EasyClip#Substitute#SubstituteToEndOfLine(v:register, 1)<CR>:call repeat#set("\<Plug>SubstituteToEndOfLine")<CR>
+n  <Plug>G_SubstituteOverMotionMap * :<C-U>call EasyClip#Substitute#OnPreSubstitute(v:register, 0)<CR>:set opfunc=EasyClip#Substitute#SubstituteMotion<CR>g@
+n  <Plug>SubstituteOverMotionMap * :<C-U>call EasyClip#Substitute#OnPreSubstitute(v:register, 1)<CR>:set opfunc=EasyClip#Substitute#SubstituteMotion<CR>g@
+n  <Plug>MoveMotionPlug * ":<C-U>call EasyClip#Move#PreMoveMotion()<CR>:set opfunc=EasyClip#Move#MoveMotion<CR>" . (v:count > 0 ? v:count : '') . "g@"
+x  <Plug>MoveMotionXPlug * :<C-U>call <SNR>25_VisualModeMoveMotion(v:register)<CR>
+n  <Plug>MoveMotionLinePlug * ':<C-U>EasyClipBeforeYank<CR>'. v:count .'yy'. v:count . '"_dd:EasyClipOnYanksChanged<CR>:call repeat#set("\<Plug>MoveMotionLinePlug")<CR>'
+n  <Plug>MoveMotionReplaceLinePlug * :<C-U>EasyClipBeforeYank<CR>0y$:EasyClipOnYanksChanged<CR>"_d$:call repeat#set("\<Plug>MoveMotionReplaceLinePlug")<CR>
+n  <Plug>MoveMotionEndOfLinePlug * :<C-U>EasyClipBeforeYank<CR>y$:EasyClipOnYanksChanged<CR>"_d$:call repeat#set("\<Plug>MoveMotionEndOfLinePlug")<CR>
+n  <Plug>EasyClipToggleFormattedPaste * :call EasyClip#Paste#ToggleFormattedPaste()<CR>
+x  <Plug>XG_EasyClipPasteUnformatted * "_d:<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gP', 0, "G_EasyClipPasteUnformattedBefore")<CR>
+n  <Plug>XEasyClipPasteUnformatted * "_d:<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'P', 0, "EasyClipPasteUnformattedBefore")<CR>
+n  <Plug>G_EasyClipPasteUnformattedBefore * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gP', 0, "G_EasyClipPasteUnformattedBefore")<CR>
+n  <Plug>G_EasyClipPasteUnformattedAfter * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gp', 0, "G_EasyClipPasteUnformattedAfter")<CR>
+n  <Plug>EasyClipPasteUnformattedBefore * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'P', 0, "EasyClipPasteUnformattedBefore")<CR>
+n  <Plug>EasyClipPasteUnformattedAfter * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'p', 0, "EasyClipPasteUnformattedAfter")<CR>
+x  <Plug>XG_EasyClipPaste * "_d:<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gP', 1, "G_EasyClipPasteBefore")<CR>
+n  <Plug>G_EasyClipPasteBefore * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gP', 1, "G_EasyClipPasteBefore")<CR>
+n  <Plug>G_EasyClipPasteAfter * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'gp', 1, "G_EasyClipPasteAfter")<CR>
+x  <Plug>XEasyClipPaste * ':<C-U>call EasyClip#Paste#PasteTextVisualMode(''' . v:register . ''',' . v:count . ')<CR>'
+n  <Plug>EasyClipPasteBefore * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'P', 1, "EasyClipPasteBefore")<CR>
+n  <Plug>EasyClipPasteAfter * :<C-U>call EasyClip#Paste#PasteText(v:register, v:count, 'p', 1, "EasyClipPasteAfter")<CR>
+n  <Plug>EasyClipSwapPasteBackwards * :call EasyClip#Paste#SwapPaste(0)<CR>
+n  <Plug>EasyClipSwapPasteForward * :call EasyClip#Paste#SwapPaste(1)<CR>
+v  <Plug>VgSurround * :<C-U>call <SNR>21_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>
+v  <Plug>VSurround * :<C-U>call <SNR>21_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+n  <Plug>YSurround * :<C-U>set opfunc=<SNR>21_opfunc2<CR>g@
+n  <Plug>Ysurround * :<C-U>set opfunc=<SNR>21_opfunc<CR>g@
+n  <Plug>YSsurround * :<C-U>call <SNR>21_opfunc2(v:count1)<CR>
+n  <Plug>Yssurround * :<C-U>call <SNR>21_opfunc(v:count1)<CR>
+n  <Plug>CSurround * :<C-U>call <SNR>21_changesurround(1)<CR>
+n  <Plug>Csurround * :<C-U>call <SNR>21_changesurround()<CR>
+n  <Plug>Dsurround * :<C-U>call <SNR>21_dosurround(<SNR>21_inputtarget())<CR>
+n  <Plug>SurroundRepeat * .
+n  <Plug>unimpaired_line_xml_decode * :<C-U>call <SNR>20_Transform("xml_decode",v:count1)<CR>
+x  <Plug>unimpaired_xml_decode * :<C-U>call <SNR>20_Transform("xml_decode",visualmode())<CR>
+n  <Plug>unimpaired_xml_decode * :<C-U>call <SNR>20_TransformSetup("xml_decode")<CR>g@
+n  <Plug>unimpaired_line_xml_encode * :<C-U>call <SNR>20_Transform("xml_encode",v:count1)<CR>
+x  <Plug>unimpaired_xml_encode * :<C-U>call <SNR>20_Transform("xml_encode",visualmode())<CR>
+n  <Plug>unimpaired_xml_encode * :<C-U>call <SNR>20_TransformSetup("xml_encode")<CR>g@
+n  <Plug>unimpaired_line_url_decode * :<C-U>call <SNR>20_Transform("url_decode",v:count1)<CR>
+x  <Plug>unimpaired_url_decode * :<C-U>call <SNR>20_Transform("url_decode",visualmode())<CR>
+n  <Plug>unimpaired_url_decode * :<C-U>call <SNR>20_TransformSetup("url_decode")<CR>g@
+n  <Plug>unimpaired_line_url_encode * :<C-U>call <SNR>20_Transform("url_encode",v:count1)<CR>
+x  <Plug>unimpaired_url_encode * :<C-U>call <SNR>20_Transform("url_encode",visualmode())<CR>
+n  <Plug>unimpaired_url_encode * :<C-U>call <SNR>20_TransformSetup("url_encode")<CR>g@
+n  <Plug>unimpaired_line_string_decode * :<C-U>call <SNR>20_Transform("string_decode",v:count1)<CR>
+x  <Plug>unimpaired_string_decode * :<C-U>call <SNR>20_Transform("string_decode",visualmode())<CR>
+n  <Plug>unimpaired_string_decode * :<C-U>call <SNR>20_TransformSetup("string_decode")<CR>g@
+n  <Plug>unimpaired_line_string_encode * :<C-U>call <SNR>20_Transform("string_encode",v:count1)<CR>
+x  <Plug>unimpaired_string_encode * :<C-U>call <SNR>20_Transform("string_encode",visualmode())<CR>
+n  <Plug>unimpaired_string_encode * :<C-U>call <SNR>20_TransformSetup("string_encode")<CR>g@
+n  <Plug>unimpairedPutBelow * :call <SNR>20_putline(']p', 'Below')<CR>
+n  <Plug>unimpairedPutAbove * :call <SNR>20_putline('[p', 'Above')<CR>
+n  <Plug>unimpairedPaste * :call <SNR>20_setup_paste()<CR>
+   <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>20_MoveSelectionDown(v:count1)<CR>
+   <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>20_MoveSelectionUp(v:count1)<CR>
+n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>20_Move('+',v:count1,'Down')<CR>
+n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>20_Move('--',v:count1,'Up')<CR>
+n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>20_BlankDown(v:count1)<CR>
+n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>20_BlankUp(v:count1)<CR>
+o  <Plug>unimpairedContextNext * :call <SNR>20_ContextMotion(0)<CR>
+o  <Plug>unimpairedContextPrevious * :call <SNR>20_ContextMotion(1)<CR>
+n  <Plug>unimpairedContextNext * :call <SNR>20_Context(0)<CR>
+n  <Plug>unimpairedContextPrevious * :call <SNR>20_Context(1)<CR>
+n  <Plug>unimpairedOPrevious   <Plug>unimpairedDirectoryPrevious:echohl WarningMSG|echo "[o is deprecated. Use [f"|echohl NONE<CR>
+n  <Plug>unimpairedONext   <Plug>unimpairedDirectoryNext:echohl WarningMSG|echo "]o is deprecated. Use ]f"|echohl NONE<CR>
+n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>20_fnameescape(fnamemodify(<SNR>20_FileByOffset(-v:count1), ':.'))<CR><CR>
+n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>20_fnameescape(fnamemodify(<SNR>20_FileByOffset(v:count1), ':.'))<CR><CR>
+n  <Plug>unimpairedTLast * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR>
+n  <Plug>unimpairedTFirst * :<C-U>exe "".(v:count ? v:count : "")."tfirst"<CR>
+n  <Plug>unimpairedTNext * :<C-U>exe "".(v:count ? v:count : "")."tnext"<CR>
+n  <Plug>unimpairedTPrevious * :<C-U>exe "".(v:count ? v:count : "")."tprevious"<CR>
+n  <Plug>unimpairedQNFile * :<C-U>exe "".(v:count ? v:count : "")."cnfile"<CR>zv
+n  <Plug>unimpairedQPFile * :<C-U>exe "".(v:count ? v:count : "")."cpfile"<CR>zv
+n  <Plug>unimpairedQLast * :<C-U>exe "".(v:count ? v:count : "")."clast"<CR>zv
+n  <Plug>unimpairedQFirst * :<C-U>exe "".(v:count ? v:count : "")."cfirst"<CR>zv
+n  <Plug>unimpairedQNext * :<C-U>exe "".(v:count ? v:count : "")."cnext"<CR>zv
+n  <Plug>unimpairedQPrevious * :<C-U>exe "".(v:count ? v:count : "")."cprevious"<CR>zv
+n  <Plug>unimpairedLNFile * :<C-U>exe "".(v:count ? v:count : "")."lnfile"<CR>zv
+n  <Plug>unimpairedLPFile * :<C-U>exe "".(v:count ? v:count : "")."lpfile"<CR>zv
+n  <Plug>unimpairedLLast * :<C-U>exe "".(v:count ? v:count : "")."llast"<CR>zv
+n  <Plug>unimpairedLFirst * :<C-U>exe "".(v:count ? v:count : "")."lfirst"<CR>zv
+n  <Plug>unimpairedLNext * :<C-U>exe "".(v:count ? v:count : "")."lnext"<CR>zv
+n  <Plug>unimpairedLPrevious * :<C-U>exe "".(v:count ? v:count : "")."lprevious"<CR>zv
+n  <Plug>unimpairedBLast * :<C-U>exe "".(v:count ? v:count : "")."blast"<CR>
+n  <Plug>unimpairedBFirst * :<C-U>exe "".(v:count ? v:count : "")."bfirst"<CR>
+n  <Plug>unimpairedBNext * :<C-U>exe "".(v:count ? v:count : "")."bnext"<CR>
+n  <Plug>unimpairedBPrevious * :<C-U>exe "".(v:count ? v:count : "")."bprevious"<CR>
+n  <Plug>unimpairedALast * :<C-U>exe "".(v:count ? v:count : "")."last"<CR>
+n  <Plug>unimpairedAFirst * :<C-U>exe "".(v:count ? v:count : "")."first"<CR>
+n  <Plug>unimpairedANext * :<C-U>exe "".(v:count ? v:count : "")."next"<CR>
+n  <Plug>unimpairedAPrevious * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR>
+n  <Plug>CommentaryUndo   <Plug>Commentary<Plug>Commentary
+n  <Plug>ChangeCommentary * c:<C-U>call <SNR>19_textobject(1)<CR>
+o  <Plug>Commentary * :<C-U>call <SNR>19_textobject(0)<CR>
+n  <Plug>CommentaryLine * :<C-U>set opfunc=<SNR>19_go|exe 'norm! 'v:count1.'g@_'<CR>
+n  <Plug>Commentary * :<C-U>set opfunc=<SNR>19_go<CR>g@
+x  <Plug>Commentary * :<C-U>call <SNR>19_go(line("'<"),line("'>"))<CR>
+n  <Plug>Coerce * :<C-U>call <SNR>18_coerce(nr2char(getchar()))<CR>
+n  <SNR>17_:   * :<C-U><C-R>=v:count ? v:count : ''<CR>
+n  <F6>        * :exe "ConqueTermSplit ipython " . expand("%")<CR>
+n  <F5>        * :ConqueTermSplit ipython<CR>
+   <F2>          :TaskList<CR> <Tab>   " отоб@азить список тасков на F2
+   <F3>          :NERDTreeToggle<CR>
+   <F4>          :TagbarToggle<CR>
