@@ -104,7 +104,7 @@ function include_env() {
 }
 
 
-# Creates environment variable with name $1 pointing to directory $2. The directory is created if abssent
+# Creates environment variable with name $1 pointing to directory $2. The directory is created if absent
 function setup_name_and_dir() {
   if [[ ! -v $1 ]]; then
     declare -gxr $1=$2

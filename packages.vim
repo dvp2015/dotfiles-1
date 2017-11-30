@@ -122,7 +122,7 @@ call minpac#add('jeetsukumaran/vim-filebeagle')
 call minpac#add('ctrlpvim/ctrlp.vim')
 
 " code/project navigation ===-------------
-call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
+" call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
 call minpac#add('majutsushi/tagbar')          	" Class/module browser
 
 " Status line
