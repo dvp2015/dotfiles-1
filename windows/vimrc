@@ -23,19 +23,12 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'L9'
 
 " Git plugin not hosted on GitHub
-" dvp: cannot load c-extensions on bigfoot
-" Plugin 'git://git.wincent.com/command-t.git'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" dvp: cannot load c-extensions on bigfoot, needs Ruby
+" Plugin 'wincent/command-t.git'
 
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" our plugins
-Plugin 'flazz/vim-colorschemes'
 
 " advanced substituion rules and operators
 Plugin 'tpope/tpope-vim-abolish'
@@ -52,38 +45,35 @@ Plugin 'tpope/vim-surround'
 " repeat the previous mapping as a whole
 Plugin 'tpope/vim-repeat'
 
+Plugin 'tpope/vim-vinegar'
+
 " Clipboard ring
 Plugin 'svermeulen/vim-easyclip'
-
-" File list and open
-Plugin 'jeetsukumaran/vim-filebeagle'
 
 " ctrl-P
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" code/project navigation ===-------------
-Plugin 'scrooloose/nerdtree' 	    	" Project and file navigation
-Plugin 'majutsushi/tagbar'          	" Class/module browser
+Plugin 'majutsushi/tagbar'              " Class/module browser
 
 "------------------=== Other ===----------------------
+Plugin 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'bling/vim-airline'   	    	" Lean & mean status/tabline for vim
-Plugin 'fisadev/FixedTaskList.vim'  	" Pending tasks list
-Plugin 'rosenfeld/conque-term'      	" Consoles as buffers
+Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
+Plugin 'rosenfeld/conque-term'          " Consoles as buffers
 
 "tags, and more
 "
 "--------------=== Snippets support ===--------------
-Plugin 'garbas/vim-snipmate'		" Snippets manager
-Plugin 'MarcWeber/vim-addon-mw-utils'	" dependencies #1
-Plugin 'tomtom/tlib_vim'		" dependencies #2
-Plugin 'honza/vim-snippets'		" snippets repo
+Plugin 'garbas/vim-snipmate'        " Snippets manager
+Plugin 'MarcWeber/vim-addon-mw-utils'   " dependencies #1
+Plugin 'tomtom/tlib_vim'        " dependencies #2
+Plugin 'honza/vim-snippets'     " snippets repo
 
 "---------------=== Languages support ===-------------
 " --- Python ---
-Plugin 'klen/python-mode'	        " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
-Plugin 'davidhalter/jedi-vim' 		" Jedi-vim autocomplete plugin
-Plugin 'mitsuhiko/vim-jinja'		" Jinja support for vim
+Plugin 'klen/python-mode'           " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
+Plugin 'davidhalter/jedi-vim'       " Jedi-vim autocomplete plugin
+Plugin 'mitsuhiko/vim-jinja'        " Jinja support for vim
 Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
 Plugin 'g2boojum/vim-mcnp'              " MCNP syntax
 Plugin 'freitass/todo.txt-vim'          " TODO.txt syntax
@@ -94,6 +84,13 @@ Plugin 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
 Plugin 'vim-pandoc/vim-pandoc-syntax' 
 Plugin 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
 Plugin 'dhruvasagar/vim-table-mode'    " Automates table creation
+
+" Julia
+Plugin 'JuliaEditorSupport/julia-vim'
+
+
+" git window, :Agit
+Plugin 'cohama/agit.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -177,17 +174,17 @@ set switchbuf=useopen
 set visualbell t_vb= 
 set novisualbell       
 
-set enc=utf-8	     " utf-8 по дефолту в файлах
+set enc=utf-8        " utf-8 по дефолту в файлах
 set ls=2             " всегда показываем статусбар
-set incsearch	     " инкреминтируемый поиск
-set hlsearch	     " подсветка результатов поиска
-set nu	             " показывать номера строк
-set scrolloff=5	     " 5 строк при скролле за раз
+set incsearch        " инкреминтируемый поиск
+set hlsearch         " подсветка результатов поиска
+set nu               " показывать номера строк
+set scrolloff=5      " 5 строк при скролле за раз
 
 " отключаем бэкапы и своп-файлы
-set nobackup 	     " no backup files
+set nobackup         " no backup files
 set nowritebackup    " only in case you don't want a backup file while editing
-set noswapfile 	     " no swap files
+set noswapfile       " no swap files
 
 " прячем панельки
 "set guioptions-=m   " меню
@@ -198,6 +195,7 @@ set guioptions-=T    " тулбар
 set smarttab
 set tabstop=4
 set shiftwidth=4
+set expandtab
 
 "  при переходе за границу в 80 символов в Ruby/Python/js/C/C++ подсвечиваем на темном фоне текст
 augroup vimrc_autocmds
@@ -228,10 +226,10 @@ map <F3> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']  
 
 " TaskList настройки
-map <F2> :TaskList<CR> 	   " отобразить список тасков на F2
+map <F2> :TaskList<CR>     " отобразить список тасков на F2
 
 " Работа буфферами
-map <C-q> :bd<CR> 	   " CTRL+Q - закрыть текущий буффер
+map <C-q> :bd<CR>      " CTRL+Q - закрыть текущий буффер
 
 "=====================================================
 " Python-mode settings
@@ -297,5 +295,4 @@ nnoremap <leader>Tp :set ft=python<CR>
 nnoremap <leader>Tj :set ft=javascript<CR>
 nnoremap <leader>Tc :set ft=css<CR>
 nnoremap <leader>Td :set ft=django<CR>
-
-set showcmd   " Display command begin in the bottom right corner
+et showcmd   " Display command begin in the bottom right corner
