@@ -10,8 +10,10 @@ if !has('nvim')
   source $VIMRUNTIME/defaults.vim
 endif
 
-" Julia
-:let g:latex_to_unicode_auto = 1
+set packpath^=~/.vim
+packadd minpac
+
+call minpac#init()
 
 source ~/dotfiles/packages.vim
 
@@ -593,4 +595,12 @@ let g:operator#highlight#clear_time=2.0
 
 if filereadable(".init.vim")
   source ".init.vim"  " Load local vim settings
+endif
+
+" Julia
+:let g:latex_to_unicode_auto = 1
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep' " ag is faster
 endif

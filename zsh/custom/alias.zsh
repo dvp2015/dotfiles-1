@@ -21,10 +21,14 @@ alias vimc='vim -u ~/.vim/essential.vim'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
 # navigation
 alias ne='~/dev/python/triniti_ne'
 alias mcc='ssh dvpab@ui2.computing.kiae.ru'
+alias apk5='ssh dvp2@apk5.triniti.ru'
 alias cs='ssh dvp@gitlab.iterrf.ru'
+alias misc='~/misc'
+alias dotfiles='~/dotfiles'
 
 alias mkdir='mkdir -p'
 
@@ -59,4 +63,5 @@ if (( $+commands[todo.sh] )); then
   alias etodo="vim ~/misc/todo/todo.txt"
 fi
 
-
+# Chrome
+alias chrome='/opt/google/chrome/chrome'

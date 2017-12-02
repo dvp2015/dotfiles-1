@@ -17,7 +17,7 @@ call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-characterize')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
-call minpac#add('tpope/vim-eunuch')
+call minpac#add('tpope/vim-eunuch')     " Unix shell commands: :Delete, :Move etc
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-ragtag')
 call minpac#add('tpope/vim-repeat')
@@ -26,7 +26,9 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-tbone')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-projectionist')
+call minpac#add('tpope/vim-vinegar')
 call minpac#add('nelstrom/vim-visual-star-search')
+call minpac#add('nmileszs/ack')
 call minpac#add('SirVer/ultisnips')
 call minpac#add('godlygeek/tabular')
 call minpac#add('neomake/neomake')
@@ -116,13 +118,13 @@ endif
 call minpac#add('svermeulen/vim-easyclip')
 
 " File list and open
-call minpac#add('jeetsukumaran/vim-filebeagle')
+call minpac#add('justinmk/vim-dirvish')
 
 " Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
 call minpac#add('ctrlpvim/ctrlp.vim')
 
 " code/project navigation ===-------------
-call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
+call minpac#clean('scrooloose/nerdtree')   	" Project and file navigation
 call minpac#add('majutsushi/tagbar')          	" Class/module browser
 
 " Status line
