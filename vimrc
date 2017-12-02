@@ -16,7 +16,7 @@ endif
 source ~/dotfiles/packages.vim
 
 " Personal preferences not set by sensible.vim
-" let g:mapleader=','
+let g:mapleader=','
 set history=5000
 set showcmd
 set nojoinspaces

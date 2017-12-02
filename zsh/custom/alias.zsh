@@ -59,5 +59,10 @@ if (( $+commands[todo.sh] )); then
   alias etodo="vim ~/misc/todo/todo.txt"
 fi
 
+alias ek="vim ~/misc/keys/generic.txt"
+
 # Chrome
 alias chrome='/opt/google/chrome/chrome'
+
+# Jupyter
+alias jn='jupyter notebook'
