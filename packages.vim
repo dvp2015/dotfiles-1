@@ -17,7 +17,7 @@ call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-characterize')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
-call minpac#add('tpope/vim-eunuch')
+call minpac#add('tpope/vim-eunuch')     " Unix shell commands: :Delete, :Move etc
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-ragtag')
 call minpac#add('tpope/vim-repeat')
@@ -26,7 +26,9 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-tbone')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-projectionist')
+call minpac#add('tpope/vim-vinegar')
 call minpac#add('nelstrom/vim-visual-star-search')
+call minpac#add('nmileszs/ack')
 call minpac#add('SirVer/ultisnips')
 call minpac#add('godlygeek/tabular')
 call minpac#add('neomake/neomake')
@@ -49,7 +51,7 @@ call minpac#add('b4winckler/vim-angry')
 call minpac#add('saihoooooooo/vim-textobj-space')
 
 " For Vimscript
-call minpac#add('tpope/vim-scriptease')
+call minpac#add('tpope/vim-scriptease')Plugin 'vim-pandoc/vim-criticmarkup'   " Comments, c
 call minpac#add('tweekmonster/helpful.vim')
 call minpac#add('nelstrom/vim-docopen')
 
@@ -57,11 +59,22 @@ call minpac#add('nelstrom/vim-docopen')
 call minpac#add('tpope/vim-markdown')
 call minpac#add('nelstrom/vim-markdown-folding')
 call minpac#add('junegunn/vim-emoji', {'type': 'opt'})
+call minpac#add('vim-pandoc/vim-criticmarkup')   " Comments, changes and notes in text and markdown files
+call minpac#add('vim-pandoc/vim-pandoc')         " Intergrates VIM and Pandoc
+call minpac#add('vim-pandoc/vim-pandoc-syntax') 
+call minpac#add('vim-pandoc/vim-pandoc-after')   " Integrates Pandoc with thirdparty plugins
+call minpac#add('dhruvasagar/vim-table-mode')    " Automates table creation
+
+"--------------=== Snippets support ===--------------
+call minpac#add('garbas/vim-snipmate')          " Snippets manager
+call minpac#add('MarcWeber/vim-addon-mw-utils') " dependencies #1
+call minpac#add('tomtom/tlib_vim')              " dependencies #2
+call minpac#add('honza/vim-snippets')           " snippets repo
 
 " Python
 call minpac#add('python-mode/python-mode', {'type': 'opt'})
-call minpac#add('davidhalter/jedi-vim') 		" Jedi-vim autocomplete plugin
-call minpac#add('mitsuhiko/vim-jinja')		" Jinja support for vim
+call minpac#add('davidhalter/jedi-vim')                 " Jedi-vim autocomplete plugin
+call minpac#add('mitsuhiko/vim-jinja')          " Jinja support for vim
 call minpac#add('mitsuhiko/vim-python-combined')  " Combined Python 2/3 for Vim
 call minpac#add('nvie/vim-flake8')  " Static syntax and code checker Flake8 
 " call minpac#add('ervandew/supertab ')  " use <Tab> for all your insert completion needs (:h ins-completion). 
@@ -116,21 +129,25 @@ endif
 call minpac#add('svermeulen/vim-easyclip')
 
 " File list and open
-call minpac#add('jeetsukumaran/vim-filebeagle')
+call minpac#add('justinmk/vim-dirvish')
 
 " Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
 call minpac#add('ctrlpvim/ctrlp.vim')
 
-" code/project navigation ===-------------
-call minpac#add('scrooloose/nerdtree') 	    	" Project and file navigation
-call minpac#add('majutsushi/tagbar')          	" Class/module browser
+" call minpac#clean('scrooloose/nerdtree')      " Project and file navigation
+call minpac#add('majutsushi/tagbar')            " Class/module browser
 
 " Status line
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+
+call minpac#add('fisadev/FixedTaskList.vim')    " Pending tasks list
 
 " Julia
 call minpac#add('JuliaEditorSupport/julia-vim')
 
 " to-do.txt
 call minpac#add('freitass/todo.txt-vim')
+
+" git window, :Agit
+call minpac#add('cohama/agit.vim')

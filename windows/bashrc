@@ -63,6 +63,9 @@ if ! shopt -oq posix; then
   fi
 fi 
 
+# See pandoc manual.
+eval "$(pandoc --bash-completion)"
+
 # Load bash session configuration files 
 if [[ -d ".bash.d" ]]; then # Load local files
 	if [[ -r ".bash.d/__init__.sh" ]]; then

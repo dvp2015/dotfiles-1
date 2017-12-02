@@ -10,8 +10,10 @@ if !has('nvim')
   source $VIMRUNTIME/defaults.vim
 endif
 
-" Julia
-:let g:latex_to_unicode_auto = 1
+set packpath^=~/.vim
+packadd minpac
+
+call minpac#init()
 
 source ~/dotfiles/packages.vim
 
@@ -41,10 +43,16 @@ set ignorecase
 set smartcase
 set incsearch
 set smarttab
+set exrc       " Execute .vimrc from local folders
+set secure     " Disallow local .vimrc write anything
+
+" set colorcolumn=110
+" highlight ColorColumn ctermbg=darkgray
 
 " Highlight characters past column 120
 augroup vimrc_autocmds
     autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
     autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=#c12a0f
     autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
     autocmd FileType ruby,python,javascript,c,cpp set nowrap
@@ -593,4 +601,12 @@ let g:operator#highlight#clear_time=2.0
 
 if filereadable(".init.vim")
   source ".init.vim"  " Load local vim settings
+endif
+
+" Julia
+:let g:latex_to_unicode_auto = 1
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep' " ag is faster
 endif
