@@ -6,7 +6,7 @@ alias tls='tmux ls'
 alias tkill='tmux kill-session -t'
 
 # convenience aliases for editing configs
-alias ev='vim ~/dotfiles/vimrc'
+alias ev='vim ~/dotfiles/.vimrc'
 alias et='vim ~/dotfiles/tmux.conf'
 alias ea='vim ~/dotfiles/zsh/custom/alias.zsh'
 alias ep='vim ~/dotfiles/zsh/custom/path.zsh'
