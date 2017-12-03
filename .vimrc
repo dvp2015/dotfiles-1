@@ -66,16 +66,16 @@ set langmap=йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ъ],фa,ыs,вd,аf,пg,
 set list
 set listchars=tab:»\ ,trail:·,extends:>,nbsp:.
 
-set exrc
-set secure
-" }}}
-
 set colorcolumn=110
 highlight ColorColumn ctermbg=darkgray
 
 " Status line settings {{{
 " Always show status line
 set laststatus=2
+" }}}
+
+set exrc
+set secure
 " }}}
 
 " dein Scripts  {{{
@@ -720,7 +720,6 @@ nmap gss <plug>SubstituteLine
 " xmap gs p
 xmap gs <plug>XEasyClipPaste
 nnoremap gm m
-let g:EasyClipUsePasteToggleDefaults = 0
 
 " Yank and highlight   {{{
 " see  https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
