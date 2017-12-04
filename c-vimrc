@@ -1,0 +1,3 @@
+" Настройка конфигурации VIM для проекта на C
+" https://habrahabr.ru/post/221267/
+let &path.="src/include,/usr/include/AL,"  " update to actual
