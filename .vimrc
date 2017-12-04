@@ -244,8 +244,9 @@ if dein#load_state('~/.vim/bundle')
   endif
   " }}}
 
-  " Clipboard ring
+  " Clipboard ring {{{
   call dein#add('svermeulen/vim-easyclip')
+  " }}}
 
   " File list and open
   call dein#add('justinmk/vim-dirvish')
@@ -441,15 +442,15 @@ augroup end
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown setlocal linebreak
-    autocmd FileType markdown nnoremap <buffer> j gj
+    autocmd filetype markdown setlocal linebreak
+    autocmd filetype markdown nnoremap <buffer> j gj
     autocmd FileType markdown nnoremap <buffer> k gk
 augroup end
 " }}}
 
 
 " YCM settings {{{
-let g:clang_library_path = "/usr/lib64/"
+let g:clang_library_path = "~/.vim/bundle/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd/"
 let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 let g:clang_snippets = 1
@@ -462,8 +463,12 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_path_to_python_interpreter = '/opt/anaconda3/bin/python'
 
-let g:ycm_global_ycm_extra_conf = "~/dotfiles/vim/.ycm_extra_conf.py"
+" let g:ycm_global_ycm_extra_conf = "~/dotfiles/vim/.ycm_extra_conf.py"
 " }}}
 
 " Easymotion {{{
@@ -707,7 +712,7 @@ nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
 nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
 " }}} (Solarized)
 
-" Easyclip 
+" Easyclip {{{
 set clipboard=unnamed,unnamedplus
 let g:EasyClipAutoFormat=1
 let g:EasyClipCopyExplicitRegisterToDefault=1
@@ -720,6 +725,7 @@ nmap gss <plug>SubstituteLine
 " xmap gs p
 xmap gs <plug>XEasyClipPaste
 nnoremap gm m
+" }}}
 
 " Yank and highlight   {{{
 " see  https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
