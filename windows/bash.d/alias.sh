@@ -2,7 +2,7 @@
 
 # convenience aliases for editing configs
 alias ea='vim ~/dotfiles/windows/bash.d/alias.sh'
-alias ev='vim ~/dotfiles/windows/vimrc'
+alias ev='vim ~/dotfiles/.vimrc'
 alias eb='vim ~/dotfiles/windows/bashrc'
 
 
