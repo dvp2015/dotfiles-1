@@ -57,11 +57,9 @@ alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 
 # Return if requirements are not found.
-if (( $+commands[todo.sh] )); then
-  alias todo='todo.sh'
-  alias todol="todo.sh ls -someday"
-  alias etodo="vim ~/misc/todo/todo.txt"
-fi
+alias todo='~/misc/todo/todo.sh'
+alias todol="todo ls -someday"
+alias etodo="vim ~/misc/todo/todo.txt"
 
 alias ek="vim ~/misc/keys/generic.txt"
 
