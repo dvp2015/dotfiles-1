@@ -238,3 +238,5 @@ function o() {
     xdg-open $i
   done
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -78,131 +78,224 @@ set exrc
 set secure
 " }}}
 
-" Register plugins  {{{
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+" dein Scripts  {{{
+" Required:
+set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
+" Required:
+if dein#load_state('~/.vim/bundle')
+  call dein#begin('~/.vim/bundle')
 
-Plug 'airblade/vim-gitgutter'   " Mark changed lines
-Plug 'tpope/vim-fugitive'       " Git wrapper: Git, Gcommit, Gmove...
-Plug 'junegunn/vim-easy-align'  " Easy alignment
-Plug 'tpope/vim-repeat'         " Repeat last change
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-syntastic/syntastic'
-if executable("ag") || executable("ack")
-  Plug 'mileszs/ack.vim'
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  if has('nvim')
+    "  Dark powered shell: Deol, DeolCd, DeolEdit
+    call dein#add('Shougo/deol.nvim')
+  endif
+
+  if executable("make")
+    " vimproc is a great asynchronous execution library for Vim.
+    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+  endif
+
+  call dein#add('Valloric/YouCompleteMe')
+  " call dein#add('Valloric/YouCompleteMe', {
+  " \    'build' : {
+  " \        'linux' : 'git submodule update --init --recursive && ./install.sh --clang-completer --system-libclang',
+  " \    },
+  " \ })
+
+  " Generic enhancement     {{{
+  call dein#add('SirVer/ultisnips')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('pbrisbin/vim-mkdir') " Creates directories, in not exist
+  call dein#add('pbrisbin/vim-syntax-shakespeare')  " text macros interpolation using shakespeare
+  call dein#add('easymotion/vim-easymotion')  " Fast motions
+  call dein#add('jceb/vim-orgmode')      " .org files
+  call dein#add('aklt/plantuml-syntax')  " for .uml .planuml files
+  " call dein#add('godlygeek/tabular')
+  " call dein#add('kana/vim-smartinput')
+  if executable("ag") || executable("ack")
+    call dein#add('mileszs/ack.vim')
+  endif
+  " call dein#add('nelstrom/vim-visual-star-search')
+  " call dein#add('neomake/neomake')
+  " call dein#add('szw/vim-g')
+  " call dein#add('tommcdo/vim-exchange')
+  call dein#add('tpope/vim-abolish') " automatic typos correctin and  :Subvert
+  call dein#add('tpope/vim-characterize') " press ga on character
+  call dein#add('tpope/vim-commentary')
+  " call dein#add('tpope/vim-dispatch')
+  " call dein#add('tpope/vim-eunuch')     " Unix shell commands: :Delete, :Move etc
+  call dein#add('tpope/vim-fugitive')     " Git commands: Git, Gcommit, Gmove...
+  " call dein#add('tpope/vim-projectionist')
+  " call dein#add('tpope/vim-ragtag')
+  call dein#add('tpope/vim-repeat')
+  " call dein#add('tpope/vim-scriptease') " VIM plugin to make VIM plugins
+  " call dein#add('tpope/vim-sleuth') " automatically adjusts 'shiftwidth' and 'expandtab' 
+  call dein#add('tpope/vim-speeddating') " <c-a>,<c-x> on dates
+  call dein#add('tpope/vim-surround')
+  " call dein#add('tpope/vim-tbone')     " tmux support: Tmux, Tyank, Twrite
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tpope/vim-vinegar')     " Enhances netrw: project drawer, use '-', '.'
+  call dein#add('vim-syntastic/syntastic')
+  " }}}
+
+  " Custom textobjects {{{
+  call dein#add('kana/vim-textobj-user') " create your own text objects without pain
+  call dein#add('kana/vim-textobj-entire') " select entire buffer: ae/ie
+  call dein#add('kana/vim-textobj-indent')
+  call dein#add('kana/vim-textobj-syntax')
+  call dein#add('kana/vim-textobj-line')
+  " call dein#add('nelstrom/vim-textobj-rubyblock')
+  call dein#add('Julian/vim-textobj-variable-segment')
+  call dein#add('bkad/CamelCaseMotion')
+  call dein#add('b4winckler/vim-angry')  " select function arguments: aa, aA
+  call dein#add('saihoooooooo/vim-textobj-space')
+  "  }}}
+
+  " For Vimscript  {{{
+  " call dein#add('tweekmonster/helpful.vim')
+  " call dein#add('nelstrom/vim-docopen')
+  "  }}}
+  "
+  " Markdown   {{{
+  call dein#add('tpope/vim-markdown')
+  call dein#add('nelstrom/vim-markdown-folding')
+  call dein#add('junegunn/vim-emoji')
+  call dein#add('vim-pandoc/vim-criticmarkup')   " Comments, changes and notes in text and markdown files
+  call dein#add('vim-pandoc/vim-pandoc')         " Intergrates VIM and Pandoc
+  call dein#add('vim-pandoc/vim-pandoc-syntax') 
+  call dein#add('vim-pandoc/vim-pandoc-after')   " Integrates Pandoc with thirdparty plugins
+  call dein#add('dhruvasagar/vim-table-mode')    " Automates table creation
+  " }}}
+
+  " Snippets support {{{
+  call dein#add('garbas/vim-snipmate')          " Snippets manager
+  call dein#add('MarcWeber/vim-addon-mw-utils') " dependencies #1
+  call dein#add('tomtom/tlib_vim')              " dependencies #2
+  call dein#add('honza/vim-snippets')           " snippets repo
+  " }}}
+
+  " Python  {{{
+  call dein#add('python-mode/python-mode')
+  call dein#add('davidhalter/jedi-vim')                 " Jedi-vim autocomplete plugin
+  call dein#add('mitsuhiko/vim-jinja')          " Jinja support for vim
+  call dein#add('mitsuhiko/vim-python-combined')  " Combined Python 2/3 for Vim
+  call dein#add('nvie/vim-flake8')  " Static syntax and code checker Flake8 
+  " call dein#add('ervandew/supertab ')  " use <Tab> for all your insert completion needs (:h ins-completion). 
+  call dein#add('rosenfeld/conque-term')  " Consoles as buffers
+  "  }}}
+  "
+  "
+  " MCNP  {{{
+  call dein#add('g2boojum/vim-mcnp')              " MCNP syntax
+  "  }}}
+
+  " yank - Highlight copied area  {{{
+  " https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
+  call dein#add('kana/vim-operator-user')            " Lets user define their own operators.
+  call dein#add('thinca/vim-operator-sequence')      " Operator to do two or more operators.
+  call dein#add('osyo-manga/vim-operator-highlight') " the plugin for this.
+  "  }}}
+  
+
+  " " JavaScript {{{
+  " call dein#add('pangloss/vim-javascript')
+  " call dein#add('elzr/vim-json')
+  " }}}
+
+  " Ruby {{{
+  " call dein#add('tpope/vim-bundler')
+  " call dein#add('tpope/vim-endwise')
+  " call dein#add('tpope/vim-rails')
+  " call dein#add('tpope/vim-rake')
+  " call dein#add('vim-ruby/vim-ruby')
+  "  }}}
+    
+  " Support for rare and exotic languages {{{
+  " call dein#add('nelstrom/vim-pml')
+  " call dein#add('nelstrom/vim-subrip')
+  " }}}
+
+  " Colorschemes  {{{
+  call dein#add('lifepillar/vim-solarized8')
+  call dein#add('morhetz/gruvbox')  " colorscheme gruvbox
+  call dein#add('tomasr/molokai', {'merged': 0})
+  call dein#add('rakr/vim-one')
+  call dein#add('NLKNguyen/papercolor-theme')
+  call dein#add('reedes/vim-colors-pencil')
+  " }}}
+
+  " Plugins for either Vim8 or NeoVim {{{
+  if has('nvim')
+    call dein#add('Shougo/denite.nvim')
+    call dein#add('machakann/vim-highlightedyank')
+    call dein#add('kassio/neoterm')
+    call dein#add('Shougo/neomru.vim')
+  else
+    call dein#add('Shougo/unite.vim') " Navigation between buffers and files
+  endif
+  " }}}
+
+  " Clipboard ring {{{
+  call dein#add('svermeulen/vim-easyclip')
+  " }}}
+
+  " File list and open
+  call dein#add('justinmk/vim-dirvish')
+
+  " Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+  call dein#add('ctrlpvim/ctrlp.vim')
+
+  call dein#add('majutsushi/tagbar')            " Class/module browser
+
+  " Status line  {{{
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  " }}}
+  "
+  call dein#add('fisadev/FixedTaskList.vim')    " Pending tasks list
+
+  " Julia {{{
+  " call dein#add('JuliaEditorSupport/julia-vim')
+  " }}}
+
+  " Misc {{{
+  " to-do.txt
+  call dein#add('freitass/todo.txt-vim')
+  " call dein#add('thanthese/Tortoise-Typing')         " touch typing tutor
+  " }}}
+
+  " git window, :Agit
+  " call dein#add('cohama/agit.vim')
+    
+  
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
 
-" if executable('ruby') && executable('git')
-"  Plug 'junegunn/vim-github-dashboard.git'
-" endif
+" Required:
+filetype plugin indent on
+syntax enable
 
-" Snippets support {{{
-Plug 'SirVer/ultisnips' 
-Plug 'garbas/vim-snipmate'          " Snippets manager
-Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-Plug 'tomtom/tlib_vim'              " dependencies #2
-Plug 'honza/vim-snippets'           " snippets repo
-" }}}
-
-Plug 'easymotion/vim-easymotion'  " Fast motions
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle' }
-
-" Using a non-master branch
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" yank - Highlight copied area  {{{
-" https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
-Plug 'kana/vim-operator-user'            " Lets user define their own operators.
-Plug 'thinca/vim-operator-sequence'      " Operator to do two or more operators.
-Plug 'osyo-manga/vim-operator-highlight' " the plugin for this.
-"  }}}
-
-" Plugins for either Vim8 or NeoVim {{{
-if has('nvim')
-  Plug 'Shougo/denite.nvim'
-  Plug 'machakann/vim-highlightedyank'
-  Plug 'kassio/neoterm'
-  Plug 'Shougo/neomru.vim'
-else
-  Plug 'Shougo/unite.vim' " Navigation between buffers and files
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
 endif
-" }}}
 
+"End dein Scripts-------------------------
+"   }}}
 
-" Colorschemes  {{{
-Plug 'lifepillar/vim-solarized8'
-Plug 'morhetz/gruvbox'  " colorscheme gruvbox
-Plug 'rakr/vim-one'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'reedes/vim-colors-pencil'
-" }}}
+" Plugin configuration {{{
 
-" File list and open
-Plug 'justinmk/vim-dirvish'
-
-" Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'majutsushi/tagbar'            " Class/module browser
-
-" Status line  {{{
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" }}}
-"
-Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
-
-" Julia {{{
-" Plug 'JuliaEditorSupport/julia-vim'
-" }}}
-
-" Misc {{{
-" to-do.txt
-Plug 'freitass/todo.txt-vim'
-" Plug 'thanthese/Tortoise-Typing')         " touch typing tutor
-" }}}
-
-
-" Markdown   {{{
-Plug 'tpope/vim-markdown'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'junegunn/vim-emoji'
-Plug 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
-Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
-Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
-" }}}
-
-" Python  {{{
-Plug 'python-mode/python-mode'
-Plug 'davidhalter/jedi-vim'           " Jedi-vim autocomplete plugin
-Plug 'mitsuhiko/vim-jinja'            " Jinja support for vim
-Plug 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
-Plug 'nvie/vim-flake8'  " Static syntax and code checker Flake8 
-" Plug :h ins-completion.
-Plug 'rosenfeld/conque-term'  " Consoles as buffers
-"  }}}
-
-" MCNP  {{{
-Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
-"  }}}
-
-
-" Initialize plugin system
-call plug#end()
-
-" }}}
-
-" Generic key mappings {{{
 " Edit .vimrc and commands {{{
 " local .vimrc
 if has('nvim')
@@ -213,8 +306,8 @@ endif
 nnoremap <leader>gv :vsplit $MYVIMRC<CR>
 
 " Insert <leader> and <Esc>
-" cnoremap <C-l> <lt>leader>
-" cnoremap <C-E> <lt>Esc>
+cnoremap <C-l> <lt>leader>
+cnoremap <C-E> <lt>Esc>
 " }}}
 
 " netrw.vim {{{
@@ -269,10 +362,7 @@ nnoremap o<Esc> :echoerr "Use <lt>leader>o instead"<cr>
 nnoremap O<Esc> :echoerr "Use <lt>leader>O instead"<cr>
 " }}}
 
-" }}}
-
-" Filetype configuration {{{
-
+" Highlight characters past column 120
 augroup vimrc_autocmds
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
@@ -318,6 +408,35 @@ augroup filetype_vim
 augroup end
 " }}}
 
+" Haskell file settings {{{
+function! GHCI()
+    if !bufexists('ghci')
+        split
+        exec "normal \<C-w>J"
+        term cabal exec ghci %
+        file ghci
+        set bufhidden=hide
+        tnoremap <buffer> <C-r> :r<cr>
+    else
+        let win = bufwinnr('ghci')
+        if win != -1
+            exec "normal " . win . "\<C-w>w"
+            startinsert
+        end
+    end
+endfunction
+
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell,cabal setlocal expandtab
+    autocmd FileType haskell compiler ghc
+    if has('nvim')
+        autocmd FileType haskell nnoremap <buffer> <F5> :call GHCI()<cr>
+    else
+        autocmd FileType haskell nnoremap <buffer> <F5> :!cabal exec ghci %<cr>
+    endif
+augroup end
+" }}}
 
 " Markdown file settings {{{
 augroup filetype_markdown
@@ -328,14 +447,28 @@ augroup filetype_markdown
     autocmd FileType markdown nnoremap <buffer> k gk
 augroup end
 " }}}
-" }}} (filetype)
-
-" Plugin configuration {{{
 
 
-" vim-easy-align  {{{
-xmap ga <Plug>(EasyAlign)  " Start interactive EasyAlign in visual mode (e.g. vipga)
-nmap ga <Plug>(EasyAlign) " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" YCM settings {{{
+let g:clang_library_path = "~/.vim/bundle/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd/"
+let g:clang_complete_copen = 0
+let g:clang_hl_errors = 1
+let g:clang_snippets = 1
+let g:clang_snippets_engine = "ultisnips"
+let g:clang_close_preview = 1
+let g:clang_complete_macros = 1
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_path_to_python_interpreter = '/opt/anaconda3/bin/python'
+
+" let g:ycm_global_ycm_extra_conf = "~/dotfiles/vim/.ycm_extra_conf.py"
 " }}}
 
 " Easymotion {{{
