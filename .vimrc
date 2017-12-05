@@ -1,5 +1,6 @@
+" VIM settings {{{1
 " vim:nowrap:tw=80:ts=2:sw=0:ft=vim:norl:et:fen:
-" Basic settings {{{
+" Basic settings {{{2
 scriptencoding utf-8
 
 if &compatible
@@ -69,26 +70,26 @@ set listchars=tab:»\ ,trail:·,extends:>,nbsp:.
 set colorcolumn=110
 highlight ColorColumn ctermbg=darkgray
 
-" Status line settings {{{
+" Status line settings {{{3
 " Always show status line
 set laststatus=2
-" }}}
+
 
 set exrc
 set secure
-" }}}
 
-" Register plugins  {{{
+
+" Register plugins  {{{2
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
 
-Plug 'airblade/vim-gitgutter'   " Mark changed lines
-Plug 'tpope/vim-fugitive'       " Git wrapper: Git, Gcommit, Gmove...
-Plug 'junegunn/vim-easy-align'  " Easy alignment
-Plug 'tpope/vim-repeat'         " Repeat last change
+Plug 'airblade/vim-gitgutter'  " Mark changed lines
+Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
+Plug 'junegunn/vim-easy-align' " Easy alignment
+Plug 'tpope/vim-repeat'        " Repeat last change
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-syntastic/syntastic'
@@ -100,13 +101,13 @@ endif
 "  Plug 'junegunn/vim-github-dashboard.git'
 " endif
 
-" Snippets support {{{
+" Snippets support {{{3
 Plug 'SirVer/ultisnips' 
 Plug 'garbas/vim-snipmate'          " Snippets manager
 Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
 Plug 'tomtom/tlib_vim'              " dependencies #2
 Plug 'honza/vim-snippets'           " snippets repo
-" }}}
+
 
 Plug 'easymotion/vim-easymotion'  " Fast motions
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -118,14 +119,16 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle' }
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" yank - Highlight copied area  {{{
+" Clipboard ring
+Plug 'svermeulen/vim-easyclip'
+
+" yank - Highlight copied area  {{{3
 " https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
 Plug 'kana/vim-operator-user'            " Lets user define their own operators.
 Plug 'thinca/vim-operator-sequence'      " Operator to do two or more operators.
 Plug 'osyo-manga/vim-operator-highlight' " the plugin for this.
-"  }}}
 
-" Plugins for either Vim8 or NeoVim {{{
+" Plugins for either Vim8 or NeoVim {{{3
 if has('nvim')
   Plug 'Shougo/denite.nvim'
   Plug 'machakann/vim-highlightedyank'
@@ -134,16 +137,14 @@ if has('nvim')
 else
   Plug 'Shougo/unite.vim' " Navigation between buffers and files
 endif
-" }}}
 
-
-" Colorschemes  {{{
+" Colorschemes  {{{3
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'  " colorscheme gruvbox
 Plug 'rakr/vim-one'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'reedes/vim-colors-pencil'
-" }}}
+
 
 " File list and open
 Plug 'justinmk/vim-dirvish'
@@ -153,25 +154,21 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'majutsushi/tagbar'            " Class/module browser
 
-" Status line  {{{
+" Status line  {{{3
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" }}}
-"
+
 Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
-" Julia {{{
+" Julia {{{3
 " Plug 'JuliaEditorSupport/julia-vim'
-" }}}
 
-" Misc {{{
+" Misc {{{3
 " to-do.txt
 Plug 'freitass/todo.txt-vim'
 " Plug 'thanthese/Tortoise-Typing')         " touch typing tutor
-" }}}
 
-
-" Markdown   {{{
+" Markdown   {{{3
 Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'junegunn/vim-emoji'
@@ -180,9 +177,8 @@ Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
 Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
-" }}}
 
-" Python  {{{
+" Python  {{{3
 Plug 'python-mode/python-mode'
 Plug 'davidhalter/jedi-vim'           " Jedi-vim autocomplete plugin
 Plug 'mitsuhiko/vim-jinja'            " Jinja support for vim
@@ -190,20 +186,19 @@ Plug 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
 Plug 'nvie/vim-flake8'  " Static syntax and code checker Flake8 
 " Plug :h ins-completion.
 Plug 'rosenfeld/conque-term'  " Consoles as buffers
-"  }}}
 
-" MCNP  {{{
+" MCNP  {{{3
 Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
-"  }}}
+
 
 
 " Initialize plugin system
 call plug#end()
 
-" }}}
 
-" Generic key mappings {{{
-" Edit .vimrc and commands {{{
+
+" Generic key mappings {{{2
+" Edit .vimrc and commands {{{3
 " local .vimrc
 if has('nvim')
     nnoremap <leader>ev :vsplit .nvimrc<CR>
@@ -215,31 +210,27 @@ nnoremap <leader>gv :vsplit $MYVIMRC<CR>
 " Insert <leader> and <Esc>
 " cnoremap <C-l> <lt>leader>
 " cnoremap <C-E> <lt>Esc>
-" }}}
 
-" netrw.vim {{{
+" netrw.vim {{{3
 " let g:netrw_banner=0
 " Don't show undo files in the explorer
 " let g:netrw_list_hide='\.un\~$'
 " }}}
-"
-" Navigation {{{
+
+" Navigation {{{3
 " Start and end of line
 nnoremap H ^
 nnoremap L $
 vnoremap L g_
-" }}}
 
-" Window manipulation {{{
-" Resize window {{{
+" Window manipulation {{{3
+" Resize window {{{4
 nnoremap + <C-W>+
 nnoremap _ <C-W>-
 " the next one conflicts with ==
 " nnoremap = <C-W>>
 nnoremap - <C-W><
-" }}}
 
-" Manipulate windows {{{
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -249,7 +240,6 @@ inoremap <C-h> <C-o><C-w>h
 inoremap <C-j> <C-o><C-w>j
 inoremap <C-k> <C-o><C-w>k
 inoremap <C-l> <C-o><C-w>l
-" }}}
 
 " Remove search highlight
 nnoremap <silent> <leader>/ :nohlsearch<CR>
@@ -264,14 +254,45 @@ nnoremap <silent> <leader>. :cnext<CR>
 " Convert word to uppercase
 inoremap <C-U> <Esc>viwUea
 
-" Hard way (restrict use of some features) {{{
+" Hard way (restrict use of some features) {{{3
 nnoremap o<Esc> :echoerr "Use <lt>leader>o instead"<cr>
 nnoremap O<Esc> :echoerr "Use <lt>leader>O instead"<cr>
-" }}}
 
-" }}}
+" Easier moving of code blocks {{{4
+vnoremap < <gv " Shift+> keys
+vnoremap > >gv " Shift+< keys
 
-" Filetype configuration {{{
+" Backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+" CTRL-Z is Undo {{{4
+noremap <C-z> u
+inoremap <C-z> <C-O>u
+
+" CTRL-Y is Redo {{{4
+noremap <C-y> <C-R>
+inoremap <C-y> <C-O><C-R>
+
+" CTRL-A is Select all {{{4
+noremap <C-a> gggH<C-O>G
+inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
+cnoremap <C-a> <C-C>gggH<C-O>G
+onoremap <C-a> <C-C>gggH<C-O>G
+snoremap <C-a> <C-C>gggH<C-O>G
+xnoremap <C-a> <C-C>ggVG
+
+" CTRL-S is Quicksave command {{{4
+noremap <C-s> :update<CR>
+vnoremap <C-s> <C-C>:update<CR>
+inoremap <C-s> <C-O>:update<CR>
+
+" Settings for buffers {{{4
+map <C-q> :bd<CR>         " close current buffer
+noremap <C-Right> :bn<CR> " move to next buffer
+noremap <C-Left> :bp<CR>  " move to previous buffer
+
+
+" Filetype configuration {{{2
 
 augroup vimrc_autocmds
     autocmd!
@@ -287,7 +308,7 @@ augroup filetype_c
     autocmd FileType c,cpp setlocal cindent
 augroup end
 
-" Python file settings {{{
+" Python file settings {{{3
 augroup filetype_python
     autocmd!
     if has('nvim')
@@ -298,28 +319,23 @@ augroup filetype_python
         autocmd FileType python nnoremap <buffer> <F4> :!./% 
     endif
 augroup end
-" }}}
 
-" Vimscript file settings {{{
+
+" Vimscript file settings {{{3
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-
     autocmd FileType vim setlocal nolinebreak
-
     " Insert <leader> and <Esc>
     autocmd FileType vim inoremap <buffer> <C-l>      <lt>leader>
     autocmd FileType vim inoremap <buffer> <C-V><Esc> <lt>Esc>
     autocmd FileType vim inoremap <buffer> <C-V><CR>  <lt>CR>
-
     autocmd FileType vim nnoremap <buffer> <F5> :source %<CR>
-
     autocmd FileType vim setlocal keywordprg=:help
 augroup end
-" }}}
 
 
-" Markdown file settings {{{
+" Markdown file settings {{{3
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal wrap
@@ -327,18 +343,26 @@ augroup filetype_markdown
     autocmd filetype markdown nnoremap <buffer> j gj
     autocmd FileType markdown nnoremap <buffer> k gk
 augroup end
-" }}}
-" }}} (filetype)
-
-" Plugin configuration {{{
 
 
-" vim-easy-align  {{{
-xmap ga <Plug>(EasyAlign)  " Start interactive EasyAlign in visual mode (e.g. vipga)
-nmap ga <Plug>(EasyAlign) " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-" }}}
+" Pandoc file settings {{{3
+augroup filetype_pandoc
+    autocmd!
+    autocmd FileType pandoc setlocal wrap
+    autocmd filetype pandoc setlocal linebreak
+    autocmd filetype pandoc nnoremap <buffer> j gj
+    autocmd FileType pandoc nnoremap <buffer> k gk
+augroup end
 
-" Easymotion {{{
+
+" Plugin configuration {{{2
+" vim-easy-align  {{{3
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Easymotion {{{3
 let g:EasyMotion_do_mapping = -1
 let g:EasyMotion_startofline = 0
 nmap <M-f> <Plug>(easymotion-f)
@@ -361,13 +385,12 @@ nmap <M-j> <Plug>(easymotion-j)
 nmap <M-k> <Plug>(easymotion-k)
 
 " set nohlsearch " easymotion does it
-" }}}
+
 
 let g:load_doxygen_syntax = 1
 
-"  Ctrl-P {{{
+"  Ctrl-P {{{3
 let g:ctrlp_map = '<c-u>'
-" }}}
 
 " Fast saving and closing
 nnoremap <leader><leader> :w<cr>
@@ -395,18 +418,18 @@ map <F3> :TaskList<CR> " show pending tasks list
 map <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 0 " autofocus on Tagbar open
 
-" ConqueTerm
+" ConqueTerm {{{3
 nnoremap <F5> :ConqueTermSplit ipython<CR> " run python-scripts at <F5>
 nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR> " and debug-mode for <F6>
 let g:ConqueTerm_StartMessages = 0
 let g:ConqueTerm_CloseOnEnd = 0
 
-" Jedi-vim
+" Jedi-vim {{{3
 let g:jedi#show_call_signatures = 1 " Show call signatures
 let g:jedi#popup_on_dot = 1         " Enable autocomplete on dot
 let g:jedi#popup_select_first = 0   " Disable first select from auto-complete
 
-" Syntastic
+" Syntastic {{{3
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 1
@@ -428,14 +451,14 @@ noremap <f7> :w<CR>:SyntasticCheck<CR>
 " nnoremap ZS :SyntasticCheck<CR>
 nnoremap ZT :SyntasticToggle<CR>
 
-" Better :sign interface symbols
+" Better :sign interface symbols {{{4
 let g:syntastic_error_symbol = 'X'
 let g:syntastic_style_error_symbol = 'X'
 let g:syntastic_warning_symbol = 'x'
 let g:syntastic_style_warning_symbol = 'x'
 
 
-" Python helping options
+" Python helping options {{{3
 " http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
 " set textwidth=79  " lines longer than 79 columns will be broken
 " set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
@@ -497,74 +520,35 @@ let g:pymode_folding = 0
 " Disable choose first function/method at autocomplete
 let g:jedi#popup_select_first = 0
 
-"=====================================================
-" User hotkeys
-"=====================================================
-" Easier moving of code blocks
-vnoremap < <gv " Shift+> keys
-vnoremap > >gv " Shift+< keys
-
-" Backspace in Visual mode deletes selection
-vnoremap <BS> d
-
-" CTRL-Z is Undo
-" noremap <C-z> u
-" inoremap <C-z> <C-O>u
-
-" CTRL-Y is Redo
-noremap <C-y> <C-R>
-inoremap <C-y> <C-O><C-R>
-
-" CTRL-A is Select all
-noremap <C-a> gggH<C-O>G
-inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-a> <C-C>gggH<C-O>G
-onoremap <C-a> <C-C>gggH<C-O>G
-snoremap <C-a> <C-C>gggH<C-O>G
-xnoremap <C-a> <C-C>ggVG
-
-" CTRL-S is Quicksave command
-noremap <C-s> :update<CR>
-vnoremap <C-s> <C-C>:update<CR>
-inoremap <C-s> <C-O>:update<CR>
-
-" Settings for buffers
-map <C-q> :bd<CR>         " close current buffer
-noremap <C-Right> :bn<CR> " move to next buffer
-noremap <C-Left> :bp<CR>  " move to previous buffer
-
-"  ack and ag {{{
+"  ack and ag {{{3
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   set grepprg=ag\ --nogroup\ --nocolor
   " cnoreabbrev Ack Ack!
   nnoremap <Leader>a :Ack!<Space>
 endif
-" }}}
 
-
-" Status line {{{
+" Status line {{{3
 if has('vim_starting')
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%{fugitive#statusline()}
   set statusline+=%*
 endif
-" }}}
 
-" Colorscheme {{{
+" Colorscheme {{{3
 set termguicolors
 set background=dark
 silent!  colorscheme solarized8_dark_high
-" }}}
 
-" Vim-Airline status line  {{{
+
+" Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-" }}}
 
-" Solarized8 {{{
+
+" Solarized8 {{{3
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
       \ ? substitute(g:colors_name, 'dark', 'light', '')
       \ : substitute(g:colors_name, 'light', 'dark', '')
@@ -577,9 +561,9 @@ endfunction
 
 nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
 nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
-" }}} (Solarized)
 
-" Easyclip {{{
+
+" Easyclip {{{3
 set clipboard=unnamed,unnamedplus
 let g:EasyClipAutoFormat=1
 let g:EasyClipCopyExplicitRegisterToDefault=1
@@ -592,16 +576,14 @@ nmap gss <plug>SubstituteLine
 " xmap gs p
 xmap gs <plug>XEasyClipPaste
 nnoremap gm m
-" }}}
 
-" Yank and highlight   {{{
+" Yank and highlight   {{{3
 " see  https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
 noremap <expr> <Plug>(yank-highlight) operator#sequence#map("y", "\<Plug>(operator-highlight)")
 nmap <Leader>y <Plug>(yank-highlight)
 vmap <Leader>y <Plug>(yank-highlight)
 let g:operator#highlight#clear_time=2.0
-"  }}}
-"
+
 source ~/dotfiles/vim/SwitchColor.vim  " Toggle colorsheme with F8, Shift-F8
 
-" }}} (Plugin Configuration)
+
