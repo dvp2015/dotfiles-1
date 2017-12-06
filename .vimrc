@@ -393,7 +393,8 @@ nnoremap <silent> <leader>o o<Esc>
 nnoremap <silent> <leader>O O<Esc>
 
 " Работа буфферами
-map <C-q> :bd<CR> 	   " CTRL+Q - закрыть текущий буффер
+" CTRL+Q - закрыть текущий буффер
+map <c-q> :bd<cr>
 
 " Hard way (restrict use of some features) {{{3
 nnoremap o<Esc> :echoerr "Use <lt>leader>o instead"<cr>
@@ -429,9 +430,12 @@ inoremap <C-s> <C-O>:update<CR>
 
 " Settings for buffers {{{4
 map <C-q> :bd<CR>         " close current buffer
+" Ctrl-Left or Ctrl-Right to go to the previous or next tabs
 noremap <C-Right> :bn<CR> " move to next buffer
 noremap <C-Left> :bp<CR>  " move to previous buffer
-
+" press Alt-Left or Alt-Right to move the current tab to the left or right
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Plugin configuration {{{2
 " vim-easy-align  {{{3
@@ -670,4 +674,11 @@ let g:operator#highlight#clear_time=2.0
 
 source ~/dotfiles/vim/SwitchColor.vim  " Toggle colorsheme with F8, Shift-F8
 
+" Pandoc {{{3
+" let g:pandoc#filetypes#handled = ["pandoc", "markdown", "rst", "textfile"]
+" let g:pandoc#filetypes#pandoc_markdown = 0
+" let g:pandoc#formatting#smart_autoformat_on_cursormoved = 1
+
+" NerdCommenter {{{3
+let g:NERDSpaceDelims=1
 
