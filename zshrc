@@ -119,7 +119,7 @@ function allup() {
     echo "zplug update zsh..."
     zplug update > /dev/null &
     echo "minpack update vim..."
-    vim +PackUpdate +qall &
+    vim +PlugUpdate +qall &
     # echo "cask update emacs..."
     # cd ~/.emacs.d && cask update &
     # cd -

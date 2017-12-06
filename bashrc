@@ -102,3 +102,5 @@ else
   export VISUAL="nvim"
 fi
 eval "$(dircolors -b ~/.dircolors)" 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
