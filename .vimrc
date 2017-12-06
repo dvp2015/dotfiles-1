@@ -17,14 +17,12 @@ let localleader = "\\"
 
 set number
 set nowrap
-set autoindent
 set smartindent
 set backspace=indent,eol,start
 set diffopt=filler,vertical
 set ruler
 set ignorecase
 set smartcase
-set incsearch
 set smarttab
 " Python helping options
 " http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
@@ -36,6 +34,12 @@ set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line 
 
+set enc=utf-8    " utf-8 по дефолту в файлах
+set laststatus=2 " всегда показываем статусбар
+set incsearch    " инкреминтируемый поиск
+set hlsearch     " подсветка результатов поиска
+set nu           " показывать номера строк
+set scrolloff=5  " 5 строк при скролле за раз
 
 set hidden
 set hls
@@ -52,12 +56,8 @@ set noswapfile
 
 set showcmd
 set nojoinspaces
-set scrolloff=2
 
 set title
-
-set hlsearch
-set incsearch
 
 " List completions
 set wildmode=longest:list,full
@@ -117,8 +117,21 @@ if has('python') || has('python3')
 endif
 
 " Youcomplete, (not implemented) {{{3
-" Using a non-master branch
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+if has("python") || has("python3")
+  function! BuildYCM(info)
+    " info is a dictionary with 3 fields
+    " - name:   name of the plugin
+    " - status: 'installed', 'updated', or 'unchanged'
+    " - force:  set on PlugInstall! or PlugUpdate!
+    if a:info.status == 'installed' || a:info.force
+      !./install.py
+    endif
+  endfunction
+
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+endif
 
 " Fuzzy file search, installes as external application {{{3
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -172,7 +185,9 @@ Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 Plug 'freitass/todo.txt-vim'
 " Plug 'thanthese/Tortoise-Typing')         " touch typing tutor
 
+
 " Markdown   {{{3
+
 Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'junegunn/vim-emoji'
@@ -183,13 +198,15 @@ Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
 Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
 
 " Python  {{{3
-Plug 'python-mode/python-mode'
-Plug 'davidhalter/jedi-vim'           " Jedi-vim autocomplete plugin
-Plug 'mitsuhiko/vim-jinja'            " Jinja support for vim
-Plug 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
-Plug 'nvie/vim-flake8'  " Static syntax and code checker Flake8 
-" Plug :h ins-completion.
-Plug 'rosenfeld/conque-term'  " Consoles as buffers
+
+if has("python") || has("python3")
+  Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
+  Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
+  Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
+  Plug 'rosenfeld/conque-term'                             " Consoles as buffers
+  Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
+endif
+Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
 
 " MCNP  {{{3
 Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
@@ -199,6 +216,109 @@ Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
 " Initialize plugin system
 call plug#end()
 
+" VIM setup {{{2
+tab sball
+set switchbuf=useopen
+
+" Filetype configuration {{{3
+
+filetype on
+filetype plugin on
+filetype plugin indent on
+
+" Generic settings {{{4
+augroup vimrc_autocmds
+    autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+    autocmd BufRead,BufNewFile *.hpp,*.h++,*.hxx,*.cpp,*.c++,*.cxx set filetype=cpp.doxygen
+    autocmd FileType ruby,python,javascript,c,cpp,julia highlight Excess ctermbg=DarkGrey guibg=#c12a0f
+    autocmd FileType ruby,python,javascript,c,cpp,julia match Excess /\%80v.*/
+    autocmd FileType ruby,python,javascript,c,cpp,julia set nowrap
+augroup end
+
+" C file settings {{{4
+augroup filetype_c
+    autocmd!
+    autocmd FileType c,cpp setlocal cindent
+augroup end
+
+" Python file settings {{{4
+if has("python") || has("python3")
+  augroup filetype_python
+      autocmd!
+      if has('nvim')
+          autocmd FileType python nnoremap <buffer> <F5> :vsplit \| ./%<CR>
+          autocmd FileType python nnoremap <buffer> <F4> :vsplit \| ./% 
+      else
+          autocmd FileType python nnoremap <buffer> <F5> :!./%<CR>
+          autocmd FileType python nnoremap <buffer> <F4> :!./% 
+      endif
+  augroup end
+endif
+
+"=====================================================
+" Languages support
+"=====================================================
+" --- Python ---
+autocmd FileType python set completeopt-=preview " раскомментируйте, в случае, если не надо, чтобы jedi-vim показывал документацию по методу/классу
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
+            \ formatoptions+=croq softtabstop=4 smartindent
+            \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+
+" --- JavaScript ---
+let javascript_enable_domhtmlcss=1
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+
+" --- HTML ---
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+" --- template language support (SGML / XML too) ---
+autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd bufnewfile,bufread *.rhtml setlocal ft=eruby
+autocmd BufNewFile,BufRead *.mako setlocal ft=mako
+autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
+autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
+let html_no_rendering=1
+let g:closetag_default_xml=1
+let g:sparkupNextMapping='<c-l>'
+autocmd FileType html,htmldjango,htmljinja,eruby,mako let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako source ~/.vim/scripts/closetag.vim
+
+" --- CSS ---
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+" Vimscript file settings {{{4
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal nolinebreak
+    " Insert <leader> and <Esc>
+    autocmd FileType vim inoremap <buffer> <C-l>      <lt>leader>
+    autocmd FileType vim inoremap <buffer> <C-V><Esc> <lt>Esc>
+    autocmd FileType vim inoremap <buffer> <C-V><CR>  <lt>CR>
+    autocmd FileType vim nnoremap <buffer> <F5> :source %<CR>
+    autocmd FileType vim setlocal keywordprg=:help
+augroup end
+
+" Markdown file settings {{{4
+augroup filetype_markdown
+    autocmd!
+    autocmd FileType markdown setlocal wrap
+    autocmd filetype markdown setlocal linebreak
+    autocmd filetype markdown nnoremap <buffer> j gj
+    autocmd FileType markdown nnoremap <buffer> k gk
+augroup end
+
+" Pandoc file settings {{{4
+augroup filetype_pandoc
+    autocmd!
+    autocmd FileType pandoc setlocal wrap
+    autocmd filetype pandoc setlocal linebreak
+    autocmd filetype pandoc nnoremap <buffer> j gj
+    autocmd FileType pandoc nnoremap <buffer> k gk
+augroup end
 
 
 " Generic key mappings {{{2
@@ -228,7 +348,8 @@ nnoremap L $
 vnoremap L g_
 
 " Window manipulation {{{3
-" Resize window {{{4
+
+" Resize window
 nnoremap + <C-W>+
 nnoremap _ <C-W>-
 " the next one conflicts with ==
@@ -258,6 +379,22 @@ nnoremap <silent> <leader>. :cnext<CR>
 " Convert word to uppercase
 inoremap <C-U> <Esc>viwUea
 
+" Fast saving and closing
+nnoremap <leader><leader> :w<cr>
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>w :wq<cr>
+
+" Opening splits
+nnoremap <leader>v <C-w><C-v><C-w>l
+nnoremap <leader>s <C-w>s
+
+" Insert newline and stay in normal mode
+nnoremap <silent> <leader>o o<Esc>
+nnoremap <silent> <leader>O O<Esc>
+
+" Работа буфферами
+map <C-q> :bd<CR> 	   " CTRL+Q - закрыть текущий буффер
+
 " Hard way (restrict use of some features) {{{3
 nnoremap o<Esc> :echoerr "Use <lt>leader>o instead"<cr>
 nnoremap O<Esc> :echoerr "Use <lt>leader>O instead"<cr>
@@ -270,7 +407,7 @@ vnoremap > >gv " Shift+< keys
 vnoremap <BS> d
 
 " CTRL-Z is Undo {{{4
-" noremap <C-z> u   "  conflicts with default <C-Z> - switch to consoleUltiSnips requires py >= 2.7 or py3msys-python2.7.d
+" noremap <C-z> u   "  conflicts with default <C-Z> - switch to console
 inoremap <C-z> <C-O>u
 
 " CTRL-Y is Redo {{{4
@@ -294,69 +431,6 @@ inoremap <C-s> <C-O>:update<CR>
 map <C-q> :bd<CR>         " close current buffer
 noremap <C-Right> :bn<CR> " move to next buffer
 noremap <C-Left> :bp<CR>  " move to previous buffer
-
-
-" Filetype configuration {{{2
-
-augroup vimrc_autocmds
-    autocmd!
-    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
-    autocmd BufRead,BufNewFile *.hpp,*.h++,*.hxx,*.cpp,*.c++,*.cxx set filetype=cpp.doxygen
-    autocmd FileType ruby,python,javascript,c,cpp,julia highlight Excess ctermbg=DarkGrey guibg=#c12a0f
-    autocmd FileType ruby,python,javascript,c,cpp,julia match Excess /\%80v.*/
-    autocmd FileType ruby,python,javascript,c,cpp,julia set nowrap
-augroup END
-
-augroup filetype_c
-    autocmd!
-    autocmd FileType c,cpp setlocal cindent
-augroup end
-
-" Python file settings {{{3
-augroup filetype_python
-    autocmd!
-    if has('nvim')
-        autocmd FileType python nnoremap <buffer> <F5> :vsplit \| ./%<CR>
-        autocmd FileType python nnoremap <buffer> <F4> :vsplit \| ./% 
-    else
-        autocmd FileType python nnoremap <buffer> <F5> :!./%<CR>
-        autocmd FileType python nnoremap <buffer> <F4> :!./% 
-    endif
-augroup end
-
-
-" Vimscript file settings {{{3
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType vim setlocal nolinebreak
-    " Insert <leader> and <Esc>
-    autocmd FileType vim inoremap <buffer> <C-l>      <lt>leader>
-    autocmd FileType vim inoremap <buffer> <C-V><Esc> <lt>Esc>
-    autocmd FileType vim inoremap <buffer> <C-V><CR>  <lt>CR>
-    autocmd FileType vim nnoremap <buffer> <F5> :source %<CR>
-    autocmd FileType vim setlocal keywordprg=:help
-augroup end
-
-
-" Markdown file settings {{{3
-augroup filetype_markdown
-    autocmd!
-    autocmd FileType markdown setlocal wrap
-    autocmd filetype markdown setlocal linebreak
-    autocmd filetype markdown nnoremap <buffer> j gj
-    autocmd FileType markdown nnoremap <buffer> k gk
-augroup end
-
-
-" Pandoc file settings {{{3
-augroup filetype_pandoc
-    autocmd!
-    autocmd FileType pandoc setlocal wrap
-    autocmd filetype pandoc setlocal linebreak
-    autocmd filetype pandoc nnoremap <buffer> j gj
-    autocmd FileType pandoc nnoremap <buffer> k gk
-augroup end
 
 
 " Plugin configuration {{{2
@@ -396,21 +470,14 @@ let g:load_doxygen_syntax = 1
 "  Ctrl-P {{{3
 let g:ctrlp_map = '<c-u>'
 
-" Fast saving and closing
-nnoremap <leader><leader> :w<cr>
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>w :wq<cr>
-
-" Opening splits
-nnoremap <leader>v <C-w><C-v><C-w>l
-nnoremap <leader>s <C-w>s
-
-" Insert newline and stay in normal mode
-nnoremap <silent> <leader>o o<Esc>
-nnoremap <silent> <leader>O O<Esc>
-
 " nnoremap <M-h> :tabp<cr>
 " nnoremap <M-l> :tabn<cr>
+
+" NerdTree настройки
+" показать NERDTree на F3
+map <F1> :NERDTreeToggle<CR>
+"игноррируемые файлы с расширениями
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']  
 
 " Unite settings
 nnoremap <F2> :Unite buffer<CR> " browse a list of the currently opened buffers
@@ -418,20 +485,12 @@ nnoremap <F2> :Unite buffer<CR> " browse a list of the currently opened buffers
 " TaskList settings
 map <F3> :TaskList<CR> " show pending tasks list
 
+" указываем каталог с настройками SnipMate
+let g:snippets_dir = "~/.vim/plugged/vim-snippets/snippets"
+
 " TagBar settings
 map <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 0 " autofocus on Tagbar open
-
-" ConqueTerm {{{3
-nnoremap <F5> :ConqueTermSplit ipython<CR> " run python-scripts at <F5>
-nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR> " and debug-mode for <F6>
-let g:ConqueTerm_StartMessages = 0
-let g:ConqueTerm_CloseOnEnd = 0
-
-" Jedi-vim {{{3
-let g:jedi#show_call_signatures = 1 " Show call signatures
-let g:jedi#popup_on_dot = 1         " Enable autocomplete on dot
-let g:jedi#popup_select_first = 0   " Disable first select from auto-complete
 
 " Syntastic {{{3
 let g:syntastic_always_populate_loc_list = 1
@@ -462,67 +521,87 @@ let g:syntastic_warning_symbol = 'x'
 let g:syntastic_style_warning_symbol = 'x'
 
 
-" Python helping options {{{3
-" http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-" set textwidth=79  " lines longer than 79 columns will be broken
-" set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
-" set tabstop=4     " a hard TAB displays as 4 columns
-" set expandtab     " insert spaces when hitting TABs
-" set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-" set shiftround    " round indent to multiple of 'shiftwidth'
-" set autoindent    " align the new line indent with the previous line 
-" autocmd BufWritePost *.py call Flake8()
-"=====================================================
-" Python-mode settings
-"=====================================================
-" Keys:
-" K Show python docs
-" <Ctrl-Space> Rope autocomplete
-" <Ctrl-c>g Rope goto definition
-" <Ctrl-c>d Rope show documentation
-" <Ctrl-c>f Rope find occurrences
-" <Leader>b Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[ Jump on previous class or function (normal, visual, operator modes)
-" ]] Jump on next class or function (normal, visual, operator modes)
-" [M Jump on previous class or method (normal, visual, operator modes)
-" ]M Jump on next class or method (normal, visual, operator modes)
+" Python-mode settings  {{{3
 
-" отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
+if has("python") || has("python3")
+  " Keys:
+  " K Show python docs
+  " <Ctrl-Space> Rope autocomplete
+  " <Ctrl-c>g Rope goto definition
+  " <Ctrl-c>d Rope show documentation
+  " <Ctrl-c>f Rope find occurrences
+  " <Leader>b Set, unset breakpoint (g:pymode_breakpoint enabled)
+  " [[ Jump on previous class or function (normal, visual, operator modes)
+  " ]] Jump on next class or function (normal, visual, operator modes)
+  " [M Jump on previous class or method (normal, visual, operator modes)
+  " ]M Jump on next class or method (normal, visual, operator modes)
 
-" документация
-let g:pymode_doc = 0
-let g:pymode_doc_key = 'K'
-" проверка кода
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pylint,pep8"
-let g:pymode_lint_ignore="E501,W601,C0110"
-" провека кода после сохранения
-let g:pymode_lint_write = 1
+  " отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
+  let g:pymode_rope = 0
+  let g:pymode_rope_completion = 0
+  let g:pymode_rope_complete_on_dot = 0
 
-" поддержка virtualenv
-let g:pymode_virtualenv = 1
+  " документация
+  let g:pymode_doc = 0
+  let g:pymode_doc_key = 'K'
+  " проверка кода
+  let g:pymode_lint = 1
+  let g:pymode_lint_checker = "pylint,pep8"
+  let g:pymode_lint_ignore="E501,W601,C0110"
+  " провека кода после сохранения
+  let g:pymode_lint_write = 1
 
-" установка breakpoints
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
+  " поддержка virtualenv
+  let g:pymode_virtualenv = 1
 
-" подстветка синтаксиса
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
+  " установка breakpoints
+  let g:pymode_breakpoint = 1
+  let g:pymode_breakpoint_key = '<leader>b'
 
-" отключить autofold по коду
-let g:pymode_folding = 0
+  " подстветка синтаксиса
+  let g:pymode_syntax = 1
+  let g:pymode_syntax_all = 1
+  let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+  let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
-" возможность запускать код
-" let g:pymode_run = 0
+  " отключить autofold по коду
+  let g:pymode_folding = 0
 
-" Disable choose first function/method at autocomplete
-let g:jedi#popup_select_first = 0
+  " возможность запускать код
+  let g:pymode_run = 0
+
+  " Disable choose first function/method at autocomplete
+  let g:jedi#popup_select_first = 0
+
+  " ConqueTerm {{{4
+
+  " run python-scripts at <F5>
+  nnoremap <F5> :ConqueTermSplit ipython<CR>
+  " and debug-mode for <F6>
+  nnoremap <F6> :exe 'ConqueTermSplit ipython '.expand('%')<CR>
+  let g:ConqueTerm_StartMessages = 0
+  let g:ConqueTerm_CloseOnEnd = 0
+
+  " проверка кода в соответствии с PEP8 через <leader>8
+  autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
+
+  " Jedi-vim {{{4
+
+  let g:jedi#show_call_signatures = 1 " Show call signatures
+  let g:jedi#popup_on_dot = 1         " Enable autocomplete on dot
+  let g:jedi#popup_select_first = 0   " Disable first select from auto-complete
+
+  " автокомплит через <Ctrl+Space>
+  inoremap <C-space> <C-x><C-o>
+
+  " переключение между синтаксисами
+  nnoremap <leader>Th :set ft=htmljinja<CR>
+  nnoremap <leader>Tp :set ft=python<CR>
+  nnoremap <leader>Tj :set ft=javascript<CR>
+  nnoremap <leader>Tc :set ft=css<CR>
+  nnoremap <leader>Td :set ft=django<CR>
+
+endif
 
 "  ack and ag {{{3
 if executable('ag')
@@ -550,7 +629,8 @@ silent!  colorscheme solarized8_dark_high
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Solarized8 {{{3
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"

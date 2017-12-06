@@ -1,8 +1,5 @@
 # Partially stolen from https://bitbucket.org/mblum/libgp/src/2537ea7329ef/.ycm_extra_conf.py
-YCMD_PATH="~/.vim/bundle/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd"
 import os
-import sys
-sys.path.append(YCMD_PATH)
 import ycm_core
 
 # These are the compilation flags that will be used in case there's no
