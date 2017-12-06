@@ -85,44 +85,48 @@ set secure
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-
-Plug 'airblade/vim-gitgutter'  " Mark changed lines
-Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
-Plug 'junegunn/vim-easy-align' " Easy alignment
-Plug 'tpope/vim-repeat'        " Repeat last change
+" Utilities  {{{3
+Plug 'junegunn/vim-easy-align'     " Easy alignment
+Plug 'tpope/vim-repeat'            " Repeat last change
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-syntastic/syntastic'
+Plug 'easymotion/vim-easymotion'   " Fast motions
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
+Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
+
 if executable("ag") || executable("ack")
   Plug 'mileszs/ack.vim'
 endif
 
+" Git support {{{3
+Plug 'airblade/vim-gitgutter'  " Mark changed lines
+Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
 " if executable('ruby') && executable('git')
 "  Plug 'junegunn/vim-github-dashboard.git'
 " endif
 
 " Snippets support {{{3
-Plug 'SirVer/ultisnips' 
-Plug 'garbas/vim-snipmate'          " Snippets manager
-Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-Plug 'tomtom/tlib_vim'              " dependencies #2
-Plug 'honza/vim-snippets'           " snippets repo
+if has('python') || has('python3')
+  Plug 'SirVer/ultisnips' 
+  Plug 'garbas/vim-snipmate'          " Snippets manager
+  Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
+  Plug 'tomtom/tlib_vim'              " dependencies #2
+  Plug 'honza/vim-snippets'           " snippets repo
+endif
 
-
-Plug 'easymotion/vim-easymotion'  " Fast motions
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle' }
-
+" Youcomplete, (not implemented) {{{3
 " Using a non-master branch
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" Plugin outside ~/.vim/plugged with post-update hook
+" Fuzzy file search, installes as external application {{{3
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Clipboard ring
+" Clipboard ring {{{3
 Plug 'svermeulen/vim-easyclip'
 
-" yank - Highlight copied area  {{{3
+" yank - Highlight copied area  {{{4
 " https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
 Plug 'kana/vim-operator-user'            " Lets user define their own operators.
 Plug 'thinca/vim-operator-sequence'      " Operator to do two or more operators.
@@ -266,7 +270,7 @@ vnoremap > >gv " Shift+< keys
 vnoremap <BS> d
 
 " CTRL-Z is Undo {{{4
-noremap <C-z> u
+" noremap <C-z> u   "  conflicts with default <C-Z> - switch to consoleUltiSnips requires py >= 2.7 or py3msys-python2.7.d
 inoremap <C-z> <C-O>u
 
 " CTRL-Y is Redo {{{4
