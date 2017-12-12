@@ -211,7 +211,8 @@ Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
 " MCNP  {{{3
 Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
 
-
+" Autocompletion on Awesome vim plugins {{{3
+Plug 'mbbill/undotree'
 
 " Initialize plugin system
 call plug#end()
@@ -682,3 +683,10 @@ source ~/dotfiles/vim/SwitchColor.vim  " Toggle colorsheme with F8, Shift-F8
 " NerdCommenter {{{3
 let g:NERDSpaceDelims=1
 
+
+" UndtoTeee  {{{3
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+nnoremap <leader>ut :UndotreeToggle<cr>
