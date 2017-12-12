@@ -44,7 +44,7 @@ set scrolloff=5  " 5 строк при скролле за раз
 set hidden
 set hls
 
-set showmatch "brackets
+set showmatch           " highlight matching [{()}]
 
 " Enable mouse
 set mouse=a
@@ -75,6 +75,8 @@ highlight ColorColumn ctermbg=darkgray
 set laststatus=2
 
 
+syntax enable           " enable syntax processing
+set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
 
@@ -330,7 +332,7 @@ if has('nvim')
 else
     nnoremap <leader>ev :vsplit .vimrc<CR>
 endif
-nnoremap <leader>gv :vsplit $MYVIMRC<CR>
+" nnoremap <leader>gv :vsplit $MYVIMRC<CR>
 
 " Insert <leader> and <Esc>
 " cnoremap <C-l> <lt>leader>
@@ -347,6 +349,10 @@ nnoremap <leader>gv :vsplit $MYVIMRC<CR>
 nnoremap H ^
 nnoremap L $
 vnoremap L g_
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
 " Window manipulation {{{3
 
@@ -366,6 +372,13 @@ inoremap <C-h> <C-o><C-w>h
 inoremap <C-j> <C-o><C-w>j
 inoremap <C-k> <C-o><C-w>k
 inoremap <C-l> <C-o><C-w>l
+inoremap <c-h> <c-o><c-w>h
+inoremap <c-j> <c-o><c-w>j
+inoremap <c-k> <c-o><c-w>k
+inoremap <c-l> <c-o><c-w>l
+
+" highlight last inserted text
+nnoremap <leader>gv `[v`]
 
 " Remove search highlight
 nnoremap <silent> <leader>/ :nohlsearch<CR>
