@@ -487,6 +487,12 @@ let g:load_doxygen_syntax = 1
 
 "  Ctrl-P {{{3
 let g:ctrlp_map = '<c-u>'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
 
 " nnoremap <M-h> :tabp<cr>
 " nnoremap <M-l> :tabn<cr>
