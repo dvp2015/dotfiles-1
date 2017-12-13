@@ -55,7 +55,13 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
 #POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs dir_writable)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda battery time)
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda)
+# Check if battery is present in the system
+if [ -f /sys/class/power_supply/BAT1/uevent ]; then
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS battery)
+fi 
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS time)
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
@@ -118,8 +124,8 @@ function allup() {
     brew update &
     echo "zplug update zsh..."
     zplug update > /dev/null &
-    echo "minpack update vim..."
-    vim +PlugUpdate +qall &
+    echo "vim-plug update..."
+    vim +PlugUpdate --sync +qall &
     # echo "cask update emacs..."
     # cd ~/.emacs.d && cask update &
     # cd -
