@@ -179,9 +179,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
 " Julia {{{3
-if executable('julia')
-  Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
-endif
+" if executable('julia')
+  " Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+" endif
 
 " Misc {{{3
 " to-do.txt
