@@ -1,5 +1,4 @@
 " VIM settings {{{1
-" vim:nowrap:tw=80:ts=2:sw=0:ft=vim:norl:et:fen:
 " Basic settings {{{2
 scriptencoding utf-8
 
@@ -180,7 +179,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
 " Julia {{{3
-" Plug 'JuliaEditorSupport/julia-vim'
+if executable('julia')
+  Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+endif
 
 " Misc {{{3
 " to-do.txt
@@ -705,7 +706,9 @@ let g:NERDSpaceDelims=1
 
 " UndtoTeee  {{{3
 if has("persistent_undo")
-    set undodir=~/.undodir/
-    set undofile
+  set undodir=~/.undodir/
+  set undofile
 endif
 nnoremap <leader>ut :UndotreeToggle<cr>
+
+" vim:nowrap:tw=80:ts=2:sw=0:ft=vim:norl:et:fen:
