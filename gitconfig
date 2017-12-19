@@ -10,5 +10,6 @@
 [core]
 	autocrlf = input
 	editor = vim
+	excludesfile = /home/dvp/.gitignore
 [color]
 	ui = auto
