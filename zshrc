@@ -246,3 +246,13 @@ function o() {
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export BOOST_VERSION=1.66
+export BOOST_HOME=~/lib/boost/${BOOST_VERSION}
+export INCLUDE_PATH=$INCLUDE_PATH:${BOOST_HOME}/include
+export LD_PATH=${LD_PATH}:${BOOST_HOME}/lib
+export LIB_PATH=${LIB_PATH}:${BOOST_HOME}/lib
+
+export GTEST_HOME=~/lib/gtest
+export INCLUDE_PATH=$INCLUDE_PATH:${GTEST_HOME}/include
+export LIB_PATH=${LIB_PATH}:${GTEST_HOME}/lib
