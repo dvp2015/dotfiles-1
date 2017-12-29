@@ -13,3 +13,5 @@
 	excludesfile = /home/dvp/.gitignore
 [color]
 	ui = auto
+[cola]
+	fontdiff = Monospace,14,-1,5,50,0,0,0,0,0
