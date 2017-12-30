@@ -42,15 +42,14 @@ alias df='df -kTh'
 # Различные варианты 'ls' (предполагается, что установлена GNU-версия ls)
 # alias l='ls'                    # короче
 # alias la='ls -Al'               # показать скрытые файлы
-alias ls='ls -hF --color'       # выделить различные типы файлов цветом
-alias lx='ls -lXB'              # сортировка по расширению
-alias lk='ls -lSr'              # сортировка по размеру
-alias lc='ls -lcr'              # сортировка по времени изменения
-alias lu='ls -lur'              # сортировка по времени последнего обращения
-alias lr='ls -lR'               # рекурсивный обход подкаталогов
-alias lt='ls -ltr'              # сортировка по дате
-alias lm='ls -al |more'         # вывод через 'more'
-alias tree='tree -Csu'          # альтернатива 'ls'
+alias ls='ls -hF --color=always --group-directories-first'       # выделить различные типы файлов цветом
+alias lx='ls -lXB --color=always --group-directories-first'      # сортировка по расширению
+alias lk='ls -lSr --color=always --group-directories-first'      # сортировка по размеру
+alias lc='ls -lcr --color=always --group-directories-first'      # сортировка по времени изменения
+alias lu='ls -lur --color=always --group-directories-first'      # сортировка по времени последнего обращения
+alias lr='ls -lR --color=always --group-directories-first'       # рекурсивный обход подкаталогов
+alias lt='ls -ltr --color=always --group-directories-first'      # сортировка по дате
+alias lm='ls -al --color=always --group-directories-first |more' # вывод через 'more'
 
 #Using clipboard
 alias setclip="xclip -selection c"

@@ -221,8 +221,10 @@ Plug 'mbbill/undotree'
 call plug#end()
 
 " VIM setup {{{2
-tab sball
-set switchbuf=useopen
+if ! &diff
+  tab sball
+  set switchbuf=useopen
+endif
 
 " Filetype configuration {{{3
 
