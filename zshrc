@@ -15,7 +15,8 @@ path=("$HOME/.linuxbrew/bin" $path)
 export PATH
 export MANPATH="$(brew --prefix)/share/man:$MANPATH"
 export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
-export PKG_CONFIG_PATH="/home/dvp/.linuxbrew/lib/pkgconfig:/usr/lib/pkgconfig"
+export PKG_CONFIG_PATH="/home/dvp/.linuxbrew/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="/home/dvp/lib/gtest/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Enable zplug
 # See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
@@ -249,6 +250,17 @@ function o() {
 # History
 export HISTCONTROL=erasedups	# when adding an item to history, delete itentical commands upstream
 export HISTSIZE=10000		# save 10000 items in history
-export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek"
+export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:resize:clear:history:mcc:cs"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export BOOST_VERSION=1.66
+export BOOST_ROOT=~/lib/boost/${BOOST_VERSION}
+export BOOST_INCLUDE_DIR=${BOOST_ROOT}/include
+export INCLUDE_PATH=$INCLUDE_PATH:${BOOST_INCLUDE_DIR}
+export LD_PATH=${LD_PATH}:${BOOST_ROOT}/lib
+export LIB_PATH=${LIB_PATH}:${BOOST_ROOT}/lib
+
+export GTEST_ROOT=~/lib/gtest
+export INCLUDE_PATH=$INCLUDE_PATH:${GTEST_ROOT}/include
+export LIB_PATH=${LIB_PATH}:${GTEST_ROOT}/lib
