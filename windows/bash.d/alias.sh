@@ -29,10 +29,12 @@ alias 2ne='2dir "/c/dev/python/triniti_ne"'
 
 # Aliases for git as in zsh
 alias g='git'
+alias ga='git add'
 alias gp='git push'
 alias gl='git pull'
 alias gst='git status'
 alias gcam='git commit -am'
+alias gco='git checkout'
 
 alias 2misc='cd ~/misc'
 alias ek='vim ~/misc/keys/generic.txt'
