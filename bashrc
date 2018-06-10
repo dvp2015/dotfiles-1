@@ -57,8 +57,6 @@ function cdf() {
 # Reload .bashrc
 alias refresh='. ~/.bashrc'
 
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 function ps1_branch {
