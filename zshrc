@@ -5,6 +5,10 @@ TERM=xterm-256color
 typeset -U path
 path=("$HOME/bin" $path)
 path=("/usr/local/bin" $path)
+# same for alike variables
+typeset -UT INCLUDE_PATH include_path
+typeset -UT LD_PATH ld_path
+typeset -UT LIB_PATH lib_path
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
@@ -254,13 +258,28 @@ export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:re
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export BOOST_VERSION=1.66
+# function extent_path(dst, src) {
+    # if [[ -z  $dst ]]; then
+        # dst="${src}"
+    # else
+        # dst="${dst}:$src"
+    # fi
+# }
+
+export BOOST_VERSION=1.65
 export BOOST_ROOT=~/lib/boost/${BOOST_VERSION}
 export BOOST_INCLUDE_DIR=${BOOST_ROOT}/include
-export INCLUDE_PATH=$INCLUDE_PATH:${BOOST_INCLUDE_DIR}
-export LD_PATH=${LD_PATH}:${BOOST_ROOT}/lib
-export LIB_PATH=${LIB_PATH}:${BOOST_ROOT}/lib
+export BOOST_LIBRARYDIR=${BOOST_ROOT}/lib
+include_path+=${BOOST_INCLUDE_DIR}
+ld_path+=${BOOST_ROOT}/lib
+lib_path+=${BOOST_ROOT}/lib
 
 export GTEST_ROOT=~/lib/gtest
-export INCLUDE_PATH=$INCLUDE_PATH:${GTEST_ROOT}/include
-export LIB_PATH=${LIB_PATH}:${GTEST_ROOT}/lib
+include_path+=${GTEST_ROOT}/include
+lib_path+=${GTEST_ROOT}/lib
+
+export INCLUDE_PATH
+export LD_PATH
+export LIB_PATH
+
+
