@@ -263,7 +263,5 @@ export HISTSIZE=10000		# save 10000 items in history
 export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:resize:clear:history:mcc:cs"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-[ -f .local/build.zsh ] && source .local/build.zsh || \
+[ -f .local/build.zsh ] && source .local/build.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
