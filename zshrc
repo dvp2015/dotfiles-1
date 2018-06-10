@@ -5,6 +5,16 @@ TERM=xterm-256color
 typeset -U path
 path=("$HOME/bin" $path)
 path=("/usr/local/bin" $path)
+# same for alike variables
+typeset -UT INCLUDE_PATH include_path
+typeset -UT LD_PATH ld_path
+typeset -UT LIB_PATH lib_path
+typeset -UT LD_LIBRARY_PATH ld_library_path
+typeset -UT PKG_CONFIG_PATH pkg_config_path
+typeset -UT CPATH cpath
+typeset -UT C_INCLUDE_PATH c_include_path
+typeset -UT CPLUS_INCLUDE_PATH cplus_include_path
+typeset -UT OBJC_INCLUDE_PATH objc_include_path
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
@@ -254,15 +264,6 @@ export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:re
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export BOOST_VERSION=1.66
-export BOOST_ROOT=~/lib/boost/${BOOST_VERSION}
-export BOOST_INCLUDE_DIR=${BOOST_ROOT}/include
-export INCLUDE_PATH=$INCLUDE_PATH:${BOOST_INCLUDE_DIR}
-export LD_PATH=${LD_PATH}:${BOOST_ROOT}/lib
-export LIB_PATH=${LIB_PATH}:${BOOST_ROOT}/lib
 
-export GTEST_ROOT=~/lib/gtest
-export INCLUDE_PATH=$INCLUDE_PATH:${GTEST_ROOT}/include
-export LIB_PATH=${LIB_PATH}:${GTEST_ROOT}/lib
-
-
+[ -f .local/build.zsh ] && source .local/build.zsh || \
+[ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
