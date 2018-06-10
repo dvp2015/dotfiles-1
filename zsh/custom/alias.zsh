@@ -15,7 +15,7 @@ alias ez='vim ~/.zshrc'
 alias eomz="vim ~/.oh-my-zsh/oh-my-zsh.sh"
 
 # running vim with "factory settings", see "Practical Vim"
-alias vimc='vim -u ~/.vim/essential.vim'
+alias vimc='vim -u ~/dofiles/vim/essential.vim'
 
 # full proof
 alias rm='rm -i'
@@ -29,6 +29,7 @@ alias apk5='ssh dvp2@apk5.triniti.ru'
 alias cs='ssh dvp@gitlab.iterrf.ru'
 alias misc='~/misc'
 alias dotfiles='~/dotfiles'
+alias upp='/opt/lanl/wrk/upp'
 
 alias mkdir='mkdir -p'
 

@@ -109,30 +109,30 @@ Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
 " endif
 
 " Snippets support {{{3
-if has('python') || has('python3')
-  Plug 'SirVer/ultisnips' 
-  Plug 'garbas/vim-snipmate'          " Snippets manager
-  Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-  Plug 'tomtom/tlib_vim'              " dependencies #2
-  Plug 'honza/vim-snippets'           " snippets repo
-endif
+" if has('python') || has('python3')
+  " Plug 'SirVer/ultisnips' 
+  " Plug 'garbas/vim-snipmate'          " Snippets manager
+  " Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
+  " Plug 'tomtom/tlib_vim'              " dependencies #2
+  " Plug 'honza/vim-snippets'           " snippets repo
+" endif
 
 " Youcomplete, (not implemented) {{{3
 
-if has("python") || has("python3")
-  function! BuildYCM(info)
-    " info is a dictionary with 3 fields
-    " - name:   name of the plugin
-    " - status: 'installed', 'updated', or 'unchanged'
-    " - force:  set on PlugInstall! or PlugUpdate!
-    if a:info.status == 'installed' || a:info.force
-      !./install.py
-    endif
-  endfunction
+" if has("python") || has("python3")
+  " function! BuildYCM(info)
+    " " info is a dictionary with 3 fields
+    " " - name:   name of the plugin
+    " " - status: 'installed', 'updated', or 'unchanged'
+    " " - force:  set on PlugInstall! or PlugUpdate!
+    " if a:info.status == 'installed' || a:info.force
+      " !./install.py
+    " endif
+  " endfunction
 
-  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-endif
+  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" endif
 
 " Fuzzy file search, installes as external application {{{3
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -331,9 +331,9 @@ augroup end
 " Edit .vimrc and commands {{{3
 " local .vimrc
 if has('nvim')
-    nnoremap <leader>ev :vsplit .nvimrc<CR>
+    nnoremap <leader>ev :vsplit ~/.nvimrc<CR>
 else
-    nnoremap <leader>ev :vsplit .vimrc<CR>
+    nnoremap <leader>ev :vsplit ~/.vimrc<CR>
 endif
 " nnoremap <leader>gv :vsplit $MYVIMRC<CR>
 

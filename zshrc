@@ -9,6 +9,12 @@ path=("/usr/local/bin" $path)
 typeset -UT INCLUDE_PATH include_path
 typeset -UT LD_PATH ld_path
 typeset -UT LIB_PATH lib_path
+typeset -UT LD_LIBRARY_PATH ld_library_path
+typeset -UT PKG_CONFIG_PATH pkg_config_path
+typeset -UT CPATH cpath
+typeset -UT C_INCLUDE_PATH c_include_path
+typeset -UT CPLUS_INCLUDE_PATH cplus_include_path
+typeset -UT OBJC_INCLUDE_PATH objc_include_path
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
@@ -258,28 +264,6 @@ export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:re
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# function extent_path(dst, src) {
-    # if [[ -z  $dst ]]; then
-        # dst="${src}"
-    # else
-        # dst="${dst}:$src"
-    # fi
-# }
 
-export BOOST_VERSION=1.65
-export BOOST_ROOT=~/lib/boost/${BOOST_VERSION}
-export BOOST_INCLUDE_DIR=${BOOST_ROOT}/include
-export BOOST_LIBRARYDIR=${BOOST_ROOT}/lib
-include_path+=${BOOST_INCLUDE_DIR}
-ld_path+=${BOOST_ROOT}/lib
-lib_path+=${BOOST_ROOT}/lib
-
-export GTEST_ROOT=~/lib/gtest
-include_path+=${GTEST_ROOT}/include
-lib_path+=${GTEST_ROOT}/lib
-
-export INCLUDE_PATH
-export LD_PATH
-export LIB_PATH
-
-
+[ -f .local/build.zsh ] && source .local/build.zsh || \
+[ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
