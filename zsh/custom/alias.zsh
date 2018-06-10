@@ -36,7 +36,7 @@ alias mkdir='mkdir -p'
 alias h='history'
 alias j='jobs -l'
 alias r='rlogin'
-alias show_path='echo -e ${PATH//:/\\n}'
+alias printpath='echo -e ${PATH//:/\\n}'
 alias du='du -kh'
 alias df='df -kTh'
 
