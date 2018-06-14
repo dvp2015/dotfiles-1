@@ -5,6 +5,16 @@ TERM=xterm-256color
 typeset -U path
 path=("$HOME/bin" $path)
 path=("/usr/local/bin" $path)
+# same for alike variables
+typeset -UT INCLUDE_PATH include_path
+typeset -UT LD_PATH ld_path
+typeset -UT LIB_PATH lib_path
+typeset -UT LD_LIBRARY_PATH ld_library_path
+typeset -UT PKG_CONFIG_PATH pkg_config_path
+typeset -UT CPATH cpath
+typeset -UT C_INCLUDE_PATH c_include_path
+typeset -UT CPLUS_INCLUDE_PATH cplus_include_path
+typeset -UT OBJC_INCLUDE_PATH objc_include_path
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
@@ -252,12 +262,6 @@ export HISTSIZE=10000		# save 10000 items in history
 export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:resize:clear:history:mcc:cs"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
+[ -f .local/build.zsh ] && source .local/build.zsh
 
-
-if [[ -r ~/.local/build.env ]]; then
-    . ~/.local/build.env
-fi
-
-if [[ -r .local/build.env ]]; then
-    . .local/build.env
-fi
