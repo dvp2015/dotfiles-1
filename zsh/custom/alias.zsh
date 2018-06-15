@@ -25,6 +25,7 @@ alias mv='mv -i'
 # navigation
 alias ne='~/dev/python/triniti_ne'
 alias mcc='ssh dvpab@ui2.computing.kiae.ru'
+alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
 alias apk5='ssh dvp2@apk5.triniti.ru'
 alias cs='ssh dvp@gitlab.iterrf.ru'
 alias misc='~/misc'
