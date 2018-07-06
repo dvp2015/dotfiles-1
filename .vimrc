@@ -221,8 +221,11 @@ Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
 " MCNP  {{{3
 Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
 
+" Other {{{3
 " Autocompletion on Awesome vim plugins {{{3
 Plug 'mbbill/undotree'
+" CMake syntax
+Plug 'pboettch/vim-cmake-syntax'
 
 " Initialize plugin system
 call plug#end()

@@ -33,6 +33,12 @@ alias dotfiles='~/dotfiles'
 alias upp='/opt/lanl/wrk/upp'
 
 alias mkdir='mkdir -p'
+#
+# Creates a given directory (if needed) and changes to it.
+#
+function mdcd() {
+    mkdir -p "$1"  && cd "$1"
+}
 
 alias h='history'
 alias j='jobs -l'
