@@ -69,3 +69,8 @@ alias chrome='/opt/google/chrome/chrome'
 
 # Jupyter
 alias jn='jupyter notebook'
+
+# yEd
+# https://www.yworks.com
+alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
+
