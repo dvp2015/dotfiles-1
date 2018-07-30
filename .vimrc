@@ -8,7 +8,9 @@ endif
 
 if !has('nvim')
   unlet! skip_defaults_vim
-  source $VIMRUNTIME/defaults.vim
+  if filereadable("$VIMRUNTIME/defaults.vim")
+    source $VIMRUNTIME/defaults.vim
+  endif
 endif
 
 let mapleader = " "
@@ -79,11 +81,6 @@ set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
 
-" download vim-plug if missing
-if empty(glob("~/.vim/autoload/plug.vim"))
-    silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * silent! PlugInstall
-endif
 
 " Register plugins  {{{2
 " Specify a directory for plugins
@@ -103,7 +100,7 @@ Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
 
 if executable("ag") || executable("ack")
-Plug 'mileszs/ack.vim'
+  Plug 'mileszs/ack.vim'
 endif
 
 " Git support {{{3
@@ -115,28 +112,28 @@ Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
 
 " Snippets support {{{3
 " if has('python') || has('python3')
-" Plug 'SirVer/ultisnips' 
-" Plug 'garbas/vim-snipmate'          " Snippets manager
-" Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-" Plug 'tomtom/tlib_vim'              " dependencies #2
-" Plug 'honza/vim-snippets'           " snippets repo
+  " Plug 'SirVer/ultisnips' 
+  " Plug 'garbas/vim-snipmate'          " Snippets manager
+  " Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
+  " Plug 'tomtom/tlib_vim'              " dependencies #2
+  " Plug 'honza/vim-snippets'           " snippets repo
 " endif
 
 " Youcomplete, (not implemented) {{{3
 
 " if has("python") || has("python3")
-" function! BuildYCM(info)
+  " function! BuildYCM(info)
     " " info is a dictionary with 3 fields
     " " - name:   name of the plugin
     " " - status: 'installed', 'updated', or 'unchanged'
     " " - force:  set on PlugInstall! or PlugUpdate!
     " if a:info.status == 'installed' || a:info.force
-    " !./install.py
+      " !./install.py
     " endif
-" endfunction
+  " endfunction
 
-" Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 " endif
 
 " Fuzzy file search, installes as external application {{{3
@@ -153,12 +150,12 @@ Plug 'osyo-manga/vim-operator-highlight' " the plugin for this.
 
 " Plugins for either Vim8 or NeoVim {{{3
 if has('nvim')
-Plug 'Shougo/denite.nvim'
-Plug 'machakann/vim-highlightedyank'
-Plug 'kassio/neoterm'
-Plug 'Shougo/neomru.vim'
+  Plug 'Shougo/denite.nvim'
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'kassio/neoterm'
+  Plug 'Shougo/neomru.vim'
 else
-Plug 'Shougo/unite.vim' " Navigation between buffers and files
+  Plug 'Shougo/unite.vim' " Navigation between buffers and files
 endif
 
 " Colorschemes  {{{3
@@ -185,7 +182,7 @@ Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
 " Julia {{{3
 " if executable('julia')
-" Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+  " Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
 " endif
 
 " Misc {{{3
@@ -196,36 +193,31 @@ Plug 'freitass/todo.txt-vim'
 
 " Markdown   {{{3
 
-if v:version >= 704
-    Plug 'tpope/vim-markdown'
-    Plug 'nelstrom/vim-markdown-folding'
-    Plug 'junegunn/vim-emoji'
-    Plug 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
-    Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-    Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
-    Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
-endif
+Plug 'tpope/vim-markdown'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'junegunn/vim-emoji'
+Plug 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
+Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
+Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
 
 " Python  {{{3
 
 if has("python") || has("python3")
-Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
-Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
-Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
-Plug 'rosenfeld/conque-term'                             " Consoles as buffers
-Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
+  Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
+  Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
+  Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
+  Plug 'rosenfeld/conque-term'                             " Consoles as buffers
+  Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
 endif
 Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
 
 " MCNP  {{{3
 Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
 
-" Other {{{3
 " Autocompletion on Awesome vim plugins {{{3
 Plug 'mbbill/undotree'
-" CMake syntax
-Plug 'pboettch/vim-cmake-syntax'
 
 " Initialize plugin system
 call plug#end()
@@ -657,7 +649,9 @@ if has('vim_starting')
 endif
 
 " Colorscheme {{{3
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
 set background=dark
 silent!  colorscheme solarized8_dark_high
 
