@@ -18,14 +18,14 @@ typeset -UT OBJC_INCLUDE_PATH objc_include_path
 
 # Use linux brew
 # See https://github.com/Linuxbrew/brew
-if [[ ! -d ~/.linuxbrew ]]; then
-  git clone https://github.com/Linuxbrew/brew.git ~/.linuxbrew
-fi
-path=("$HOME/.linuxbrew/bin" $path)
-export PATH
-export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
-export PKG_CONFIG_PATH="/home/dvp/.linuxbrew/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+# if [[ ! -d ~/.linuxbrew ]]; then
+#   git clone https://github.com/Linuxbrew/brew.git ~/.linuxbrew
+# fi
+# path=("$HOME/.linuxbrew/bin" $path)
+# export PATH
+# export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+# export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+# export PKG_CONFIG_PATH="/home/dvp/.linuxbrew/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Enable zplug
 # See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
@@ -239,8 +239,6 @@ export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
 
-source ~/.bin/tmuxinator.zsh
-
 # Directory colors (like in bash)
 eval "$(dircolors -b ~/.dircolors)" 
 
@@ -261,6 +259,7 @@ export HISTCONTROL=erasedups	# when adding an item to history, delete itentical 
 export HISTSIZE=10000		# save 10000 items in history
 export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:resize:clear:history:mcc:cs"
 
+[ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 [ -f .local/build.zsh ] && source .local/build.zsh
