@@ -227,6 +227,7 @@ call plug#end()
 if ! &diff
   tab sball
   set switchbuf=useopen
+  :set diffopt=filler,context:3,iwhite
 endif
 
 " Filetype configuration {{{3
@@ -659,7 +660,9 @@ silent!  colorscheme solarized8_dark_high
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-let g:airline#extensions#tabline#enabled = 1
+if ! &diff
+  let g:airline#extensions#tabline#enabled = 1
+endif
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Solarized8 {{{3
