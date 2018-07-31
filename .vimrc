@@ -1,3 +1,6 @@
+" 
+" version 1.0.0
+"
 " VIM settings {{{1
 " Basic settings {{{2
 scriptencoding utf-8
