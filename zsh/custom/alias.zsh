@@ -39,6 +39,7 @@ alias mkdir='mkdir -p'
 function mdcd() {
     mkdir -p "$1"  && cd "$1"
 }
+alias mdcdb='mdcd build'
 
 alias h='history'
 alias j='jobs -l'
