@@ -257,7 +257,7 @@ function o() {
 
 # add ssh id to a console session
 function sshid() {
-    eval $(ssh-agent) && ssh-add -q
+    eval $(ssh-agent) && ssh-add
 }
 
 # History
