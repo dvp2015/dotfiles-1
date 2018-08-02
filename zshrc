@@ -247,11 +247,17 @@ eval "$(dircolors -b ~/.dircolors)"
 export PYTHON="/opt/anaconda3/bin/python"
 export JUPYTER="/opt/anaconda3/bin/jupyter"
 
+# open file with a default assiciated program
 function o() {
   for i in $* 
   do
     xdg-open $i
   done
+}
+
+# add ssh id to a console session
+function sshid() {
+    eval $(ssh-agent) && ssh-add -q
 }
 
 # History
