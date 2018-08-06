@@ -32,7 +32,7 @@ alias misc='~/misc'
 alias dotfiles='~/dotfiles'
 alias upp='/opt/lanl/wrk/upp'
 
-alias mkdir='mkdir -p'
+alias mkdir -p'
 #
 # Creates a given directory (if needed) and changes to it.
 #
@@ -59,6 +59,10 @@ alias lu='ls -lur --color=always --group-directories-first'      # сортир�
 alias lr='ls -lR --color=always --group-directories-first'       # рекурсивный обход подкаталогов
 alias lt='ls -ltr --color=always --group-directories-first'      # сортировка по дате
 alias lm='ls -al --color=always --group-directories-first |more' # вывод через 'more'
+
+function lss () { 
+    ls -FaGl "${@}" | awk '{ total += $4; print }; END { print total }'; 
+}
 
 #Using clipboard
 alias setclip="xclip -selection c"
