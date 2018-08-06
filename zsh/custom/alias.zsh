@@ -81,3 +81,6 @@ alias jn='jupyter notebook'
 # https://www.yworks.com
 alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
 
+
+# Midnight Commander
+alias mc='. /usr/local/libexec/mc/mc-wrapper.sh'
