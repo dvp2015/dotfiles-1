@@ -32,7 +32,7 @@ alias misc='~/misc'
 alias dotfiles='~/dotfiles'
 alias upp='/opt/lanl/wrk/upp'
 
-alias mkdir -p'
+alias md='mkdir -p'
 #
 # Creates a given directory (if needed) and changes to it.
 #
