@@ -101,6 +101,7 @@ Plug 'easymotion/vim-easymotion'   " Fast motions
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
+Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
 
 if executable("ag") || executable("ack")
   Plug 'mileszs/ack.vim'
@@ -109,6 +110,8 @@ endif
 " Git support {{{3
 Plug 'airblade/vim-gitgutter'  " Mark changed lines
 Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
+Plug 'junegunn/gv.vim'         " git commit browser, GV, GV! GV?
+
 " if executable('ruby') && executable('git')
 "  Plug 'junegunn/vim-github-dashboard.git'
 " endif
