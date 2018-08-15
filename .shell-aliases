@@ -1,0 +1,101 @@
+alias dos2unix='sed "s/$//"'
+
+alias tmux='tmux -2'
+
+if which exa >/dev/null 2>&1; then
+  alias ls='exa'
+elif which ls++ >/dev/null 2>&1; then
+  alias ls='ls++'
+else
+  alias ls='ls --color=auto'
+fi
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+# Различные варианты 'ls' (предполагается, что установлена GNU-версия ls)
+# alias l='ls'                    # короче
+# alias la='ls -Al'               # показать скрытые файлы
+alias ls='ls -hF --color=always --group-directories-first'       # выделить различные типы файлов цветом
+alias lx='ls -lXB --color=always --group-directories-first'      # сортировка по расширению
+alias lk='ls -lSr --color=always --group-directories-first'      # сортировка по размеру
+alias lc='ls -lcr --color=always --group-directories-first'      # сортировка по времени изменения
+alias lu='ls -lur --color=always --group-directories-first'      # сортировка по времени последнего обращения
+alias lr='ls -lR --color=always --group-directories-first'       # рекурсивный обход подкаталогов
+alias lt='ls -ltr --color=always --group-directories-first'      # сортировка по дате
+alias lm='ls -al --color=always --group-directories-first |more' # вывод через 'more'
+
+function lss () { 
+    ls -FaGl "${@}" | awk '{ total += $4; print }; END { print total }'; 
+}
+
+#Using clipboard
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
+
+# Return if requirements are not found.
+alias todo='~/misc/todo/todo.sh'
+alias todol="todo ls -someday"
+alias etodo="vim ~/misc/todo/todo.txt"
+
+alias ek="vim ~/misc/keys/generic.txt"
+
+# Chrome
+alias chrome='/opt/google/chrome/chrome'
+
+# Jupyter
+alias jn='jupyter notebook'
+
+# yEd
+# https://www.yworks.com
+alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
+
+
+# Midnight Commander
+alias mc='. /usr/local/libexec/mc/mc-wrapper.sh'
+#alias dir='dir --color=auto'
+#alias vdir='vdir --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+if which nvim >/dev/null 2>&1; then
+  alias vim='nvim'
+fi
+alias purevim='vim -u NONE'
+
+alias ll='\ls -l'
+alias lt='\ls --color=auto -lhFart'
+
+if which vim >/dev/null 2>&1; then
+  alias vi='vim'
+fi
+
+if [[ ! -z $TMUX ]]; then
+  alias fzf='fzf-tmux'
+fi
+
+alias displayoff='xset -display :0.0 dpms force off'
+alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
+alias suspiria='/usr/bin/dbus-send --system --print-reply \
+  --dest="org.freedesktop.UPower" \
+  /org/freedesktop/UPower \
+  org.freedesktop.UPower.Suspend'
+
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+

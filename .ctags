@@ -1,3 +1,7 @@
+--langdef=ansible
+--langmap=ansible:.yml
+--regex-ansible=/^\s*- name:(.*)/\1/t,task/
+
 --langdef=pml
 --langmap=pml:.pml
 --regex-pml=/<title>(.*)<\/title>/\1/t,title/

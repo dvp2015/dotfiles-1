@@ -1,3 +1,20 @@
+# Via https://tanguy.ortolo.eu/blog/article25/shrc
+#
+# Zsh always executes zshenv. Then, depending on the case:
+# - run as a login shell, it executes zprofile;
+# - run as an interactive, it executes zshrc;
+# - run as a login shell, it executes zlogin.
+#
+# At the end of a login session, it executes zlogout, but in reverse order, the
+# user-specific file first, then the system-wide one, constituting a chiasmus
+# with the zlogin files.
+
+# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
+
+fpath=(/usr/share/zsh/vendor-completions/ $fpath)
+
 export DEFAULT_USER=dvp
 TERM=xterm-256color
 
@@ -34,7 +51,7 @@ if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
   source ~/.zplug/init.zsh && zplug update
 fi
- 
+
 export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
 ZSH_CUSTOM=$HOME/dotfiles/zsh/custom
 source $ZSH/oh-my-zsh.sh
@@ -88,6 +105,10 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
+# Load after ssh-agent
+zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
+zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
 zplug "djui/alias-tips"
 zplug "willghatch/zsh-snippets"
 zplug "supercrabtree/k"
@@ -102,6 +123,9 @@ zplug "plugins/pylint", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "zlsun/solarized-man"
+zplug "joel-porquet/zsh-dircolors-solarized"
+zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
 # ZSH_THEME="fino-time"
 # zplug "themes/amuse", as:theme, from:oh-my-zsh
 # zplug "themes/fino-time", as:theme, from:oh-my-zsh
@@ -118,7 +142,7 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
  
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
+    printf "Install zsh plugins? [y/N]: "
     if read -q; then
         echo; zplug install
     else
@@ -131,8 +155,8 @@ zplug load
 bindkey '^j' snippet-expand
  
 function allup() {
-    echo "brew update application..."
-    brew update &
+    # echo "brew update application..."
+    # brew update &
     echo "zplug update zsh..."
     zplug update > /dev/null &
     echo "vim-plug update..."
@@ -239,10 +263,6 @@ export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
 
-# Directory colors (like in bash)
-eval "$(dircolors -b ~/.dircolors)" 
-
-
 # This forces julia PyCall and IJulia to use "standard" python and jupyter
 export PYTHON="/opt/anaconda3/bin/python"
 export JUPYTER="/opt/anaconda3/bin/jupyter"
@@ -260,13 +280,41 @@ function sshid() {
     eval $(ssh-agent) && ssh-add
 }
 
-# History
-export HISTCONTROL=erasedups	# when adding an item to history, delete itentical commands upstream
-export HISTSIZE=10000		# save 10000 items in history
-export HISTIGNORE="&:bg:fg:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:id:uptime:resize:clear:history:mcc:cs"
+#                                          --- tmux
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+# Teleconsole does not preserve TMUX env variable
+if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
+    # Attempt to discover a detached session and attach it, else create a new
+    # session
+    CURRENT_USER=$(whoami)
+    if tmux has-session -t $CURRENT_USER 2>/dev/null; then
+        tmux attach-session -t $CURRENT_USER
+    else
+        tmux new-session -s $CURRENT_USER
+    fi
+fi
+
+
+if [[ -x `which ag` ]]; then
+    export FZF_DEFAULT_COMMAND='ag -l -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+export FZF_DEFAULT_OPTS="--extended-exact"
+
 
 [ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 [ -f .local/build.zsh ] && source .local/build.zsh
 
+# v - open files in ~/.viminfo and ~/.nviminfo
+v() {
+    local files
+    files=$(grep --no-filename '^>' ~/.viminfo ~/.nviminfo | cut -c3- |
+        while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+        done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+}
