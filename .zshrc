@@ -53,7 +53,7 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 
 export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
-ZSH_CUSTOM=$HOME/dotfiles/zsh/custom
+ZSH_CUSTOM=$HOME/.config/zsh/custom
 source $ZSH/oh-my-zsh.sh
 
 # Powerlevel options

@@ -20,3 +20,6 @@ HISTFILESIZE=20000
 
 export HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:exit:id:uptime:resize:clear:history:mcc:cs:cd .."
 
+
+export ANACONDA_HOME="/opt/anaconda3"
+export POWERLINE_HOME="$ANACONDA_HOME/python3.6/site-packages/powerline"

@@ -1,5 +1,5 @@
 " 
-" version 1.0.0
+" version 1.1.0
 "
 " VIM settings {{{1
 " Basic settings {{{2
@@ -84,149 +84,159 @@ set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
 
+" download vim-plug if missing
+if empty(glob("~/.vim/autoload/plug.vim"))
+  silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * silent! PlugInstall
+endif
+
 
 " Register plugins  {{{2
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+silent! if plug#begin('~/.vim/plugged')
 
-" Utilities  {{{3
-Plug 'junegunn/vim-easy-align'     " Easy alignment
-Plug 'tpope/vim-repeat'            " Repeat last change
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-syntastic/syntastic'
-Plug 'easymotion/vim-easymotion'   " Fast motions
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
-Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
-Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
+    " Utilities  {{{3
+    Plug 'junegunn/vim-easy-align'     " Easy alignment
+    Plug 'tpope/vim-repeat'            " Repeat last change
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'easymotion/vim-easymotion'   " Fast motions
+    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
+    Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
+    Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
 
-if executable("ag") || executable("ack")
-  Plug 'mileszs/ack.vim'
-endif
+    if executable("ag") || executable("ack")
+    Plug 'mileszs/ack.vim'
+    endif
 
-" Git support {{{3
-Plug 'airblade/vim-gitgutter'  " Mark changed lines
-Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
-Plug 'junegunn/gv.vim'         " git commit browser, GV, GV! GV?
+    " Git support {{{3
+    Plug 'airblade/vim-gitgutter'  " Mark changed lines
+    Plug 'tpope/vim-fugitive'      " Git wrapper: Git, Gcommit, Gmove...
+    Plug 'junegunn/gv.vim'         " git commit browser, GV, GV! GV?
 
-" if executable('ruby') && executable('git')
-"  Plug 'junegunn/vim-github-dashboard.git'
-" endif
-
-" Snippets support {{{3
-" if has('python') || has('python3')
-  " Plug 'SirVer/ultisnips' 
-  " Plug 'garbas/vim-snipmate'          " Snippets manager
-  " Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-  " Plug 'tomtom/tlib_vim'              " dependencies #2
-  " Plug 'honza/vim-snippets'           " snippets repo
-" endif
-
-" Youcomplete, (not implemented) {{{3
-
-" if has("python") || has("python3")
-  " function! BuildYCM(info)
-    " " info is a dictionary with 3 fields
-    " " - name:   name of the plugin
-    " " - status: 'installed', 'updated', or 'unchanged'
-    " " - force:  set on PlugInstall! or PlugUpdate!
-    " if a:info.status == 'installed' || a:info.force
-      " !./install.py
+    " if executable('ruby') && executable('git')
+    "  Plug 'junegunn/vim-github-dashboard.git'
     " endif
-  " endfunction
 
-  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-" endif
+    " Snippets support {{{3
+    " if has('python') || has('python3')
+    " Plug 'SirVer/ultisnips' 
+    " Plug 'garbas/vim-snipmate'          " Snippets manager
+    " Plug 'MarcWeber/vim-addon-mw-utils' " dependencies #1
+    " Plug 'tomtom/tlib_vim'              " dependencies #2
+    " Plug 'honza/vim-snippets'           " snippets repo
+    " endif
 
-" Fuzzy file search, installes as external application {{{3
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    " Youcomplete, (not implemented) {{{3
 
-" Clipboard ring {{{3
-Plug 'svermeulen/vim-easyclip'
+    " if has("python") || has("python3")
+    " function! BuildYCM(info)
+        " " info is a dictionary with 3 fields
+        " " - name:   name of the plugin
+        " " - status: 'installed', 'updated', or 'unchanged'
+        " " - force:  set on PlugInstall! or PlugUpdate!
+        " if a:info.status == 'installed' || a:info.force
+        " !./install.py
+        " endif
+    " endfunction
 
-" yank - Highlight copied area  {{{4
-" https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
-Plug 'kana/vim-operator-user'            " Lets user define their own operators.
-Plug 'thinca/vim-operator-sequence'      " Operator to do two or more operators.
-Plug 'osyo-manga/vim-operator-highlight' " the plugin for this.
+    " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+    " endif
 
-" Plugins for either Vim8 or NeoVim {{{3
-if has('nvim')
-  Plug 'Shougo/denite.nvim'
-  Plug 'machakann/vim-highlightedyank'
-  Plug 'kassio/neoterm'
-  Plug 'Shougo/neomru.vim'
-else
-  Plug 'Shougo/unite.vim' " Navigation between buffers and files
+    " Fuzzy file search, installes as external application {{{3
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+    " Clipboard ring {{{3
+    Plug 'svermeulen/vim-easyclip'
+
+    " yank - Highlight copied area  {{{4
+    " https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
+    Plug 'kana/vim-operator-user'            " Lets user define their own operators.
+    Plug 'thinca/vim-operator-sequence'      " Operator to do two or more operators.
+    Plug 'osyo-manga/vim-operator-highlight' " the plugin for this.
+
+    " Plugins for either Vim8 or NeoVim {{{3
+    if has('nvim')
+    Plug 'Shougo/denite.nvim'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'kassio/neoterm'
+    Plug 'Shougo/neomru.vim'
+    else
+    Plug 'Shougo/unite.vim' " Navigation between buffers and files
+    endif
+
+    " Colorschemes  {{{3
+    Plug 'lifepillar/vim-solarized8'
+    Plug 'morhetz/gruvbox'  " colorscheme gruvbox
+    Plug 'rakr/vim-one'
+    Plug 'NLKNguyen/papercolor-theme'
+    Plug 'reedes/vim-colors-pencil'
+
+
+    " File list and open
+    Plug 'justinmk/vim-dirvish'
+
+    " Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+    Plug 'ctrlpvim/ctrlp.vim'
+
+    Plug 'majutsushi/tagbar'            " Class/module browser
+
+    " Status line  {{{3
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
+
+    " Julia {{{3
+    " if executable('julia')
+    " Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+    " endif
+
+    " Misc {{{3
+    " to-do.txt
+    Plug 'freitass/todo.txt-vim'
+    " Plug 'thanthese/Tortoise-Typing')         " touch typing tutor
+
+
+    " Markdown   {{{3
+    
+    if v:version >= 704
+
+        Plug 'tpope/vim-markdown'
+        Plug 'nelstrom/vim-markdown-folding'
+        Plug 'junegunn/vim-emoji'
+        Plug 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
+        Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
+        Plug 'vim-pandoc/vim-pandoc-syntax'
+        Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins       
+        Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
+
+    endif
+
+    " Python  {{{3
+
+    if has("python") || has("python3")
+    Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
+    Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
+    Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
+    Plug 'rosenfeld/conque-term'                             " Consoles as buffers
+    Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
+    endif
+    Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
+
+    " MCNP  {{{3
+    Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
+
+    " Autocompletion on Awesome vim plugins {{{3
+    Plug 'mbbill/undotree'
+
+    call plug#end()
 endif
-
-" Colorschemes  {{{3
-Plug 'lifepillar/vim-solarized8'
-Plug 'morhetz/gruvbox'  " colorscheme gruvbox
-Plug 'rakr/vim-one'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'reedes/vim-colors-pencil'
-
-
-" File list and open
-Plug 'justinmk/vim-dirvish'
-
-" Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'majutsushi/tagbar'            " Class/module browser
-
-" Status line  {{{3
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
-
-" Julia {{{3
-" if executable('julia')
-  " Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
-" endif
-
-" Misc {{{3
-" to-do.txt
-Plug 'freitass/todo.txt-vim'
-" Plug 'thanthese/Tortoise-Typing')         " touch typing tutor
-
-
-" Markdown   {{{3
-
-Plug 'tpope/vim-markdown'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'junegunn/vim-emoji'
-Plug 'vim-pandoc/vim-criticmarkup'   " Comments, changes and notes in text and markdown files
-Plug 'vim-pandoc/vim-pandoc'         " Intergrates VIM and Pandoc
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins
-Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
-
-" Python  {{{3
-
-if has("python") || has("python3")
-  Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
-  Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
-  Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
-  Plug 'rosenfeld/conque-term'                             " Consoles as buffers
-  Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
-endif
-Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
-
-" MCNP  {{{3
-Plug 'g2boojum/vim-mcnp', {'for': 'mcnp'}              " MCNP syntax
-
-" Autocompletion on Awesome vim plugins {{{3
-Plug 'mbbill/undotree'
-
-" Initialize plugin system
-call plug#end()
 
 " VIM setup {{{2
 if ! &diff

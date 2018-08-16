@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#
+# Called from yadm on updating $HOME folder with the dotfiles.
+#
+# Install (if ssh keys are not set):
+#    yadm clone https://github.com/dvp2015/dotfiles-1.git
+#
+
+# Because Git submodule commands cannot operate without a work tree, they must
+# be run from within $HOME (assuming this is the root of your dotfiles)
+cd "$HOME"
+
+echo "Run YADM bootstrap"
+
+# yadm decrypt
+# yadm perms
+yadm remote set-url origin  git@github.com:dvp2015/dotfiles-1.git
+
+echo "Init submodules"
+yadm submodule update --recursive --init
+
+echo "Installing powerline fonts"
+# https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation
+pip install powerline-status
+git clone https://github.com/powerline/fonts.git .yadm/fonts --depth=1
+cd .yadm/fonts
+
+./install.sh
+
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+mv PowerlineSymbols.otf ~/.local/share/fonts/
+mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+fc-cache -vf ~/.local/share/fonts/
+
+cd ..
+rm -rf fonts
+cd "$HOME"
+
+if command -v vim >/dev/null 2>&1; then
+  echo "Bootstraping Vim"
+  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+fi
+
