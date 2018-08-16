@@ -718,7 +718,7 @@ nmap <Leader>y <Plug>(yank-highlight)
 vmap <Leader>y <Plug>(yank-highlight)
 let g:operator#highlight#clear_time=2.0
 
-source ~/dotfiles/vim/SwitchColor.vim  " Toggle colorsheme with F8, Shift-F8
+source ~/.vim/SwitchColor.vim  " Toggle colorsheme with F8, Shift-F8
 
 " Pandoc {{{3
 " let g:pandoc#filetypes#handled = ["pandoc", "markdown", "rst", "textfile"]
