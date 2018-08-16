@@ -280,20 +280,24 @@ function sshid() {
     eval $(ssh-agent) && ssh-add
 }
 
-#                                          --- tmux
-if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
+USE_TMUX=no
 
-# Teleconsole does not preserve TMUX env variable
-if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
-    # Attempt to discover a detached session and attach it, else create a new
-    # session
-    CURRENT_USER=$(whoami)
-    if tmux has-session -t $CURRENT_USER 2>/dev/null; then
-        tmux attach-session -t $CURRENT_USER
-    else
-        tmux new-session -s $CURRENT_USER
+if [[ "yes" == "$USE_TMUX" ]]; then
+    #                                          --- tmux
+    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    # Teleconsole does not preserve TMUX env variable
+    if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
+        # Attempt to discover a detached session and attach it, else create a new
+        # session
+        CURRENT_USER=$(whoami)
+        if tmux has-session -t $CURRENT_USER 2>/dev/null; then
+            tmux attach-session -t $CURRENT_USER
+        else
+            tmux new-session -s $CURRENT_USER
+        fi
     fi
 fi
 
