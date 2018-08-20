@@ -17,33 +17,43 @@ test -r ~/.shell-env && source ~/.shell-env
 ##
 ## Paths
 ##
-typeset -gU cdpath fpath mailpath manpath path
+typeset -gU cdpath fpath mailpath manpath
+typeset -gU  path
 typeset -gUT INFOPATH infopath
+typeset -gUT INCLUDE_PATH include_path
+typeset -gUT LIBRARY_PATH library_path
+typeset -gUT LD_LIBRARY_PATH ld_library_path
+typeset -gUT PKG_CONFIG_PATH pkg_config_path
+typeset -gUT CPATH cpath
+typeset -gUT C_INCLUDE_PATH c_include_path
+typeset -gUT CPLUS_INCLUDE_PATH cplus_include_path
+typeset -gUT OBJC_INCLUDE_PATH objc_include_path
+
 
 cdpath=(
-  $HOME/src
+  $HOME/dev
+  /opt/lanl/wrk
   $cdpath
 )
 
 infopath=(
-  $BREW_PREFIX/share/info
   /usr/local/share/info
   /usr/share/info
   $infopath
 )
 
 manpath=(
-  $BREW_PREFIX/share/man
   /usr/local/share/man
   /usr/share/man
   $manpath
 )
 
 path=(
-  $BREW_PREFIX/{bin,sbin}
-  ${GOPATH//://bin:}/bin
+  $HOME/bin
+  $HOME/.local/bin
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
   $path
 )
+

@@ -2,6 +2,46 @@ alias dos2unix='sed "s/$//"'
 
 alias tmux='tmux -2'
 
+# convenience aliases for editing configs
+alias ev='vim ~/.vimrc'
+alias et='vim ~/.tmux.conf'
+alias ea='vim ~/.shell-aliases'
+alias ee='vim ~/.shell-env'
+alias ez='vim ~/.zshrc'
+
+# running vim with "factory settings", see "Practical Vim"
+alias vimc='vim -u ~/.vim/essential.vim'
+
+# full proof
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# navigation
+alias ne='~/dev/python/triniti_ne'
+alias sshmcc='ssh dvpab@ui2.computing.kiae.ru'
+alias sshhpc4='ssh dvpab@ui4.computing.kiae.ru'
+alias sshapk5='ssh dvp2@apk5.triniti.ru'
+alias sshcs='ssh dvp@gitlab.iterrf.ru'
+alias misc='~/misc'
+alias upp='/opt/lanl/wrk/upp'
+
+alias md='mkdir -p'
+#
+# Creates a given directory (if needed) and changes to it.
+#
+function mdcd() {
+    mkdir -p "$1"  && cd "$1"
+}
+alias mdcdb='mdcd build'
+
+alias h='history'
+alias j='jobs -l'
+alias r='rlogin'
+alias du='du -kh'
+alias df='df -kTh'
+
+
 if which exa >/dev/null 2>&1; then
   alias ls='exa'
 elif which ls++ >/dev/null 2>&1; then
@@ -52,8 +92,6 @@ alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
 
 # Midnight Commander
 alias mc='. /usr/local/libexec/mc/mc-wrapper.sh'
-#alias dir='dir --color=auto'
-#alias vdir='vdir --color=auto'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -80,22 +118,9 @@ fi
 
 alias displayoff='xset -display :0.0 dpms force off'
 alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
-alias suspiria='/usr/bin/dbus-send --system --print-reply \
-  --dest="org.freedesktop.UPower" \
-  /org/freedesktop/UPower \
-  org.freedesktop.UPower.Suspend'
-
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 

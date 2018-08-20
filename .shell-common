@@ -20,6 +20,11 @@ HISTFILESIZE=20000
 
 export HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:exit:id:uptime:resize:clear:history:mcc:cs:cd .."
 
+if [ -x /usr/games/fortune ]; then
+    /usr/games/fortune -s
+fi
 
-export ANACONDA_HOME="/opt/anaconda3"
-export POWERLINE_HOME="$ANACONDA_HOME/python3.6/site-packages/powerline"
+function rvm-prompt() {
+    which python
+}
+

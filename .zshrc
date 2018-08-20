@@ -14,35 +14,16 @@ test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
+typeset -U  path
+path=($HOME/bin $path)
+# echo ".zhsrc"
+# print -l $path
+# which cat
+# echo ---
 
 export DEFAULT_USER=dvp
 TERM=xterm-256color
 
-# Make path array entries unique
-typeset -U path
-path=("$HOME/bin" $path)
-path=("/usr/local/bin" $path)
-# same for alike variables
-typeset -UT INCLUDE_PATH include_path
-typeset -UT LD_PATH ld_path
-typeset -UT LIB_PATH lib_path
-typeset -UT LD_LIBRARY_PATH ld_library_path
-typeset -UT PKG_CONFIG_PATH pkg_config_path
-typeset -UT CPATH cpath
-typeset -UT C_INCLUDE_PATH c_include_path
-typeset -UT CPLUS_INCLUDE_PATH cplus_include_path
-typeset -UT OBJC_INCLUDE_PATH objc_include_path
-
-# Use linux brew
-# See https://github.com/Linuxbrew/brew
-# if [[ ! -d ~/.linuxbrew ]]; then
-#   git clone https://github.com/Linuxbrew/brew.git ~/.linuxbrew
-# fi
-# path=("$HOME/.linuxbrew/bin" $path)
-# export PATH
-# export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-# export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
-# export PKG_CONFIG_PATH="/home/dvp/.linuxbrew/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Enable zplug
 # See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
@@ -155,15 +136,10 @@ zplug load
 bindkey '^j' snippet-expand
  
 function allup() {
-    # echo "brew update application..."
-    # brew update &
     echo "zplug update zsh..."
-    zplug update > /dev/null &
+    zplug update  &
     echo "vim-plug update..."
     vim +PlugUpdate --sync +qall &
-    # echo "cask update emacs..."
-    # cd ~/.emacs.d && cask update &
-    # cd -
     wait
 }
 
@@ -280,7 +256,7 @@ function sshid() {
     eval $(ssh-agent) && ssh-add
 }
 
-USE_TMUX=no
+USE_TMUX="no" # DVP: while I don't use tmux
 
 if [[ "yes" == "$USE_TMUX" ]]; then
     #                                          --- tmux
@@ -312,7 +288,6 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
-[ -f .local/build.zsh ] && source .local/build.zsh
 
 # v - open files in ~/.viminfo and ~/.nviminfo
 v() {

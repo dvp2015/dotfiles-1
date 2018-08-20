@@ -10,11 +10,11 @@ esac
 [ -z "$PS1" ] && return
 
 # Source global definitions
-test -r /etc/bashrc && . /etc/bashrc
+test -r /etc/bash.bashrc && . /etc/bash.bashrc
 
-test -r ~/.shell-env && . ~/.shell-env
+test -r ~/.shell-env  && . ~/.shell-env
+test -r ~/.shell-common  && . ~/.shell-common
 test -r ~/.shell-aliases && . ~/.shell-aliases
-test -r ~/.shell-common && . ~/.shell-common
 
 # append to the history file, don't overwrite it
 shopt -s histappend
