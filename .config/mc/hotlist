@@ -1,0 +1,20 @@
+GROUP "local"
+    ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
+ENDGROUP
+GROUP "cs"
+    ENTRY "~" URL "/sftp://dvp@gitlab.iterrf.ru/"
+    ENTRY "sftp" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp"
+ENDGROUP
+GROUP "hpc2"
+  ENTRY "~" URL "/sftp://dvpab@ui2.computing.kiae.ru/"
+  ENTRY "wrk" URL "/sftp://dvpab@ui2.computing.kiae.ru/s/ls2/groups/g0072/wrk"
+  ENTRY "bin" URL "/sftp://dvpab@ui2.computing.kiae.ru/s/ls2/g-sw/g0072"
+ENDGROUP
+GROUP "hpc4"
+  ENTRY "~" URL "/sftp://dvpab@ui4.computing.kiae.ru/"
+  ENTRY "wrk" URL "/sftp://dvpab@ui4.computing.kiae.ru/s/ls4/groups/g0072/wrk"
+  ENTRY "bin" URL "/sftp://dvpab@ui4.computing.kiae.ru/s/ls4/groups/g0072/bin"
+ENDGROUP
+GROUP "config"
+    ENTRY "mc config" URL "/home/dvp/.config/mc"
+ENDGROUP

@@ -59,8 +59,8 @@ function join_strings() {
 #   1:2:3:4
 #
 function make_path() {
-    first="yes"
-    t=""
+    local first="yes"
+    local t=""
     for p in $*
     do
         array=($(echo ${p//:/ }))
@@ -81,7 +81,6 @@ function make_path() {
     done
     echo "$t"
 }
-# export -f make_path
 
 
 function remove_non_existing_dirs_from_path() {
@@ -146,8 +145,7 @@ update_path                  \
     "/usr/local/bin"         \
     "/usr/bin"               \
     "/bin"                   \
-    "$PATH"                  
-    
+    "$PATH"
 
 # TRIPOLI_HOME=/opt/tripoli
 # PATH=$PATH:$TRIPOLI_HOME/bin

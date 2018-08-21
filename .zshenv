@@ -11,9 +11,6 @@
 
 skip_global_compinit=1
 
-# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
-test -r ~/.shell-env && source ~/.shell-env
-
 ##
 ## Paths
 ##
@@ -57,3 +54,9 @@ path=(
   $path
 )
 
+# if [[ -z "$zhenv_load_counter" ]]; then
+#     export zhenv_load_counter=1
+# else
+#     export zhenv_load_counter=$(($zhenv_load_counter + 1))
+# fi
+# print ".zshenv load #$zhenv_load_counter"

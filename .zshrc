@@ -10,6 +10,7 @@
 # with the zlogin files.
 
 # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
