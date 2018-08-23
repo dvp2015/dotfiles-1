@@ -157,3 +157,20 @@ function add_to_path() {
     export PATH="$(makepath $PATH $*)"
 }
 
+
+function bz() {
+    #
+    #  Compress/decompress file with bzip2 if a file has/doesn't have extension
+    #  bz2
+    #
+    local file_name=$1
+    if [[ -r $file_name ]]; then
+        if [[ "${file_name/.bz2}" == "$file_name" ]]; then
+            bzip2 -z "$file_name"
+        else
+            bzip2 -d "$file_name"
+        fi
+    else
+        echo "ERROR bz: cannot read file $file_name"
+    fi
+}
