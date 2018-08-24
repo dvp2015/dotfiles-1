@@ -46,13 +46,13 @@ manpath=(
 )
 
 path=(
+  $path
   $HOME/bin
   $HOME/.local/bin
   /opt/julia-1.0.0/bin
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
-  $path
 )
 
 # if [[ -z "$zhenv_load_counter" ]]; then
