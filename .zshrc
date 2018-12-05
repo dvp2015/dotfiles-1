@@ -298,3 +298,8 @@ v() {
             [ -f "${line/\~/$HOME}" ] && echo "$line"
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
+
+# https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
+[ -x /usr/games/fortune  -a -x /usr/games/cowsay ] && \
+    fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
+
