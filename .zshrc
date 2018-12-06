@@ -300,6 +300,6 @@ v() {
 }
 
 # https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
-[ -x /usr/games/fortune  -a -x /usr/games/cowsay ] && \
-    fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
+# [ -x /usr/games/fortune  -a -x /usr/games/cowsay ] && \
+    # fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
 
