@@ -93,7 +93,16 @@ alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
 
 
 # Midnight Commander
-alias mc='. /usr/local/libexec/mc/mc-wrapper.sh'
+if [[ -r "$HOME/.local/bin/mc-wrapper.sh" ]]; then
+    alias mc="source $HOME/.local/bin/mc-wrapper.sh"
+elif [[ -r "source /usr/share/mc/bin/mc-wrapper.sh" ]]; then
+    alias mc='/usr/share/mc/bin/mc-wrapper.sh'
+elif [[ -r "/usr/local/libexec/mc/mc-wrapper.sh" ]]; then
+    alias mc='source /usr/local/libexec/mc/mc-wrapper.sh'
+else
+    echo "WARNING: cannot locate mc-wrapper.sh, mc is not aliased (see .shell-aliases)"
+fi
+
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
