@@ -1,15 +1,16 @@
 [submodule ".config/tmux/plugins/tpm"]
-	path = .config/tmux/plugins/tpm
+    path = .config/tmux/plugins/tpm
     url = https://github.com/tmux-plugins/tpm
 [submodule ".yadm/installable/diff-so-fancy"]
-	path = .yadm/installable/diff-so-fancy
-	url = https://github.com/so-fancy/diff-so-fancy.git
+    path = .yadm/installable/diff-so-fancy
+    url = https://github.com/so-fancy/diff-so-fancy.git
 [submodule ".yadm/installable/bats"]
     path = .yadm/installable/bats
     url = https://github.com/sstephenson/bats.git
 [submodule "/home/dvp/.local/bats-support"]
-	path = /home/dvp/.local/bats-support
-	url = https://github.com/ztombol/bats-support
+    path = /home/dvp/.local/bats-support
+    url = https://github.com/ztombol/bats-support
 [submodule "/home/dvp/.local/bats-assert"]
-	path = /home/dvp/.local/bats-assert
-	url = https://github.com/ztombol/bats-assert
+    path = /home/dvp/.local/bats-assert
+    url = https://github.com/ztombol/bats-assert
+
