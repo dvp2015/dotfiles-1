@@ -18,6 +18,7 @@ echo "Run YADM bootstrap"
 yadm remote set-url origin  git@github.com:dvp2015/dotfiles-1.git
 
 echo "Init submodules"
+yadm submodule init
 yadm submodule update --recursive --init
 
 echo "Installing powerline fonts"
