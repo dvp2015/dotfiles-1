@@ -51,9 +51,8 @@ if [[ -d "$HOME/.yadm/installable/bats" ]]; then
     ./install.sh "$HOME/.local"
     popd >/dev/null 2>&1
 else
-    echo "Cannot find bats"
+    echo "Cannot find bats submodule"
 fi
-
 
 if [[ -d "$HOME/.yadm/installable/diff-so-fancy" ]]; then
     echo "Installing diff-so-fancy (git diff human readable)"
