@@ -10,12 +10,3 @@
 [submodule ".yadm/installable/bats-support"]
     path = .yadm/installable/bats-support
     url = https://github.com/ztombol/bats-support
-[submodule ".yadm/installable/bats-assert"]
-    path = .yadm/installable/bats-assert
-    url = https://github.com/ztombol/bats-assert
-; [submodule "/home/dvp/.local/bats-support"]
-    ; path = /home/dvp/.local/bats-support
-    ; url = https://github.com/ztombol/bats-support
-; [submodule "/home/dvp/.local/bats-assert"]
-    ; path = /home/dvp/.local/bats-assert
-    ; url = https://github.com/ztombol/bats-assert
