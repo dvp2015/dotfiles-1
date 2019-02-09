@@ -1,5 +1,6 @@
 GROUP "local"
     ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
+    ENTRY "dev" URL "/home/dvp/dev"
 ENDGROUP
 GROUP "cs"
     ENTRY "~" URL "/sftp://dvp@gitlab.iterrf.ru/"
