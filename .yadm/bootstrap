@@ -54,6 +54,8 @@ else
     echo "Cannot find bats"
 fi
 
+ln -s ~/.yadm/installable/bats-support ~/.local/bats-support
+ln -s ~/.yadm/installable/bats-assert  ~/.local/bats-assert
 
 if [[ -d "$HOME/.yadm/installable/diff-so-fancy" ]]; then
     echo "Installing diff-so-fancy (git diff human readable)"
