@@ -709,6 +709,7 @@ nmap <silent> gs <plug>SubstituteOverMotionMap
 nmap gss <plug>SubstituteLine
 " xmap gs p
 xmap gs <plug>XEasyClipPaste
+" m is assigned to 'move', set markers with 'gm' command
 nnoremap gm m
 
 " Yank and highlight   {{{3

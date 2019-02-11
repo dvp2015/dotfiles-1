@@ -143,3 +143,16 @@ alias yc='yadm commit -am'
 alias yl='yadm pull'
 alias yp='yadm push'
 
+
+# Источник: http://liberatum.ru/e/7-bash-lifehacks-linux
+
+alias untar='tar -zxvf '
+# continue wget
+alias wget='wget -c '
+# Generate cryptic password
+alias getpass='openssl rand -base64 12 '
+# Stop ping after 4 packets
+alias ping='ping -c 4 '
+# Run http server in local folder
+alias www='python -m SimpleHTTPServer 8000'
+
