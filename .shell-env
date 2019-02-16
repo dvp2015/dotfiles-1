@@ -26,6 +26,8 @@ export MCNP_DATA=$MCNP_HOME/MCNP_DATA
 export DATAPATH=$MCNP_DATA
 export MCNP_DEFAULT_XSDIR=$DATAPATH/xsdir
 
+alias printpath='echo -e ${PATH//:/\\n}'
+
 function join_strings() {
     separator=":"
     arg="$1"
@@ -86,7 +88,7 @@ function make_path() {
 function remove_non_existing_dirs_from_path() {
     local first="yes"
     local t=""
-    local array=($(echo ${=PATH//:/ }))
+    local array=($(echo ${=$1//:/ }))
     for pp in "${array[@]}"
     do
         if  [[ -d "$pp"  ]]; then
@@ -127,12 +129,14 @@ function update_path() {
 
     local NEW_PATH=$(make_path $*)
 
-    all_dirs_exist $NEW_PATH || NEW_PATH=$(remove_non_existing_dirs_from_path)
+    #TODO the following breaks the path
+    #all_dirs_exist $NEW_PATH || NEW_PATH=$(remove_non_existing_dirs_from_path "$NEW_PATH")
 
     if [[ "$NEW_PATH" != "$PATH" ]]; then
         export PATH="$NEW_PATH"
     fi
 }
+
 
 update_path                  \
     "$HOME/bin"              \
@@ -147,11 +151,12 @@ update_path                  \
     "/bin"                   \
     "$PATH"
 
+
+
 # TRIPOLI_HOME=/opt/tripoli
 # PATH=$PATH:$TRIPOLI_HOME/bin
 # PATH=$PATH:/opt/pycharm-community-2018.1.4/bin
 
-alias printpath='echo -e ${PATH//:/\\n}'
 
 function add_to_path() {
     export PATH="$(makepath $PATH $*)"
@@ -174,3 +179,5 @@ function bz() {
         echo "ERROR bz: cannot read file $file_name"
     fi
 }
+
+# echo ".shell-env is sourced"

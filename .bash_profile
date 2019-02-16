@@ -12,3 +12,5 @@
 # often worked around by having the profile execute bashrc anyway.
 
 [[ -f ~/.profile ]] && . ~/.profile
+
+export PATH="$HOME/.cargo/bin:$PATH"

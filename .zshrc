@@ -15,12 +15,6 @@ test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
-typeset -U  path
-path=($HOME/bin $path)
-# echo ".zhsrc"
-# print -l $path
-# which cat
-# echo ---
 
 export DEFAULT_USER=dvp
 TERM=xterm-256color

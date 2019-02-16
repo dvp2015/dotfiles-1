@@ -34,12 +34,14 @@ cdpath=(
 )
 
 infopath=(
+  $HOME/.local/share/info
   /usr/local/share/info
   /usr/share/info
   $infopath
 )
 
 manpath=(
+  $HOME/.local/share/man
   /usr/local/share/man
   /usr/share/man
   $manpath
@@ -54,9 +56,10 @@ path=(
   /{bin,sbin}
 )
 
+
 # if [[ -z "$zhenv_load_counter" ]]; then
-#     export zhenv_load_counter=1
+    # export zhenv_load_counter=1
 # else
-#     export zhenv_load_counter=$(($zhenv_load_counter + 1))
+    # export zhenv_load_counter=$(($zhenv_load_counter + 1))
 # fi
 # print ".zshenv load #$zhenv_load_counter"
