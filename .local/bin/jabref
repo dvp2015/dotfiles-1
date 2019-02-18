@@ -4,4 +4,4 @@
 # Run LaTex Bibliography editor
 # See https://www.fosshub.com/JabRef.html
 
-java -jar /opt/extension/JabRef-4.3.1.jar $*
+java -jar /opt/java/extensions/JabRef-4.3.1.jar $*

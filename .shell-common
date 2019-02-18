@@ -22,6 +22,7 @@ export HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:exit:id:upti
 
 if [ -x /usr/games/fortune ]; then
     /usr/games/fortune -s
+    alias show_fortune='fortune -c -i -m ' # add regex patter to search after
 fi
 
 function rvm-prompt() {
