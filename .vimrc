@@ -1,5 +1,4 @@
-" 
-" version 1.1.0
+" version 1.2.0
 "
 " VIM settings {{{1
 " Basic settings {{{2
@@ -701,16 +700,28 @@ nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
 set clipboard=unnamed,unnamedplus
 let g:EasyClipAutoFormat=1
 let g:EasyClipCopyExplicitRegisterToDefault=1
-let g:EasyClipShareYanks=0
-" let g:EasyClipShareYanksFile='.easyclip'
-" let g:EasyClipUseSubstituteDefaults=1
-let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end
+let g:EasyClipShareYanks=1
+let g:EasyClipUseSubstituteDefaults=1
+let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end of paste
 nmap <silent> gs <plug>SubstituteOverMotionMap
-nmap gss <plug>SubstituteLine
+" nmap gss <plug>SubstituteLine
 " xmap gs p
 xmap gs <plug>XEasyClipPaste
+
+" Move area from cursor to end of line
+nmap M <Plug>MoveMotionEndOfLinePlug   
+
+" to toggle between the formatted paste and unformatted paste.
+nmap <leader>cf <plug>EasyClipToggleFormattedPaste
+
+" insert mode paste
+imap <c-v> <plug>EasyClipInsertModePaste
+" command mode paste
+cmap <c-v> <plug>EasyClipCommandModePaste
+
+
 " m is assigned to 'move', set markers with 'gm' command
-nnoremap gm m
+noremap gm m
 
 " Yank and highlight   {{{3
 " see  https://stackoverflow.com/questions/26069278/hightlight-copied-area-on-vim
@@ -737,4 +748,25 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<cr>
 
-" vim:nowrap:tw=80:ts=2:sw=0:ft=vim:norl:et:fen:
+" modelin magic
+" http://vim.wikia.com/wiki/Modeline_magic
+"
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d ss=%d %set %sai :",
+        \ &tabstop, &shiftwidth, &textwidth, &sidescroll,
+        \ &expandtab ? '' : 'no',
+        \ &autoindent ? '' : 'no'
+        \ )
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+
+nnoremap <silent> <Leader>ml :call AppendModeline()
+
+" vim: nowrap:tw=132:ts=2:sw=4:ft=vim:norl:et:fen:noai:ss=4:
+
+
