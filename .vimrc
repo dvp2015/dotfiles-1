@@ -83,6 +83,8 @@ set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
 
+set modeline
+
 " download vim-plug if missing
 if empty(glob("~/.vim/autoload/plug.vim"))
   silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
