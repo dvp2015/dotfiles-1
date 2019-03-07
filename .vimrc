@@ -670,14 +670,14 @@ endif
 if has('termguicolors')
   set termguicolors
 endif
-set background=dark
-silent!  colorscheme solarized8_dark_high
+set background=light
+silent!  colorscheme solarized8_high
 
 
 " Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+let g:airline_solarized_bg='light'
 if ! &diff
   let g:airline#extensions#tabline#enabled = 1
 endif
@@ -690,7 +690,7 @@ nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
       \ )<cr>
 
 function! Solarized8Contrast(delta)
-  let l:schemes = map(['_low', '_flat', '', '_high'], '"solarized8_".(&background).v:val')
+  let l:schemes = map(['_low', '_flat', '', '_high'], '"solarized8".v:val')
   exe 'colors' l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
 endfunction
 
@@ -706,8 +706,7 @@ let g:EasyClipShareYanks=1
 let g:EasyClipUseSubstituteDefaults=1
 let g:EasyClipAlwaysMoveCursorToEndOfPaste=1 " to have the cursor positioned at the end of paste
 nmap <silent> gs <plug>SubstituteOverMotionMap
-" nmap gss <plug>SubstituteLine
-" xmap gs p
+nmap gss <plug>SubstituteLine
 xmap gs <plug>XEasyClipPaste
 
 " Move area from cursor to end of line
@@ -769,6 +768,5 @@ endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()
 
-" vim: nowrap:tw=132:ts=2:sw=4:ft=vim:norl:et:fen:noai:ss=4:
-
+" vim: set ts=2 sw=4 tw=132 ss=4 ft=vim norl fen et noai :
 

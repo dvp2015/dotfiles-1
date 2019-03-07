@@ -74,7 +74,7 @@ POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 
 # Essential
 source ~/.zplug/init.zsh
- 
+
 # Make sure to use double quotes to prevent shell expansion
 zplug "zplug/zplug", hook-build:"zplug --self-manage"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -109,13 +109,11 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
 # plugins=(git gitfast git-extras python pylint tmux tmuxinator)
 
-# zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
- 
 # zplug "/usr/local/opt/fzf/shell", from:local
 # zplug "~/dev/tools", from:local, use:"*.sh"
- 
+
 # Add a bunch more of your favorite packages!
- 
+
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
     printf "Install zsh plugins? [y/N]: "
@@ -125,11 +123,11 @@ if ! zplug check --verbose; then
         echo
     fi
 fi
- 
+
 zplug load
- 
+
 bindkey '^j' snippet-expand
- 
+
 function allup() {
     echo "zplug update zsh..."
     zplug update  &
@@ -297,3 +295,4 @@ v() {
 # [ -x /usr/games/fortune  -a -x /usr/games/cowsay ] && \
     # fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
 
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
