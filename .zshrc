@@ -179,6 +179,9 @@ COMPLETION_WAITING_DOTS="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
+HISTORY_IGNORE="&:[bf]g:ll:ls:lm:lk:l:la:lt:h:history:ev:ea:ek:exit:id:uptime:resize:clear:mc:cs:cd .."
+HISTORY_IGNORE="$HISTORY_IGNORE:ez:...:...."
+
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -244,11 +247,6 @@ function o() {
   done
 }
 
-# add ssh id to a console session
-function sshid() {
-    eval $(ssh-agent) && ssh-add
-}
-
 USE_TMUX="no" # DVP: while I don't use tmux
 
 if [[ "yes" == "$USE_TMUX" ]]; then
@@ -285,14 +283,11 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 # v - open files in ~/.viminfo and ~/.nviminfo
 v() {
     local files
-    files=$(grep --no-filename '^>' ~/.viminfo ~/.nviminfo | cut -c3- |
+    files=$(grep --no-filename '^>' ~/.viminfo | cut -c3- |
         while read line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
-# https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
-# [ -x /usr/games/fortune  -a -x /usr/games/cowsay ] && \
-    # fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :

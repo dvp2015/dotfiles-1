@@ -235,6 +235,9 @@ silent! if plug#begin('~/.vim/plugged')
 
     " Autocompletion on Awesome vim plugins {{{3
     Plug 'mbbill/undotree'
+    
+    " bats syntax {{{3
+    Plug 'aliou/bats.vim'
 
     call plug#end()
 endif

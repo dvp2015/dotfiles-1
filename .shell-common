@@ -18,14 +18,34 @@ export HISTCONTROL=erasedups	# when adding an item to history, delete itentical 
 HISTSIZE=10000
 HISTFILESIZE=20000
 
-export HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ez:ea:ek:pwd:exit:id:uptime:resize:clear:history:mcc:cs:cd .."
+HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ea:ek:pwd:exit:id:uptime:resize:clear:history"
+export HISTIGNORE="$HISTIGNORE:mc:mcc:cs:cd .."
 
-if [ -x /usr/games/fortune ]; then
+if [[ -x /usr/games/fortune ]]; then
+# https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
+  if [[ -x /usr/games/cowsay ]]; then
+    fortune -s | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
+  else
     /usr/games/fortune -s
-    alias show_fortune='fortune -c -i -m ' # add regex patter to search after
+  fi
+  alias show_fortune='fortune -c -i -m ' # add regex patter to search after
 fi
 
 function rvm-prompt() {
     which python
 }
 
+# add ssh id to a console session
+function sshid() {
+    eval $(ssh-agent) && ssh-add
+}
+
+mydir () {
+    local source="${BASH_SOURCE[0]}"
+    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+        DIR="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+        source="$(readlink "$source")"
+        [[ $source != /* ]] && source="$DIR/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
+}

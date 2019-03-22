@@ -1,6 +1,6 @@
-##
-## Editors
-##
+#
+# Editors
+#
 export EDITOR=vim
 export GIT_EDITOR="$EDITOR"
 export USE_EDITOR="$EDITOR"
