@@ -5,13 +5,22 @@
 export FISPACT_HOME=/opt/fispact
 
 fispact_setenv() {
-    if [[ -d "$FISPACT_HOME" ]]; then
-        export FISPACT=${FISPACT_HOME}/bin/fispact
-        export PATH=${FISPACT_HOME}/bin:$PATH
-        echo "Using fispact from $FISPACT_HOME"
+    export FISPACT=${FISPACT_HOME}/bin/fispact
+    export PATH=${FISPACT_HOME}/bin:$PATH
+}
+
+
+fispact_checkenv() {
+    if [[ -d $FISPACT_HOME ]]; then
+        if [[ -f "$FISPACT" ]]; then
+            return 0
+        else
+            echo "ERROR in fispact.rc: cannot find file $FISPACT"
+        fi
     else
-        echo "ERROR: fispact is not found, check $HOME/.local/bin/fispact.rc file"
+        echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found"
     fi
+    return 1
 }
 
 
@@ -22,6 +31,6 @@ fispact_printenv() {
 
 
 
-[ -z "$BATS_PREFIX" ] &&  fispact_setenv
+[ -n "$BATS_PREFIX" ] ||  fispact_setenv
 
 # vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
