@@ -673,14 +673,16 @@ endif
 if has('termguicolors')
   set termguicolors
 endif
-set background=light
+" set background=light
+set background=dark
 silent!  colorscheme solarized8_high
 
 
 " Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-let g:airline_solarized_bg='light'
+" let g:airline_solarized_bg='light'
+let g:airline_solarized_bg='dark'
 if ! &diff
   let g:airline#extensions#tabline#enabled = 1
 endif
