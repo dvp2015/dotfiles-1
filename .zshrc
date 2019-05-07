@@ -132,7 +132,7 @@ function allup() {
     echo "zplug update zsh..."
     zplug update  &
     echo "vim-plug update..."
-    vim +PlugUpdate --sync +qall &
+    vim +PlugUpdate +qall &
     wait
 }
 
