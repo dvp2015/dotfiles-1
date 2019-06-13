@@ -21,6 +21,8 @@ HISTFILESIZE=20000
 HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ea:ek:pwd:exit:id:uptime:resize:clear:history"
 export HISTIGNORE="$HISTIGNORE:mc:mcc:cs:cd .."
 
+export QT_SELECT=5
+
 if [[ -x /usr/games/fortune ]]; then
 # https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
   if [[ -x /usr/games/cowsay ]]; then

@@ -429,6 +429,7 @@ backend      : Qt5Agg
 #figure.titleweight : normal   ## weight of the figure title
 #figure.figsize   : 6.4, 4.8   ## figure size in inches
 #figure.dpi       : 100        ## figure dots per inch
+figure.dpi       : 163     # dvp for BENQ resolution
 #figure.facecolor : w      ## figure facecolor; 0.75 is scalar gray
 #figure.edgecolor : w      ## figure edgecolor
 #figure.frameon : True          ## enable figure frame
@@ -468,6 +469,10 @@ backend      : Qt5Agg
 ## combined into a single composite image before
 ## saving a figure as a vector graphics file,
 ## such as a PDF.
+# According to recomendation from:
+# https://tonysyu.github.io/raw_content/matplotlib-style-gallery/gallery.html
+image.cmap : gray
+image.interpolation  : none
 
 #### CONTOUR PLOTS
 #contour.negative_linestyle : dashed ## string or on-off ink sequence
