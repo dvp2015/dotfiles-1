@@ -52,4 +52,4 @@ mydir () {
     cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
 }
 
-source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
+# source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
