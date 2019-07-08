@@ -52,6 +52,6 @@ mydir () {
     cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
 }
 
-# source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
 
+# source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
