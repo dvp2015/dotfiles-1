@@ -51,6 +51,7 @@ path=(
   $path
   $HOME/bin
   $HOME/.local/bin
+  /home/dvp/dev/ipython-latex
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}

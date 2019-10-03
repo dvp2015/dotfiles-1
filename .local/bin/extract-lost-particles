@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+#
+# Extracts description of lost particles from MCNP output files
+#
+# Usage:
+#   extract-lost-particles [<files...>]
+#
+# Options:
+#   files - files to extract records on lost particles from,
+#           optional, default - all the files .o extension.
+#
+
+files=$*
+files=${files:-*.o}
+cat $files | sed -n '/lost particle no/,+15p' 
