@@ -58,9 +58,11 @@ path=(
 )
 
 
-# if [[ -z "$zhenv_load_counter" ]]; then
-    # export zhenv_load_counter=1
-# else
-    # export zhenv_load_counter=$(($zhenv_load_counter + 1))
-# fi
-# print ".zshenv load #$zhenv_load_counter"
+
+# Add pyenv init to your shell to enable shims and autocompletion.
+# Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
+# configuration file since it manipulates PATH during the initialization.
+if command -v pyenv 1>/dev/null 2>&1; then 
+    eval "$(pyenv init -)"
+fi
+

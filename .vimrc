@@ -194,9 +194,9 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    " if executable('julia')
-    " Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
-    " endif
+    if executable('julia')
+        Plug 'julialang/julia-vim'  " , {'for': 'julia'}
+    endif
 
     " Misc {{{3
     " to-do.txt
@@ -260,9 +260,9 @@ augroup vimrc_autocmds
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
     autocmd BufRead,BufNewFile *.hpp,*.h++,*.hxx,*.cpp,*.c++,*.cxx set filetype=cpp.doxygen
-    autocmd FileType ruby,python,javascript,c,cpp,julia highlight Excess ctermbg=DarkGrey guibg=#c12a0f
-    autocmd FileType ruby,python,javascript,c,cpp,julia match Excess /\%80v.*/
-    autocmd FileType ruby,python,javascript,c,cpp,julia set nowrap
+    autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=#c12a0f
+    autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
+    autocmd FileType ruby,python,javascript,c,cpp set nowrap
 augroup end
 
 " C file settings {{{4
@@ -774,6 +774,7 @@ function! AppendModeline()
 endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()
+autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
 " vim: set ts=2 sw=4 tw=132 ss=4 ft=vim norl fen et noai :
 
