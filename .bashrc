@@ -42,6 +42,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    xterm-256color) color_prompt=yes;;
     screen-256color) color_prompt=yes;;
     screen) color_prompt=yes;;
 esac
@@ -99,5 +100,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+# echo ".bashrc is loaded"
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
