@@ -31,7 +31,7 @@ if [[ ! -e "$PYENV_ROOT" ]]; then
 fi
 if [[ ! -e "$PYENV_ROOT/plugins/pyenv-virtualenv" ]]; then
     echo "Installing missed pyenv-virtualenv folder"
-    git clone https://github.com/pyenv/pyenv-virtualenv.git $(PYENV_ROOT)/plugins/pyenv-virtualenv
+    git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
 fi
 
 
