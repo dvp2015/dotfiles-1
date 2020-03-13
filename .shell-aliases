@@ -88,6 +88,7 @@ alias chrome='/opt/google/chrome/chrome'
 
 # Jupyter
 alias jn='jupyter notebook'
+alias jl='jupyter lab'
 
 # yEd
 # https://www.yworks.com
