@@ -159,7 +159,7 @@ alias ping='ping -c 4 '
 # Run http server in local folder
 alias www='python -m SimpleHTTPServer 8000'
 
-if [[ $(uname) =~ MINGW ]]
+if [[ $(uname) =~ MINGW ]]; then
   alias gst='git status'
   alias gl='git pull'
   alias gp='git push'
