@@ -100,4 +100,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
