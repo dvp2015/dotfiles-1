@@ -41,7 +41,9 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
+    xterm) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
+    xterm-256color) color_prompt=yes;;
     screen-256color) color_prompt=yes;;
     screen) color_prompt=yes;;
 esac
@@ -92,12 +94,15 @@ test -r ~/.bashrc.local && . ~/.bashrc.local
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Add pyenv init to your shell to enable shims and autocompletion.
-# Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
-# configuration file since it manipulates PATH during the initialization.
-if command -v pyenv 1>/dev/null 2>&1; then 
-    eval "$(pyenv init -)"
+
+if [[ -x python ]]; then
+    # Add pyenv init to your shell to enable shims and autocompletion.
+    # Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
+    # configuration file since it manipulates PATH during the initialization.
+    if command -v pyenv 1>/dev/null 2>&1; then 
+        eval "$(pyenv init -)"
+    fi
 fi
 
-
+# echo ".bashrc is loaded"
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :

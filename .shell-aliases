@@ -88,6 +88,7 @@ alias chrome='/opt/google/chrome/chrome'
 
 # Jupyter
 alias jn='jupyter notebook'
+alias jl='jupyter lab'
 
 # yEd
 # https://www.yworks.com
@@ -157,4 +158,12 @@ alias getpass='openssl rand -base64 12 '
 alias ping='ping -c 4 '
 # Run http server in local folder
 alias www='python -m SimpleHTTPServer 8000'
+
+if [[ $(uname) =~ MINGW ]]; then
+  alias gst='git status'
+  alias gl='git pull'
+  alias gp='git push'
+  alias gcam='git commit -am'
+  alias ga='git add'
+fi
 
