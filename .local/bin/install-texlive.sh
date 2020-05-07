@@ -1,0 +1,12 @@
+# Installing texlive on Debian-Ubuntu
+# https://www.coursera.org/learn/latex/supplement/yz6q1/proghrammnoie-obiespiechieniie-linux
+# http://www.tug.org/texlive/
+
+
+# sudo apt-get install texlive
+# or
+sudo apt-get install texlive-full
+sudo apt-get install texlive-latex3
+sudo apt-get install texlive-lang-cyrillic
+sudo apt-get install texlive-latex-extra
+sudo apt-get install texlive-bibtex-extra biber
