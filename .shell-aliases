@@ -162,5 +162,6 @@ if [[ $(uname) =~ "MINGW" ]]; then
   alias gp='git push'
   alias gcam='git commit -am'
   alias ga='git add'
+  alias gm='git merge'
 fi
 
