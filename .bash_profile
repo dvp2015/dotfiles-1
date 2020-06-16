@@ -13,4 +13,5 @@
 
 [[ -f ~/.profile ]] && . ~/.profile
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# echo ".bash_profile is loaded"
+

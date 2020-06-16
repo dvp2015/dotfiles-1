@@ -21,9 +21,7 @@ alias mv='mv -i'
 
 # navigation
 alias ne='~/dev/python/triniti_ne'
-alias sshmcc='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
-alias sshhpc4='ssh dvpab@ui4.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
 alias sshapk5='ssh dvp2@apk5.triniti.ru'
 alias sshcs='ssh dvp@gitlab.iterrf.ru'
@@ -88,6 +86,7 @@ alias chrome='/opt/google/chrome/chrome'
 
 # Jupyter
 alias jn='jupyter notebook'
+alias jl='jupyter lab'
 
 # yEd
 # https://www.yworks.com
@@ -113,16 +112,18 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-if which nvim >/dev/null 2>&1; then
-  alias vim='nvim'
-fi
-alias purevim='vim -u NONE'
-
 alias ll='\ls -l'
 alias lt='\ls --color=auto -lhFart'
 
+if which nvim >/dev/null 2>&1; then
+  alias vim='nvim'
+fi
 if which vim >/dev/null 2>&1; then
   alias vi='vim'
+  # Run vim in no swap mode (for very big files)
+  alias vin='vim -n'
+  # Run vim without configuring with .vimrc
+  alias purevim='vim -u NONE'
 fi
 
 if [[ ! -z $TMUX ]]; then
@@ -135,9 +136,6 @@ alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Run vim in no swap mode (for very big files)
-alias vin='vim -n'
 
 alias ys='yadm status'
 alias ya='yadm add'
@@ -157,4 +155,13 @@ alias getpass='openssl rand -base64 12 '
 alias ping='ping -c 4 '
 # Run http server in local folder
 alias www='python -m SimpleHTTPServer 8000'
+
+if [[ $(uname) =~ "MINGW" ]]; then
+  alias gst='git status'
+  alias gl='git pull'
+  alias gp='git push'
+  alias gcam='git commit -am'
+  alias ga='git add'
+  alias gm='git merge'
+fi
 
