@@ -238,7 +238,8 @@ silent! if plug#begin('~/.vim/plugged')
     
     " bats syntax {{{3
     Plug 'aliou/bats.vim'
-
+    " requirements syntax
+    Plug 'raimon49/requirements.txt.vim' ", {'for': 'requirements'}
     call plug#end()
 endif
 
