@@ -156,12 +156,14 @@ alias ping='ping -c 4 '
 # Run http server in local folder
 alias www='python -m SimpleHTTPServer 8000'
 
-if [[ $(uname) =~ "MINGW" ]]; then
-  alias gst='git status'
-  alias gl='git pull'
-  alias gp='git push'
-  alias gcam='git commit -am'
+if [[ $(uname) =~ MINGW ]]; then
+  alias g='git'
   alias ga='git add'
+  alias gcam='git commit -am'
+  alias gcm='git checkout master'
+  alias gl='git pull'
   alias gm='git merge'
+  alias gp='git push'
+  alias gst='git status'
 fi
 
