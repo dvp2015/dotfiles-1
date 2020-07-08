@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+#
+# remove directories generatated by advantg
+#
+
+rm -fr fwcadis_adj_solution  \
+       fwd_solution          \
+       model                 \
+       output
