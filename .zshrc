@@ -99,6 +99,7 @@ zplug "plugins/pylint", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "mattberther/zsh-pyenv"
 zplug "zlsun/solarized-man"
 zplug "joel-porquet/zsh-dircolors-solarized"
 zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
@@ -133,6 +134,8 @@ function allup() {
     zplug update  &
     echo "vim-plug update..."
     vim +PlugUpdate +qall &
+    echo "pyenv update..."
+    pyenv update &
     wait
 }
 
