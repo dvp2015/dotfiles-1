@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "Cleaning MCNP output files in the directory \"$(pwd)\""
+rm -f outp? comou? runtp?
