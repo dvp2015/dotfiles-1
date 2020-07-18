@@ -129,13 +129,25 @@ zplug load
 
 bindkey '^j' snippet-expand
 
-function allup() {
+function zplug_up() {
     echo "zplug update zsh..."
-    zplug update  &
+    zplug update
+}
+
+function vim_up() {
     echo "vim-plug update..."
-    vim +PlugUpdate +qall &
+    vim +PlugUpdate +qall
+}
+
+function pyenv_up() {
     echo "pyenv update..."
-    pyenv update &
+    pyenv update
+}
+
+function allup() {
+    zplug_up &
+    vim_up &
+    pyenv_up &
     wait
 }
 
