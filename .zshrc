@@ -145,10 +145,9 @@ function pyenv_up() {
 }
 
 function allup() {
-    zplug_up &
-    vim_up &
-    pyenv_up &
-    wait
+    zplug_up 
+    vim_up 
+    pyenv_up 
 }
 
 
