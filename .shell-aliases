@@ -163,6 +163,7 @@ if [[ $(uname) =~ MINGW ]]; then
   alias gcm='git checkout master'
   alias gl='git pull'
   alias gm='git merge'
+  alias gco='git checkout'
   alias gp='git push'
   alias gst='git status'
 fi
