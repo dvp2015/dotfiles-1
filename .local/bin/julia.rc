@@ -1,6 +1,10 @@
-export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.1-1
-#  export JULIAPRO_HOME=/opt/julia/JuliaPro-1.0.1.1
-# export JULIA_HOME="/opt/julia/1.3.1"
+machine="$(uname -n)"
+if [[ "RDAServer1" == "$machine ]]; then
+	export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+else
+	export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.1-1
+fi
+export JULIA_HOME="$JULIAPRO_HOME/Julia-1.4.2"
 
 if [[ -z $PYTHON ]]; then
     export PYTHON=$(which python)
