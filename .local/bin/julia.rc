@@ -1,5 +1,5 @@
 machine="$(uname -n)"
-if [[ "RDAServer1" == "$machine ]]; then
+if [[ "RDAServer1" == "$machine" ]]; then
 	export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
 else
     . anaconda.rc
