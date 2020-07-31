@@ -1,8 +1,9 @@
 machine="$(uname -n)"
-if [[ "RDAServer1" == "$machine ]]; then
-	export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+if [[ "RDAServer1" == "$machine" ]]; then
+    export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+    . /d/programs/anaconda3/Scripts/activate /d/programs/anaconda3
 else
-	export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.1-1
+    export JULIAPRO_HOME="/opt/julia/JuliaPro-1.4.2-1"
 fi
 export JULIA_HOME="$JULIAPRO_HOME/Julia-1.4.2"
 
@@ -17,7 +18,7 @@ fi
 JULIA_LIB_DIR="$JULIA_HOME/lib"
 
 if [[ -d "$JULIA_LIB_DIR" ]]; then
-    export JULIA_LIB_DIR="$JULIA_HOME/lib;$JULIA_HOME/lib/julia"
+    export JULIA_LIB_DIR="$JULIA_HOME/lib:$JULIA_HOME/lib/julia"
     export JULIA_INCLUDE_DIR="$JULIA_HOME/include"
     export INCLUDE_PATH="$(make_path $JULIA_INCLUDE_DIR $INCLUDE_PATH)"
     export CPATH=$(make_path $JULIA_INCLUDE_DIR $CPATH)
@@ -39,6 +40,4 @@ elif [[ -n "$ZSH_VERSION" ]]; then
     )
 fi
 
-# vim ft:sh
-
-
+# vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
