@@ -3,7 +3,8 @@ if [[ "RDAServer1" == "$machine" ]]; then
     export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
     . /d/programs/anaconda3/Scripts/activate /d/programs/anaconda3
 else
-    export JULIAPRO_HOME="/opt/julia/JuliaPro-1.4.2-1"
+    . anaconda.rc
+    export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.2-1
 fi
 export JULIA_HOME="$JULIAPRO_HOME/Julia-1.4.2"
 
