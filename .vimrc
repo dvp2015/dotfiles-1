@@ -7,6 +7,7 @@ scriptencoding utf-8
 if &compatible
   set nocompatible               " Be iMproved
 endif
+set t_Co=256
 
 if !has('nvim')
   unlet! skip_defaults_vim
@@ -39,6 +40,7 @@ set autoindent    " align the new line indent with the previous line
 
 set enc=utf-8    " utf-8 по дефолту в файлах
 set laststatus=2 " всегда показываем статусбар
+set noshowmode   " --INSERT-- is not necessary, the mode is shown at left end of status bar
 set incsearch    " инкреминтируемый поиск
 set hlsearch     " подсветка результатов поиска
 set nu           " показывать номера строк
@@ -176,8 +178,6 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'  " colorscheme gruvbox
     Plug 'rakr/vim-one'
     Plug 'NLKNguyen/papercolor-theme'
-    Plug 'reedes/vim-colors-pencil'
-    Plug 'jacoborus/tender.vim'
 
     " File list and open
     Plug 'justinmk/vim-dirvish'
@@ -207,7 +207,6 @@ silent! if plug#begin('~/.vim/plugged')
     " Markdown   {{{3
     
     if v:version >= 704
-
         Plug 'tpope/vim-markdown'
         Plug 'nelstrom/vim-markdown-folding'
         Plug 'junegunn/vim-emoji'
@@ -222,11 +221,11 @@ silent! if plug#begin('~/.vim/plugged')
     " Python  {{{3
 
     if has("python") || has("python3")
-    Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
-    Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
-    Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
-    Plug 'rosenfeld/conque-term'                             " Consoles as buffers
-    Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
+        Plug 'python-mode/python-mode', {'for': 'python' }       " Load for python modules
+        Plug 'mitsuhiko/vim-python-combined', {'for': 'python' } " Combined Python 2/3 for Vim
+        Plug 'nvie/vim-flake8'                                   " Static syntax and code checker Flake8
+        Plug 'rosenfeld/conque-term'                             " Consoles as buffers
+        Plug 'davidhalter/jedi-vim'                              " Jedi-vim autocomplete plugin
     endif
     Plug 'mitsuhiko/vim-jinja'                               " Jinja support for vim
 
@@ -677,22 +676,17 @@ endif
 " set background=light
 set background=dark
 " silent!  colorscheme solarized8_high
-" silent!  colorscheme PaperColor
-silent!  colorscheme tender
-" set lighline theme inside lightline config
-let g:lightline = { 'colorscheme': 'tender' }
+silent!  colorscheme PaperColor
 " set airline theme
-let g:airline_theme = 'tender'
 " Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='solarized'
-let g:airline_theme='atomic'
+let g:airline_theme='solarized'
 " let g:airline_solarized_bg='light'
 let g:airline_solarized_bg='dark'
 if ! &diff
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
 endif
-let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Solarized8 {{{3
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
