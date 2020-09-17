@@ -177,7 +177,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'rakr/vim-one'
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'reedes/vim-colors-pencil'
-
+    Plug 'jacoborus/tender.vim'
 
     " File list and open
     Plug 'justinmk/vim-dirvish'
@@ -677,9 +677,12 @@ endif
 " set background=light
 set background=dark
 " silent!  colorscheme solarized8_high
-silent!  colorscheme PaperColor
-
-
+" silent!  colorscheme PaperColor
+silent!  colorscheme tender
+" set lighline theme inside lightline config
+let g:lightline = { 'colorscheme': 'tender' }
+" set airline theme
+let g:airline_theme = 'tender'
 " Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='solarized'
