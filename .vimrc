@@ -165,12 +165,12 @@ silent! if plug#begin('~/.vim/plugged')
 
     " Plugins for either Vim8 or NeoVim {{{3
     if has('nvim')
-    Plug 'Shougo/denite.nvim'
-    Plug 'machakann/vim-highlightedyank'
-    Plug 'kassio/neoterm'
-    Plug 'Shougo/neomru.vim'
+        Plug 'Shougo/denite.nvim'
+        Plug 'machakann/vim-highlightedyank'
+        Plug 'kassio/neoterm'
+        Plug 'Shougo/neomru.vim'
     else
-    Plug 'Shougo/unite.vim' " Navigation between buffers and files
+        Plug 'Shougo/unite.vim' " Navigation between buffers and files
     endif
 
     " Colorschemes  {{{3
@@ -187,9 +187,11 @@ silent! if plug#begin('~/.vim/plugged')
 
     Plug 'majutsushi/tagbar'            " Class/module browser
 
-    " Status line  {{{3
-    Plug 'vim-airline/vim-airline'
+    " Visual enhancements{{{3
+    Plug 'vim-airline/vim-airline'      " Status line  
     Plug 'vim-airline/vim-airline-themes'
+    
+    Plug 'ryanoasis/vim-devicons'       " Icons in NerdTree and airline 
 
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
@@ -669,6 +671,9 @@ if has('vim_starting')
   set statusline+=%*
 endif
 
+" Font {{{3
+set guifont=Fura\ Code\ Light\ Nerd\ Font\ Complete:h16 "Это light версия
+
 " Colorscheme {{{3
 if has('termguicolors')
   set termguicolors
@@ -677,9 +682,14 @@ endif
 set background=dark
 " silent!  colorscheme solarized8_high
 silent!  colorscheme PaperColor
+
 " set airline theme
 " Vim-Airline status line  {{{3
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1    "Включить поддержку Powerline шрифтов
+let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
+" let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
+let g:Powerline_symbols='unicode' "Поддержка unicode
+let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
 let g:airline_theme='solarized'
 " let g:airline_solarized_bg='light'
 let g:airline_solarized_bg='dark'
