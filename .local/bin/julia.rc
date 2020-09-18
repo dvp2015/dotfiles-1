@@ -1,9 +1,10 @@
 machine="$(uname -n)"
 if [[ "RDAServer1" == "$machine" ]]; then
-	export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+    export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+    . /d/programs/anaconda3/Scripts/activate /d/programs/anaconda3
 else
     . anaconda.rc
-	export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.2-1
+    export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.2-1
 fi
 export JULIA_HOME="$JULIAPRO_HOME/Julia-1.4.2"
 
@@ -39,6 +40,5 @@ elif [[ -n "$ZSH_VERSION" ]]; then
         $path
     )
 fi
-
 
 # vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
