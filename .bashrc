@@ -10,11 +10,11 @@ esac
 [ -z "$PS1" ] && return
 
 # Source global definitions
-test -r /etc/bash.bashrc && . /etc/bash.bashrc
+test -r /etc/bash.bashrc && source /etc/bash.bashrc
 
-test -r ~/.shell-env  && . ~/.shell-env
-test -r ~/.shell-common  && . ~/.shell-common
-test -r ~/.shell-aliases && . ~/.shell-aliases
+test -r ~/.shell-env  && source ~/.shell-env
+test -r ~/.shell-common  && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -84,11 +84,11 @@ esac
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-test -f /usr/share/bash-completion/bash_completion && . /usr/share/bash-completion/bash_completion
-test -f /etc/bash_completion && . /etc/bash_completion
+test -f /usr/share/bash-completion/bash_completion && source /usr/share/bash-completion/bash_completion
+test -f /etc/bash_completion && source /etc/bash_completion
 # test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
-test -r ~/.bashrc.local && . ~/.bashrc.local
+test -r ~/.bashrc.local && source ~/.bashrc.local
 
 
 

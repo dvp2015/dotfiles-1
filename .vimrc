@@ -111,7 +111,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
 
     if executable("ag") || executable("ack")
-    Plug 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
     endif
 
     " Git support {{{3
@@ -194,9 +194,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    if executable('julia')
-        Plug 'julialang/julia-vim'  " , {'for': 'julia'}
-    endif
+    Plug 'julialang/julia-vim'  " , {'for': 'julia'}
 
     " Misc {{{3
     " to-do.txt
@@ -249,6 +247,11 @@ if ! &diff
   set switchbuf=useopen
   :set diffopt=filler,context:3,iwhite
 endif
+
+" See :help julia-vim
+runtime macros/matchit.vim
+noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
+
 
 " Filetype configuration {{{3
 
