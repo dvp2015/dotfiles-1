@@ -21,23 +21,38 @@ echo "Init submodules"
 yadm submodule init
 yadm submodule update --recursive --init
 
-echo "Installing powerline fonts"
-# https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation
-pip install powerline-status
-git clone https://github.com/powerline/fonts.git .yadm/fonts --depth=1
-cd .yadm/fonts
+# Obsole ?
+function install_powerline_fonts() {
+    echo "Installing powerline fonts"
+    # https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation
+    pip install powerline-status
+    git clone https://github.com/powerline/fonts.git .yadm/fonts --depth=1
+    cd .yadm/fonts
 
-./install.sh
+    ./install.sh
 
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mv PowerlineSymbols.otf ~/.local/share/fonts/
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-fc-cache -vf ~/.local/share/fonts/
+    wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+    wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+    mv PowerlineSymbols.otf ~/.local/share/fonts/
+    mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
-cd ..
-rm -rf fonts
-cd "$HOME"
+    cd ..
+    rm -rf fonts
+    cd "$HOME"
+}
+
+function install_nerd_fonts() {
+    # https://github.com/ryanoasis/nerd-fonts
+    echo "Installing nerd fonts"
+    git clone https://github.com/ryanoasis/nerd-fonts .yadm/fonts --depth=1
+    cd .yadm/fonts
+    ./install.sh
+    cd ..
+    rm -rf fonts
+    cd "$HOME"
+}
+
+install_nerd_fonts && fc-cache -vf ~/.local/share/fonts/
 
 if command -v vim >/dev/null 2>&1; then
   echo "Bootstraping Vim"
