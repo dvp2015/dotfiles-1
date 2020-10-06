@@ -99,6 +99,7 @@ zplug "plugins/pylint", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "mattberther/zsh-pyenv"
 zplug "zlsun/solarized-man"
 zplug "joel-porquet/zsh-dircolors-solarized"
 zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
@@ -128,12 +129,25 @@ zplug load
 
 bindkey '^j' snippet-expand
 
-function allup() {
+function zplug_up() {
     echo "zplug update zsh..."
-    zplug update  &
+    zplug update
+}
+
+function vim_up() {
     echo "vim-plug update..."
-    vim +PlugUpdate +qall &
-    wait
+    vim +PlugUpdate +qall
+}
+
+function pyenv_up() {
+    echo "pyenv update..."
+    pyenv update
+}
+
+function allup() {
+    zplug_up 
+    vim_up 
+    pyenv_up 
 }
 
 

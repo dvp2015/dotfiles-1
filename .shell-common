@@ -23,17 +23,6 @@ export HISTIGNORE="$HISTIGNORE:mc:mcc:cs:cd .."
 
 export QT_SELECT=5
 
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ ! -e "$PYENV_ROOT" ]]; then
-    echo "Installing missed pyenv folder"
-    git clone https://github.com/pyenv/pyenv.git "$PYENV_ROOT"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-if [[ ! -e "$PYENV_ROOT/plugins/pyenv-virtualenv" ]]; then
-    echo "Installing missed pyenv-virtualenv folder"
-    git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
-fi
-
 
 if [[ -x /usr/games/fortune ]]; then
 # https://askubuntu.com/questions/16428/showing-a-cowsay-fortune-in-every-new-terminal-session
@@ -53,17 +42,6 @@ function rvm-prompt() {
 function sshid() {
     eval $(ssh-agent) && ssh-add
 }
-
-mydir () {
-    local source="${BASH_SOURCE[0]}"
-    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-        DIR="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-        source="$(readlink "$source")"
-        [[ $source != /* ]] && source="$DIR/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-    done
-    cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
-}
-
 
 # source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :

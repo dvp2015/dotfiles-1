@@ -10,11 +10,11 @@ esac
 [ -z "$PS1" ] && return
 
 # Source global definitions
-test -r /etc/bash.bashrc && . /etc/bash.bashrc
+test -r /etc/bash.bashrc && source /etc/bash.bashrc
 
-test -r ~/.shell-env  && . ~/.shell-env
-test -r ~/.shell-common  && . ~/.shell-common
-test -r ~/.shell-aliases && . ~/.shell-aliases
+test -r ~/.shell-env  && source ~/.shell-env
+test -r ~/.shell-common  && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -84,11 +84,11 @@ esac
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-test -f /usr/share/bash-completion/bash_completion && . /usr/share/bash-completion/bash_completion
-test -f /etc/bash_completion && . /etc/bash_completion
+test -f /usr/share/bash-completion/bash_completion && source /usr/share/bash-completion/bash_completion
+test -f /etc/bash_completion && source /etc/bash_completion
 # test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
-test -r ~/.bashrc.local && . ~/.bashrc.local
+test -r ~/.bashrc.local && source ~/.bashrc.local
 
 
 
@@ -96,11 +96,35 @@ test -r ~/.bashrc.local && . ~/.bashrc.local
 
 
 if [[ -x python ]]; then
-    # Add pyenv init to your shell to enable shims and autocompletion.
-    # Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
-    # configuration file since it manipulates PATH during the initialization.
-    if command -v pyenv 1>/dev/null 2>&1; then 
+
+    GITHUB="https://github.com"
+
+    [[ -z "$PYENV_HOME" ]] && export PYENV_HOME="$HOME/.pyenv"
+
+    _pyenv_install() {
+        echo "Installing pyenv..."
+        git clone "${GITHUB}/pyenv/pyenv.git"            "${PYENV_HOME}"
+        git clone "${GITHUB}/pyenv/pyenv-doctor.git"     "${PYENV_HOME}/plugins/pyenv-doctor"
+        git clone "${GITHUB}/pyenv/pyenv-installer.git"  "${PYENV_HOME}/plugins/pyenv-installer"
+        git clone "${GITHUB}/pyenv/pyenv-update.git"     "${PYENV_HOME}/plugins/pyenv-update"
+        git clone "${GITHUB}/pyenv/pyenv-virtualenv.git" "${PYENV_HOME}/plugins/pyenv-virtualenv"
+        git clone "${GITHUB}/pyenv/pyenv-which-ext.git"  "${PYENV_HOME}/plugins/pyenv-which-ext"
+    }
+
+    _pyenv_load() {
+        # export PATH
+        export PATH="$PYENV_HOME/bin:$PATH"
+
         eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+    }
+
+    # install pyenv if it is not already installed
+    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
+
+    # load pyenv if it is installed
+    if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
+        _pyenv_load
     fi
 fi
 
