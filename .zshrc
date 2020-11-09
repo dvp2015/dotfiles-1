@@ -303,6 +303,12 @@ v() {
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
-
+# if [[ -d "$HOME/.pyenv/bin" ]]; then
+    # export PATH="$HOME/.pyenv/bin:$PATH"
+    # eval "$(pyenv init -)"
+    # eval "$(pyenv virtualenv-init -)"
+# fi
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
+export PATH="$HOME/.poetry/bin:$PATH"
