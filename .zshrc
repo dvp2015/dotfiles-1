@@ -311,4 +311,3 @@ v() {
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
-export PATH="$HOME/.poetry/bin:$PATH"
