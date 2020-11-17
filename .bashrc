@@ -101,6 +101,8 @@ if [[ -x python ]]; then
 
     [[ -z "$PYENV_HOME" ]] && export PYENV_HOME="$HOME/.pyenv"
 
+    # TODO update for pyenv-win
+
     _pyenv_install() {
         echo "Installing pyenv..."
         git clone "${GITHUB}/pyenv/pyenv.git"            "${PYENV_HOME}"
@@ -120,12 +122,12 @@ if [[ -x python ]]; then
     }
 
     # install pyenv if it is not already installed
-    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
+#    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
 
     # load pyenv if it is installed
-    if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
-        _pyenv_load
-    fi
+    # if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
+        # _pyenv_load
+    # fi
 fi
 
 # echo ".bashrc is loaded"
