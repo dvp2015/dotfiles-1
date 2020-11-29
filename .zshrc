@@ -1,3 +1,4 @@
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -41,43 +42,29 @@ source $ZSH/oh-my-zsh.sh
 
 # Powerlevel options
 # See: https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-# POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_MODE='awesome-patched'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-# POWERLEVEL9K_OS_ICON_BACKGROUND="white"
-# POWERLEVEL9K_OS_ICON_FOREGROUND="blue"
-# POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-
-# POWERLEVEL9K_HOME_SUB_ICON=$'\UE18D ' # <- Whitespace added
-POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
-#POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs dir_writable)
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda)
+# POWERLEVEL9K_MODE='awesome-patched'
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+# POWERLEVEL9K_STATUS_VERBOSE=false
+# POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
+# POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+# POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
+# POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
+# POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
+# POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
+# POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
+# POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
+# POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs dir_writable)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda)
 # Check if battery is present in the system
-if [ -f /sys/class/power_supply/BAT1/uevent ]; then
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS battery)
-fi 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS time)
-
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
+# if [ -f /sys/class/power_supply/BAT1/uevent ]; then
+    # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS battery)
+# fi 
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS time)
+# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+# POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+# POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 
 # Essential
 source ~/.zplug/init.zsh
@@ -112,10 +99,7 @@ zplug "joel-porquet/zsh-dircolors-solarized"
 zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
 zplug 'molovo/revolver', as:command, use:revolver
 zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
-# ZSH_THEME="fino-time"
-# zplug "themes/amuse", as:theme, from:oh-my-zsh
-# zplug "themes/fino-time", as:theme, from:oh-my-zsh
-# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme 
+ZSH_THEME="powerlevel10k/powerleve10k"
 zplug romkatv/powerlevel10k, as:theme, depth:1
 # plugins=(git gitfast git-extras python pylint tmux tmuxinator)
 
@@ -126,7 +110,7 @@ zplug romkatv/powerlevel10k, as:theme, depth:1
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
-    printf "Install zsh plugins? [y/N]: "
+    printf "Install zsh plugins? [y/n]: "
     if read -q; then
         echo; zplug install
     else
@@ -318,7 +302,6 @@ v() {
     # eval "$(pyenv virtualenv-init -)"
 # fi
 
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
