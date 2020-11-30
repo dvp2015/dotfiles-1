@@ -303,6 +303,10 @@ v() {
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
-
+# TODO dvp: check why zsh-pyenv plugin doesn't work
+# if command -v pyenv &>/dev/null; then
+    # _zsh_pyenv_load
+# fi
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+

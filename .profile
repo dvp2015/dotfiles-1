@@ -17,3 +17,4 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 # echo ".profile is loaded"
 export PATH="$HOME/.cargo/bin:$PATH"
+
