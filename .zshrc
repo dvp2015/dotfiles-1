@@ -37,34 +37,8 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 
 export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
-ZSH_CUSTOM=$HOME/.config/zsh/custom
+export ZSH_CUSTOM=$HOME/.config/zsh/custom
 source $ZSH/oh-my-zsh.sh
-
-# Powerlevel options
-# See: https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-# POWERLEVEL9K_MODE='awesome-patched'
-# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-# POWERLEVEL9K_STATUS_VERBOSE=false
-# POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-# POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
-# POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-# POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-# POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-# POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-# POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
-# POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs dir_writable)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda)
-# Check if battery is present in the system
-# if [ -f /sys/class/power_supply/BAT1/uevent ]; then
-    # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS battery)
-# fi 
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS time)
-# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-# POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 
 # Essential
 source ~/.zplug/init.zsh
@@ -101,12 +75,6 @@ zplug 'molovo/revolver', as:command, use:revolver
 zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
 ZSH_THEME="powerlevel10k/powerleve10k"
 zplug romkatv/powerlevel10k, as:theme, depth:1
-# plugins=(git gitfast git-extras python pylint tmux tmuxinator)
-
-# zplug "/usr/local/opt/fzf/shell", from:local
-# zplug "~/dev/tools", from:local, use:"*.sh"
-
-# Add a bunch more of your favorite packages!
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then

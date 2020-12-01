@@ -34,6 +34,7 @@ shopt -s dirspell
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
+# TODO dvp: There's no debin_chroot in my system
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
