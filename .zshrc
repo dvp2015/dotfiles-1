@@ -62,17 +62,18 @@ zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/zsh_reload", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
+zplug "plugins/poetry", from:oh-my-zsh
 zplug "plugins/python", from:oh-my-zsh
 # zplug "plugins/pylint", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/tmuxinator", from:oh-my-zsh
+# zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "mattberther/zsh-pyenv"
-zplug "zlsun/solarized-man"
+# zplug "zlsun/solarized-man"
 zplug "joel-porquet/zsh-dircolors-solarized"
-zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
-zplug 'molovo/revolver', as:command, use:revolver
-zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
+# zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
+# zplug 'molovo/revolver', as:command, use:revolver
+# zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
 ZSH_THEME="powerlevel10k/powerleve10k"
 zplug romkatv/powerlevel10k, as:theme, depth:1
 
