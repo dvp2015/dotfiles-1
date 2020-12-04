@@ -24,6 +24,15 @@ test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
+# To activate completions for zsh you need to have
+# bashcompinit enabled in zsh:
+autoload -U bashcompinit
+bashcompinit
+
+# Afterwards you can enable completion for nox:
+eval "$(register-python-argcomplete nox)"
+
+
 export DEFAULT_USER=dvp
 TERM=xterm-256color
 
@@ -262,7 +271,6 @@ v() {
             [ -f "${line/\~/$HOME}" ] && echo "$line"
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
