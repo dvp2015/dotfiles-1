@@ -154,9 +154,8 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
-HISTORY_IGNORE="&:[bf]g:ll:ls:lm:lk:l:la:lt:h:history:ev:ea:ek:exit:id:uptime:resize:clear:mc:cs:cd .."
-HISTORY_IGNORE="$HISTORY_IGNORE:ez:...:...."
+export HIST_STAMPS="yyyy-mm-dd"
+export HISTORY_IGNORE="(&|[bf]g|ll|ls|lm|lk|l|la|lt|h|history|ev|ea|ek|exit|id|uptime|resize|clear|mc|cs|cd ..|ez|...|....)"
 
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -167,7 +166,6 @@ HISTORY_IGNORE="$HISTORY_IGNORE:ez:...:...."
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git gitfast git-extras python pylint tmux tmuxinator)
-
 # source $ZSH/oh-my-zsh.sh
 
 # User configuration
