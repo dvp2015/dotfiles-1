@@ -109,12 +109,26 @@ function all_dirs_exist() {
     for pp in "${array[@]}"
     do
         if  [[ ! -d "$pp"  ]]; then
-            echo "WARNING: Directory $pp doesn't exist!"
+            echo "WARNING: Directory \"$pp\" doesn't exist!"
             warns=$(($warns + 1))
         fi
     done
     return $warns
 }
+
+
+check_files_exist() {
+    for f in $*; do
+        if [[ -e "$f" ]]; then
+            continue
+        else
+            echo "File $f doesn't exist"
+                return 1
+                fi
+                done
+                return 0
+}
+
 
 if [[ -z "$ORIGINAL_PATH" ]]; then
     export ORIGINAL_PATH="$PATH"
@@ -176,5 +190,17 @@ function bz() {
         echo "ERROR bz: cannot read file $file_name"
     fi
 }
+
+
+mydir () {
+    local src="${BASH_SOURCE[0]}"
+    while [ -h "$src" ]; do # resolve $src until the file is no longer a symlink
+        DIR="$( cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd )"
+        src="$(readlink "$src")"
+        [[ $src != /* ]] && src="$DIR/$src" # if $src was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd
+}
+
 
 # echo ".shell-env is sourced"

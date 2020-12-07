@@ -69,5 +69,8 @@ tags
 *.mtc
 *.mtc0
 
+#pyenv
+.python-version
+
 # Windows
 Thumbs.db

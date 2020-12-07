@@ -13,5 +13,3 @@
 
 [[ -f ~/.profile ]] && . ~/.profile
 
-# echo ".bash_profile is loaded"
-

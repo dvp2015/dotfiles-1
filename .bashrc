@@ -10,11 +10,11 @@ esac
 [ -z "$PS1" ] && return
 
 # Source global definitions
-test -r /etc/bash.bashrc && . /etc/bash.bashrc
+test -r /etc/bash.bashrc && source /etc/bash.bashrc
 
-test -r ~/.shell-env  && . ~/.shell-env
-test -r ~/.shell-common  && . ~/.shell-common
-test -r ~/.shell-aliases && . ~/.shell-aliases
+test -r ~/.shell-env  && source ~/.shell-env
+test -r ~/.shell-common  && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -34,6 +34,7 @@ shopt -s dirspell
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
+# TODO dvp: There's no debin_chroot in my system
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -84,11 +85,11 @@ esac
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-test -f /usr/share/bash-completion/bash_completion && . /usr/share/bash-completion/bash_completion
-test -f /etc/bash_completion && . /etc/bash_completion
+test -f /usr/share/bash-completion/bash_completion && source /usr/share/bash-completion/bash_completion
+test -f /etc/bash_completion && source /etc/bash_completion
 # test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
-test -r ~/.bashrc.local && . ~/.bashrc.local
+test -r ~/.bashrc.local && source ~/.bashrc.local
 
 
 
@@ -100,6 +101,8 @@ if [[ -x python ]]; then
     GITHUB="https://github.com"
 
     [[ -z "$PYENV_HOME" ]] && export PYENV_HOME="$HOME/.pyenv"
+
+    # TODO update for pyenv-win
 
     _pyenv_install() {
         echo "Installing pyenv..."
@@ -120,13 +123,29 @@ if [[ -x python ]]; then
     }
 
     # install pyenv if it is not already installed
-    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
+#    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
 
     # load pyenv if it is installed
-    if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
-        _pyenv_load
-    fi
+    # if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
+        # _pyenv_load
+    # fi
 fi
 
 # echo ".bashrc is loaded"
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+        # __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        # if [ $? -eq 0 ]; then
+            # eval "$__conda_setup"
+        # else
+            # if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+                # . "/opt/anaconda3/etc/profile.d/conda.sh"
+            # else
+                # export PATH="/opt/anaconda3/bin:$PATH"
+            # fi
+        # fi
+        # unset __conda_setup
+# <<< conda initialize <<<
+
