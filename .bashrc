@@ -57,14 +57,16 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
+
+# TODO check debian_chroot variable, what is the use in it on mingw?
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -87,7 +89,6 @@ esac
 # sources /etc/bash.bashrc).
 test -f /usr/share/bash-completion/bash_completion && source /usr/share/bash-completion/bash_completion
 test -f /etc/bash_completion && source /etc/bash_completion
-# test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
 test -r ~/.bashrc.local && source ~/.bashrc.local
 
@@ -100,52 +101,35 @@ if [[ -x python ]]; then
 
     GITHUB="https://github.com"
 
-    [[ -z "$PYENV_HOME" ]] && export PYENV_HOME="$HOME/.pyenv"
+    [[ -z "$PYENV_ROOT" ]] && export PYENV_ROOT="$HOME/.pyenv"
 
     # TODO update for pyenv-win
 
     _pyenv_install() {
         echo "Installing pyenv..."
-        git clone "${GITHUB}/pyenv/pyenv.git"            "${PYENV_HOME}"
-        git clone "${GITHUB}/pyenv/pyenv-doctor.git"     "${PYENV_HOME}/plugins/pyenv-doctor"
-        git clone "${GITHUB}/pyenv/pyenv-installer.git"  "${PYENV_HOME}/plugins/pyenv-installer"
-        git clone "${GITHUB}/pyenv/pyenv-update.git"     "${PYENV_HOME}/plugins/pyenv-update"
-        git clone "${GITHUB}/pyenv/pyenv-virtualenv.git" "${PYENV_HOME}/plugins/pyenv-virtualenv"
-        git clone "${GITHUB}/pyenv/pyenv-which-ext.git"  "${PYENV_HOME}/plugins/pyenv-which-ext"
+        git clone "${GITHUB}/pyenv/pyenv.git"            "${PYENV_ROOT}"
+        git clone "${GITHUB}/pyenv/pyenv-doctor.git"     "${PYENV_ROOT}/plugins/pyenv-doctor"
+        git clone "${GITHUB}/pyenv/pyenv-installer.git"  "${PYENV_ROOT}/plugins/pyenv-installer"
+        git clone "${GITHUB}/pyenv/pyenv-update.git"     "${PYENV_ROOT}/plugins/pyenv-update"
+        git clone "${GITHUB}/pyenv/pyenv-virtualenv.git" "${PYENV_ROOT}/plugins/pyenv-virtualenv"
+        git clone "${GITHUB}/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
     }
 
     _pyenv_load() {
         # export PATH
-        export PATH="$PYENV_HOME/bin:$PATH"
+        export PATH="$PYENV_ROOT/bin:$PATH"
 
         eval "$(pyenv init -)"
         eval "$(pyenv virtualenv-init -)"
     }
-
-    # install pyenv if it is not already installed
-#    [[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _pyenv_install
+# install pyenv if it is not already installed
+#    [[ ! -f "$PYENV_ROOT/libexec/pyenv" ]] && _pyenv_install
 
     # load pyenv if it is installed
-    # if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
-        # _pyenv_load
+    # if [[ -f "$PYENV_ROOT/libexec/pyenv" ]]; then
+    # _pyenv_load
     # fi
 fi
 
 # echo ".bashrc is loaded"
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-        # __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-        # if [ $? -eq 0 ]; then
-            # eval "$__conda_setup"
-        # else
-            # if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-                # . "/opt/anaconda3/etc/profile.d/conda.sh"
-            # else
-                # export PATH="/opt/anaconda3/bin:$PATH"
-            # fi
-        # fi
-        # unset __conda_setup
-# <<< conda initialize <<<
-

@@ -29,9 +29,10 @@ fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 autoload -U bashcompinit
 bashcompinit
 
-# Afterwards you can enable completion for nox:
-eval "$(register-python-argcomplete nox)"
-
+if [[ -e "register-python-argcomplete" ]]; then
+    # Enable completion for nox:
+    eval "$(register-python-argcomplete nox)"
+fi
 
 export DEFAULT_USER=dvp
 TERM=xterm-256color
