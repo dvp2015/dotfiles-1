@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+
+# TODO select some fonts instead of installin all the fonts
+# TODO check the nerd-fonts site, is it obsolete?
+function install_nerd_fonts() {
+    # https://github.com/ryanoasis/nerd-fonts
+    echo "Installing nerd fonts"
+    git clone https://github.com/ryanoasis/nerd-fonts /tmp/fonts --depth=1
+    cd /tmp/fonts
+    ./install.sh "JetBrainsMono Nerd Font"
+    ./install.sh "Meslo Nerd Font"
+    cd ..
+    rm -rf fonts
+    cd "$HOME"
+}
+
+install_nerd_fonts && fc-cache -vf ~/.local/share/fonts/
+

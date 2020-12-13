@@ -4,6 +4,7 @@ git clone  git://github.com/bats-core/bats-core.git
 pushd bats-core
 ./install.sh $HOME/.local
 popd
+rm -fr bats-core
 
 for p in bats-support bats-assert bats-file; do
     git clone git://github.com/bats-core/${p}.git $HOME/.local/lib/${p}
