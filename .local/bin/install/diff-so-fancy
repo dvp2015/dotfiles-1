@@ -1,23 +1,33 @@
 #!/usr/bin/env bash
 
-main() {
-    local _path, _url
+install_diff_so_fancy() {
 
-    if [[ ! -x  git ]]; then
+    if command -p git --version > /dev/null
+    then
+        echo "git ok"
+    else
         echo "ERRROR: cannot execute GIT"
         return
     fi
 
     echo "Installing diff-so-fancy (git diff human readable)"
-
-    _path=$HOME/Downloads/install/diff-so-fancy
-    _url=https://github.com/so-fancy/diff-so-fancy.git
-
-    git clone ${_url} ${_path}  && \
+    local _install_dir=$HOME/Downloads/install
+    local _path=${_install_dir}/diff-so-fancy
+    if [[ -d ${_path} ]]; then
+        echo "Updating diff-so-fancy in ${_path}"
+        pushd ${_path}
+        git pull
+        popd
+    else
+        local _url=https://github.com/so-fancy/diff-so-fancy.git
+        mkdir -p ${_install_dir}
+        git clone ${_url} ${_path} --depth=1
+        echo "diff-so-fancy is cloned to ${_path}"
+    fi
     cp "${_path}/diff-so-fancy" "$HOME/.local/bin" && \
     cp -r "${_path}/lib" "$HOME/.local/bin"
 }
 
-[ -n "$BATS_PREFIX" ] || main $*
+[ -n "$BATS_ROOT" ] || install_diff_so_fancy $*
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
