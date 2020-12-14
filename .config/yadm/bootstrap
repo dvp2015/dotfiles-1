@@ -28,12 +28,5 @@ if command -v vim >/dev/null 2>&1; then
 fi
 
 
-if [[ -d "$HOME/.yadm/installable/diff-so-fancy" ]]; then
-    echo "Installing diff-so-fancy (git diff human readable)"
-    cp "$HOME/.yadm/installable/diff-so-fancy/diff-so-fancy" "$HOME/.local/bin"
-    cp -r "$HOME/.yadm/installable/diff-so-fancy/lib" "$HOME/.local/bin"
-else
-    echo "Cannot find diff-so-fancy"
-fi
 
 
