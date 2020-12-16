@@ -14,6 +14,3 @@
 [[ -f ~/.profile ]] && . ~/.profile
 
 # echo ".bash_profile is loaded"
-
-
-export PATH="$HOME/.poetry/bin:$PATH"
