@@ -12,5 +12,3 @@
 # often worked around by having the profile execute bashrc anyway.
 
 [[ -f ~/.profile ]] && . ~/.profile
-
-# echo ".bash_profile is loaded"

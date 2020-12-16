@@ -529,7 +529,7 @@ endif
 " nnoremap <M-l> :tabn<cr>
 
 " NerdTree настройки
-" показать NERDTree на F3
+" показать NERDTree на F1
 map <F1> :NERDTreeToggle<CR>
 "игноррируемые файлы с расширениями
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']  

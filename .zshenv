@@ -29,7 +29,7 @@ typeset -gUT OBJC_INCLUDE_PATH objc_include_path
 
 cdpath=(
   $HOME/dev
-  /opt/lanl/wrk
+  /opt
   $cdpath
 )
 
@@ -57,12 +57,4 @@ path=(
   /{bin,sbin}
 )
 
-
-
-# Add pyenv init to your shell to enable shims and autocompletion.
-# Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
-# configuration file since it manipulates PATH during the initialization.
-if command -v pyenv 1>/dev/null 2>&1; then 
-    eval "$(pyenv init -)"
-fi
 

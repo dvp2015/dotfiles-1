@@ -1,3 +1,11 @@
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Via https://tanguy.ortolo.eu/blog/article25/shrc
 #
 # Zsh always executes zshenv. Then, depending on the case:
@@ -16,6 +24,16 @@ test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
+# To activate completions for zsh you need to have
+# bashcompinit enabled in zsh:
+autoload -U bashcompinit
+bashcompinit
+
+if [[ -e "register-python-argcomplete" ]]; then
+    # Enable completion for nox:
+    eval "$(register-python-argcomplete nox)"
+fi
+
 export DEFAULT_USER=dvp
 TERM=xterm-256color
 
@@ -29,48 +47,8 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 
 export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
-ZSH_CUSTOM=$HOME/.config/zsh/custom
+export ZSH_CUSTOM=$HOME/.config/zsh/custom
 source $ZSH/oh-my-zsh.sh
-
-# Powerlevel options
-# See: https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-# POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_MODE='awesome-patched'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-# POWERLEVEL9K_OS_ICON_BACKGROUND="white"
-# POWERLEVEL9K_OS_ICON_FOREGROUND="blue"
-# POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-
-# POWERLEVEL9K_HOME_SUB_ICON=$'\UE18D ' # <- Whitespace added
-POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
-#POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs dir_writable)
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs anaconda)
-# Check if battery is present in the system
-if [ -f /sys/class/power_supply/BAT1/uevent ]; then
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS battery)
-fi 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS time)
-
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 
 # Essential
 source ~/.zplug/init.zsh
@@ -94,30 +72,24 @@ zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/zsh_reload", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
+zplug "plugins/poetry", from:oh-my-zsh
 zplug "plugins/python", from:oh-my-zsh
-zplug "plugins/pylint", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
+# zplug "plugins/pylint", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/tmuxinator", from:oh-my-zsh
+# zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "mattberther/zsh-pyenv"
-zplug "zlsun/solarized-man"
+# zplug "zlsun/solarized-man"
 zplug "joel-porquet/zsh-dircolors-solarized"
-zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
-# ZSH_THEME="fino-time"
-# zplug "themes/amuse", as:theme, from:oh-my-zsh
-# zplug "themes/fino-time", as:theme, from:oh-my-zsh
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme 
-
-# plugins=(git gitfast git-extras python pylint tmux tmuxinator)
-
-# zplug "/usr/local/opt/fzf/shell", from:local
-# zplug "~/dev/tools", from:local, use:"*.sh"
-
-# Add a bunch more of your favorite packages!
+# zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
+# zplug 'molovo/revolver', as:command, use:revolver
+# zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
+ZSH_THEME="powerlevel10k/powerleve10k"
+zplug romkatv/powerlevel10k, as:theme, depth:1
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
-    printf "Install zsh plugins? [y/N]: "
+    printf "Install zsh plugins? [y/n]: "
     if read -q; then
         echo; zplug install
     else
@@ -192,9 +164,8 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
-HISTORY_IGNORE="&:[bf]g:ll:ls:lm:lk:l:la:lt:h:history:ev:ea:ek:exit:id:uptime:resize:clear:mc:cs:cd .."
-HISTORY_IGNORE="$HISTORY_IGNORE:ez:...:...."
+export HIST_STAMPS="yyyy-mm-dd"
+export HISTORY_IGNORE="(&|[bf]g|ll|ls|lm|lk|l|la|lt|h|history|ev|ea|ek|exit|id|uptime|resize|clear|mc|cs|cd ..|ez|...|....)"
 
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -205,7 +176,6 @@ HISTORY_IGNORE="$HISTORY_IGNORE:ez:...:...."
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git gitfast git-extras python pylint tmux tmuxinator)
-
 # source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -303,11 +273,5 @@ v() {
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
-# if [[ -d "$HOME/.pyenv/bin" ]]; then
-    # export PATH="$HOME/.pyenv/bin:$PATH"
-    # eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"
-# fi
-
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
-
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
