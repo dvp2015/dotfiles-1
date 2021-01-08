@@ -47,6 +47,8 @@ manpath=(
   $manpath
 )
 
+export GOPATH=$HOME/.go
+
 path=(
   $path
   $HOME/bin
@@ -55,6 +57,7 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
+  /usr/local/go/bin
+  $GOPATH/bin
 )
-
 
