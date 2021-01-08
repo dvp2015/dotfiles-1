@@ -17,4 +17,5 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 # echo ".profile is loaded"
 export PATH="$HOME/.cargo/bin:$PATH"
-
+export GOPATH=$HOME/.go
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"

@@ -30,7 +30,7 @@ set smartcase
 set smarttab
 " Python helping options
 " http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-set textwidth=79  " lines longer than 79 columns will be broken
+set textwidth=88  " lines longer than 88 columns will be broken
 set shiftwidth=0  " operation >> indents  columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -600,8 +600,8 @@ if has("python") || has("python3")
   let g:pymode_doc = 0
   let g:pymode_doc_key = 'K'
   " проверка кода
-  let g:pymode_lint = 1
-  let g:pymode_lint_checker = "pylint,pep8"
+  let g:pymode_lint = 0  " TODO make lint working
+  let g:pymode_lint_checker = "flake8"
   let g:pymode_lint_ignore="E501,W601,C0110"
   " провека кода после сохранения
   let g:pymode_lint_write = 1
