@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#
+# The fastest grep-like utility
+# https://github.com/BurntSushi/ripgrep
+#
+
+# sudo apt install ripgrep        # [On Debian/Ubuntu]
+# sudo pacman -S ripgrep        # [On Arch Linux]
+# sudo zypper install ripgrep   # [On OpenSuse]
+# sudo dnf install ripgrep      # [On CentOS/RHEL/Fedora]
+
+# From source (requires Rust https://www.rust-lang.org/)
+# rustup update stable
+git clone https://github.com/BurntSushi/ripgrep
+cd ripgrep
+# default build:
+# cargo build --release
+# with features (requires nightly Rust compilier):
+RUSTFLAGS="-C target-cpu=native" cargo build --release --features 'simd-accel pcre2'
+./target/release/rg --version
+# 0.1.3
