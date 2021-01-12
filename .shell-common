@@ -43,16 +43,5 @@ function sshid() {
     eval $(ssh-agent) && ssh-add
 }
 
-mydir () {
-    local source="${BASH_SOURCE[0]}"
-    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-        DIR="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-        source="$(readlink "$source")"
-        [[ $source != /* ]] && source="$DIR/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-    done
-    cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
-}
-
-
 # source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :

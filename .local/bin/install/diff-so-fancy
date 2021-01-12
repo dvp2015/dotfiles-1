@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+install_diff_so_fancy() {
+    command -p git --version > /dev/null || (echo "ERRROR: cannot execute GIT" && return 1)
+    echo "Installing diff-so-fancy (git diff human readable)"
+    local _out_dir=${1:-$HOME/.local}
+    local _git_dir=${2:-$HOME/Downloads/install/diff-so-fancy}
+    if [[ -d ${_git_dir} ]]; then
+        echo "Updating diff-so-fancy in ${_git_dir}"
+        pushd ${_git_dir} > /dev/null
+        git pull
+        popd > /dev/null
+    else
+        local _url=https://github.com/so-fancy/diff-so-fancy.git
+        mkdir -p $(dirname ${_git_dir})
+        git clone ${_url} ${_git_dir} --depth=1
+        echo "diff-so-fancy is cloned to ${_git_dir}"
+    fi
+
+    cp "${_git_dir}/diff-so-fancy" "$_out_dir/bin" && \
+    cp -r "${_git_dir}/lib" "$_out_dir"
+}
+
+install_diff_so_fancy "$@"
+
+# vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

@@ -1,44 +1,68 @@
-machine="$(uname -n)"
-if [[ "RDAServer1" == "$machine" ]]; then
-    export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
-    . /d/programs/anaconda3/Scripts/activate /d/programs/anaconda3
-else
-    . anaconda.rc
-    export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.2-1
-fi
-export JULIA_HOME="$JULIAPRO_HOME/Julia-1.4.2"
-
-if [[ -z $PYTHON ]]; then
-    export PYTHON=$(which python)
-fi
-
-if [[ -z $JUPYTER ]]; then
-    export JUPYTER=$(which jupyter)
-fi
-
-JULIA_LIB_DIR="$JULIA_HOME/lib"
-
-if [[ -d "$JULIA_LIB_DIR" ]]; then
-    export JULIA_LIB_DIR="$JULIA_HOME/lib:$JULIA_HOME/lib/julia"
-    export JULIA_INCLUDE_DIR="$JULIA_HOME/include"
-    export INCLUDE_PATH="$(make_path $JULIA_INCLUDE_DIR $INCLUDE_PATH)"
-    export CPATH=$(make_path $JULIA_INCLUDE_DIR $CPATH)
-    export CPLUS_INCLUDE_PATH=$(make_path $JULIA_INCLUDE_DIR $CPLUS_INCLUDE_PATH)
-    export PATH=$(make_path $JULIA_LIB_DIR $PATH)
-    export LD_LIBRARY_PATH=$(make_path $JULIA_LIB_DIR $LD_LIBRARY_PATH)
-    export LIBARY_PATH=$(make_path $JULIA_LIB_DIR $LIBARY_PATH)
-    export PKG_CONFIG_PATH=$(make_path ${JULIA_LIB_DIR}/pkgconfig $PKG_CONFIG_PATH)
-    export JULIA_LOAD_PATH="$(pwd):$JULIA_LOAD_PATH"
-fi
+setup_julia_vars() {
+    local julia_version="${1:-1.5.0}"
+    local machine="$(uname -n)"
+    echo "Setting Julia environment for machine $machine, version $julia_version"
+    if [[ "RDAServer1" == "$machine" ]]; then
+        export JULIAPRO_HOME="/d/programs/JuliaPro-1.4.2-1"
+        # . /d/programs/anaconda3/Scripts/activate /d/programs/anaconda3
+        export JULIA_ROOT="$JULIAPRO_HOME/Julia-1.4.2"
+        export JULIA_HOME="$JULIAPRO_ROOT/bin"
+    elif [[ "dvp-K56" == "$machine" ]]; then
+        export JULIA_ROOT="/opt/julia/${julia_version}"
+        export JULIA_HOME="$JULIA_ROOT/bin"
+    else
+        # . anaconda.rc
+        export JULIAPRO_HOME=/opt/julia/JuliaPro-1.4.2-1
+        export JULIA_ROOT="$JULIAPRO_HOME/Julia-1.4.2"
+        export JULIA_HOME="$JULIAPRO_ROOT/bin"
+    fi
 
 
-if [[ -n "$BASH_VERSION" ]]; then
-    export PATH=$(make_path "${JULIA_HOME}/bin" $PATH)
-elif [[ -n "$ZSH_VERSION" ]]; then
-    path=(
-        ${JULIA_HOME}/bin
-        $path
-    )
-fi
+    if [[ -z $PYTHON ]]; then
+        export PYTHON=$(which python)
+    fi
+
+    if [[ -z $JUPYTER ]]; then
+        export JUPYTER=$(which jupyter)
+    fi
+
+    JULIA_LIB_DIR="$JULIA_ROOT/lib"
+
+    if [[ -d "$JULIA_LIB_DIR" ]]; then
+        export JULIA_LIB_DIR="$JULIA_ROOT/lib:$JULIA_ROOT/lib/julia"
+        export JULIA_INCLUDE_DIR="$JULIA_ROOT/include"
+        export INCLUDE_PATH="$(make_path $JULIA_INCLUDE_DIR $INCLUDE_PATH)"
+        export CPATH=$(make_path $JULIA_INCLUDE_DIR $CPATH)
+        export CPLUS_INCLUDE_PATH=$(make_path $JULIA_INCLUDE_DIR $CPLUS_INCLUDE_PATH)
+        export PATH=$(make_path $JULIA_LIB_DIR $PATH)
+        export LD_LIBRARY_PATH=$(make_path $JULIA_LIB_DIR $LD_LIBRARY_PATH)
+        export LIBARY_PATH=$(make_path $JULIA_LIB_DIR $LIBARY_PATH)
+        export PKG_CONFIG_PATH=$(make_path ${JULIA_LIB_DIR}/pkgconfig $PKG_CONFIG_PATH)
+        export JULIA_LOAD_PATH="$(pwd):$JULIA_LOAD_PATH"
+    fi
+
+
+    if [[ -n "$BASH_VERSION" ]]; then
+        export PATH=$(make_path "${JULIA_HOME}" $PATH)
+    elif [[ -n "$ZSH_VERSION" ]]; then
+        path=(
+            ${JULIA_HOME}
+            $path
+        )
+    fi
+}
+
+check_julia_dirs() {
+    all_dirs_exist  $JULIA_ROOT $JULIA_HOME  && \
+    check_files_exist $JULIA_HOME/julia && \
+    julia --version > /dev/null
+}
+
+main() {
+    setup_julia_vars $* && \
+    check_julia_dirs
+}
+
+[ -n "$BATS_ROOT" ] || main $*
 
 # vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :

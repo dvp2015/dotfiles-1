@@ -30,22 +30,21 @@ set smartcase
 set smarttab
 " Python helping options
 " http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-set textwidth=80    " lines longer than 79 columns will be broken
-set cursorline      " так мы можем подсвечивать строку с курсором
-set shiftwidth=0    " operation >> indents  columns; << unindents 4 columns
-set tabstop=4       " a hard TAB displays as 4 columns
-set expandtab       " insert spaces when hitting TABs
-set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-set shiftround      " round indent to multiple of 'shiftwidth'
-set autoindent      " align the new line indent with the previous line 
+set textwidth=88  " lines longer than 88 columns will be broken
+set shiftwidth=0  " operation >> indents  columns; << unindents 4 columns
+set tabstop=4     " a hard TAB displays as 4 columns
+set expandtab     " insert spaces when hitting TABs
+set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround    " round indent to multiple of 'shiftwidth'
+set autoindent    " align the new line indent with the previous line 
 
-set enc=utf-8       " utf-8 по дефолту в файлах
-set laststatus=2    " всегда показываем статусбар
-set noshowmode      " --INSERT-- is not necessary, the mode is shown at left end of status bar
-set incsearch       " инкреминтируемый поиск
-set hlsearch        " подсветка результатов поиска
-set nu              " показывать номера строк
-set scrolloff=5     " 5 строк при скролле за раз
+set enc=utf-8    " utf-8 по дефолту в файлах
+set laststatus=2 " всегда показываем статусбар
+set noshowmode   " --INSERT-- is not necessary, the mode is shown at left end of status bar
+set incsearch    " инкреминтируемый поиск
+set hlsearch     " подсветка результатов поиска
+set nu           " показывать номера строк
+set scrolloff=5  " 5 строк при скролле за раз
 
 set hidden
 set hls
@@ -114,7 +113,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
 
     if executable("ag") || executable("ack")
-    Plug 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
     endif
 
     " Git support {{{3
@@ -200,9 +199,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    if executable('julia')
-        Plug 'julialang/julia-vim'  " , {'for': 'julia'}
-    endif
+    Plug 'julialang/julia-vim'  " , {'for': 'julia'}
 
     " Misc {{{3
     " to-do.txt
@@ -254,6 +251,11 @@ if ! &diff
   set switchbuf=useopen
   :set diffopt=filler,context:3,iwhite
 endif
+
+" See :help julia-vim
+runtime macros/matchit.vim
+noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
+
 
 " Filetype configuration {{{3
 
@@ -539,7 +541,7 @@ endif
 " nnoremap <M-l> :tabn<cr>
 
 " NerdTree настройки
-" показать NERDTree на F3
+" показать NERDTree на F1
 map <F1> :NERDTreeToggle<CR>
 "игноррируемые файлы с расширениями
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']  
@@ -619,8 +621,8 @@ if has("python") || has("python3")
   let g:pymode_doc = 0
   let g:pymode_doc_key = 'K'
   " проверка кода
-  let g:pymode_lint = 1
-  let g:pymode_lint_checker = "pylint,pep8"
+  let g:pymode_lint = 0  " TODO make lint working
+  let g:pymode_lint_checker = "flake8"
   let g:pymode_lint_ignore="E501,W601,C0110"
   " провека кода после сохранения
   let g:pymode_lint_write = 1
