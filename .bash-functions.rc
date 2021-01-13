@@ -133,5 +133,13 @@ mydir () {
     cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd
 }
 
+# v - open files in ~/.viminfo and ~/.nviminfo
+v() {
+    local files
+    files=$(grep --no-filename '^>' ~/.viminfo | cut -c3- |
+        while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+        done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+}
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 install_diff_so_fancy() {
-    command -p git --version > /dev/null || (echo "ERRROR: cannot execute GIT" && return 1)
     echo "Installing diff-so-fancy (git diff human readable)"
     local _out_dir=${1:-$HOME/.local}
     local _git_dir=${2:-$HOME/Downloads/install/diff-so-fancy}

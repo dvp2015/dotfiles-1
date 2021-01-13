@@ -21,7 +21,7 @@ export LESS='-iFMRSX -x4'
 ##
 export MAKEFLAGS="-j $(nproc)"
 
-export MCNP_HOME=${MCNP_HOME:-/opt/lanl}
+export MCNP_HOME="${MCNP_HOME:-/opt/lanl}"
 export MCNP_DATA=$MCNP_HOME/MCNP_DATA
 export DATAPATH=$MCNP_DATA
 export MCNP_DEFAULT_XSDIR=$DATAPATH/xsdir
@@ -45,4 +45,4 @@ update_path                  \
 
 
 
-#  vim: set ts=4 sw=0 tw=88 ss=0 et ai :
+#  vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

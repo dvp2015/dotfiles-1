@@ -61,3 +61,4 @@ path=(
   $GOPATH/bin
 )
 
+source "$HOME/.cargo/env"

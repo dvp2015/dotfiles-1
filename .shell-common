@@ -38,10 +38,5 @@ function rvm-prompt() {
     which python
 }
 
-# add ssh id to a console session
-function sshid() {
-    eval $(ssh-agent) && ssh-add
-}
-
 # source /home/dvp/dev/vcpkg/scripts/vcpkg_completion.bash
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
