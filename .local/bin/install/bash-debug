@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#
+# Install bashdb (Bash debugger)
+# required by VSCode extension "Bash Debug"
+# https://github.com/rogalmic/vscode-bash-debug/
+#
+
+# bashdb not found in standard Linux Mint repository
+# sudo apt-get install bashdb
+
+echo "Install bashdb manually, see: http://bashdb.sourceforge.net/"

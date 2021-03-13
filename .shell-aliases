@@ -169,3 +169,5 @@ if [[ $(uname) =~ MINGW ]]; then
   alias gst='git status'
 fi
 
+alias pnv='pyenv'
+alias pry='poetry'

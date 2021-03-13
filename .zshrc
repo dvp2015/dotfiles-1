@@ -225,7 +225,7 @@ export JUPYTER="/opt/anaconda3/bin/jupyter"
 
 # open file with a default assiciated program
 function o() {
-  for i in $* 
+  for i in "$@"
   do
     xdg-open $i
   done
@@ -264,6 +264,7 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 
+<<<<<<< HEAD
 # v - open files in ~/.viminfo and ~/.nviminfo
 v() {
     local files
@@ -275,3 +276,20 @@ v() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+||||||| merged common ancestors
+# v - open files in ~/.viminfo and ~/.nviminfo
+v() {
+    local files
+    files=$(grep --no-filename '^>' ~/.viminfo | cut -c3- |
+        while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+        done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+}
+
+
+
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+=======
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+>>>>>>> 950e9d676405ca1f95590e9a563cfa6362268ef5

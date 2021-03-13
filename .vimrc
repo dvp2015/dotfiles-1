@@ -30,7 +30,7 @@ set smartcase
 set smarttab
 " Python helping options
 " http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-set textwidth=79  " lines longer than 79 columns will be broken
+set textwidth=88  " lines longer than 88 columns will be broken
 set shiftwidth=0  " operation >> indents  columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -67,7 +67,7 @@ set title
 " List completions
 set wildmode=longest:list,full
 
-set langmap=йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ъ],фa,ыs,вd,аf,пg,рh,оj,лk,дl,ж\\;,э',яz,чx,сc,мv,иb,тn,ьm,ю.,ё',ЙQ,ЦW,УE,КR,ЕT,НY,ГU,ШI,ЩO,ЗP,Х\{,Ъ\},ФA,ЫS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж\:,Э\",ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б\<,Ю\>
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz 
 
 set list
 set listchars=tab:»\ ,trail:·,extends:>,nbsp:.
@@ -173,6 +173,9 @@ silent! if plug#begin('~/.vim/plugged')
         Plug 'Shougo/unite.vim' " Navigation between buffers and files
     endif
 
+    " Send code to REPL with C-C,C {{{3
+    Plug 'jpalardy/vim-slime'
+
     " Colorschemes  {{{3
     Plug 'lifepillar/vim-solarized8'
     Plug 'morhetz/gruvbox'  " colorscheme gruvbox
@@ -215,7 +218,7 @@ silent! if plug#begin('~/.vim/plugged')
         Plug 'vim-pandoc/vim-pandoc-syntax'
         Plug 'vim-pandoc/vim-pandoc-after'   " Integrates Pandoc with thirdparty plugins       
         Plug 'dhruvasagar/vim-table-mode'    " Automates table creation
-
+        Plug 'lervag/vimtex'                 " Latex support
     endif
 
     " Python  {{{3
@@ -259,6 +262,10 @@ noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
 filetype on
 filetype plugin on
 filetype plugin indent on
+
+" Don't freeze terminal on C-s, when in VIM
+silent !stty -ixon                                                             
+autocmd VimLeave * silent !stty ixon   
 
 " Generic settings {{{4
 augroup vimrc_autocmds
@@ -344,6 +351,11 @@ augroup filetype_markdown
     autocmd filetype markdown nnoremap <buffer> j gj
     autocmd FileType markdown nnoremap <buffer> k gk
 augroup end
+
+" Latex {{{4
+let g:tex_flavor = 'latex' "Уточняем какой Тех
+"Отключаем автоматическое открытие окна Quickfix
+let g:vimtex_quickfix_mode = 0
 
 " Pandoc file settings {{{4
 augroup filetype_pandoc
@@ -575,6 +587,15 @@ let g:syntastic_style_error_symbol = 'X'
 let g:syntastic_warning_symbol = 'x'
 let g:syntastic_style_warning_symbol = 'x'
 
+" Code to REPL, see https://habr.com/ru/post/468265/
+" Для tmux
+let g:slime_target = "tmux"
+
+" Для обычного Вима
+" let g:slime_target = "vimterminal"
+
+" Для Вима избранных
+" let g:slime_target = "neovim"
 
 " Python-mode settings  {{{3
 
@@ -600,8 +621,8 @@ if has("python") || has("python3")
   let g:pymode_doc = 0
   let g:pymode_doc_key = 'K'
   " проверка кода
-  let g:pymode_lint = 1
-  let g:pymode_lint_checker = "pylint,pep8"
+  let g:pymode_lint = 0  " TODO make lint working
+  let g:pymode_lint_checker = "flake8"
   let g:pymode_lint_ignore="E501,W601,C0110"
   " провека кода после сохранения
   let g:pymode_lint_write = 1
@@ -675,7 +696,7 @@ if has('vim_starting')
 endif
 
 " Font {{{3
-set guifont=Fura\ Code\ Light\ Nerd\ Font\ Complete:h16 "Это light версия
+set guifont=NerdFonts/Fura\ Code\ Light\ Nerd\ Font\ Complete:h16 "Это light версия
 
 " Colorscheme {{{3
 if has('termguicolors')
@@ -690,9 +711,7 @@ silent!  colorscheme PaperColor
 " Vim-Airline status line  {{{3
 let g:airline_powerline_fonts = 1    "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
-" let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
 let g:Powerline_symbols='unicode' "Поддержка unicode
-let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
 let g:airline_theme='solarized'
 " let g:airline_solarized_bg='light'
 let g:airline_solarized_bg='dark'
