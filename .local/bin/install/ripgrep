@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+#
+# The fastest grep-like utility
+# https://github.com/BurntSushi/ripgrep
+#
+
+
+# Using OS package manager:
+# sudo apt install ripgrep        # [On Debian/Ubuntu]
+# sudo pacman -S ripgrep        # [On Arch Linux]
+# sudo zypper install ripgrep   # [On OpenSuse]
+# sudo dnf install ripgrep      # [On CentOS/RHEL/Fedora]
+
+# From source (requires Rust https://www.rust-lang.org/)
+# rustup update stable
+
+install_ripgrep() {
+    echo "Installing ripgrep, the fastest text search tool"
+    local _git_dir=${2:-$HOME/Downloads/install/ripgrep}
+    if [[ -d ${_git_dir} ]]; then
+        echo "Updating ripgrep in ${_git_dir}"
+        pushd ${_git_dir} > /dev/null
+        git pull
+        popd > /dev/null
+    else
+        local _url=https://github.com/BurntSushi/ripgrep
+        mkdir -p $(dirname ${_git_dir})
+        git clone ${_url} ${_git_dir} --depth=1
+        echo "ripgrep is cloned to ${_git_dir}"
+    fi
+    pushd ${_git_dir} > /dev/null
+    # default build:
+    cargo build --release
+    # with features (requires nightly Rust compilier):
+    # RUSTFLAGS="-C target-cpu=native" cargo build --release --features 'simd-accel pcre2'
+    cargo install --path .
+    popd > /dev/null
+}
+
+install_ripgrep "$@"
+
+# vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

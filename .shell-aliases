@@ -76,6 +76,7 @@ alias getclip="xclip -selection c -o"
 
 # Return if requirements are not found.
 alias todo='~/misc/todo/todo.sh'
+alias todoh='~/misc/todo/todo.sh --help && ~/misc/todo/todo.sh'
 alias todol="todo ls -someday"
 alias etodo="vim ~/misc/todo/todo.txt"
 
@@ -170,5 +171,5 @@ if [[ $(uname) =~ MINGW ]]; then
   alias gst='git status'
 fi
 
-alias pe='pyenv'
-alias py='poetry'
+alias pnv='pyenv'
+alias pry='poetry'
