@@ -131,12 +131,6 @@ if [[ -x python ]]; then
     # fi
 fi
 
-# add ssh id to a console session
-function sshid() {
-    eval $(ssh-agent) && ssh-add
-}
-
 
 # echo ".bashrc is loaded"
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
-source "$HOME/.cargo/env"
