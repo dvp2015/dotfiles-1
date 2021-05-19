@@ -5,22 +5,51 @@ if [[ -n "$ZSH_VERSION" ]] ; then
 fi
 
 join_strings() {
+    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+cat << 'END'
+Usage:
+
+   join_strings [options...] item1 item2 ...
+
+Options:
+    -h, --help              - print this help text
+    -u, --unique            - drop non unique items
+    -s, --separator <CHAR>  - use <CHAR> as item separator, default ':'
+
+Forms list of items with given separator from the given arguments optionally removing duplicates.
+Handles items with spaces.
+
+Example:
+v=$(join_strings -s "," -u 1 2 3,4,1 3 "a b" c)
+echo $v
+
+Output:
+1,2,3,4,a b,c
+END
+        return 0
+    fi
     local separator=":"
     local unique=""
-    local arg="$1"
-    if [[ "-s" == "$arg" ]] || [[ "--separator" == "$arg" ]]; then
-        shift
-        separator="$1"
-        shift
-    elif [[ "-u" == "$arg" ]] || [[ "--unique" == "$arg" ]]; then
-        shift
-        unique="yes"
-    fi
+    while true; do
+        local arg="$1"
+        if [[ "-s" == "$arg" ]] || [[ "--separator" == "$arg" ]]; then
+            shift
+            separator="$1"
+            shift
+        elif [[ "-u" == "$arg" ]] || [[ "--unique" == "$arg" ]]; then
+            shift
+            unique="yes"
+        else
+            break
+        fi
+    done
     res=""
+    # echo "Unique: $unique, separator: \"$separator\""
     for arg in $@; do
         IFS=$separator array=(${arg})
         for inner_arg in ${array[@]}; do 
-            if [[ -z "$unique" ]] || [[ ! "$res" =~ "(^|$separator)$inner_arg($separtor|$)" ]]; then
+            # Note: the right hand side of operator =~ is to be unquoted
+            if [[ -z "$unique" ]] || [[ ! "$res" =~ (^|$separator)$inner_arg($separtor|$) ]]; then
                 if [[ -n "$res" ]]; then
                     res="${res}${separator}"
                 fi
@@ -171,6 +200,12 @@ function search_file_upward() {
         d=$(dirname $d)
     done
     return 1 # file is not found in the folders hierarchy
+}
+
+
+# add ssh id to a console session
+sshid() {
+    eval $(ssh-agent) && ssh-add
 }
 
 

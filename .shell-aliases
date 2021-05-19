@@ -160,12 +160,14 @@ alias www='python -m SimpleHTTPServer 8000'
 if [[ $(uname) =~ MINGW ]]; then
   alias g='git'
   alias ga='git add'
+  alias gb='git branch'
   alias gcam='git commit -am'
   alias gcm='git checkout master'
   alias gl='git pull'
   alias gm='git merge'
   alias gco='git checkout'
   alias gp='git push'
+  alias grv='git remote -v'
   alias gst='git status'
 fi
 
