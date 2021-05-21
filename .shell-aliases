@@ -5,10 +5,11 @@ alias dos2unix='sed "s/$//"'
 alias tmux='tmux -2'
 
 # convenience aliases for editing configs
-alias ev='vim ~/.vimrc'
-alias et='vim ~/.tmux.conf'
 alias ea='vim ~/.shell-aliases'
 alias ee='vim ~/.shell-env'
+alias ef='vim ~/.bash-functions.rc'
+alias et='vim ~/.tmux.conf'
+alias ev='vim ~/.vimrc'
 alias ez='vim ~/.zshrc'
 
 # running vim with "factory settings", see "Practical Vim"
