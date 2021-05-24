@@ -1,0 +1,26 @@
+#
+#  Load one of available gcc environment from EXT folder.
+#
+
+# TODO dvp: update to gcc-11.1.1 when available
+
+export EXT_ROOT="$HOME/ext"
+if [[ -d $EXT_ROOT ]]; then
+    gcc_version="${1:-9.1.0}"
+    env_file=$EXT_ROOT/bin/build-gcc-$gcc_version.rc
+    if [[ -r $env_file ]]; then
+        . $env_file
+    else
+        echo "ERROR: environment $env_file is not availablle in EXT folder"
+        echo "Available environments:"
+        for f in $EXT_ROOT/gcc/* ; do
+            echo " $f"
+        done
+    fi
+    unset gcc_version
+    unset env_file
+else
+    echo "ERROR: directory $EXT_ROOT doesn't exist"
+fi
+# vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
+
