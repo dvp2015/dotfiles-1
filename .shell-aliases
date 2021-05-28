@@ -174,3 +174,5 @@ fi
 
 alias pnv='pyenv'
 alias pry='poetry'
+
+alias pluto='julia -t 4 -e "import Pluto; Pluto.run()"'
