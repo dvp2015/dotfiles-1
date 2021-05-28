@@ -9,7 +9,8 @@ atreplinit() do repl
     try
         @eval using OhMyREPL
         @eval colorscheme!("OneDark")
-        @eval OhMyREPL.enable_autocomplete_brackets(false)
+        @eval OhMyREPL.enable_autocomplete_brackets(true)
+        @eval OhMyREPL.Passes.RainbowBrackets.activate_256colors()
     catch
         @warn "OhMyREPL package is not available, add it with Pkg"
     end
