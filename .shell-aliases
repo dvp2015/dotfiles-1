@@ -174,3 +174,7 @@ fi
 
 alias pnv='pyenv'
 alias pry='poetry'
+
+# File extension aliases
+# http://www.bash2zsh.com/essays/essay1_file_manager.html
+# [[ -e okular ]] && alias -s pdf=okular

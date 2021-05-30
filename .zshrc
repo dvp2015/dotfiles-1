@@ -34,9 +34,19 @@ if [[ -e "register-python-argcomplete" ]]; then
     eval "$(register-python-argcomplete nox)"
 fi
 
+# Add file manager functions to shell
+# http://www.bash2zsh.com/essays/essay1_file_manager.html
+zstyle :mime: mailcap ~/.mailcap /usr/local/etc/mailcap /etc/mailcap
+zstyle :mime: mime-types ~/.mime.types /usr/local/etc/mime.types /etc/mime.types
+autoload -U zsh-mime-setup
+zsh-mime-setup
+# ... to open HTML files in proper browser
+autoload -U pick-web-browser
+zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
+zstyle ':mime:.htm(|l):' flags ''
+
 export DEFAULT_USER=dvp
 TERM=xterm-256color
-
 
 # Enable zplug
 # See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
