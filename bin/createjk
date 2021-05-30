@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Jupyter kernel setup
+#
+# dvp, May 2021
+#
+
+select_first_local_pyenv() {
+    local envs=($(pyenv local))
+    echo "${envs[0]}"
+}
+
+create_jupyter_kernel() {
+    local myenv="$1"
+    echo "Creating jupyter kernel for python environment $myenv"
+    python -m ipykernel install --user --name "$myenv"
+    if [[ $? ]]; then
+        cat <<MSG
+To use $myenv environment in jupyter:
+    - Run 'jupyter lab'
+    - Open or create notebook
+    - Select kernel $myenv
+    - check if 'import myenv' in the notebook works
+echo
+To remove a kernel use jupyter comands:
+    jupyter kernelspec list
+    jupyter kernelspec remove <kernels...>
+MSG
+    fi
+}
+
+[[ -n "$BATS_PREFIX" ]] || create_jupyter_kernel "${1:-$(select_first_local_pyenv)}"
