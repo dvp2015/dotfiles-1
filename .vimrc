@@ -806,5 +806,8 @@ endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()
 autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
+" VS Code plugin recommendation: jonsmithers.open-in-vim
+:command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
+
 " vim: set ts=2 sw=4 tw=132 ss=4 ft=vim norl fen et noai :
 
