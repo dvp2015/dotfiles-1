@@ -179,4 +179,4 @@ alias pry='poetry'
 # http://www.bash2zsh.com/essays/essay1_file_manager.html
 # [[ -e okular ]] && alias -s pdf=okular
 
-alias pluto='julia -t 4 -e "import Pluto; Pluto.run()"'
+alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
