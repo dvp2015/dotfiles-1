@@ -28,10 +28,10 @@ set ruler
 set ignorecase
 set smartcase
 set smarttab
-" Python helping options
-" http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-set textwidth=88  " lines longer than 88 columns will be broken
-set shiftwidth=0  " operation >> indents  columns; << unindents 4 columns
+" Python helping options http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/
+" Julia: https://github.com/invenia/BlueStyle
+set textwidth=92  " lines longer than 92 columns will be broken
+set shiftwidth=4  " operation >> indents  columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
 set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
@@ -200,6 +200,7 @@ silent! if plug#begin('~/.vim/plugged')
 
     " Julia {{{3
     Plug 'julialang/julia-vim'  " , {'for': 'julia'}
+    Plug 'kdheepak/JuliaFormatter.vim'
 
     " Misc {{{3
     " to-do.txt
@@ -255,10 +256,15 @@ endif
 " See :help julia-vim
 runtime macros/matchit.vim
 noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
-
+" normal mode mapping
+nnoremap <localleader>jf :JuliaFormatterFormat<CR>
+" visual mode mapping
+vnoremap <localleader>jf :JuliaFormatterFormat<CR>
+let g:JuliaFormatter_options = {
+        \ 'style' : 'blue',
+        \ }
 
 " Filetype configuration {{{3
-
 filetype on
 filetype plugin on
 filetype plugin indent on

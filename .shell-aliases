@@ -180,3 +180,5 @@ alias pry='poetry'
 # [[ -e okular ]] && alias -s pdf=okular
 
 alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
+alias 2j='cd ~/.julia/dev'
+
