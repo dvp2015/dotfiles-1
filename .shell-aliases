@@ -146,7 +146,7 @@ alias yp='yadm push'
 
 
 # Источник: http://liberatum.ru/e/7-bash-lifehacks-linux
-alias untar='tar -zxvf '
+alias untar='tar -xvf '
 # continue wget
 alias wget='wget -c '
 # Generate cryptic password
