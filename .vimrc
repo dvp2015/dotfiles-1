@@ -194,7 +194,8 @@ silent! if plug#begin('~/.vim/plugged')
     " endif
 
     " Fuzzy file search, installes as external application {{{3
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
     " Clipboard ring {{{3
     Plug 'svermeulen/vim-easyclip'

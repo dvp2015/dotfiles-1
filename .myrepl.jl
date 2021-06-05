@@ -1,5 +1,10 @@
 using Pkg
-using PkgTemplates
+try
+    using PkgTemplates
+catch
+    Pkg.add("PkgTemplates")
+    using PkgTemplates
+end
 
 """
     mdcd(dir)
