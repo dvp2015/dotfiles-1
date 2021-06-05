@@ -178,3 +178,5 @@ alias pry='poetry'
 alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
 alias 2j='cd ~/.julia/dev'
 
+# exa - modern ls replacement
+alias exa='exa --icons --group-directories-first'
