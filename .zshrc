@@ -23,6 +23,7 @@ test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
+fpath=($HOME/.local/zsh.completions $fpath)
 
 # To activate completions for zsh you need to have
 # bashcompinit enabled in zsh:
