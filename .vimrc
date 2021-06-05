@@ -4,6 +4,10 @@
 " Basic settings {{{2
 scriptencoding utf-8
 
+" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -79,8 +83,11 @@ highlight ColorColumn ctermbg=darkgray
 " Always show status line
 set laststatus=2
 
+" ENABLE SAVING OF TAB TITLES FOR SESSIONS 
+set sessionoptions+=tabpages,globals
+set encoding=utf-8
 
-syntax enable           " enable syntax processing
+syntax on               " enable syntax processing
 set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
@@ -199,7 +206,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    Plug 'julialang/julia-vim'  " , {'for': 'julia'}
+    Plug 'JuliaEditorSupport/julia-vim'  " , {'for': 'julia'}
     Plug 'kdheepak/JuliaFormatter.vim'
 
     " Misc {{{3
@@ -253,8 +260,14 @@ if ! &diff
   :set diffopt=filler,context:3,iwhite
 endif
 
-" See :help julia-vim
+" Julia setup {{{3
+" Block-wise movements and selection.
+" See :help julia-vim and  https://github.com/JuliaEditorSupport/julia-vim
+" The default mappings use ]], ][, [[, [], ]j, ]J, [j, and [J for the movements
+" and aj, ij for the selections.
 runtime macros/matchit.vim
+let g:latex_to_unicode_auto = 1
+" Formatting
 noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
 " normal mode mapping
 nnoremap <localleader>jf :JuliaFormatterFormat<CR>

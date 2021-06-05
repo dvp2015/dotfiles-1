@@ -12,6 +12,9 @@ alias et='vim ~/.tmux.conf'
 alias ev='vim ~/.vimrc'
 alias ez='vim ~/.zshrc'
 
+# Check if reboot is required
+alias rr='if [ -f /var/run/reboot-required ]; then echo "reboot required"; else echo "No reboot needed"; fi'
+
 # running vim with "factory settings", see "Practical Vim"
 alias vimc='vim -u ~/.vim/essential.vim'
 
@@ -75,7 +78,6 @@ function lss () {
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 
-# Return if requirements are not found.
 alias todo='~/misc/todo/todo.sh'
 alias todoh='~/misc/todo/todo.sh --help && ~/misc/todo/todo.sh'
 alias todol="todo ls -someday"
@@ -90,10 +92,8 @@ alias chrome='/opt/google/chrome/chrome'
 alias jn='jupyter notebook'
 alias jl='jupyter lab'
 
-# yEd
-# https://www.yworks.com
+# yEd https://www.yworks.com
 alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
-
 
 # Midnight Commander
 if [[ -r "$HOME/.local/bin/mc-wrapper.sh" ]]; then
@@ -105,7 +105,6 @@ elif [[ -r "/usr/local/libexec/mc/mc-wrapper.sh" ]]; then
 else
     echo "WARNING: cannot locate mc-wrapper.sh, mc is not aliased (see .shell-aliases)"
 fi
-
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -147,7 +146,6 @@ alias yp='yadm push'
 
 
 # Источник: http://liberatum.ru/e/7-bash-lifehacks-linux
-
 alias untar='tar -zxvf '
 # continue wget
 alias wget='wget -c '
@@ -155,8 +153,6 @@ alias wget='wget -c '
 alias getpass='openssl rand -base64 12 '
 # Stop ping after 4 packets
 alias ping='ping -c 4 '
-# Run http server in local folder
-alias www='python -m SimpleHTTPServer 8000'
 
 if [[ $(uname) =~ MINGW ]]; then
   alias g='git'

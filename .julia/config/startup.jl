@@ -1,29 +1,14 @@
-atreplinit() do repl
-    @async try
-        sleep(0.1)
-        @eval using Revise
-        @async Revise.wait_steal_repl_backend()
-    catch
-        @warn "Package Revise is not available, add it with Pkg"
-    end
+using OhMyREPL
+colorscheme!("OneDark")
+OhMyREPL.enable_autocomplete_brackets(true)
+OhMyREPL.Passes.RainbowBrackets.activate_256colors()
+OhMyREPL.input_prompt!("👠> ")
 
-    try
-        @eval using OhMyREPL
-        @eval colorscheme!("OneDark")
-        @eval OhMyREPL.enable_autocomplete_brackets(true)
-        @eval OhMyREPL.Passes.RainbowBrackets.activate_256colors()
-    catch
-        @warn "OhMyREPL package is not available, add it with Pkg"
-    end
-
-    if "JULIA_EDITOR" ∉ keys(ENV) && Sys.isexecutable("vim")
-        ENV["JULIA_EDITOR"] = "vim"
-    end
-
+if "JULIA_EDITOR" ∉ keys(ENV) && Sys.isexecutable("vim")
+    ENV["JULIA_EDITOR"] = "vim"
 end
 
-myrepl() = joinpath(homedir(), ".dvprepl.jl")
+myrepl() = joinpath(homedir(), ".myprepl.jl")
 imyrepl() = include(myrepl())
 emyrepl() = edit(myrepl())
-
 

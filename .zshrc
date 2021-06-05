@@ -60,6 +60,8 @@ export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
 export ZSH_CUSTOM=$HOME/.config/zsh/custom
 source $ZSH/oh-my-zsh.sh
 
+# TODO stop using plugin manager, update ohmyzsh
+
 # Essential
 source ~/.zplug/init.zsh
 
@@ -111,25 +113,25 @@ zplug load
 
 bindkey '^j' snippet-expand
 
-function zplug_up() {
+function zplugup() {
     echo "zplug update zsh..."
     zplug update
 }
 
-function vim_up() {
+function vimup() {
     echo "vim-plug update..."
     vim +PlugUpdate +qall
 }
 
-function pyenv_up() {
+function pyenvup() {
     echo "pyenv update..."
     pyenv update
 }
 
 function allup() {
-    zplug_up 
-    vim_up 
-    pyenv_up 
+    zplugup 
+    vimup 
+    pyenvup 
 }
 
 
