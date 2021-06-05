@@ -866,5 +866,8 @@ autocmd BufRead,BufNewFile *.jl :set filetype=julia
 " VS Code plugin recommendation: jonsmithers.open-in-vim
 :command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
 
+" fzf
+nnoremap <localleader>lt :call vimtex#fzf#run()
+
 " vim: set ts=2 sw=4 tw=132 ss=4 ft=vim norl fen et noai :
 
