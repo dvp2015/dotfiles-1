@@ -8,7 +8,7 @@ if "JULIA_EDITOR" ∉ keys(ENV) && Sys.isexecutable("vim")
     ENV["JULIA_EDITOR"] = "vim"
 end
 
-myrepl() = joinpath(homedir(), ".myprepl.jl")
+myrepl() = joinpath(homedir(), ".myrepl.jl")
 imyrepl() = include(myrepl())
 emyrepl() = edit(myrepl())
 
