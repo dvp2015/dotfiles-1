@@ -31,7 +31,37 @@ set diffopt=filler,vertical
 set ruler
 set ignorecase
 set smartcase
+set complete-=i
 set smarttab
+set nrformats-=octal
+set wildmenu
+if &listchars ==# 'eol:$'
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
+if has('path_extra')
+    setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+    set shell=/usr/bin/env\ bash
+endif
+
+if &history < 1000
+  set history=1000
+endif
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+set viewoptions-=options
+
 " Python helping options http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/
 " Julia: https://github.com/invenia/BlueStyle
 set textwidth=92  " lines longer than 92 columns will be broken
@@ -48,8 +78,11 @@ set noshowmode   " --INSERT-- is not necessary, the mode is shown at left end of
 set incsearch    " инкреминтируемый поиск
 set hlsearch     " подсветка результатов поиска
 set nu           " показывать номера строк
-set scrolloff=5  " 5 строк при скролле за раз
-
+set scrolloff=1
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
 set hidden
 set hls
 
@@ -87,7 +120,9 @@ set laststatus=2
 set sessionoptions+=tabpages,globals
 set encoding=utf-8
 
-syntax on               " enable syntax processing
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
 set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
@@ -114,7 +149,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-unimpaired'
     Plug 'vim-syntastic/syntastic'
     Plug 'easymotion/vim-easymotion'   " Fast motions
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
     Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
     Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
@@ -154,7 +189,7 @@ silent! if plug#begin('~/.vim/plugged')
         " endif
     " endfunction
 
-    " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    " Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
     " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     " endif
 
@@ -206,8 +241,8 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    Plug 'JuliaEditorSupport/julia-vim'  " , {'for': 'julia'}
-    Plug 'kdheepak/JuliaFormatter.vim'
+    Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+    Plug 'kdheepak/JuliaFormatter.vim', {'for': 'julia'}
 
     " Misc {{{3
     " to-do.txt
@@ -280,7 +315,9 @@ let g:JuliaFormatter_options = {
 " Filetype configuration {{{3
 filetype on
 filetype plugin on
-filetype plugin indent on
+if has('autocmd')
+    filetype plugin indent on
+endif
 
 " Don't freeze terminal on C-s, when in VIM
 silent !stty -ixon                                                             
