@@ -181,7 +181,7 @@ silent! if plug#begin('~/.vim/plugged')
     endif
 
     " Send code to REPL with C-C,C {{{3
-    Plug 'jpalardy/vim-slime'
+    Plug 'jpalardy/vim-slime', { 'branch': 'main' }
 
     " Colorschemes  {{{3
     Plug 'lifepillar/vim-solarized8'
@@ -608,7 +608,7 @@ let g:syntastic_style_warning_symbol = 'x'
 
 " Code to REPL, see https://habr.com/ru/post/468265/
 " Для tmux
-let g:slime_target = "tmux"
+" let g:slime_target = "tmux"
 
 " Для обычного Вима
 " let g:slime_target = "vimterminal"
