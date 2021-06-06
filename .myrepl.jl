@@ -26,6 +26,10 @@ function edit_startup()
     return nothing
 end
 
+repl_history() = joinpath(Pkg.logdir(), "repl_history.jl")
+edit_history() = edit(repl_history())
+
+
 """
     gitlab_template() -> Template
 
