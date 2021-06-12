@@ -5,31 +5,32 @@ alias dos2unix='sed "s/$//"'
 alias tmux='tmux -2'
 
 # convenience aliases for editing configs
-alias ea='vim ~/.shell-aliases'
-alias ee='vim ~/.shell-env'
-alias ef='vim ~/.bash-functions.rc'
-alias et='vim ~/.tmux.conf'
-alias ev='vim ~/.vimrc'
-alias ez='vim ~/.zshrc'
+alias ealias='vim ~/.shell-aliases'
+alias eenv='vim ~/.shell-env'
+alias efuncs='vim ~/.bash-functions.rc'
+alias etmux='vim ~/.tmux.conf'
+alias evim='vim ~/.vimrc'
+alias ezsh='vim ~/.zshrc'
 
 # Check if reboot is required
-alias rr='if [ -f /var/run/reboot-required ]; then echo "reboot required"; else echo "No reboot needed"; fi'
+alias rr='[[ -f /var/run/reboot-required ]] && echo "reboot required" || echo "No reboot needed"'
 
 # running vim with "factory settings", see "Practical Vim"
 alias vimc='vim -u ~/.vim/essential.vim'
 
-# full proof
+# foul proof
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
 # navigation
-alias ne='~/dev/python/triniti_ne'
+alias hfsr='~/dev/mcnp/hfsr'
 alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
+alias misc='~/misc'
+alias ne='~/dev/python/triniti_ne'
 alias sshapk5='ssh dvp2@apk5.triniti.ru'
 alias sshcs='ssh dvp@gitlab.iterrf.ru'
-alias misc='~/misc'
 alias upp='~/dev/mcnp/upp'
 
 alias md='mkdir -p'
@@ -175,8 +176,12 @@ alias pry='poetry'
 # http://www.bash2zsh.com/essays/essay1_file_manager.html
 # [[ -e okular ]] && alias -s pdf=okular
 
+# julia helpers
 alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
 alias 2j='cd ~/.julia/dev'
 
 # exa - modern ls replacement
-alias exa='exa --icons --group-directories-first'
+alias es='exa --icons --group-directories-first'
+alias e1='exa -1 --icons --group-directories-first'
+alias el='exa -l --icons --group-directories-first'
+alias ea='exa -a --icons --group-directories-first'
