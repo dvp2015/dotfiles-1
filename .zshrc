@@ -66,6 +66,9 @@ source $ZSH/oh-my-zsh.sh
 # Essential
 source ~/.zplug/init.zsh
 
+# https://github.com/zplug/zplug/issues/419
+# alias -g zplug="LC_MESSAGES=en_US.UTF-8 zplug"
+
 # Make sure to use double quotes to prevent shell expansion
 zplug "zplug/zplug", hook-build:"zplug --self-manage"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -110,7 +113,7 @@ if ! zplug check --verbose; then
     fi
 fi
 
-zplug load
+zplug load --verbose
 
 bindkey '^j' snippet-expand
 

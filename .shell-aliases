@@ -24,7 +24,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # navigation
-alias hfsr='~/dev/mcnp/hfsr'
+alias 2hfsr='cd ~/dev/mcnp/hfsr'
 alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
 alias misc='~/misc'
