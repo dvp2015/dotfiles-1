@@ -242,7 +242,10 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
+    Plug 'JuliaEditorSupport/julia-vim'
+    " Check {'for': 'julia'} - so far, with this LaTeXtoUnicode is not loaded causing errors
+    " on 'bigfoot', no errors  on 'k56'
+    " see https://github.com/JuliaEditorSupport/julia-vim/issues/35
     Plug 'kdheepak/JuliaFormatter.vim', {'for': 'julia'}
 
     " Misc {{{3
