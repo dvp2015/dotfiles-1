@@ -15,12 +15,5 @@ if [ -n "$BASH_VERSION" ]; then
     . "$HOME/.bashrc"
     fi
 fi
-# echo ".profile is loaded"
-<<<<<<< HEAD
-export PATH="$HOME/.cargo/bin:$PATH"
 
-||||||| merged common ancestors
-export PATH="$HOME/.cargo/bin:$PATH"
-=======
-source "$HOME/.cargo/env"
->>>>>>> 950e9d676405ca1f95590e9a563cfa6362268ef5
+[[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"

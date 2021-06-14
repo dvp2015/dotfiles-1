@@ -11,12 +11,4 @@
 # Note the funny (read: insane) non-login condition for executing bashrc: it is
 # often worked around by having the profile execute bashrc anyway.
 
-[[ -f ~/.profile ]] && . ~/.profile
-<<<<<<< HEAD
-||||||| merged common ancestors
-
-# echo ".bash_profile is loaded"
-
-=======
-source "$HOME/.cargo/env"
->>>>>>> 950e9d676405ca1f95590e9a563cfa6362268ef5
+[[ -f $HOME/.profile ]] && source $HOME.profile
