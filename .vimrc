@@ -4,6 +4,10 @@
 " Basic settings {{{2
 scriptencoding utf-8
 
+" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -27,11 +31,41 @@ set diffopt=filler,vertical
 set ruler
 set ignorecase
 set smartcase
+set complete-=i
 set smarttab
-" Python helping options
-" http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/"
-set textwidth=88  " lines longer than 88 columns will be broken
-set shiftwidth=0  " operation >> indents  columns; << unindents 4 columns
+set nrformats-=octal
+set wildmenu
+if &listchars ==# 'eol:$'
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
+if has('path_extra')
+    setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+    set shell=/usr/bin/env\ bash
+endif
+
+if &history < 1000
+  set history=1000
+endif
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+set viewoptions-=options
+
+" Python helping options http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/
+" Julia: https://github.com/invenia/BlueStyle
+set textwidth=92  " lines longer than 92 columns will be broken
+set shiftwidth=4  " operation >> indents  columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
 set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
@@ -44,8 +78,11 @@ set noshowmode   " --INSERT-- is not necessary, the mode is shown at left end of
 set incsearch    " инкреминтируемый поиск
 set hlsearch     " подсветка результатов поиска
 set nu           " показывать номера строк
-set scrolloff=5  " 5 строк при скролле за раз
-
+set scrolloff=1
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
 set hidden
 set hls
 
@@ -79,8 +116,13 @@ highlight ColorColumn ctermbg=darkgray
 " Always show status line
 set laststatus=2
 
+" ENABLE SAVING OF TAB TITLES FOR SESSIONS 
+set sessionoptions+=tabpages,globals
+set encoding=utf-8
 
-syntax enable           " enable syntax processing
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
 set lazyredraw          " redraw only when we need to.
 set exrc
 set secure
@@ -107,7 +149,7 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-unimpaired'
     Plug 'vim-syntastic/syntastic'
     Plug 'easymotion/vim-easymotion'   " Fast motions
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'scrooloose/nerdcommenter'    " Comments <leader>cc,...
     Plug 'Xuyuanp/nerdtree-git-plugin' " Git flags in NerdTree pane
     Plug 'vim-voom/voom'               " two-pane text outliner: Voom, Voomhelp, Voomexec, Voomlog
@@ -147,12 +189,13 @@ silent! if plug#begin('~/.vim/plugged')
         " endif
     " endfunction
 
-    " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    " Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
     " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     " endif
 
     " Fuzzy file search, installes as external application {{{3
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
     " Clipboard ring {{{3
     Plug 'svermeulen/vim-easyclip'
@@ -174,7 +217,7 @@ silent! if plug#begin('~/.vim/plugged')
     endif
 
     " Send code to REPL with C-C,C {{{3
-    Plug 'jpalardy/vim-slime'
+    Plug 'jpalardy/vim-slime', { 'branch': 'main' }
 
     " Colorschemes  {{{3
     Plug 'lifepillar/vim-solarized8'
@@ -199,7 +242,11 @@ silent! if plug#begin('~/.vim/plugged')
     Plug 'fisadev/FixedTaskList.vim'    " Pending tasks list
 
     " Julia {{{3
-    Plug 'julialang/julia-vim'  " , {'for': 'julia'}
+    Plug 'JuliaEditorSupport/julia-vim'
+    " Check {'for': 'julia'} - so far, with this LaTeXtoUnicode is not loaded causing errors
+    " on 'bigfoot', no errors  on 'k56'
+    " see https://github.com/JuliaEditorSupport/julia-vim/issues/35
+    Plug 'kdheepak/JuliaFormatter.vim', {'for': 'julia'}
 
     " Misc {{{3
     " to-do.txt
@@ -252,16 +299,29 @@ if ! &diff
   :set diffopt=filler,context:3,iwhite
 endif
 
-" See :help julia-vim
+" Julia setup {{{3
+" Block-wise movements and selection.
+" See :help julia-vim and  https://github.com/JuliaEditorSupport/julia-vim
+" The default mappings use ]], ][, [[, [], ]j, ]J, [j, and [J for the movements
+" and aj, ij for the selections.
 runtime macros/matchit.vim
+let g:latex_to_unicode_auto = 1
+" Formatting
 noremap <Leader>fb :call julia#toggle_function_blockassign()<CR>
-
+" normal mode mapping
+nnoremap <localleader>jf :JuliaFormatterFormat<CR>
+" visual mode mapping
+vnoremap <localleader>jf :JuliaFormatterFormat<CR>
+let g:JuliaFormatter_options = {
+        \ 'style' : 'blue',
+        \ }
 
 " Filetype configuration {{{3
-
 filetype on
 filetype plugin on
-filetype plugin indent on
+if has('autocmd')
+    filetype plugin indent on
+endif
 
 " Don't freeze terminal on C-s, when in VIM
 silent !stty -ixon                                                             
@@ -589,7 +649,7 @@ let g:syntastic_style_warning_symbol = 'x'
 
 " Code to REPL, see https://habr.com/ru/post/468265/
 " Для tmux
-let g:slime_target = "tmux"
+" let g:slime_target = "tmux"
 
 " Для обычного Вима
 " let g:slime_target = "vimterminal"
@@ -805,6 +865,12 @@ endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()
 autocmd BufRead,BufNewFile *.jl :set filetype=julia
+
+" VS Code plugin recommendation: jonsmithers.open-in-vim
+:command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
+
+" fzf
+nnoremap <localleader>lt :call vimtex#fzf#run()
 
 " vim: set ts=2 sw=4 tw=132 ss=4 ft=vim norl fen et noai :
 

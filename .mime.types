@@ -1,0 +1,3 @@
+text/html; /usr/bin/google-chrome-stable --incognito %s; test=test -n "$DISPLAY"
+text/xml; /usr/bin/google-chrome-stable --incognito %s; test=test -n "$DISPLAY"
+

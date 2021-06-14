@@ -23,6 +23,7 @@ test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
+fpath=($HOME/.local/zsh.completions $fpath)
 
 # To activate completions for zsh you need to have
 # bashcompinit enabled in zsh:
@@ -34,9 +35,19 @@ if [[ -e "register-python-argcomplete" ]]; then
     eval "$(register-python-argcomplete nox)"
 fi
 
+# Add file manager functions to shell
+# http://www.bash2zsh.com/essays/essay1_file_manager.html
+zstyle :mime: mailcap ~/.mailcap /usr/local/etc/mailcap /etc/mailcap
+zstyle :mime: mime-types ~/.mime.types /usr/local/etc/mime.types /etc/mime.types
+autoload -U zsh-mime-setup
+zsh-mime-setup
+# ... to open HTML files in proper browser
+autoload -U pick-web-browser
+zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
+zstyle ':mime:.htm(|l):' flags ''
+
 export DEFAULT_USER=dvp
 TERM=xterm-256color
-
 
 # Enable zplug
 # See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
@@ -49,6 +60,8 @@ fi
 export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
 export ZSH_CUSTOM=$HOME/.config/zsh/custom
 source $ZSH/oh-my-zsh.sh
+
+# TODO stop using plugin manager, update ohmyzsh
 
 # Essential
 source ~/.zplug/init.zsh
@@ -101,25 +114,25 @@ zplug load
 
 bindkey '^j' snippet-expand
 
-function zplug_up() {
+function zplugup() {
     echo "zplug update zsh..."
     zplug update
 }
 
-function vim_up() {
+function vimup() {
     echo "vim-plug update..."
     vim +PlugUpdate +qall
 }
 
-function pyenv_up() {
+function pyenvup() {
     echo "pyenv update..."
     pyenv update
 }
 
 function allup() {
-    zplug_up 
-    vim_up 
-    pyenv_up 
+    zplugup 
+    vimup 
+    pyenvup 
 }
 
 
@@ -264,32 +277,7 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 
-<<<<<<< HEAD
-# v - open files in ~/.viminfo and ~/.nviminfo
-v() {
-    local files
-    files=$(grep --no-filename '^>' ~/.viminfo | cut -c3- |
-        while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-        done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
-}
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-||||||| merged common ancestors
-# v - open files in ~/.viminfo and ~/.nviminfo
-v() {
-    local files
-    files=$(grep --no-filename '^>' ~/.viminfo | cut -c3- |
-        while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-        done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
-}
-
-
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
-=======
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
->>>>>>> 950e9d676405ca1f95590e9a563cfa6362268ef5

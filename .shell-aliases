@@ -5,27 +5,32 @@ alias dos2unix='sed "s/$//"'
 alias tmux='tmux -2'
 
 # convenience aliases for editing configs
-alias ev='vim ~/.vimrc'
-alias et='vim ~/.tmux.conf'
-alias ea='vim ~/.shell-aliases'
-alias ee='vim ~/.shell-env'
-alias ez='vim ~/.zshrc'
+alias ealias='vim ~/.shell-aliases'
+alias eenv='vim ~/.shell-env'
+alias efuncs='vim ~/.bash-functions.rc'
+alias etmux='vim ~/.tmux.conf'
+alias evim='vim ~/.vimrc'
+alias ezsh='vim ~/.zshrc'
+
+# Check if reboot is required
+alias rr='[[ -f /var/run/reboot-required ]] && echo "reboot required" || echo "No reboot needed"'
 
 # running vim with "factory settings", see "Practical Vim"
 alias vimc='vim -u ~/.vim/essential.vim'
 
-# full proof
+# foul proof
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
 # navigation
-alias ne='~/dev/python/triniti_ne'
+alias hfsr='~/dev/mcnp/hfsr'
 alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
+alias misc='~/misc'
+alias ne='~/dev/python/triniti_ne'
 alias sshapk5='ssh dvp2@apk5.triniti.ru'
 alias sshcs='ssh dvp@gitlab.iterrf.ru'
-alias misc='~/misc'
 alias upp='~/dev/mcnp/upp'
 
 alias md='mkdir -p'
@@ -74,7 +79,6 @@ function lss () {
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 
-# Return if requirements are not found.
 alias todo='~/misc/todo/todo.sh'
 alias todoh='~/misc/todo/todo.sh --help && ~/misc/todo/todo.sh'
 alias todol="todo ls -someday"
@@ -89,10 +93,8 @@ alias chrome='/opt/google/chrome/chrome'
 alias jn='jupyter notebook'
 alias jl='jupyter lab'
 
-# yEd
-# https://www.yworks.com
+# yEd https://www.yworks.com
 alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
-
 
 # Midnight Commander
 if [[ -r "$HOME/.local/bin/mc-wrapper.sh" ]]; then
@@ -104,7 +106,6 @@ elif [[ -r "/usr/local/libexec/mc/mc-wrapper.sh" ]]; then
 else
     echo "WARNING: cannot locate mc-wrapper.sh, mc is not aliased (see .shell-aliases)"
 fi
-
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -146,28 +147,41 @@ alias yp='yadm push'
 
 
 # Источник: http://liberatum.ru/e/7-bash-lifehacks-linux
-
-alias untar='tar -zxvf '
+alias untar='tar -xvf '
 # continue wget
 alias wget='wget -c '
 # Generate cryptic password
 alias getpass='openssl rand -base64 12 '
 # Stop ping after 4 packets
 alias ping='ping -c 4 '
-# Run http server in local folder
-alias www='python -m SimpleHTTPServer 8000'
 
 if [[ $(uname) =~ MINGW ]]; then
   alias g='git'
   alias ga='git add'
+  alias gb='git branch'
   alias gcam='git commit -am'
   alias gcm='git checkout master'
   alias gl='git pull'
   alias gm='git merge'
   alias gco='git checkout'
   alias gp='git push'
+  alias grv='git remote -v'
   alias gst='git status'
 fi
 
 alias pnv='pyenv'
 alias pry='poetry'
+
+# File extension aliases
+# http://www.bash2zsh.com/essays/essay1_file_manager.html
+# [[ -e okular ]] && alias -s pdf=okular
+
+# julia helpers
+alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
+alias 2j='cd ~/.julia/dev'
+
+# exa - modern ls replacement
+alias es='exa --icons --group-directories-first'
+alias e1='exa -1 --icons --group-directories-first'
+alias el='exa -l --icons --group-directories-first'
+alias ea='exa -a --icons --group-directories-first'

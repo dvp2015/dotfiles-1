@@ -1,5 +1,9 @@
 #### MATPLOTLIBRC FORMAT
 
+# dvp
+# check https://turnermoni.ca/python2.html
+#
+
 ## This is a sample matplotlib configuration file - you can find a copy
 ## of it on your system in
 ## site-packages/matplotlib/mpl-data/matplotlibrc.  If you edit it
@@ -38,7 +42,7 @@
 ##
 ## If you omit this parameter, it will always default to "Agg", which is a
 ## non-interactive backend.
-backend      : Qt5Agg
+#backend      : Qt5Agg
 
 ## Note that this can be overridden by the environment variable
 ## QT_API used by Enthought Tool Suite (ETS); valid values are
@@ -428,6 +432,7 @@ backend      : Qt5Agg
 #figure.titlesize : large      ## size of the figure title (Figure.suptitle())
 #figure.titleweight : normal   ## weight of the figure title
 #figure.figsize   : 6.4, 4.8   ## figure size in inches
+figure.figsize   : 6.89, 4.8   ## figure size in inches
 #figure.dpi       : 100        ## figure dots per inch
 figure.dpi       : 163     # dvp for BENQ resolution
 #figure.facecolor : w      ## figure facecolor; 0.75 is scalar gray
@@ -523,6 +528,7 @@ image.interpolation  : none
 ## e.g., you may want a higher resolution, or to make the figure
 ## background white
 #savefig.dpi         : figure   ## figure dots per inch or 'figure'
+savefig.dpi          : 1200     ## figure dots per inch or 'figure'
 #savefig.facecolor   : w        ## figure facecolor when saving
 #savefig.edgecolor   : w        ## figure edgecolor when saving
 #savefig.format      : png      ## png, ps, pdf, svg

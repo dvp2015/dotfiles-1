@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+drop2write() {
+    for f in $@; do
+        local dst="${f%_2write}"
+        [[ "$f" == "$dst" ]] || mv "$f" "$dst" && echo "$f -> $dst"
+    done
+}
+
+[[ -n "$BASH_PREFIX" ]] || drop2write $@

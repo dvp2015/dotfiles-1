@@ -61,11 +61,6 @@ path=(
   $GOPATH/bin
 )
 
-<<<<<<< HEAD
-
-||||||| merged common ancestors
-
-
 # Add pyenv init to your shell to enable shims and autocompletion.
 # Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
 # configuration file since it manipulates PATH during the initialization.
@@ -73,6 +68,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-=======
+# TODO duplicated in .profile
 source "$HOME/.cargo/env"
->>>>>>> 950e9d676405ca1f95590e9a563cfa6362268ef5

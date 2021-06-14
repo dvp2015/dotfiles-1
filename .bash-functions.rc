@@ -5,22 +5,51 @@ if [[ -n "$ZSH_VERSION" ]] ; then
 fi
 
 join_strings() {
+    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+cat << 'END'
+Usage:
+
+   join_strings [options...] item1 item2 ...
+
+Options:
+    -h, --help              - print this help text
+    -u, --unique            - drop non unique items
+    -s, --separator <CHAR>  - use <CHAR> as item separator, default ':'
+
+Forms list of items with given separator from the given arguments optionally removing duplicates.
+Handles items with spaces.
+
+Example:
+v=$(join_strings -s "," -u 1 2 3,4,1 3 "a b" c)
+echo $v
+
+Output:
+1,2,3,4,a b,c
+END
+        return 0
+    fi
     local separator=":"
     local unique=""
-    local arg="$1"
-    if [[ "-s" == "$arg" ]] || [[ "--separator" == "$arg" ]]; then
-        shift
-        separator="$1"
-        shift
-    elif [[ "-u" == "$arg" ]] || [[ "--unique" == "$arg" ]]; then
-        shift
-        unique="yes"
-    fi
+    while true; do
+        local arg="$1"
+        if [[ "-s" == "$arg" ]] || [[ "--separator" == "$arg" ]]; then
+            shift
+            separator="$1"
+            shift
+        elif [[ "-u" == "$arg" ]] || [[ "--unique" == "$arg" ]]; then
+            shift
+            unique="yes"
+        else
+            break
+        fi
+    done
     res=""
+    # echo "Unique: $unique, separator: \"$separator\""
     for arg in $@; do
         IFS=$separator array=(${arg})
         for inner_arg in ${array[@]}; do 
-            if [[ -z "$unique" ]] || [[ ! "$res" =~ "(^|$separator)$inner_arg($separtor|$)" ]]; then
+            # Note: the right hand side of operator =~ is to be unquoted
+            if [[ -z "$unique" ]] || [[ ! "$res" =~ (^|$separator)$inner_arg($separtor|$) ]]; then
                 if [[ -n "$res" ]]; then
                     res="${res}${separator}"
                 fi
@@ -122,7 +151,12 @@ function bz() {
 
 
 mydir () {
-    local src="${BASH_SOURCE[0]}"
+    get_dir "${BASH_SOURCE[0]}"
+}
+
+get_dir() {
+    curdir="$(pwd)"
+    local src="$1"
     while [ -h "$src" ]; do # resolve $src until the file is no longer a symlink
         DIR="$( cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd )"
         src="$(readlink "$src")"
@@ -131,6 +165,7 @@ mydir () {
         [[ $src != /* ]] && src="$DIR/$src" 
     done
     cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd
+    cd "$curdir" > /dev/null 2>&1
 }
 
 # v - open files in ~/.viminfo and ~/.nviminfo
@@ -141,5 +176,37 @@ v() {
             [ -f "${line/\~/$HOME}" ] && echo "$line"
         done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
+
+# Searches the first readable file over folder hierarchy, starting from the current directory
+# Arguments:
+#    $1 - file to seaarch
+#    $2 - path to start search from (optional, default current dir)
+# Output on success: the full path to the found file
+# Returns 0 on success, 1 if the file not found
+# Exits if the file is not specified in arguments.
+function search_file_upward() {
+    if [[ $# < 1 ]]; then
+        echo "ERROR: search_file_upward: the file name is not provided"
+        return 10
+    fi
+    local d=${2:-$(pwd)}
+    while [[ "$d" != "/" ]]
+    do
+        fn=$(readlink -f $d/$1)
+        if [[ -r $fn  ]]; then
+            echo $fn
+            return 0
+        fi
+        d=$(dirname $d)
+    done
+    return 1 # file is not found in the folders hierarchy
+}
+
+
+# add ssh id to a console session
+sshid() {
+    eval $(ssh-agent) && ssh-add
+}
+
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
