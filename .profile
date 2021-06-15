@@ -16,3 +16,4 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+[[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
