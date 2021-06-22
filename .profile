@@ -17,3 +17,5 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 [[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
+export GOPATH=$HOME/.go
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -exv
+
+check_go() {
+    if [[ ! -x go ]]; then
+        echo "Setup a go environment with 'install/go' script"
+        echo "Or see https://golang.org/doc/install"
+        return 1
+    fi
+    local go_version=$(go version | cut -c "15-17")
+    if [[ $go_version < "1.16" ]]; then
+        echo "go version  >= 1.16 is required, actual version $go_version"
+        return 2
+    fi
+    return 0
+}
+
+clone_project() {
+    local working_dir=$1
+    if [[ -d $working_dir ]]; then
+        pushd $working_dir 
+        git pull
+    else
+        git clone git@github.com:direnv/direnv.git $working_dir
+    fi
+}
+
+make_project() {
+    local working_dir=$1
+    pushd $working_dir
+    make
+    make test
+    make install PREFIX=~/.local
+    popd
+}
+
+main() {
+    check_go || return 1
+    local working_dir=$HOME/Downloads/install/direnv
+    clone_project $working_dir || return 2
+    make_project $working_dir  || return 3
+}
+
+[[ -n "$BATS_PREFIX" ]] || main
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

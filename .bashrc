@@ -131,6 +131,7 @@ if [[ -x python ]]; then
     # fi
 fi
 
+[[ -x direnv ]] && eval "$(direnv hook bash)"
 
 # echo ".bashrc is loaded"
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :

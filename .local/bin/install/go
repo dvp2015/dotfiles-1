@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-
 . $HOME/.bash-functions.rc
 
 set -eux
 
-go_version=1.15.6
+go_version=1.16.5
 go_base_name=go${go_version}
 go_file_name=${go_base_name}.linux-amd64.tar.gz
-go_url="https://storage.googleapis.com/golang/${go_file_name}"
-working_dir="$HOME/Downloads/go/$go_version"
+# https://golang.org/dl/go1.16.5.linux-amd64.tar.gz
+# go_url="https://storage.googleapis.com/golang/${go_file_name}"
+go_url="https://golang.org/dl/${go_file_name}"
+working_dir="$HOME/Downloads/install/go/$go_version"
 
 add_go_path() {
 cat <<'END'
@@ -21,10 +22,10 @@ main() {
     mkdir -p  $working_dir
     pushd $working_dir
     if [[ ! -d go ]]; then
-        if [[ ! -e $go_file_name ]]; then
+        if [[ ! -r $go_file_name ]]; then
             download $go_url
         fi
-        tar -xvf $go_file_name
+        tar -xzvf $go_file_name
     fi
     sudo mv go /usr/local
     grep GOPATH "$HOME/.profile" || add_go_path >> $HOME/.profile

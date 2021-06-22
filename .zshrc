@@ -283,4 +283,6 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+[[ -x direnv ]] && eval "$(direnv hook zsh)"
+
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
