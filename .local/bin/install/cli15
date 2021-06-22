@@ -1,10 +1,15 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # modification of https://devsday.ru/blog/details/38051
 
 # PROGRAMS="hub httpie ripgrep bat fzf fd fd-find jq autojump direnv tig tmux neovim exa"
-CARGO=(ripgrep bat fd-find tealdeer)
+CARGO=(ripgrep bat fd-find tealdeer just)
 APT=(fzf  autojump direnv tig tmux neovim exa)
+
+# go get github.com/gsamokovarov/jump
+# go get github.com/jesseduffield/lazygit
 NPM="how-2"
 
 cargo install ${CARGO[@]}

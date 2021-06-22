@@ -268,8 +268,21 @@ if [[ "yes" == "$USE_TMUX" ]]; then
     fi
 fi
 
+lg() {
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
 
-if [[ -x `which ag` ]]; then
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
+
+if [[ -x rg ]]; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+elif [[ -x ag ]]; then
     export FZF_DEFAULT_COMMAND='ag -l -g ""'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
@@ -283,6 +296,7 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-[[ -x direnv ]] && eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"
+eval "$(jump shell zsh)"
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :

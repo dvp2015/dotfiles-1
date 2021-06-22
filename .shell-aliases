@@ -43,7 +43,7 @@ function mdcd() {
 alias mdcdb='mdcd build'
 
 alias h='history'
-alias j='jobs -l'
+# alias j='jobs -l'
 alias r='rlogin'
 alias du='du -kh'
 alias df='df -kTh'
