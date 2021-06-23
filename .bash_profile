@@ -11,4 +11,4 @@
 # Note the funny (read: insane) non-login condition for executing bashrc: it is
 # often worked around by having the profile execute bashrc anyway.
 
-[[ -f $HOME/.profile ]] && source $HOME.profile
+[[ -f $HOME/.profile ]] && source $HOME/.profile
