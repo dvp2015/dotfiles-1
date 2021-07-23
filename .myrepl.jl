@@ -20,8 +20,7 @@ Open user's startup.jl in default editor.
 
 """
 function edit_startup()
-    home = ENV[Sys.iswindows() ? "USERPROFILE" : "HOME"]
-    startup = joinpath(home, ".julia", "config", "startup.jl")
+    startup = joinpath(homedir(), ".julia", "config", "startup.jl")
     edit(startup)
     return nothing
 end
