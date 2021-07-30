@@ -1,4 +1,6 @@
 using Pkg
+using REPL
+
 try
     using PkgTemplates
 catch
@@ -13,6 +15,7 @@ Make directory `dir` and change to it.
 """
 mdcd(path::AbstractString; mode::Unsigned=0o777) = cd(mkpath(path; mode))
 
+
 """
     edit_startup()
 
@@ -25,8 +28,15 @@ function edit_startup()
     return nothing
 end
 
-repl_history() = joinpath(Pkg.logdir(), "repl_history.jl")
-edit_history() = edit(repl_history())
+
+"""
+    edit_history()
+
+Open REPL history file.
+
+Use this to extract code snippets from REPL history to files.
+"""
+edit_history() = edit(REPL.find_hist_file())
 
 
 """
