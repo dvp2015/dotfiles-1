@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 . $HOME/.bash-functions.rc
 
-set -eux
-
-go_version=1.16.5
-go_base_name=go${go_version}
-go_file_name=${go_base_name}.linux-amd64.tar.gz
-# https://golang.org/dl/go1.16.5.linux-amd64.tar.gz
-# go_url="https://storage.googleapis.com/golang/${go_file_name}"
-go_url="https://golang.org/dl/${go_file_name}"
-working_dir="$HOME/Downloads/install/go/$go_version"
+# set -eux
 
 add_go_path() {
 cat <<'END'
@@ -18,7 +10,12 @@ export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 END
 }
 
-main() {
+install_go() {
+    local go_version=1.16.6
+    local go_base_name=go${go_version}
+    local go_file_name=${go_base_name}.linux-amd64.tar.gz
+    local go_url="https://golang.org/dl/${go_file_name}"
+    local working_dir="$HOME/Downloads/install/go/$go_version"
     mkdir -p  $working_dir
     pushd $working_dir
     if [[ ! -d go ]]; then
@@ -30,6 +27,25 @@ main() {
     sudo mv go /usr/local
     grep GOPATH "$HOME/.profile" || add_go_path >> $HOME/.profile
     popd
+}
+
+packages=(
+    gsamokovarov/jump
+    jesseduffield/lazygit
+)
+# go get github.com/gsamokovarov/jump
+# go get github.com/jesseduffield/lazygit
+
+install_packages() {
+    for t in ${packages[@]}; do
+        echo "Installing Go package $t"
+        go get "github.com/$t"
+    done
+}
+
+main() {
+    [ check_go ] && echo "Go is already installed in $(command -v go)" || install_go
+    install_packages
 }
 
 is_sourced || main "$@"

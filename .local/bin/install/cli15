@@ -6,14 +6,14 @@ set -euxo pipefail
 
 # PROGRAMS="hub httpie ripgrep bat fzf fd fd-find jq autojump direnv tig tmux neovim exa"
 CARGO=(ripgrep bat fd-find tealdeer just)
-APT=(fzf  autojump direnv tig tmux neovim exa)
+APT=(fzf  autojump tig tmux neovim)
 
 # go get github.com/gsamokovarov/jump
 # go get github.com/jesseduffield/lazygit
 NPM="how-2"
 
 cargo install ${CARGO[@]}
-sudo apt-get install ${PROGRAMS[@]}
+sudo apt-get install ${APT[@]}
 
  
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

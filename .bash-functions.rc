@@ -60,7 +60,7 @@ END
     echo "${res}"
 }
 
-function make_path() {
+make_path() {
     if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
 cat << 'END'
     Usage:
@@ -127,12 +127,12 @@ all_files_exist() {
     return $warns
 }
 
-function add_to_path() {
+add_to_path() {
     export PATH="$(makepath $PATH $@)"
 }
 
 
-function bz() {
+bz() {
     #
     #  Compress/decompress file with bzip2 if a file has/doesn't have extension
     #  bz2
@@ -184,7 +184,7 @@ v() {
 # Output on success: the full path to the found file
 # Returns 0 on success, 1 if the file not found
 # Exits if the file is not specified in arguments.
-function search_file_upward() {
+search_file_upward() {
     if [[ $# < 1 ]]; then
         echo "ERROR: search_file_upward: the file name is not provided"
         return 10
@@ -208,5 +208,19 @@ sshid() {
     eval $(ssh-agent) && ssh-add
 }
 
+check_go() {
+    if [[ ! -x $(command -v go) ]]; then
+        echo "Setup a go environment with 'install/go' script"
+        echo "Or see https://golang.org/doc/install"
+        return 1
+    fi
+    local min_required_version="${1:-1.16}"
+    local go_version=$(go version | cut -c "14-17")
+    if [[ $go_version < "$min_required_version" ]]; then
+        echo "go version  >= $min_required_version is required, actual version $go_version"
+        return 2
+    fi
+    return 0
+}
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
