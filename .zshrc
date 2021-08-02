@@ -82,6 +82,7 @@ zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
 zplug "djui/alias-tips"
 zplug "willghatch/zsh-snippets"
 zplug "supercrabtree/k"
+zplug "plugins/asdf", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/gitfast", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
@@ -296,8 +297,8 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-[ command -v direnv ] && eval "$(direnv hook zsh)"
-[ command -v jump ] && eval "$(jump shell zsh)"
+command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+command -v jump > /dev/null  && eval "$(jump shell zsh)"
 
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
