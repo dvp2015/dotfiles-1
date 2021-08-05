@@ -1,21 +1,24 @@
 #
-# Environment to work with fispact
+# Environment to work with fispact-II 5.0
 #
 
 export FISPACT_HOME=/opt/fispact
 
 fispact_setenv() {
-    export FISPACT=${FISPACT_HOME}/bin/fispact
-    export PATH=${FISPACT_HOME}/bin:$PATH
+    export FISPACT_BIN=${FISPACT_HOME}/bin/linuxmint/18
+    export FISPACT=${FISPACT_BIN}/fispact
+    export PATH=${FISPACT_BIN}:$PATH
+    export INCLUDE_PATH=${FISPACT_BIN}/include:$INCLUDE_PATH
+    export LD_LIBRARY_PATH=${FISPACT_BIN}/lib:${FISPACT_BIN}/python3:$LD_LIBRARY_PATH
 }
 
 
 fispact_checkenv() {
     if [[ -d $FISPACT_HOME ]]; then
-        if [[ -f "$FISPACT" ]]; then
+        if [[ -x "$FISPACT" ]]; then
             return 0
         else
-            echo "ERROR in fispact.rc: cannot find file $FISPACT"
+            echo "ERROR in fispact.rc: cannot find executable $FISPACT"
         fi
     else
         echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found"
@@ -29,8 +32,12 @@ fispact_printenv() {
     echo "FISPACT=$FISPACT"
 }
 
+main() {
+    fispact_setenv
+    fispact_checkenv
+}
 
 
-[ -n "$BATS_PREFIX" ] ||  fispact_setenv
+[ -n "$BATS_PREFIX" ] ||  main
 
 # vim: set ts=4 sw=0 tw=79 ss=0 ft=sh et ai :
