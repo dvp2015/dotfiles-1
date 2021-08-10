@@ -2,28 +2,23 @@
 # Environment to work with fispact-II 5.0
 #
 
+. $HOME/.bash-functions.rc
+
 export FISPACT_HOME=/opt/fispact
 
 fispact_setenv() {
     export FISPACT_BIN=${FISPACT_HOME}/bin/linuxmint/18
     export FISPACT=${FISPACT_BIN}/fispact
-    export PATH=${FISPACT_BIN}:$PATH
-    export INCLUDE_PATH=${FISPACT_BIN}/include:$INCLUDE_PATH
-    export LD_LIBRARY_PATH=${FISPACT_BIN}/lib:${FISPACT_BIN}/python3:$LD_LIBRARY_PATH
+    export PATH=$(make_path $FISPACT_BIN $PATH)
+    export INCLUDE_PATH=$(make_path ${FISPACT_BIN}/include $INCLUDE_PATH)
+    export LD_LIBRARY_PATH=$(make_path ${FISPACT_BIN}/lib ${FISPACT_BIN}/python3 $LD_LIBRARY_PATH)
 }
 
 
 fispact_checkenv() {
-    if [[ -d $FISPACT_HOME ]]; then
-        if [[ -x "$FISPACT" ]]; then
-            return 0
-        else
-            echo "ERROR in fispact.rc: cannot find executable $FISPACT"
-        fi
-    else
-        echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found"
-    fi
-    return 1
+    [ -d $FISPACT_HOME ] || echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found" && return 1
+    [ -x "$FISPACT" ] || echo "ERROR in fispact.rc: cannot find executable $FISPACT" && return 1
+    return 0
 }
 
 
