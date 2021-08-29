@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if [[ -n "$ZSH_VERSION" ]] ; then
     setopt shwordsplit
@@ -128,7 +128,7 @@ all_files_exist() {
 }
 
 add_to_path() {
-    export PATH="$(makepath $PATH $@)"
+    export PATH="$(make_path $PATH $@)"
 }
 
 
