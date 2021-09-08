@@ -30,7 +30,10 @@ fpath=($HOME/.local/zsh.completions $fpath)
 autoload -U bashcompinit
 bashcompinit
 
-if [[ -e "register-python-argcomplete" ]]; then
+# TODO dvp:
+# - should I check if nox or nox file available?
+# - move to direnv?
+if [[ -e "$(which register-python-argcomplete)" ]]; then
     # Enable completion for nox:
     eval "$(register-python-argcomplete nox)"
 fi
@@ -236,11 +239,7 @@ export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
 
-# This forces julia PyCall and IJulia to use "standard" python and jupyter
-export PYTHON="/opt/anaconda3/bin/python"
-export JUPYTER="/opt/anaconda3/bin/jupyter"
-
-# open file with a default assiciated program
+# open file with a default associated program
 function o() {
   for i in "$@"
   do
