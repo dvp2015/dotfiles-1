@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if [[ -n "$ZSH_VERSION" ]] ; then
     setopt shwordsplit
@@ -120,7 +120,7 @@ all_files_exist() {
     local warns=0
     for f in $@; do
         if [[ ! -e "$f" ]]; then
-            echo "File $f doesn't exist"
+            echo "WARNING: File \"$f\" doesn't exist"
             warns=$(($warns + 1))
         fi
     done
@@ -128,7 +128,11 @@ all_files_exist() {
 }
 
 add_to_path() {
-    export PATH="$(makepath $PATH $@)"
+    export PATH="$(make_path $PATH $@)"
+}
+
+prepend_path() {
+    export PATH="$(make_path $@ $PATH)"
 }
 
 
