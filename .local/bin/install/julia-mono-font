@@ -1,0 +1,36 @@
+#!/bin/bash
+
+install_font_manager() {
+    sudo apt install font-manager
+}
+
+
+# https://github.com/cormullion/juliamono
+
+
+install_julia_mono() {
+    echo "Installing Julia Mono font (Font for programming)"
+    local _font_dir=${1:-$HOME/.local/share/fonts}
+    local _git_dir=${2:-$HOME/Downloads/install/juliamono}
+    if [[ -d ${_git_dir} ]]; then
+        echo "Updating Julia Mono in ${_git_dir}"
+        pushd ${_git_dir} > /dev/null
+        git pull
+        popd > /dev/null
+    else
+        local _url=git@github.com:cormullion/juliamono.git
+        mkdir -p $(dirname ${_git_dir})
+        git clone ${_url} ${_git_dir} --depth=1
+        echo "Julia Mono is cloned to ${_git_dir}"
+    fi
+
+    cp -t "$_font_dir" ${_git_dir}/*.ttf
+    pushd "$_font_dir" > /dev/null
+    fc-cache -f -v
+    popd > /dev/null
+    #  fc-grep JuliaMono
+}
+
+install_julia_mono "$@"
+
+# vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
