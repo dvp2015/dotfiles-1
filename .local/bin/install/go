@@ -11,16 +11,17 @@ END
 }
 
 install_go() {
-    local go_version=1.16.6
+    local go_version=1.17.2
     local go_base_name=go${go_version}
     local go_file_name=${go_base_name}.linux-amd64.tar.gz
     local go_url="https://golang.org/dl/${go_file_name}"
     local working_dir="$HOME/Downloads/install/go/$go_version"
+    echo "Installing go $go_version"
     mkdir -p  $working_dir
     pushd $working_dir
     if [[ ! -d go ]]; then
         if [[ ! -r $go_file_name ]]; then
-            download $go_url
+            wget $go_url
         fi
         tar -xzvf $go_file_name
     fi
@@ -29,22 +30,25 @@ install_go() {
     popd
 }
 
+#
+# Jump: https://github.com/gsamokovarov/jump
+# Lazy Git: https://github.com/jesseduffield/lazygit
+#
+
 packages=(
     gsamokovarov/jump
     jesseduffield/lazygit
 )
-# go get github.com/gsamokovarov/jump
-# go get github.com/jesseduffield/lazygit
 
 install_packages() {
     for t in ${packages[@]}; do
         echo "Installing Go package $t"
-        go get "github.com/$t"
+        go install "github.com/$t@latest"
     done
 }
 
 main() {
-    [ check_go ] && echo "Go is already installed in $(command -v go)" || install_go
+    check_go && echo "Go is already installed in $(command -v go)" || install_go
     install_packages
 }
 

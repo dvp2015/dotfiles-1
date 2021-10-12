@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 install_diff_so_fancy() {
     echo "Installing diff-so-fancy (git diff human readable)"
@@ -17,7 +17,7 @@ install_diff_so_fancy() {
     fi
 
     cp "${_git_dir}/diff-so-fancy" "$_out_dir/bin" && \
-    cp -r "${_git_dir}/lib" "$_out_dir"
+    cp -r "${_git_dir}/lib" "$_out_dir/bin"
 }
 
 install_diff_so_fancy "$@"
