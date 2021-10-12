@@ -218,7 +218,7 @@ check_go() {
         echo "Or see https://golang.org/doc/install"
         return 1
     fi
-    local min_required_version="${1:-1.16}"
+    local min_required_version="${1:-1.17}"
     local go_version=$(go version | cut -c "14-17")
     if [[ $go_version < "$min_required_version" ]]; then
         echo "go version  >= $min_required_version is required, actual version $go_version"
