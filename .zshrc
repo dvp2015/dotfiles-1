@@ -89,7 +89,7 @@ zplug "plugins/asdf", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/gitfast", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/zsh_reload", from:oh-my-zsh
+# zplug "plugins/zsh_reload", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
 zplug "plugins/poetry", from:oh-my-zsh

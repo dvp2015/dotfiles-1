@@ -7,13 +7,10 @@
 function install_nerd_fonts() {
     # https://github.com/ryanoasis/nerd-fonts
     echo "Installing nerd fonts"
-    git clone https://github.com/ryanoasis/nerd-fonts /tmp/fonts --depth=1
-    cd /tmp/fonts
-    ./install.sh "JetBrainsMono Nerd Font"
-    ./install.sh "Meslo Nerd Font"
-    cd ..
-    rm -rf fonts
-    cd "$HOME"
+    pushd ~/.local/share/fonts 
+    curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+    fc-cache -f -v
+    popd
 }
 
 install_nerd_fonts && fc-cache -vf ~/.local/share/fonts/

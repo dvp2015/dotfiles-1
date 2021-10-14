@@ -1,0 +1,16 @@
+  git clone git@github.com:vim/vim.git
+  cd vim
+  cd src
+  sudo apt install make
+  sudo apt install clang
+  sudo apt install libtool-bin
+  sudo apt install libxt-dev
+  sudo apt install libgtk-3-dev
+  sudo apt install libpython3-dev
+  sudo apt install valgrind
+  sudo apt install lua5.3
+  sudo apt install lua5.3-dev
+  sudo apt install libx11-dev libxtst-dev libsm-dev libxpm-dev
+  ./configure --with-features=huge --enable-gui=auto --enable-python3interp=dynamic --enable-luainterp=dynamic --with-luajit --disable-arabic --disable-rightleft --with-x --enable-gtk2-check --enable-gnome-check
+  make
+  sudo make install
