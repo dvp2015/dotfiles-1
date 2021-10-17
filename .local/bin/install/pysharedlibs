@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#
+# Shared libraries required for syme Python optional standard packages
+#
+
+sudo apt install libncurses-dev libgdbm-dev libz-dev tk-dev libsqlite3-dev libreadline-dev liblzma-dev libffi-dev libssl-dev
