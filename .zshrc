@@ -293,8 +293,6 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 command -v jump > /dev/null  && eval "$(jump shell zsh)"
@@ -309,5 +307,8 @@ lg() {
         rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
