@@ -273,7 +273,7 @@ lg() {
 
     lazygit "$@"
 
-    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+    if [[ -f $LAZYGIT_NEW_DIR_FILE ]]; then
         cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
         rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
@@ -287,10 +287,10 @@ elif [[ -x ag ]]; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 export FZF_DEFAULT_OPTS="--extended-exact"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 [ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
 
 
