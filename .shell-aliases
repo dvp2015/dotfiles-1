@@ -56,20 +56,17 @@ alias du='du -kh'
 alias df='df -kTh'
 
 
-if which exa >/dev/null 2>&1; then
-  alias ls='exa'
-elif which ls++ >/dev/null 2>&1; then
-  alias ls='ls++'
-else
-  alias ls='ls --color=auto'
-fi
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# if which exa >/dev/null 2>&1; then
+  # alias ls='exa'
+# elif which ls++ >/dev/null 2>&1; then
+  # alias ls='ls++'
+# else
+  # alias ls='ls --color=auto'
+# fi
+# alias ll='ls -alF'
+# alias la='ls -A'
+# alias l='ls -CF'
 # Различные варианты 'ls' (предполагается, что установлена GNU-версия ls)
-# alias l='ls'                    # короче
-# alias la='ls -Al'               # показать скрытые файлы
-alias ls='ls -hF --color=always --group-directories-first'       # выделить различные типы файлов цветом
 alias lx='ls -lXB --color=always --group-directories-first'      # сортировка по расширению
 alias lk='ls -lSr --color=always --group-directories-first'      # сортировка по размеру
 alias lc='ls -lcr --color=always --group-directories-first'      # сортировка по времени изменения
@@ -77,6 +74,10 @@ alias lu='ls -lur --color=always --group-directories-first'      # сортир�
 alias lr='ls -lR --color=always --group-directories-first'       # рекурсивный обход подкаталогов
 alias lt='ls -ltr --color=always --group-directories-first'      # сортировка по дате
 alias lm='ls -al --color=always --group-directories-first |more' # вывод через 'more'
+alias ll='ls -alF --color=always --group-directories-first'
+alias l='ls -CF --color=always --group-directories-first'        # короче
+alias la='ls -A --color=always --group-directories-first'        # показать скрытые файлы
+alias ls='ls -hF --color=always --group-directories-first'       # выделить различные типы файлов цветом
 
 function lss () { 
     ls -FaGl "${@}" | awk '{ total += $4; print }; END { print total }'; 
@@ -121,8 +122,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ll='\ls -l'
-alias lt='\ls --color=auto -lhFart'
 
 if which nvim >/dev/null 2>&1; then
   alias vim='nvim'
