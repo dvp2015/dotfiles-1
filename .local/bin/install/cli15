@@ -5,15 +5,14 @@ set -euxo pipefail
 # modification of https://devsday.ru/blog/details/38051
 
 # PROGRAMS="hub httpie ripgrep bat fzf fd fd-find jq autojump direnv tig tmux neovim exa"
-CARGO=(ripgrep bat fd-find tealdeer just)
-APT=(fzf  autojump tig tmux neovim)
-
-# go get github.com/gsamokovarov/jump
-# go get github.com/jesseduffield/lazygit
+# CARGO=(ripgrep bat fd-find tealdeer just)
+CARGO=(ripgrep fd-find)
+# APT=(fzf  autojump tig tmux neovim)
+APT=(curl wget git fzf autojump tmux xclip)
 NPM="how-2"
 
-cargo install ${CARGO[@]}
 sudo apt-get install ${APT[@]}
+cargo install ${CARGO[@]}
 
  
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
