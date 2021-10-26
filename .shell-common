@@ -1,5 +1,6 @@
 # make less more friendly for non-text input files, see lesspipe(1)
-test -x /usr/bin/lesspipe && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -18,7 +19,7 @@ export HISTCONTROL=erasedups	# when adding an item to history, delete itentical 
 HISTSIZE=10000
 HISTFILESIZE=20000
 
-HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:ev:ea:ek:pwd:exit:id:uptime:resize:clear:history"
+HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:el:ea:es:ek:pwd:exit:id:uptime:resize:clear:history"
 export HISTIGNORE="$HISTIGNORE:mc:mcc:cs:cd .."
 
 export QT_SELECT=5

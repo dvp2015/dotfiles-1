@@ -12,4 +12,3 @@
 # often worked around by having the profile execute bashrc anyway.
 
 [[ -f $HOME/.profile ]] && source $HOME/.profile
-. "$HOME/.cargo/env"
