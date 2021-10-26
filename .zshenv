@@ -11,6 +11,13 @@
 
 skip_global_compinit=1
 
+# dvp: to make pytz happy on Linux, 
+# without this it stucks on finding two configurations:
+# /etc/timezone and /etc/localtime
+# export TZ="Europe/Moscow"
+# More generic, but requires file reading, TODO check timing
+export TZ=$(cat /etc/timezone)
+
 ##
 ## Paths
 ##
@@ -69,5 +76,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-# TODO duplicated in .profile
 source "$HOME/.cargo/env"
