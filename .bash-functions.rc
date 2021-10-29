@@ -87,10 +87,13 @@ download() {
     curl -O $1
 }
 
-
-is_sourced() {
-    [[ ${FUNCNAME[@]: -1} == "source" ]]
+is_main() {
+    [[ "${FUNCNAME[-1]}" == "main" ]]
 }
+
+# is_sourced() {
+    # [[ ${FUNCNAME[@]: -1} == "source" ]]
+# }
 
 
 update_path() {
