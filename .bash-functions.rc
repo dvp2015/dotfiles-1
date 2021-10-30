@@ -153,6 +153,7 @@ bz() {
         fi
     else
         echo "ERROR bz: cannot read file $file_name"
+        return 1
     fi
 }
 
