@@ -1,7 +1,28 @@
 #!/bin/bash
 
 #
-# Shared libraries required for syme Python optional standard packages
+# Shared libraries required for some Python optional standard packages
 #
 
-sudo apt install libncurses-dev libgdbm-dev libz-dev tk-dev libsqlite3-dev libreadline-dev liblzma-dev libffi-dev libssl-dev
+install_libs(){
+
+    local libs=(
+        libffi-dev
+        libgdbm-dev
+        liblzma-dev
+        libncurses-dev
+        libreadline-dev
+        libsqlite3-dev
+        libssl-dev
+        lzma
+        tk-dev
+        zlib1g-dev
+    )
+
+    sudo apt-get install ${libs[@]}
+}
+
+install_libs
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

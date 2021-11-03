@@ -8,3 +8,6 @@ sudo xed /etc/lightdm/lightdm.conf
 # 
 # autologin-user=<user>
 # autologin-user-timeout=0
+
+# How to setup Unix prompt
+# https://ss64.com/bash/syntax-prompt.html

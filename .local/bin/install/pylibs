@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Install usual Python packages for analysis and development
+
+install_libs() {
+    local libs=(
+        black
+        ipython
+        isort
+        jupyterlab
+        matplotlib
+        scipy
+        seaborn
+        xarray
+    )
+    pip install ${libs[@]}
+}
+
+install_libs
