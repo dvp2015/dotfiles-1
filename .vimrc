@@ -334,7 +334,7 @@ augroup vimrc_autocmds
     autocmd BufRead,BufNewFile *.hpp,*.h++,*.hxx,*.cpp,*.c++,*.cxx set filetype=cpp.doxygen
     autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=#c12a0f
     autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
-    autocmd FileType ruby,python,javascript,c,cpp set nowrap
+    autocmd FileType ruby,python,javascript,c,cpp,julia set nowrap
 augroup end
 
 " C file settings {{{4
