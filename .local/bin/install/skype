@@ -5,7 +5,8 @@
 # see discussion on Skype repository keys and installation
 # on https://forums.linuxmint.com/viewtopic.php?t=352453
 
-# curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add - 
+# To fix error in update manager to obtain updates: 
+curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add - 
 
 (
   cd /tmp && 
