@@ -12,8 +12,8 @@ install_prerequisites(){
             libxpm-dev
             libxt-dev
             libxtst-dev
-            lua5.3
-            lua5.3-dev
+#            liblua5.3-0
+#            liblua5.3-0-dev
             make
             valgrind
             )
