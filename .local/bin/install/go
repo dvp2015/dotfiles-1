@@ -54,5 +54,5 @@ main() {
     install_packages
 }
 
-is_sourced || main "$@"
+is_main && main "$@"
 
