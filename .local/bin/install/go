@@ -11,7 +11,7 @@ END
 }
 
 install_go() {
-    local go_version=1.17.2
+    local go_version=1.18
     local go_base_name=go${go_version}
     local go_file_name=${go_base_name}.linux-amd64.tar.gz
     local go_url="https://golang.org/dl/${go_file_name}"
@@ -33,11 +33,13 @@ install_go() {
 #
 # Jump: https://github.com/gsamokovarov/jump
 # Lazy Git: https://github.com/jesseduffield/lazygit
+# Run github actions locally with act: https://github.com/nektos/act
 #
 
 packages=(
     gsamokovarov/jump
     jesseduffield/lazygit
+    nektos/act
 )
 
 install_packages() {
