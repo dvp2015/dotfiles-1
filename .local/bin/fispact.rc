@@ -5,18 +5,20 @@
 . $HOME/.bash-functions.rc
 
 export FISPACT_HOME=/opt/fispact
+export FISPACT_DATA=/opt/nuclear_data
 
 fispact_setenv() {
-    export FISPACT_BIN=${FISPACT_HOME}/bin/linuxmint/18
-    export FISPACT=${FISPACT_BIN}/fispact
-    export PATH=$(make_path $FISPACT_BIN $PATH)
-    export INCLUDE_PATH=$(make_path ${FISPACT_BIN}/include $INCLUDE_PATH)
-    export LD_LIBRARY_PATH=$(make_path ${FISPACT_BIN}/lib ${FISPACT_BIN}/python3 $LD_LIBRARY_PATH)
+    export FISPACT_BIN="${FISPACT_HOME}/bin/linuxmint/18"
+    export FISPACT="${FISPACT_BIN}/fispact"
+    export PATH="$(make_path $FISPACT_BIN $PATH)"
+    export INCLUDE_PATH="$(make_path ${FISPACT_BIN}/include $INCLUDE_PATH)"
+    export LD_LIBRARY_PATH="$(make_path ${FISPACT_BIN}/lib ${FISPACT_BIN}/python3 $LD_LIBRARY_PATH)"
 }
 
 
 fispact_checkenv() {
-    [ -d $FISPACT_HOME ] || echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found" && return 1
+    [ -d "$FISPACT_HOME" ] || echo "ERROR in fispact.rc: directory $FISPACT_HOME is not found" && return 1
+    [ -d "$FISPACT_DATA" ] || echo "ERROR in fispact.rc: directory $FISPACT_DATA is not found" && return 1
     [ -x "$FISPACT" ] || echo "ERROR in fispact.rc: cannot find executable $FISPACT" && return 1
     return 0
 }
@@ -24,6 +26,7 @@ fispact_checkenv() {
 
 fispact_printenv() {
     echo "FISPACT_HOME=$FISPACT_HOME"
+    echo "FISPACT_DATA=$FISPACT_DATA"
     echo "FISPACT=$FISPACT"
 }
 

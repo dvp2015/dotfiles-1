@@ -37,7 +37,6 @@ typeset -gUT OBJC_INCLUDE_PATH objc_include_path
 cdpath=(
   $HOME/.julia/dev
   $HOME/dev
-  /opt
   $cdpath
 )
 
