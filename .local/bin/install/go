@@ -15,7 +15,7 @@ drop_go() {
 }
 
 install_go() {
-    local go_version=1.18.1
+    local go_version=1.18.3
     local go_base_name=go${go_version}
     local go_file_name=${go_base_name}.linux-amd64.tar.gz
     local go_url="https://golang.org/dl/${go_file_name}"
@@ -39,6 +39,9 @@ install_go() {
 # Lazy Git: https://github.com/jesseduffield/lazygit
 # Run github actions locally with act: https://github.com/nektos/act
 # Basel: Cmake alternative
+
+# Failed to install with 'go install':
+# jj:  JSON stream editor, https://github.com/tidwall/jj (not packaged, install from source)
 
 packages=(
     gsamokovarov/jump
