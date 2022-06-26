@@ -10,8 +10,12 @@ export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 END
 }
 
+drop_go() {
+    [ -d "/usr/local/go" ] && sudo rm -fr "/usr/local/go"
+}
+
 install_go() {
-    local go_version=1.18
+    local go_version=1.18.3
     local go_base_name=go${go_version}
     local go_file_name=${go_base_name}.linux-amd64.tar.gz
     local go_url="https://golang.org/dl/${go_file_name}"
@@ -34,12 +38,16 @@ install_go() {
 # Jump: https://github.com/gsamokovarov/jump
 # Lazy Git: https://github.com/jesseduffield/lazygit
 # Run github actions locally with act: https://github.com/nektos/act
-#
+# Basel: Cmake alternative
+
+# Failed to install with 'go install':
+# jj:  JSON stream editor, https://github.com/tidwall/jj (not packaged, install from source)
 
 packages=(
     gsamokovarov/jump
     jesseduffield/lazygit
     nektos/act
+    bazelbuild/bazelisk
 )
 
 install_packages() {
@@ -50,7 +58,19 @@ install_packages() {
 }
 
 main() {
-    check_go && echo "Go is already installed in $(command -v go)" || install_go
+    local do_install="no"
+
+    if [[ "$1" == "--drop" ]]; then
+        drop_go
+        do_install="yes"
+    else
+        check_go && echo "Go is already installed in $(command -v go)" || do_install="yes"
+    fi
+
+    if [[ "$do_install" == "yes" ]]; then
+        install_go
+    fi
+    
     install_packages
 }
 

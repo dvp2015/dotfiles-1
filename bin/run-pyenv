@@ -1,0 +1,71 @@
+#!/bin/bash
+
+#
+#
+# dvp 2022-06-23
+#
+#
+
+. $HOME/.bash-functions.rc
+
+RUN_PYENV_VERSION=0.1
+
+set -e
+
+usage() {
+    cat << MSG
+        run-pyenv
+
+        Run a command using specified pyenv environment
+
+        Usage:
+            
+            1) run command <command> in enironment <env>
+
+                run-pyenv <env> <command> [args...]
+
+            where:
+                env - pyenv environment to use
+                command - command to execute
+                args - parameters for the command, optional
+
+            2) print help message
+
+                run-pyenv -h | --help
+
+            3) print version
+
+                run-pyenv --version
+
+MSG
+}
+
+
+
+main() {
+    env="$1"
+    shift
+    if [[ -z "$env" ]]; then
+        usage
+        die "Environment is not specified"
+    elif [[ "-h" == "$env"  || "--help" == "$env" ]]; then
+        usage
+    elif [[ "--version" == "$env" ]]; then
+        echo "run-pyenv, v$RUN_PYENV_VERSION"
+    elif [[ -z "$@" ]]; then
+        usage
+        die "Command is not specified"
+    else
+        eval "$(pyenv init -)"
+        pyenv shell "$env"
+        $@
+        pyenv shell --unset
+        success "Done with $env $@"
+    fi
+}
+
+
+main "$@"
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

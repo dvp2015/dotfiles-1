@@ -33,6 +33,7 @@ fispact_printenv() {
 main() {
     fispact_setenv
     fispact_checkenv
+    echo fispact rc is loaded
 }
 
 
