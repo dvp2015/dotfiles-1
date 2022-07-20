@@ -1,0 +1,5 @@
+default_context:
+    full_name: "Dmitri Portnov"
+    email: "dmitri_portnov@yahoo.com"
+    github_username: "dvp2015"
+cookiecutters_dir: "~/.cookiecutters/"

@@ -293,7 +293,7 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 
 [ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
-
+[ -f ~/.invoke-completion.rc ] && source ~/.invoke-completion.rc
 
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 command -v jump > /dev/null  && eval "$(jump shell zsh)"
@@ -311,6 +311,8 @@ lg() {
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+
+
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
