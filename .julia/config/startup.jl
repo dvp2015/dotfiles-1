@@ -31,10 +31,25 @@ atreplinit() do repl
     end
 
     @eval begin
-        if "JULIA_EDITOR" ∉ keys(ENV) && Sys.isexecutable("vim")
-            ENV["JULIA_EDITOR"] = "vim"
+        if "JULIA_EDITOR" ∉ keys(ENV) 
+            editors = ["vim"]
+			if Sys.iswindows()
+                push!(
+                    editors, 
+                    "C:\\Program Files\\Notepad++\\notepad++.exe",
+                    "notepad.exe"
+                )
+            end 
+            editor_idx = findfirst(Sys.isexecutable, editors)
+            if editor_idx !== nothing
+                editor = editors[editor_idx]
+                if ' ' ∈ editor
+                    editor = "\"$editor\""  # force to be a single entry on shell_split call
+                end
+			    ENV["JULIA_EDITOR"] = editor
+             
+            end
         end
-
         myrepl() = joinpath(homedir(), ".myrepl.jl")
         imyrepl() = include(myrepl())
         emyrepl() = edit(myrepl())

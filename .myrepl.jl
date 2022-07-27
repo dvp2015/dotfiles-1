@@ -81,6 +81,18 @@ function gitlab_template()::Template
     )
 end
 
+"""
+Display the entire type hierarchy starting from the specified `roottype`
+"""
+function subtype_tree(roottype, level = 1, indent = 4)
+	level == 1 && println(roottype)
+	for s in subtypes(roottype)
+		println(join(fill(" ", level * indent)) * string(s))
+		subtype_tree(s, level + 1, indent)
+	end
+	nothing
+end
+
 ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
 cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
 installed_packages() = sort(map( (x)-> x.name, values(Pkg.dependencies())))
