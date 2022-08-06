@@ -1,3 +1,9 @@
+"""Utilities for Julia REPL.
+
+Rerences:
+	[1] Tom Kwang, Hands on Design Patterns and best practices
+"""
+
 using Pkg
 using REPL
 
@@ -93,9 +99,37 @@ function subtype_tree(roottype, level = 1, indent = 4)
 	nothing
 end
 
+"""
+	pretty_print_stacktrace(trace = stacktrace(catch_backtrace()))
+	
+	Print exception trace with numbered sections.
+	Borrowed from [1], p.335.
+"""
+function pretty_print_stacktrace(trace = stacktrace(catch_backtrace()))
+	for (i,v) in enumerate(trace)	
+		println(i, " => ", v)
+	end
+end
+
 ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
 cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
-installed_packages() = sort(map( (x)-> x.name, values(Pkg.dependencies())))
+
+"""
+	installed_packages(drop_jll=true)
+	
+	Get list of installed packages.
+"""
+function installed_packages(drop_jll::Bool=true)::Vector{String}
+	result = sort(map( (x)-> x.name, values(Pkg.dependencies())))
+	if drop_jll
+		result = filter(result) do x
+			!match(r"_jll$", x)
+		end
+	end
+	result
+end
+
+
 
 nothing
 
