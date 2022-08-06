@@ -20,19 +20,20 @@ atreplinit() do repl
         display("Cannot use Revise: $e.msg")
     end
 
-    try
-        @eval begin
-            using Logging: global_logger
-            using TerminalLoggers: TerminalLogger
-            global_logger(TerminalLogger())
-        end
-    catch e
-        display("Cannot use TerminalLoggers: $e.msg")
-    end
+    # TODO dvp: check TerminalLoggers - precompile failed
+    # try
+    #     @eval begin
+    #         using Logging: global_logger
+    #         using TerminalLoggers: TerminalLogger
+    #         global_logger(TerminalLogger())
+    #     end
+    # catch e
+    #     display("Cannot use TerminalLoggers: $e.msg")
+    # end
 
     @eval begin
         if "JULIA_EDITOR" ∉ keys(ENV) 
-            editors = ["vim"]
+            editors = ["code", "vim"]
 			if Sys.iswindows()
                 push!(
                     editors, 
