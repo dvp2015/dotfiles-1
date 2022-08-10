@@ -6,9 +6,10 @@ atreplinit() do repl
             colorscheme!("OneDark")
             OhMyREPL.enable_autocomplete_brackets(true)
             OhMyREPL.Passes.RainbowBrackets.activate_256colors()
-            # On vscode terminal on windows this breaks prompt and input focus, this is a solution 
-            vscode_terminal = get(ENV, "TERM_PROGRAM", nothing) == "vscode"
-            vscode_terminal || OhMyREPL.input_prompt!("👠> ")  
+            # On vscode terminal on windows this breaks prompt and input focus, the following is a solution 
+            let use_default_prompt = Sys.iswindows() && get(ENV, "TERM_PROGRAM", nothing) == "vscode"
+                use_default_prompt || OhMyREPL.input_prompt!("👠> ")  
+            end
         end
     catch e
         display("Cannot use OhMyREPL: $e.msg")
