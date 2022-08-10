@@ -122,12 +122,12 @@ Get list of all the installed packages.
 installed_packages_all() = sort(map(x -> x.name, values(Pkg.dependencies())))
 
 """
-	installed_packages(; filt=!endswith("_jll"))
+	installed_packages(filt=!endswith("_jll"))
 	
 Get list of the installed packages with names matching predicate `filt`.
 By default filters out low level jll-packages.
 """
-installed_packages(; filt=!endswith("_jll")) = filter(filt, installed_packages_all())
+installed_packages(filt=!endswith("_jll")) = filter(filt, installed_packages_all())
 
 
 
