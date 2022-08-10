@@ -83,20 +83,20 @@ function gitlab_template()::Template
             SrcDir(),
             TagBot(),
             Tests(; project=true),
-        ],
+        ]
     )
 end
 
 """
 Display the entire type hierarchy starting from the specified `roottype`
 """
-function subtype_tree(roottype, level = 1, indent = 4)
-	level == 1 && println(roottype)
-	for s in subtypes(roottype)
-		println(join(fill(" ", level * indent)) * string(s))
-		subtype_tree(s, level + 1, indent)
-	end
-	nothing
+function subtype_tree(roottype, level=1, indent=4)
+    level == 1 && println(roottype)
+    for s in subtypes(roottype)
+        println(join(fill(" ", level * indent)) * string(s))
+        subtype_tree(s, level + 1, indent)
+    end
+    nothing
 end
 
 """
@@ -105,29 +105,29 @@ end
 	Print exception trace with numbered sections.
 	Borrowed from [1], p.335.
 """
-function pretty_print_stacktrace(trace = stacktrace(catch_backtrace()))
-	for (i,v) in enumerate(trace)	
-		println(i, " => ", v)
-	end
+function pretty_print_stacktrace(trace=stacktrace(catch_backtrace()))
+    for (i, v) in enumerate(trace)
+        println(i, " => ", v)
+    end
 end
 
 ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
 cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
 
 """
-	installed_packages(drop_jll=true)
+	installed_packages_all()
 	
-	Get list of installed packages.
+Get list of all the installed packages.
 """
-function installed_packages(drop_jll::Bool=true)::Vector{String}
-	result = sort(map( (x)-> x.name, values(Pkg.dependencies())))
-	if drop_jll
-		result = filter(result) do x
-			!match(r"_jll$", x)
-		end
-	end
-	result
-end
+installed_packages_all() = sort(map(x -> x.name, values(Pkg.dependencies())))
+
+"""
+	installed_packages(; filt=!endswith("_jll"))
+	
+Get list of the installed packages with names matching predicate `filt`.
+By default filters out low level jll-packages.
+"""
+installed_packages(; filt=!endswith("_jll")) = filter(filt, installed_packages_all())
 
 
 
