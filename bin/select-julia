@@ -12,11 +12,25 @@ Usage:
 
     select-julia [version]
 
-Parameter "version" is a subfolder name in folder /opt 
-with the julia instance of the desired version.
-If not specified selects the most recent version.
+Optional parameter "version" is a subfolder name of folder /opt with the desired julia instance.
+Defaults to the most recent version.
 MSG
+    echo
+    show-available-versions
     exit 0
+}
+
+show-available-versions() {
+    versions=($(find-julia-versions)) 
+    if [[ 0 < ${#versions} ]]; then
+        echo "Available versions:"
+        for v in ${versions[@]}; do
+            echo "    $v"
+        done
+        echo
+    else
+        echo "WARNING: no julia subfolders found in /opt folder"
+    fi
 }
 
 find-julia-versions() {
@@ -41,14 +55,13 @@ main() {
     fi
 
     if [[ ! -x "/opt/$version/bin/julia" ]]; then
-        echo
-        echo "Available versions:"
-        find-julia-versions
-        echo
+        show-available-versions
         die "/opt/$version is not a valid julia folder"
     fi
 
-    rm ~/bin/julia && ln -s /opt/$version/bin/julia ~/bin/julia && success "julia -> $(~/bin/julia --version)"
+    rm ~/bin/julia 
+    ln -s /opt/$version/bin/julia ~/bin/julia
+    success "julia -> $(~/bin/julia --version)"
 
 }
 
