@@ -27,3 +27,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 export GOPATH=$HOME/.go
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/dvp/.local/share/JetBrains/Toolbox/scripts"
