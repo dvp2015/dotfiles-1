@@ -1,3 +1,10 @@
+#=
+Utilities for Julia REPL.
+
+References:
+	[1] Tom Kwang, Hands on Design Patterns and best practices
+=#
+
 using Pkg
 using REPL
 
@@ -77,13 +84,65 @@ function gitlab_template()::Template
             SrcDir(),
             TagBot(),
             Tests(; project=true),
-        ],
+        ]
     )
 end
 
+"""
+Display the entire type hierarchy starting from the specified `roottype`
+"""
+function subtype_tree(roottype, level=1, indent=4)
+    level == 1 && println(roottype)
+    for s in subtypes(roottype)
+        println(join(fill(" ", level * indent)) * string(s))
+        subtype_tree(s, level + 1, indent)
+    end
+    nothing
+end
+
+"""
+	pretty_print_stacktrace(trace = stacktrace(catch_backtrace()))
+	
+	Print exception trace with numbered sections.
+	Borrowed from [1], p.335.
+"""
+function pretty_print_stacktrace(io::IO, trace=stacktrace(catch_backtrace()))
+    for (i, v) in enumerate(trace)
+        println(io, i, " => ", v)
+    end
+end
+
+pretty_print_stacktrace(trace=stacktrace(catch_backtrace())) = pretty_print_stacktrace(Base.stderr, stacktrace(catch_backtrace()))
+
 ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
 cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
-installed_packages() = sort(map( (x)-> x.name, values(Pkg.dependencies())))
+
+"""
+	installed_packages()
+	
+Get list of all the installed packages.
+"""
+installed_packages() = sort(map(x -> x.name, values(Pkg.dependencies())))
+
+"""
+	installed_packages(filter)
+	
+Get list of the installed packages with names matching predicate `filter`.
+
+# Example
+
+```julia
+julia> installed_packages(!endswith("_jll"))
+...
+julia> installed_packages() do package
+           'I' ∈ package
+       end
+...
+```
+"""
+installed_packages(filter) = Base.filter(filter, installed_packages())
+
+
 
 nothing
 
