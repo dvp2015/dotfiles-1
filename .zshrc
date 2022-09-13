@@ -16,8 +16,6 @@ test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
-fpath=(/usr/share/zsh/vendor-completions/ $fpath)
-fpath=($HOME/.local/zsh.completions $fpath)
 
 # To activate completions for zsh you need to have
 # bashcompinit enabled in zsh:
@@ -316,3 +314,10 @@ lg() {
 
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
+zstyle ':completion:*' menu select
+fpath+=/usr/share/zsh/vendor-completions
+fpath+=~/.local/zsh.completions
+fpath+=~/.zfunc
+
+autoload -Uz compinit && compinit
