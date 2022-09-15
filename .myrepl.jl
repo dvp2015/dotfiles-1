@@ -95,8 +95,7 @@ Create template object with defaults appropriate for github.com/dvp2015 reposito
 # Example
 
 ```julia
-    t = github_template()
-    t.julia=v"1.7"
+    t = github_template(dir="~/dev/julia")
     t("MyPkg")
 ```
 """
@@ -117,6 +116,7 @@ function github_template()::Template
             Documenter{GitHubActions}(),
             Git(; ignore=[".*", "wrk/", "~*"]),
             GitHubActions(),
+            RegisterAction(),
             License(; name="MIT", destination="LICENSE"),
             ProjectFile(; version=v"0.1.0"),
             Readme(; inline_badges=true),
