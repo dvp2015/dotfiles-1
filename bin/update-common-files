@@ -1,0 +1,37 @@
+#!/bin/bash
+
+my_package() {
+    local dir="$(basename $(readlink -e .))"
+    local pkg="${dir//-/_}"
+    echo "$pkg"
+}
+
+main() {
+    local pkg="$(1:$(my_package))"
+    meld .flake8 ../xpypact/.flake8
+    meld .github/constraints.txt ../xpypact/.github/constraints.txt
+    meld .github/dependabot.yml ../xpypact/.github/dependabot.yml
+    meld .github/release-drafter.yml ../xpypact/.github/release-drafter.yml
+    meld .github/workflows/labeler.yml ../xpypact/.github/workflows/labeler.yml
+    meld .github/workflows/release-drafter.yml ../xpypact/.github/workflows/release-drafter.yml
+    meld .github/workflows/release.yml ../xpypact/.github/workflows/release.yml
+    meld .github/workflows/stale.yml ../xpypact/.github/workflows/stale.yml
+    meld .github/workflows/tests.yml ../xpypact/.github/workflows/tests.yml
+    meld noxfile.py ../xpypact/noxfile.py
+    meld .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
+    meld pyproject.toml ../xpypact/pyproject.toml
+    if [[ "$pkg" != "mckit" ]]; then
+        meld src/$pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
+        meld src/$pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
+        meld src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+    else
+        meld $pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
+        meld $pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
+        meld tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+    fi
+}
+
+main "$@"
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
