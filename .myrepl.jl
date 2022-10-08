@@ -72,12 +72,51 @@ function gitlab_template()::Template
             Codecov(),
             ColPracBadge(),
             CompatHelper(),
-            Coveralls(),
+            Develop(),
+            Documenter{GitLabCI}(),
+            Git(; ignore=[".*", "wrk/", "~*"], ssh=true),
+            GitLabCI(),
+            License(; name="MIT", destination="LICENSE"),
+            ProjectFile(; version=v"0.1.0"),
+            Readme(; inline_badges=true),
+            SrcDir(),
+            TagBot(),
+            Tests(; project=true),
+        ]
+    )
+end
+
+
+"""
+    github_template() -> Template
+
+Create template object with defaults appropriate for github.com/dvp2015 repositories.
+
+# Example
+
+```julia
+    t = github_template(dir="~/dev/julia")
+    t("MyPkg")
+```
+"""
+function github_template()::Template
+    return Template(;
+        julia=VERSION,
+        user="dvp2015",
+        authors=["dmitri_portnov@yahoo.com>"],
+        dir=Pkg.devdir(),
+        host="github.com",
+        plugins=PkgTemplates.Plugin[
+            BlueStyleBadge(), # https://github.com/invenia/BlueStyle
+            Citation(),
+            Codecov(),
+            ColPracBadge(),
+            CompatHelper(),
             Develop(),
             Documenter{GitHubActions}(),
-            Git(; ignore=[".*", "wrk/", "~*"], ssh=true),
+            Git(; ignore=[".*", "wrk/", "~*"]),
             GitHubActions(),
-            GitLabCI(),
+            RegisterAction(),
             License(; name="MIT", destination="LICENSE"),
             ProjectFile(; version=v"0.1.0"),
             Readme(; inline_badges=true),

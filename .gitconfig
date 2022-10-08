@@ -1,7 +1,7 @@
 # vi:sw=2:sts=2:ts=2:expandtab
 [user]
     name = dvp
-    email = dmitri_portnov@yahoo.com
+    email = d.portnov@iterrf.ru
 
 [core]
     autocrlf = input
@@ -88,7 +88,8 @@
 ### Github specific
 ###
 [github]
-    user = DoomHammer
+    user = dvp2015         #  DoomHammer
+    email = dmitri_portnov@yahoo.com
 
 # read from given uri
 # push to writable one
