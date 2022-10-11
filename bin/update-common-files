@@ -6,31 +6,50 @@ my_package() {
     echo "$pkg"
 }
 
-main() {
-    local pkg="$(1:$(my_package))"
-    meld .flake8 ../xpypact/.flake8
-    meld .github/constraints.txt ../xpypact/.github/constraints.txt
-    meld .github/dependabot.yml ../xpypact/.github/dependabot.yml
-    meld .github/release-drafter.yml ../xpypact/.github/release-drafter.yml
-    meld .github/workflows/labeler.yml ../xpypact/.github/workflows/labeler.yml
-    meld .github/workflows/release-drafter.yml ../xpypact/.github/workflows/release-drafter.yml
-    meld .github/workflows/release.yml ../xpypact/.github/workflows/release.yml
-    meld .github/workflows/stale.yml ../xpypact/.github/workflows/stale.yml
-    meld .github/workflows/tests.yml ../xpypact/.github/workflows/tests.yml
-    meld noxfile.py ../xpypact/noxfile.py
-    meld .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
-    meld pyproject.toml ../xpypact/pyproject.toml
-    if [[ "$pkg" != "mckit" ]]; then
-        meld src/$pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
-        meld src/$pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
-        meld src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+check_pair() {
+    local left="$1"
+    local right="$2"
+    if [[ ! -f $left ]]; then
+        echo "Left file $left doesn't exist"
+        return 0
+    fi
+    if [[ ! -f $right ]]; then
+        echo "Right file $right doesn't exist"
+        return 0
+    fi
+    if [[ -n "$(diff -q $left $right)" ]]; then
+        meld $left $right
     else
-        meld $pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
-        meld $pkg/utils/resource.py ../xpypact/src/xpypact/utils/resource.py
-        meld tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+        echo "Files $left and $right don't differ"
     fi
 }
 
+main() {
+    local pkg="${1:$(my_package)}"
+    echo "Target package $pkg"
+    echo "----------------------"
+    check_pair .flake8 ../xpypact/.flake8
+    check_pair .github/constraints.txt ../xpypact/.github/constraints.txt
+    check_pair .github/dependabot.yml ../xpypact/.github/dependabot.yml
+    check_pair .github/release-drafter.yml ../xpypact/.github/release-drafter.yml
+    check_pair .github/workflows/labeler.yml ../xpypact/.github/workflows/labeler.yml
+    check_pair .github/workflows/release-drafter.yml ../xpypact/.github/workflows/release-drafter.yml
+    check_pair .github/workflows/release.yml ../xpypact/.github/workflows/release.yml
+    check_pair .github/workflows/stale.yml ../xpypact/.github/workflows/stale.yml
+    check_pair .github/workflows/tests.yml ../xpypact/.github/workflows/tests.yml
+    check_pair noxfile.py ../xpypact/noxfile.py
+    check_pair .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
+    check_pair pyproject.toml ../xpypact/pyproject.toml
+    if [[ "$pkg" != "mckit" ]]; then
+        check_pair "src/${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
+        check_pair src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+    else
+        check_pair "${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
+        check_pair tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+    fi
+}
+
+my_package
 main "$@"
 
 
