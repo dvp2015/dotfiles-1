@@ -26,3 +26,7 @@ ENDGROUP
 GROUP "config"
   ENTRY "mc config" URL "/home/dvp/.config/mc"
 ENDGROUP
+GROUP "hpc-larionov-001"
+  ENTRY "/home/dvp" URL "/sftp://dvp@10.0.130.111/home/dvp"
+  ENTRY "/sharedfolder" URL "/sftp://dvp@10.0.130.111/sharedfolder"
+ENDGROUP
