@@ -67,11 +67,7 @@ function gitlab_template()::Template
         dir=Pkg.devdir(),
         host="gitlab.iterrf.ru",
         plugins=PkgTemplates.Plugin[
-            BlueStyleBadge(), # https://github.com/invenia/BlueStyle
             Citation(),
-            Codecov(),
-            ColPracBadge(),
-            CompatHelper(),
             Develop(),
             Documenter{GitLabCI}(),
             Git(; ignore=[".*", "wrk/", "~*"], ssh=true),
@@ -107,10 +103,8 @@ function github_template()::Template
         dir=Pkg.devdir(),
         host="github.com",
         plugins=PkgTemplates.Plugin[
-            BlueStyleBadge(), # https://github.com/invenia/BlueStyle
             Citation(),
             Codecov(),
-            ColPracBadge(),
             CompatHelper(),
             Develop(),
             Documenter{GitHubActions}(),
