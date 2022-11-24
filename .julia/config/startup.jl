@@ -12,15 +12,13 @@ atreplinit() do repl
             end
         end
     catch e
-        display("Cannot use OhMyREPL: $e.msg")
+        @warn "Cannot use OhMyREPL: $e.msg"
     end
 
     try
-        @eval begin
-            using Revise
-        end
+        @eval using Revise
     catch e
-        display("Cannot use Revise: $e.msg")
+        @warn "Cannot use Revise: $e.msg"
     end
 
     # TODO dvp: check TerminalLoggers - precompile failed
