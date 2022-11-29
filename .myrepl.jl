@@ -112,7 +112,7 @@ function github_template(;kwargs...)::Template
     user = githubkw!(kwargs, :user, "dvp2015")
     email = githubkw!(kwargs, :email, "dmitri_portnov@yahoo.com")
     return Template(;
-        julia=pop!(kwargs, :julia, VERSION),
+        julia=pop!(kwargs, :julia, "1.6.7"),  # stable version
         user=user,
         authors=githubkw!(kwargs, :authors, "$user <$email>"),
         plugins=PkgTemplates.Plugin[
