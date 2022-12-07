@@ -12,15 +12,13 @@ atreplinit() do repl
             end
         end
     catch e
-        display("Cannot use OhMyREPL: $e.msg")
+        @warn "Cannot use OhMyREPL: $e.msg"
     end
 
     try
-        @eval begin
-            using Revise
-        end
+        @eval using Revise
     catch e
-        display("Cannot use Revise: $e.msg")
+        @warn "Cannot use Revise: $e.msg"
     end
 
     # TODO dvp: check TerminalLoggers - precompile failed
@@ -40,20 +38,15 @@ atreplinit() do repl
 			if Sys.iswindows()
                 push!(
                     editors, 
-                    "d:\\tools\\VSCode\\Code.exe",
-                    "C:\\Program Files\\Notepad++\\notepad++.exe",
-                    "notepad.exe"
+                    "notepad++",
+                    "notepad"
                 )
             end 
-            editor_idx = findfirst(Sys.isexecutable, editors)
-            if editor_idx !== nothing
-                editor = editors[editor_idx]
-                if occursin(r"[ \\]", editor) 
-                    editor = "\"$editor\""  # force to be a single entry on shell_split call
-                end
-			    ENV["JULIA_EDITOR"] = editor
-             
+            editor = something(map(Sys.which, editors)...)
+            if Sys.iswindows() && occursin(r"[ \\]", editor) 
+                editor = "\"$editor\""  # force to be a single entry on shell_split call
             end
+            ENV["JULIA_EDITOR"] = editor
         end
         myrepl() = joinpath(homedir(), ".myrepl.jl")
         imyrepl() = include(myrepl())

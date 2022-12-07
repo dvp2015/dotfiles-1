@@ -71,7 +71,7 @@
     conflictstyle = diff3
 
 [mergetool]
-	prompt = false
+    prompt = false
     keepBackup = false
 
 [mergetool "vimdiff"]
@@ -127,3 +127,8 @@
 	prompt = false
 [mergetool "nbdime"]
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[gitlab]
+	user = dvp
+	email = d.portnov@iterrf.ru
+[init]
+	defaultBranch = master
