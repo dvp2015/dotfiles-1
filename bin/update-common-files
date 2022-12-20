@@ -25,29 +25,30 @@ check_pair() {
 }
 
 main() {
-    local pkg="${1:$(my_package)}"
+    local pkg="${1:-$(my_package)}"
+    local ref="${2:-mckit-nuclides}"
     echo "Target package $pkg"
     echo "----------------------"
-    check_pair .flake8 ../xpypact/.flake8
-    check_pair .github/constraints.txt ../xpypact/.github/constraints.txt
-    check_pair .github/dependabot.yml ../xpypact/.github/dependabot.yml
-    check_pair .github/release-drafter.yml ../xpypact/.github/release-drafter.yml
-    check_pair .github/workflows/labeler.yml ../xpypact/.github/workflows/labeler.yml
-    check_pair .github/workflows/release-drafter.yml ../xpypact/.github/workflows/release-drafter.yml
-    check_pair .github/workflows/release.yml ../xpypact/.github/workflows/release.yml
-    check_pair .github/workflows/stale.yml ../xpypact/.github/workflows/stale.yml
-    check_pair .github/workflows/tests.yml ../xpypact/.github/workflows/tests.yml
-    check_pair noxfile.py ../xpypact/noxfile.py
-    check_pair .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
-    check_pair pyproject.toml ../xpypact/pyproject.toml
-    check_pair tools/reset-pyenv ../xpypact/tools/reset-pyenv
-    check_pair tools/install-poetry ../xpypact/tools/install-poetry
+    check_pair .flake8 "../${ref}/.flake8"
+    check_pair .github/constraints.txt "../${ref}/.github/constraints.txt"
+    check_pair .github/dependabot.yml "../${ref}/.github/dependabot.yml"
+    check_pair .github/release-drafter.yml "../${ref}/.github/release-drafter.yml"
+    check_pair .github/workflows/labeler.yml "../${ref}/.github/workflows/labeler.yml"
+    check_pair .github/workflows/release-drafter.yml "../${ref}/.github/workflows/release-drafter.yml"
+    check_pair .github/workflows/release.yml "../${ref}/.github/workflows/release.yml"
+    check_pair .github/workflows/stale.yml "../${ref}/.github/workflows/stale.yml"
+    check_pair .github/workflows/tests.yml "../${ref}/.github/workflows/tests.yml"
+    check_pair noxfile.py "../${ref}/noxfile.py"
+    check_pair .pre-commit-config.yaml "../${ref}/.pre-commit-config.yaml"
+    check_pair pyproject.toml "../${ref}/pyproject.toml"
+    check_pair tools/reset-pyenv "../${ref}/tools/reset-pyenv"
+    check_pair tools/install-poetry "../${ref}/tools/install-poetry"
     if [[ "$pkg" != "mckit" ]]; then
-        check_pair "src/${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
-        check_pair src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+        check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
+        check_pair src/tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
     else
-        check_pair "${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
-        check_pair tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
+        check_pair "${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
+        check_pair tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
     fi
 }
 
