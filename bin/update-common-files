@@ -40,6 +40,8 @@ main() {
     check_pair noxfile.py ../xpypact/noxfile.py
     check_pair .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
     check_pair pyproject.toml ../xpypact/pyproject.toml
+    check_pair tools/reset-pyenv ../xpypact/tools/reset-pyenv
+    check_pair tools/install-poetry ../xpypact/tools/install-poetry
     if [[ "$pkg" != "mckit" ]]; then
         check_pair "src/${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
         check_pair src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
