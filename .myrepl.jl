@@ -159,10 +159,16 @@ function pretty_print_stacktrace(io::IO, trace=stacktrace(catch_backtrace()))
     end
 end
 
-pretty_print_stacktrace(trace=stacktrace(catch_backtrace())) = pretty_print_stacktrace(Base.stderr, stacktrace(catch_backtrace()))
+pretty_print_stacktrace(trace=stacktrace(catch_backtrace())) =
+    pretty_print_stacktrace(Base.stderr, stacktrace(catch_backtrace()))
 
-ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
-cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
+ls(path::AbstractString=pwd()) =
+    foreach(println, sort(readdir(path)))
+ls(f::Function, path::AbstractString=pwd()) =
+    foreach(println, sort(filter(f, readdir(path))))
+
+cdev(subdir::AbstractString...) =
+    cd(joinpath(Pkg.devdir(), subdir...))
 
 """
 	installed_packages()
