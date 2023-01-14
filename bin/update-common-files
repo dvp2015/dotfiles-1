@@ -45,10 +45,10 @@ main() {
     check_pair tools/install-poetry "../${ref}/tools/install-poetry"
     if [[ "$pkg" != "mckit" ]]; then
         check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair src/tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
+        check_pair src/tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
     else
         check_pair "${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
+        check_pair tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
     fi
 }
 
