@@ -1,6 +1,6 @@
 #!/bin/bash
 
-my_package() {
+my_pkg() {
     local dir="$(basename $(readlink -e .))"
     local pkg="${dir//-/_}"
     echo "$pkg"
@@ -25,9 +25,11 @@ check_pair() {
 }
 
 main() {
-    local pkg="${1:-$(my_package)}"
+    local pkg="${1:-$(my_pkg)}"
     local ref="${2:-mckit-nuclides}"
+    local refpkg="${ref//-/_}"
     echo "Target package $pkg"
+    echo "Reference      $refpkg"
     echo "----------------------"
     check_pair .flake8 "../${ref}/.flake8"
     check_pair .github/constraints.txt "../${ref}/.github/constraints.txt"
@@ -43,16 +45,10 @@ main() {
     check_pair pyproject.toml "../${ref}/pyproject.toml"
     check_pair tools/reset-pyenv "../${ref}/tools/reset-pyenv"
     check_pair tools/install-poetry "../${ref}/tools/install-poetry"
-    if [[ "$pkg" != "mckit" ]]; then
-        check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair src/tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
-    else
-        check_pair "${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
-    fi
+    check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${refpkg}/utils/resource.py"
+    check_pair tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
 }
 
-my_package
 main "$@"
 
 
