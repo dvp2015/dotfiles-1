@@ -29,7 +29,7 @@ main() {
     local ref="${2:-mckit-nuclides}"
     echo "Target package $pkg"
     echo "----------------------"
-    check_pair .flake8 "../${ref}/.flake8"
+    # ci
     check_pair .github/constraints.txt "../${ref}/.github/constraints.txt"
     check_pair .github/dependabot.yml "../${ref}/.github/dependabot.yml"
     check_pair .github/release-drafter.yml "../${ref}/.github/release-drafter.yml"
@@ -38,18 +38,19 @@ main() {
     check_pair .github/workflows/release.yml "../${ref}/.github/workflows/release.yml"
     check_pair .github/workflows/stale.yml "../${ref}/.github/workflows/stale.yml"
     check_pair .github/workflows/tests.yml "../${ref}/.github/workflows/tests.yml"
-    check_pair noxfile.py "../${ref}/noxfile.py"
+    # docs
+    check_pair docs/source/conf.py "../${ref}/docs/source/conf.py"
+    check_pair docs/source/index.rst "../${ref}/docs/source/index.rst"
+    # qa
+    check_pair .flake8 "../${ref}/.flake8"
     check_pair .pre-commit-config.yaml "../${ref}/.pre-commit-config.yaml"
+    check_pair noxfile.py "../${ref}/noxfile.py"
+    # build
     check_pair pyproject.toml "../${ref}/pyproject.toml"
     check_pair tools/reset-pyenv "../${ref}/tools/reset-pyenv"
     check_pair tools/install-poetry "../${ref}/tools/install-poetry"
-    if [[ "$pkg" != "mckit" ]]; then
-        check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair src/tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
-    else
-        check_pair "${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
-        check_pair tests/utils/test_resource.py "../${ref}/src/tests/utils/test_resource.py"
-    fi
+    # check_pair "src/${pkg}/utils/resource.py" "../${ref}/src/${ref}/utils/resource.py"
+    # check_pair tests/utils/test_resource.py "../${ref}/tests/utils/test_resource.py"
 }
 
 my_package

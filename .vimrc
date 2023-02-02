@@ -64,7 +64,7 @@ set viewoptions-=options
 
 " Python helping options http://python-guide-pt-br.readthedocs.io/en/latest/dev/env/
 " Julia: https://github.com/invenia/BlueStyle
-set textwidth=92  " lines longer than 92 columns will be broken
+set textwidth=100 " lines longer than 100 columns will be broken
 set shiftwidth=4  " operation >> indents  columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -381,6 +381,7 @@ autocmd bufnewfile,bufread *.rhtml setlocal ft=eruby
 autocmd BufNewFile,BufRead *.mako setlocal ft=mako
 autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
 autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
+autocmd BufRead,BufNewFile *.jl :set filetype=julia
 let html_no_rendering=1
 let g:closetag_default_xml=1
 let g:sparkupNextMapping='<c-l>'
@@ -864,7 +865,6 @@ function! AppendModeline()
 endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()
-autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
 " VS Code plugin recommendation: jonsmithers.open-in-vim
 :command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
