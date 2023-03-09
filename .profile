@@ -8,26 +8,28 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+add_source() {
+    for f in "$[@]"; do
+        [ -f "$f" ] && source "$f"
+    done
+}
+
+insert_path() {
+    for f in "$[@]"; do
+        [ -d "$f" ] && PATH="$f:$PATH"
+    done
+}
+
 # if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+[ -n "$BASH_VERSION" ] && add_source "$HOME/.bashrc"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+add_path "$HOME/bin" "$HOME/.local/bin"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+add_source "$HOME/.cargo/env"
+
 export GOPATH=$HOME/.go
-export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+insert_path "/usr/local/go/bin" "$GOPATH/bin"
 
+unalias vim
 
-# Added by Toolbox App
-export PATH="$PATH:/home/dvp/.local/share/JetBrains/Toolbox/scripts"
+add_source /sharedfolder/common/profile
