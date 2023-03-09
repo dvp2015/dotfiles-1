@@ -17,3 +17,5 @@ function _pip_completion {
 compctl -K _pip_completion /home/dvp/.pyenv/versions/r2s/bin/python -m pip
 # pip zsh completion end
 
+unalias vim
+[ -f /sharedfolder/common/.profile ] && . /sharedfolder/common/.profile

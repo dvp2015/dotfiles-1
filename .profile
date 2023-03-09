@@ -9,27 +9,27 @@
 #umask 022
 
 add_source() {
-    for f in "$[@]"; do
-        [ -f "$f" ] && source "$f"
+    for f in "$@"; do
+        [ -f "$f" ] && source "$f" || echo "File not found $f"
     done
 }
 
 insert_path() {
-    for f in "$[@]"; do
-        [ -d "$f" ] && PATH="$f:$PATH"
+    for f in "$@"; do
+        [ -d "$f" ] && PATH="$f:$PATH" || echo "Directory not found $f"
     done
 }
 
 # if running bash
 [ -n "$BASH_VERSION" ] && add_source "$HOME/.bashrc"
 
-add_path "$HOME/bin" "$HOME/.local/bin"
+insert_path "$HOME/bin" "$HOME/.local/bin"
 
-add_source "$HOME/.cargo/env"
+insert_source "$HOME/.cargo/env"
 
 export GOPATH=$HOME/.go
 insert_path "/usr/local/go/bin" "$GOPATH/bin"
 
 unalias vim
 
-add_source /sharedfolder/common/profile
+add_source /sharedfolder/common/.profile
