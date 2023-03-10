@@ -14,8 +14,10 @@ function _pip_completion {
              COMP_CWORD=$(( cword-1 )) \
              PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
 }
-compctl -K _pip_completion /home/dvp/.pyenv/versions/r2s/bin/python -m pip
+compctl -K _pip_completion pip
 # pip zsh completion end
 
-unalias vim
-[ -f /sharedfolder/common/.profile ] && . /sharedfolder/common/.profile
+if [[ "$HOST" == "hpc-node-01" ]]; then
+    unalias vim
+    . /sharedfolder/common/.profile
+fi

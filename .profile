@@ -10,26 +10,27 @@
 
 add_source() {
     for f in "$@"; do
-        [ -f "$f" ] && source "$f" || echo "File not found $f"
+        [ -f "$f" ] && source "$f"
     done
 }
 
 insert_path() {
     for f in "$@"; do
-        [ -d "$f" ] && PATH="$f:$PATH" || echo "Directory not found $f"
+        [ -d "$f" ] && PATH="$f:$PATH"
     done
 }
 
-# if running bash
-[ -n "$BASH_VERSION" ] && add_source "$HOME/.bashrc"
-
+[ -n "$BASH_VERSION" ] && . "$HOME/.bashrc"
 insert_path "$HOME/bin" "$HOME/.local/bin"
+add_source "$HOME/.cargo/env"
 
-insert_source "$HOME/.cargo/env"
 
-export GOPATH=$HOME/.go
-insert_path "/usr/local/go/bin" "$GOPATH/bin"
+if [[ "$HOST" == "hpc-node-01" ]]; then
+    . /sharedfolder/common/.profile
+else
+    export GOPATH=$HOME/.go
+    insert_path "/usr/local/go/bin" "$GOPATH/bin"
+fi
 
-unalias vim
-
-add_source /sharedfolder/common/.profile
+ 
+# vim: set ts=4 sw=4 tw=100 ft=sh ss=0 et ai :
