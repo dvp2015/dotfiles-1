@@ -1,0 +1,13 @@
+#!/bin/bash
+
+main() {
+    [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+    mkdir --parents $HOME/.local/bin
+    mv nvim.appimage $HOME/.local/bin/nvim
+}
+
+main
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
