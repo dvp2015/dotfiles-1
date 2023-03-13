@@ -294,6 +294,7 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.invoke-completion.rc ] && source ~/.invoke-completion.rc
 
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+# TODO dvp - this duplicates autojump, select and use one
 command -v jump > /dev/null  && eval "$(jump shell zsh)"
 
 lg() {
