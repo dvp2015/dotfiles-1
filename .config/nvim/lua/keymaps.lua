@@ -49,6 +49,12 @@ map('n', '<leader>.', ':cnext<CR>', default_opts)
 -- Convert word to uppercase
 map('i', '<c-u>', '<Esc>viwUea', default_opts)
 
+
+-- Fast saving and closing
+map('n', '<leader><leader>', ':w<cr>', default_opts)
+map('n', '<leader>q', ':q!<cr>', default_opts)
+map('n', '<leader>w', ':wq<cr>', default_opts)
+
 -- продолжить перенос из vimrc здесь
 
 -- Стрелочки откл. Использовать hjkl
