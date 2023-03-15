@@ -53,7 +53,13 @@ map('i', '<c-u>', '<Esc>viwUea', default_opts)
 -- Fast saving and closing
 map('n', '<leader><leader>', ':w<cr>', default_opts)
 map('n', '<leader>q', ':q!<cr>', default_opts)
+map('n', '<leader>Q', ':qa!<cr>', default_opts)
 map('n', '<leader>w', ':wq<cr>', default_opts)
+
+-- Opening splits
+map('n', '<leader>v', '<C-w><C-v><C-w>l', default_opts)
+map('n', '<leader>s', '<C-w>s', default_opts)
+
 
 -- продолжить перенос из vimrc здесь
 

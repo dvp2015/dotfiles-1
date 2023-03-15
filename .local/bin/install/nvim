@@ -1,6 +1,7 @@
 #!/bin/bash
 
 main() {
+    # from source https://github.com/neovim/neovim/releases/download/stable/nvim-win64.zip
     [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
     mkdir --parents $HOME/.local/bin
