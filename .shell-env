@@ -3,7 +3,8 @@
 #
 # Editors
 #
-export EDITOR=vim
+[[ -x $(command -v nvim) ]] && EDITOR=nvim || EDITOR=vim
+export EDITOR
 export GIT_EDITOR="$EDITOR"
 export USE_EDITOR="$EDITOR"
 export VISUAL=$EDITOR
