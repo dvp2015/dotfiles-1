@@ -1,10 +1,32 @@
 #!/bin/bash
 
+. $HOME/.bash-functions.rc
+
 main() {
-    [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
-    mkdir --parents $HOME/.local/bin
-    mv nvim.appimage $HOME/.local/bin/nvim
+    local usage = "
+        ./nvim [tar|image]
+
+    Default image.
+    Install nvim.
+
+    In 'source' mode to nvim is installed to $HOME/tools and link is created in $HOME/.local/bin.
+    In 'image' mode the image is copied directly to $HOME/.local/bin.
+    "
+    local mode="${1:-image}"
+    mkdir -p $HOME/tools/ && cd $HOME/tools/
+    if [[ $mode == "image"]]; then
+        [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        chmod u+x nvim.appimage
+        mkdir --parents $HOME/.local/bin
+        mv -f nvim.appimage $HOME/.local/bin/nvim
+    elif [[ $mode == "source" ]]
+        wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        tar zxvf nvim-linux64.tar.gz
+        rm -f $HOME/.local/bin/nvim
+        ln -s $HOME/tools/nvim-linux64/bin/nvim $HOME/.local/bin/nvim
+    else
+        die $usage
+    fi
     git clone --depth 1 https://github.com/wbthomason/packer.nvim  $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 }
 

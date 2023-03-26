@@ -3,7 +3,8 @@
 #
 # Editors
 #
-export EDITOR=vim
+[[ -x $(command -v nvim) ]] && EDITOR=nvim || EDITOR=vim
+export EDITOR
 export GIT_EDITOR="$EDITOR"
 export USE_EDITOR="$EDITOR"
 export VISUAL=$EDITOR
@@ -34,7 +35,7 @@ alias printpath='echo -e ${PATH//:/\\n}'
 update_path                  \
     "$HOME/bin"              \
     "$HOME/.local/bin"       \
-    "$HOME/.cargo/bin"       \
+    $(dirname $(readlink -m $HOME/bin/node)) \
     "/opt/bin"               \
     "${MCNP_HOME}/MCNP5/bin" \
     "$HOME/misc/todo"        \
@@ -43,6 +44,9 @@ update_path                  \
     "/bin"                   \
     "$PATH"
 
+
+source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
 
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
