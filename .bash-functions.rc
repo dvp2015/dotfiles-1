@@ -253,4 +253,10 @@ check_go() {
     return 0
 }
 
+
+select_first_local_pyenv() {
+    local envs=($(pyenv local))
+    echo "${envs[0]}"
+}
+
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
