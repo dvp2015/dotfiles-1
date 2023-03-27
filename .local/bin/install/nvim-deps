@@ -23,8 +23,9 @@ install_node() {
   popd > /dev/null
   mv "$HOME/tools/${folder}" "$HOME/tools/${target}"
   # assuming ~/bin/select-node is installed
-  [[ command -v select-node ]] && select-node "$target"
-  npm install -g vim-language-server
+  export PATH="$HOME/tools/${folder}/bin:$PATH"
+  command -v select-node && select-node "$target"
+  $HOME/tools/${folder}/bin/npm install -g vim-language-server
 }
 
 install_node "$@"
