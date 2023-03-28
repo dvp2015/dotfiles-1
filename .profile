@@ -22,7 +22,7 @@ insert_path() {
 
 [ -n "$BASH_VERSION" ] && . "$HOME/.bashrc"
 insert_path "$HOME/bin" "$HOME/.local/bin"
-add_
+add_source "$HOME/.cargo/env"
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
     . /sharedfolder/common/.profile
