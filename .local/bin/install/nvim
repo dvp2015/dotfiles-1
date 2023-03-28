@@ -2,6 +2,19 @@
 
 . $HOME/.bash-functions.rc
 
+backup() {
+    mkdir ~/backup_nvim
+    cp -r ~/.config/nvim ~/backup_nvim
+    cp -r ~/.local/share/nvim ~/backup_nvim
+    cp -r ~/.cache/nvim ~/backup_nvim
+}
+
+clean() {
+    rm -rf ~/.config/nvim
+    rm -rf ~/.local/share/nvim
+    rm -rf ~/.cache/nvim   
+}
+
 main() {
     local usage = "
         ./nvim [tar|image]
@@ -27,7 +40,9 @@ main() {
     else
         die $usage
     fi
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim  $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+    backup
+    clean
+    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 }
 
 main
