@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ -n "$ZSH_VERSION" ]]; then
+    [[ command -v poettry ]] && poetry completions zsh > ~/.zfunc/_poetry 
+    [[ command -v ruff ]] && ruff generate-shell-completion zsh > ~/.zfunc/_ruff
+elif [[ -n "BASH_VERSION" ]]; then
+    [[ command -v poetry ]] && poetry completions bash >> ~/.bash_completion
+    [[ command -v ruff ]] && ruff generate-shell-completion bash >> ~/.bash_completion
+fi
+
