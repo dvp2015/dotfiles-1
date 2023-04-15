@@ -25,22 +25,25 @@ main() {
   pushd $HOME/dev  > /dev/null
   for p in "${projects[@]}"; do
     echo "---------------------------"
+    pushd "$p" > /dev/null
     if [[ -n $(git status -s) ]]; then
         echo "Cannot update $p - untracked changes in repo"
     else
         echo "Updating $p"
-        pushd "$p" > /dev/null
         eval "$(pyenv init -)"
         poetry config --local virtualenvs.create false
         pyenv shell "$(select_first_local_pyenv)"
-        if [[ git pull ]]; then
+        git pull
+        if [[ 0 < $? ]]; then
+            echo "Failed to pull $p changes"
+        else
             poetry update 
             git commit -am "dependencies: poetry update" 
-            git push 
+            git push
         fi
         pyenv shell --unset
-        popd > /dev/null
     fi
+    popd > /dev/null
     echo "==========================="
   done
   popd > /dev/null
