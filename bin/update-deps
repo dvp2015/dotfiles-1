@@ -2,13 +2,16 @@
 
 # Update dependencies in projects.
 #
-# dvp 2023-03-26
+# dvp 2023-04-14
 #
 #
 
 . $HOME/.bash-functions.rc
 
-# set -exa
+set -o nounset
+# set -o errexit
+# set -o verbose
+# set -o xtrace
 
 main() {
   local projects="$@"
@@ -38,6 +41,9 @@ main() {
             echo "Failed to pull $p changes"
         else
             poetry update 
+            poetry install
+            pre-commit run -a
+            pytest
             git commit -am "dependencies: poetry update" 
             git push
         fi
