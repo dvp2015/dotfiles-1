@@ -50,4 +50,7 @@ source "$HOME/.cargo/env"
 
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
+# store history of interactive python session
+# export PYTHONSTARTUP=$HOME/.pystartup
+
 #  vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
