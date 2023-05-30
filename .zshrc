@@ -22,6 +22,13 @@ test -r ~/.shell-aliases && source ~/.shell-aliases
 autoload -U bashcompinit
 bashcompinit
 
+zstyle ':completion:*' menu select
+fpath+=/usr/share/zsh/vendor-completions
+fpath+=~/.local/zsh.completions
+fpath+=~/.zfunc
+
+autoload -Uz compinit && compinit
+
 # TODO dvp:
 # - should I check if nox or nox file available?
 # - move to direnv?
@@ -256,16 +263,6 @@ if [[ "yes" == "$USE_TMUX" ]]; then
     fi
 fi
 
-lg() {
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-
-    lazygit "$@"
-
-    if [[ -f $LAZYGIT_NEW_DIR_FILE ]]; then
-        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
-}
 
 if [[ -x rg ]]; then
     export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
@@ -305,9 +302,3 @@ lg() {
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
-zstyle ':completion:*' menu select
-fpath+=/usr/share/zsh/vendor-completions
-fpath+=~/.local/zsh.completions
-fpath+=~/.zfunc
-
-autoload -Uz compinit && compinit

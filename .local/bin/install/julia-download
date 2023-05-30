@@ -3,8 +3,8 @@
 . ~/.bash-functions.rc
 
 download() {
-  local version="1.8.5"
-  local sver="1.8"
+  local version="1.9.0"
+  local sver="1.9"
   local file="julia-${version}-linux-x86_64.tar.gz"
   curl -fLo "$file" "https://julialang-s3.julialang.org/bin/linux/x64/$sver/$file"
   success "Julia $version is downloaded."
