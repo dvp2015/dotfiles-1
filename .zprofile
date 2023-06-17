@@ -18,6 +18,5 @@ compctl -K _pip_completion pip
 # pip zsh completion end
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
-    unalias vim
     . /sharedfolder/common/.profile
 fi

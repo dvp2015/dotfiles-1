@@ -27,12 +27,12 @@ main() {
     "
     local mode="${1:-image}"
     mkdir -p $HOME/tools/ && cd $HOME/tools/
-    if [[ $mode == "image"]]; then
+    if [[ $mode == "image" ]]; then
         [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
         chmod u+x nvim.appimage
         mkdir --parents $HOME/.local/bin
         mv -f nvim.appimage $HOME/.local/bin/nvim
-    elif [[ $mode == "source" ]]
+    elif [[ $mode == "source" ]]; then
         wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
         tar zxvf nvim-linux64.tar.gz
         rm -f $HOME/.local/bin/nvim
@@ -43,6 +43,7 @@ main() {
     backup
     clean
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+    git clone git@github.com:dvp2015/nvchad-custom.git ~/.config/nvim/lua/custom --depth 1
 }
 
 main
