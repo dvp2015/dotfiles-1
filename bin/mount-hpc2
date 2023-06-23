@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# borrowed from https://tchumley.mtholyoke.edu/misc/swarm2/sshfs-screenshot.png
+md -p ~/dev/hpc/hpc-002
+sshfs 10.0.130.151:/home/dvp ~/dev/hpc/hpc-002 -o reconnect -o IdentityFile=~/.ssh/id_rsa -o follow_symlinks
