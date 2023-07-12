@@ -104,18 +104,9 @@ END
     join_strings -u $@
 }
 
-
-download() {
-    curl -O $1
+prepend_path() {
+    export PATH="$(make_path $@ $PATH)"
 }
-
-is_main() {
-    [[ "${FUNCNAME[-1]}" == "main" ]]
-}
-
-# is_sourced() {
-    # [[ ${FUNCNAME[@]: -1} == "source" ]]
-# }
 
 
 update_path() {
@@ -123,6 +114,19 @@ update_path() {
     if [[ "$new_path" != "$PATH" ]]; then
         export PATH="$new_path"
     fi
+}
+
+add_to_path() {
+    export PATH="$(make_path $PATH $@)"
+}
+
+
+download() {
+    curl -O $1
+}
+
+is_main() {
+    [[ "${FUNCNAME[-1]}" == "main" ]]
 }
 
 
@@ -150,14 +154,6 @@ all_files_exist() {
         fi
     done
     return $warns
-}
-
-add_to_path() {
-    export PATH="$(make_path $PATH $@)"
-}
-
-prepend_path() {
-    export PATH="$(make_path $@ $PATH)"
 }
 
 
