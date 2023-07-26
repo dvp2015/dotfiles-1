@@ -8,7 +8,8 @@ export FISPACT_HOME=/opt/fispact
 export FISPACT_DATA=/opt/nuclear_data
 
 fispact_setenv() {
-    export FISPACT_BIN="${FISPACT_HOME}/bin/linuxmint/18"
+    export FISPACT_BIN="${FISPACT_HOME}/bin/debian/10"
+    # export FISPACT_BIN="${FISPACT_HOME}/bin/linuxmint/18"
     export FISPACT="${FISPACT_BIN}/fispact"
     export PATH="$(make_path $FISPACT_BIN $PATH)"
     export INCLUDE_PATH="$(make_path ${FISPACT_BIN}/include $INCLUDE_PATH)"
