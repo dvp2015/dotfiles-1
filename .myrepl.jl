@@ -58,7 +58,7 @@ Create template object with defaults appropriate for gitlab.iterrf.ru server.
 
 ```julia
     t = gitlab_template()
-    t.julia=v"1.7"
+    t.julia=v"1.9"
     t("MyPkg")
 ```
 """
