@@ -10,13 +10,13 @@
 
 add_source() {
     for f in "$@"; do
-        [ -f "$f" ] && source "$f"
+        [ -f "$f" ] && source "$f" || echo "ERROR: $f is not a file" && return 1
     done
 }
 
 insert_path() {
     for f in "$@"; do
-        [ -d "$f" ] && PATH="$f:$PATH"
+        [ -d "$f" ] && PATH="$f:$PATH" || echo "ERROR: $f is not a directory" && return 1
     done
 }
 
@@ -25,7 +25,7 @@ insert_path "$HOME/bin" "$HOME/.local/bin"
 add_source "$HOME/.cargo/env"
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
-    . /sharedfolder/common/.profile
+        . /sharedfolder/common/.profile
 else
     export GOPATH=$HOME/.go
     insert_path "/usr/local/go/bin" "$GOPATH/bin"
