@@ -61,7 +61,7 @@ if [[ "$HOST" == "amarano" ]]; then
     HDF5_ROOT=/opt/HDF_Group/HDF5/1.14.1.2
     if [[ -d $HDF5_ROOT ]]; then
       export HDF5_ROOT
-      export HDF5_DIR=$HDF5_ROOT="${HDF5_ROOT}/cmake"
+      export HDF5_DIR="${HDF5_ROOT}/cmake"
       path=(
         $HDF5_ROOT/{bin,lib}
         $path
