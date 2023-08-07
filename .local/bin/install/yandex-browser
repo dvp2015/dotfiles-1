@@ -11,10 +11,10 @@ install() {
 
 
   # https://browser.yandex.ru/?banerid=6400000000&_rdr=stable
-  [[ command -v  yandex-browser ]] && echo "Yandex browser is alredy installed" && return 0
+  yandex-browser --version && echo "Yandex browser is alredy installed" && return 0
 
   wget https://browser.yandex.ru/download?banerid=6301000000&os=linux&package=deb&x64=1
   sudo dpkg -i Yandex.deb
-)
+}
 
 install $@
