@@ -9,7 +9,7 @@ pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
 # Ref: https://johnpapa.net/node-and-npm-without-sudo/
 . ~/.bash-functions.rc
 install_node() {
-  node_version="18.15.0"
+  node_version="18.16.0"
   target="node-v$node_version"
   [[ -d "$HOME/tools/$target" ]] && die "Directory already exists $HOME/tools/$target"
   folder="$target-linux-x64"
