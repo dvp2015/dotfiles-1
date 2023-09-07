@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "This is obsolete, use 'Rust' git-delta instead"
+echo "https://dandavison.github.io/delta/diff-highlight-and-diff-so-fancy-emulation.html"
+exit 0
+
 install_diff_so_fancy() {
     echo "Installing diff-so-fancy (git diff human readable)"
     local _out_dir=${1:-$HOME/.local}
