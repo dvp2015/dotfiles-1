@@ -6,7 +6,7 @@ set -euxo pipefail
 
 # PROGRAMS="hub httpie ripgrep bat fzf fd fd-find jq autojump direnv tig tmux neovim exa"
 # CARGO=(ripgrep bat fd-find tealdeer just)
-CARGO=(ripgrep fd-find)
+CARGO=(ripgrep fd-find git-delta)
 # APT=(fzf  autojump tig tmux neovim)
 APT=(curl wget git fzf autojump tmux xclip)
 NPM="how-2"
@@ -15,4 +15,4 @@ sudo apt-get install ${APT[@]}
 cargo install ${CARGO[@]}
 
  
-# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+# vim: set ts=4 sw=4 tw=92 ss:q=0 ft=sh et ai :

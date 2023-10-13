@@ -36,7 +36,8 @@ GROUP "hpc-larionov-001"
   ENTRY "/sharedfolder" URL "/sftp://dvp@10.0.130.111/sharedfolder"
 ENDGROUP
 GROUP "hpc-larionov-002"
-  ENTRY "/home/dvp" URL "/sftp://dvp@10.0.130.151/home/dvp"
-  ENTRY "/sharedfolder" URL "/sftp://dvp@10.0.130.151/sharedfolder"
+  ENTRY "~" URL "/sftp://dvp@10.0.130.151/home/dvp"
+  ENTRY "wrk-2" URL "/sftp://dvp@10.0.130.151/sharedfolder2/common/wrk"
+  ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder"
 ENDGROUP
 

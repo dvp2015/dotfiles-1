@@ -21,5 +21,5 @@ for f in ${files[@]}; do
     echo --------------------
     echo $f
     echo --------------------
-    cat $f | sed -n '/lost particle no/,+20p' 
+    cat $f | sed -n '/lost particle no/,+15p' 
 done
