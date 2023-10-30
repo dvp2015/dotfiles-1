@@ -16,6 +16,7 @@ GROUP "cs"
   ENTRY "sftp" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp"
 ENDGROUP
 GROUP "tnt-ftp"
+  ENTRY "dvp" URL "/ftps://dvp@tnt-ftp.iterrf.ru/public"
   ENTRY "public" URL "/ftps://public@tnt-ftp.iterrf.ru/public"
 ENDGROUP
 GROUP "hpc2"
@@ -38,6 +39,6 @@ ENDGROUP
 GROUP "hpc-larionov-002"
   ENTRY "~" URL "/sftp://dvp@10.0.130.151/home/dvp"
   ENTRY "wrk-2" URL "/sftp://dvp@10.0.130.151/sharedfolder2/common/wrk"
-  ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder"
+  ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
 
