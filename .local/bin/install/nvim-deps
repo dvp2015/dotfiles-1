@@ -1,33 +1,25 @@
 #!/bin/bash
+# Install NVIM prequisites
 
-# sudo apt install python3-pip
-pip install -U pynvim
-pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
-
-# Install the recent Node.js in user environment
-# TODO move to a separate script
-# Ref: https://johnpapa.net/node-and-npm-without-sudo/
 . ~/.bash-functions.rc
-install_node() {
-  node_version="20.10.0"
-  target="node-v$node_version"
-  [[ -d "$HOME/tools/$target" ]] && die "Directory already exists $HOME/tools/$target"
-  folder="$target-linux-x64"
-  archive="$folder.tar.xz"
 
-  pushd $HOME/Downloads > /dev/null
-  [[ -f $archive ]] || wget "https://nodejs.org/dist/v$node_version/$archive"
-  mkdir -p $HOME/tools
-  # extract node to a custom directory, the directory should exist.
-  tar xvf "${archive}" --directory=$HOME/tools
-  popd > /dev/null
-  mv "$HOME/tools/${folder}" "$HOME/tools/${target}"
-  # assuming ~/bin/select-node is installed
-  export PATH="$HOME/tools/${target}/bin:$PATH"
-  command -v select-node && select-node "$target"
-  $HOME/tools/${target}/bin/npm install -g vim-language-server
-  [[ -x $HOME/bin/node ]] && rm -f $HOME/bin/node
-  ln -s $HOME/tools/$target/bin/node $HOME/bin/node
+set -eo pipefail
+
+# Install python extensions
+install_pip_deps() {
+  pip install -U pynvim
+  pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
 }
 
-install_node "$@"
+# Install node extensions.
+install_node_deps() {
+  # install node if not available yet
+  command -v npm || (source "$(mydir)/node" &&  install_node)
+  npm install -g vim-language-server
+}
+
+install_nvim_deps() {
+  install_pip_deps
+  install_node_deps
+}
+is_main && install_nvim_deps "$@"
