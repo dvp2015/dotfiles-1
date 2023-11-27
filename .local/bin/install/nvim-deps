@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install python3-pip
+# sudo apt install python3-pip
 pip install -U pynvim
 pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
 
@@ -9,7 +9,7 @@ pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
 # Ref: https://johnpapa.net/node-and-npm-without-sudo/
 . ~/.bash-functions.rc
 install_node() {
-  node_version="18.16.0"
+  node_version="20.10.0"
   target="node-v$node_version"
   [[ -d "$HOME/tools/$target" ]] && die "Directory already exists $HOME/tools/$target"
   folder="$target-linux-x64"
@@ -23,9 +23,11 @@ install_node() {
   popd > /dev/null
   mv "$HOME/tools/${folder}" "$HOME/tools/${target}"
   # assuming ~/bin/select-node is installed
-  export PATH="$HOME/tools/${folder}/bin:$PATH"
+  export PATH="$HOME/tools/${target}/bin:$PATH"
   command -v select-node && select-node "$target"
-  $HOME/tools/${folder}/bin/npm install -g vim-language-server
+  $HOME/tools/${target}/bin/npm install -g vim-language-server
+  [[ -x $HOME/bin/node ]] && rm -f $HOME/bin/node
+  ln -s $HOME/tools/$target/bin/node $HOME/bin/node
 }
 
 install_node "$@"
