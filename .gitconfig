@@ -9,7 +9,8 @@
     excludesfile = ~/.gitignore
     whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
   # Use the best pager available
-    pager = diff-so-fancy | less --tabs=4 -RFX
+  # Doesn't work on windows console
+  # pager = diff-so-fancy | less --tabs=4 -RFX
     quotePath = false
 [color]
     ui = auto
