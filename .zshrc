@@ -16,13 +16,18 @@ test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
-fpath=(/usr/share/zsh/vendor-completions/ $fpath)
-fpath=($HOME/.local/zsh.completions $fpath)
 
 # To activate completions for zsh you need to have
 # bashcompinit enabled in zsh:
 autoload -U bashcompinit
 bashcompinit
+
+zstyle ':completion:*' menu select
+fpath+=/usr/share/zsh/vendor-completions
+fpath+=~/.local/zsh.completions
+fpath+=~/.zfunc
+
+autoload -Uz compinit && compinit
 
 # TODO dvp:
 # - should I check if nox or nox file available?
@@ -203,17 +208,6 @@ export HISTORY_IGNORE="(&|[bf]g|ll|ls|lm|lk|l|la|lt|h|history|ev|ea|ek|exit|id|u
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='gvim'
-# fi
-export EDITOR='vim'
-
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
@@ -269,16 +263,6 @@ if [[ "yes" == "$USE_TMUX" ]]; then
     fi
 fi
 
-lg() {
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-
-    lazygit "$@"
-
-    if [[ -f $LAZYGIT_NEW_DIR_FILE ]]; then
-        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
-}
 
 if [[ -x rg ]]; then
     export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
@@ -293,9 +277,10 @@ export FZF_DEFAULT_OPTS="--extended-exact"
 
 [ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
 [ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
-
+[ -f ~/.invoke-completion.rc ] && source ~/.invoke-completion.rc
 
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+# TODO dvp - this duplicates autojump, select and use one
 command -v jump > /dev/null  && eval "$(jump shell zsh)"
 
 lg() {
@@ -311,6 +296,9 @@ lg() {
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+
+
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+

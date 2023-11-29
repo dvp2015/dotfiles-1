@@ -4,13 +4,29 @@
 
 # TODO select some fonts instead of installin all the fonts
 # TODO check the nerd-fonts site, is it obsolete?
+
+fonts=(
+  "DroidSansMono"
+  "Noto"
+  "JetBrainsMono"
+  "FiraCode"
+)
+
 function install_nerd_fonts() {
     # https://github.com/ryanoasis/nerd-fonts
-    echo "Installing nerd fonts"
-    pushd ~/.local/share/fonts 
-    curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
-    fc-cache -f -v
-    popd
+  url_base="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2"
+  echo "Installing nerd fonts"
+  [[ -d ~/.local/share/fonts ]] || mkdir ~/.local/share/fonts
+  pushd ~/.local/share/fonts 
+  for ((i = 0; i < ${#fonts[@]}; i++)); do
+    f=${fonts[$i]}
+    echo "--- $f"
+    url="$url_base/$f.zip"
+    echo "--- $url"
+    curl -sOL "$url"
+    unzip "$f.zip"
+  done
+  popd
 }
 
 install_nerd_fonts && fc-cache -vf ~/.local/share/fonts/

@@ -1,0 +1,67 @@
+#!/bin/bash
+
+my_pkg() {
+    local dir="$(basename $(readlink -e .))"
+    local pkg="${dir//-/_}"
+    echo "$pkg"
+}
+
+check_pair() {
+    local left="$1"
+    local right="$2"
+    if [[ ! -f $left ]]; then
+        echo "Left file $left doesn't exist"
+        return 0
+    fi
+    if [[ ! -f $right ]]; then
+        echo "Right file $right doesn't exist"
+        return 0
+    fi
+    if [[ -n "$(diff -q $left $right)" ]]; then
+        meld $left $right
+    else
+        echo "Files $left and $right don't differ"
+    fi
+}
+
+main() {
+    local pkg="${1:-$(my_pkg)}"
+    local ref="${2:-mckit-nuclides}"
+    local ref_pkg="${ref//-/_}"
+    local files_to_compare=(
+        # ci
+        .github/constraints.txt
+        .github/dependabot.yml
+        .github/release-drafter.yml
+        .github/workflows/labeler.yml
+        .github/workflows/release-drafter.yml
+        .github/workflows/release.yml
+        .github/workflows/stale.yml
+        .github/workflows/clean-workflow-logs.yml
+        .github/workflows/tests.yml
+        # docs
+        # docs/source/conf.py
+        #  docs/source/index.rst
+        # qa
+        .flake8
+        .pre-commit-config.yaml
+        noxfile.py
+        # build
+        pyproject.toml
+        tools/reset-pyenv
+        tools/install-poetry
+        src/${pkg}/utils/resource.py
+        tests/utils/test_resource.py
+    )
+    echo "Target package $pkg"
+    echo "Reference      $refpkg"
+    echo "----------------------"
+    for f in "${files_to_compare[@]}"; do
+        check_pair $f "../${ref}/${f//$pkg/$ref_pkg}"
+    done
+}
+
+main "$@"
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

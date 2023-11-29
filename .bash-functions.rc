@@ -4,6 +4,28 @@ if [[ -n "$ZSH_VERSION" ]] ; then
     setopt shwordsplit
 fi
 
+
+die() {
+    >&2 echo "🥺 $@" && exit 1
+}
+
+success() {
+    echo "⭐ $@"
+}
+
+
+installed() {
+    local cmd=$(command -v "$1")
+    [[ -n "${cmd}"  &&  -f "${cmd}" ]] && return 0
+}
+
+check-prerequisites() {
+    for cmd in $*; do
+        installed "$cmd" || die "Missing dependency: $cmd"
+    done
+}
+
+
 join_strings() {
     if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
 cat << 'END'
@@ -229,6 +251,12 @@ check_go() {
         return 2
     fi
     return 0
+}
+
+
+select_first_local_pyenv() {
+    local envs=($(pyenv local))
+    echo "${envs[0]}"
 }
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

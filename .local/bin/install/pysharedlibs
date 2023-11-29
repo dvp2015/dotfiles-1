@@ -30,7 +30,6 @@ install_libs(){
         python-openssl
         tk-dev
         wget
-        xz-utilstk-dev
         zlib1g-dev
     )
     sudo apt -y install ${libs[@]}

@@ -1,0 +1,25 @@
+#!/bin/bash
+# Install NVIM prequisites
+
+. ~/.bash-functions.rc
+
+set -eo pipefail
+
+# Install python extensions
+install_pip_deps() {
+  pip install -U pynvim
+  pip install 'python-lsp-server[all]' pylsp-mypy pyls-isort
+}
+
+# Install node extensions.
+install_node_deps() {
+  # install node if not available yet
+  command -v npm || (source "$(mydir)/node" &&  install_node)
+  npm install -g vim-language-server
+}
+
+install_nvim_deps() {
+  install_pip_deps
+  install_node_deps
+}
+is_main && install_nvim_deps "$@"

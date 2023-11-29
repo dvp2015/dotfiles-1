@@ -12,8 +12,8 @@ install_prerequisites(){
             libxpm-dev
             libxt-dev
             libxtst-dev
-            lua5.3
-            lua5.3-dev
+#            liblua5.3-0
+#            liblua5.3-0-dev
             make
             valgrind
             )
@@ -21,8 +21,13 @@ install_prerequisites(){
 }
 
 install_vim() {
-    git clone git@github.com:vim/vim.git
-    cd vim
+    if [[ -d vim ]]; then
+        cd vim
+        git pull
+    else
+        git clone git@github.com:vim/vim.git
+        cd vim
+    fi
     cd src
     local options=(
         --disable-arabic

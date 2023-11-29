@@ -37,7 +37,6 @@ typeset -gUT OBJC_INCLUDE_PATH objc_include_path
 cdpath=(
   $HOME/.julia/dev
   $HOME/dev
-  /opt
   $cdpath
 )
 
@@ -57,18 +56,26 @@ manpath=(
 
 export GOPATH=$HOME/.go
 
+# HDF5 
+if [[ "$HOST" == "amarano" ]]; then
+    HDF5_ROOT=/opt/HDF_Group/HDF5/1.14.1.2
+    if [[ -d $HDF5_ROOT ]]; then
+      export HDF5_ROOT
+      export HDF5_DIR="${HDF5_ROOT}/cmake"
+      path=(
+        $HDF5_ROOT/{bin,lib}
+        $path
+      )
+    fi
+fi
+
 path=(
-  $path
   $HOME/bin
   $HOME/.local/bin
   /home/dvp/dev/ipython-latex
-  /usr/local/{bin,sbin}
-  /usr/{bin,sbin}
-  /{bin,sbin}
-  /usr/local/go/bin
   $GOPATH/bin
+  $path
 )
-
 # Add pyenv init to your shell to enable shims and autocompletion.
 # Please make sure eval "$(pyenv init -)" is placed toward the end of the shell
 # configuration file since it manipulates PATH during the initialization.
@@ -76,4 +83,3 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-source "$HOME/.cargo/env"

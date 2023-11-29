@@ -1,0 +1,21 @@
+#!/bin/bash
+
+libs=(
+    mckit-nuclides
+    xpypact
+    mckit-meshes
+    mapstp
+    mckit
+    r2s-rfda
+)
+
+main() {
+    for f in "${libs[@]}"; do
+        echo "Updating $f"
+        cd $HOME/dev/$f
+        git pull
+    done
+}
+
+
+main "$@"

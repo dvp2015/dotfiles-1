@@ -1,8 +1,10 @@
 #!/bin/bash
 
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+curl -sSL https://install.python-poetry.org | python -
 
 poetry --version
 
+# https://sam.hooke.me/note/2023/08/poetry-automatically-generated-package-version-from-git-commit/
+poetry self add "poetry-dynamic-versioning[plugin]"
 
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

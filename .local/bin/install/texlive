@@ -6,7 +6,8 @@
 # sudo apt-get install texlive
 # or
 sudo apt-get install texlive-full
-sudo apt-get install texlive-latex3
-sudo apt-get install texlive-lang-cyrillic
+sudo apt-get install texlive-latex-base
 sudo apt-get install texlive-latex-extra
+sudo apt-get install texlive-latex-recomended
+sudo apt-get install texlive-lang-cyrillic
 sudo apt-get install texlive-bibtex-extra biber

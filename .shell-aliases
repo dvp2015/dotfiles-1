@@ -9,7 +9,7 @@ alias ealias='vim ~/.shell-aliases'
 alias eenv='vim ~/.shell-env'
 alias efuncs='vim ~/.bash-functions.rc'
 alias etmux='vim ~/.tmux.conf'
-alias evim='vim ~/.vimrc'
+alias evim='cd ~/.config/nvim/lua/custom && vim *'
 alias ezsh='vim ~/.zshrc'
 
 # Check if reboot is required
@@ -29,6 +29,8 @@ alias 2mcnpdocs='cd /opt/lanl/MCNP5/docfiles'
 alias 2hfsr='cd ~/dev/mcnp/hfsr'
 alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
+alias hpc-001='ssh dvp@10.0.130.111'
+alias hpc-002='ssh dvp@10.0.130.151'
 alias manadvantg0='/opt/advantg/doc/ADVANTG-3.0.pdf'
 alias manadvantg1='/opt/advantg/doc/ADVANTG-3.2.pdf'
 alias manmcnp1='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_I.pdf'
@@ -87,9 +89,9 @@ function lss () {
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 
-alias todo='~/misc/todo/todo.sh'
-alias todoh='~/misc/todo/todo.sh --help && ~/misc/todo/todo.sh'
-alias todol="todo ls -someday"
+alias todo='todo.sh'
+alias todoh='todo.sh shorthelp && todo.sh'
+alias todol="todo.sh ls -someday"
 alias etodo="vim ~/misc/todo/todo.txt"
 
 alias ek="vim ~/misc/keys/generic.txt"
@@ -191,3 +193,7 @@ alias es='exa --icons --group-directories-first'
 alias e1='exa -1 --icons --group-directories-first'
 alias el='exa -l --icons --group-directories-first'
 alias ea='exa -a --icons --group-directories-first'
+
+# filter to prettify json text
+alias prettyjson='python -m json.tool'
+

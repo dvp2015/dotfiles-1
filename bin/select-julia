@@ -1,0 +1,68 @@
+#!/bin/bash
+
+. ~/.bash-functions.rc
+
+# set -eax
+
+usage() {
+    cat <<MSG
+Set link to a julia executable.
+
+Usage:
+
+    select-julia [version]
+
+Optional parameter "version" is a subfolder name of folder /opt with the desired julia instance.
+Defaults to the most recent version.
+MSG
+    echo
+    show-available-versions
+    exit 0
+}
+
+show-available-versions() {
+    versions=($(find-julia-versions)) 
+    if [[ 0 < ${#versions} ]]; then
+        echo "Available versions:"
+        for v in ${versions[@]}; do
+            echo "    $v"
+        done
+        echo
+    else
+        echo "WARNING: no julia subfolders found in /opt folder"
+    fi
+}
+
+find-julia-versions() {
+    pushd /opt > /dev/null
+    ls -1 -d julia* | sort
+    popd  > /dev/null
+}
+
+
+
+main() {
+
+
+    ([ "$1" == "-h" ] || [ "$1" == "--help" ]) && usage
+
+    local version="$1"
+
+    if [[ -z "$version" ]]; then
+        versions=($(find-julia-versions)) 
+        [[ 0 < ${#versions} ]] || die "No julia subfolders found in /opt folder"
+        version="${versions[-1]}"
+    fi
+
+    if [[ ! -x "/opt/$version/bin/julia" ]]; then
+        show-available-versions
+        die "/opt/$version is not a valid julia folder"
+    fi
+
+    rm ~/bin/julia 
+    ln -s /opt/$version/bin/julia ~/bin/julia
+    success "julia -> $(~/bin/julia --version)"
+
+}
+
+main "${@}"

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+
+usage() {
+cat <<-EOF
+
+    upstream - Fetch and merge upstream/master branch from original github project to local branch.
+
+    Usage:
+
+        upstream  [OPTIONS] URL
+
+
+    Options:
+        -u | --upstream-branch UBR - remote branch at original project to merge frome (default: "master")
+        -m | --merge-branch  MBR - local branch to merge to (default: "devel")
+
+    Args:
+        URL - upstream URL (where I've forked from)
+
+    Example:
+        
+        1) upstream              git@github.com:openmc-dev/openmc.git
+        2) upstream  -m merger   git@github.com:openmc-dev/openmc.git
+        3) upstream  -u develop  git@github.com:openmc-dev/openmc.git
+EOF
+}
+
+
+mbr="devel"
+ubr="master"
+
+parse_args() {
+    while [[ -n "$1" ]]; do
+        if [[ "$1" == "-m" ]] || [[ "$1" == "--merge-branch" ]]; then
+            shift
+            mbr="$1"
+            shift
+        elif [[ "$1" == "-u" ]] || [[ "$1" == "--upstream-branch" ]]; then
+            shift
+            ubr="$1"
+            shift
+        else
+            break
+        fi
+    done
+    url="$1"
+    if [[ -z  "$url" ]]; then
+        echo "ERROR: url argument is not specified."
+        usage
+        return 1
+    fi
+    echo "Merging $url@$ubr -> $mbr..."
+}
+
+
+set_upstream() {
+    set -e
+    git checkout master > /dev/null
+    git remote | grep upstream > /dev/null || git remote add upstream $url
+    git fetch upstream $ubr
+    git branch --list | grep $mbr > /dev/null && git checkout $mbr || git checkout -b $mbr
+    git merge upstream/$ubr
+    echo "Merge $url@$ubr -> $mbr is complete."
+}
+
+
+main() {
+    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+        usage
+    else
+        parse_args "$@" &&  set_upstream
+    fi
+}
+
+
+[[ -n $BATS_PREFIX ]] || main $@
