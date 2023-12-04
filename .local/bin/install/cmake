@@ -36,7 +36,7 @@ install_cmake_from_sources() {
 #
 install_cmake_from_kitware() {
     sudo ./kitware-archive.sh  
-    sudo apt-get install cmake cmake-gui
+    sudo apt-get install cmake cmake-qt-gui
 }
 
 install_cmake_from_kitware
