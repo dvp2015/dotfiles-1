@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. ~/.bash-functions.rc
+
+set -eo pipefail
+
+main() {
+  local version="1.9.4"
+  local sver="1.9"
+  local name="julia-$version"
+  local file="$name-linux-x86_64.tar.gz"
+  curl -fLo "$file" "https://julialang-s3.julialang.org/bin/linux/x64/$sver/$file"
+  untar "$file"
+  mv "$name" /opt
+  select-julia "$name"
+  success "Julia $version is installed."
+}
+
+
+
+is_main && main
+ 
