@@ -31,6 +31,7 @@ main() {
     echo "Julia $version is already installed in /opt/$name"
     return 0
   fi
+  unpack
   mv "$name" /opt
   select-julia "$name"
   success "Julia $version is installed."
