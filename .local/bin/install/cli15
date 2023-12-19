@@ -16,7 +16,7 @@ PIP=(lastversion)
 CARGO=(ripgrep fd-find git-delta)
 # APT=(fzf  autojump tig tmux neovim)
 APT=(curl wget git fzf autojump tmux xclip)
-NPM="tldr"
+NPM=(tldr)
 
 pip install ${PIP[@]}
 sudo apt-get install ${APT[@]}
