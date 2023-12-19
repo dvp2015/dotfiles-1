@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# see https://gitlab.kitware.com/cmake/cmake/-/tree/master/
+
+# set -exa
+
+#
+# The folowing doesn't install cmake properly
+#
+# cmake complains: "CMAKE_ROOT is not found"
+#
+install_cmake_from_sources() {
+    
+    echo "Fix the CMake install from source errors"
+    return 1  
+
+    mkdir -p ~/Downloads/install
+    pushd ~/Downloads/install > /dev/null
+    
+    if [[ -d cmake ]]; then
+        cd cmake
+        git pull
+    else
+        git clone "https://gitlab.kitware.com/cmake/cmake.git"
+        cd cmake
+    fi
+    
+    ./bootstrap && make && sudo make install
+
+    popd > /dev/null
+}
+
+#
+# Recommended way to install from 
+# KitWare repository: https://apt.kitware.com/
+#
+install_cmake_from_kitware() {
+    sudo ./kitware-archive.sh  
+    sudo apt-get install cmake cmake-qt-gui
+}
+
+install_cmake_from_kitware
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

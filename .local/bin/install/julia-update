@@ -1,0 +1,43 @@
+#!/bin/bash
+
+. ~/.bash-functions.rc
+
+set -eo pipefail
+
+version="$(lastversion "JuliaLang/julia")"  # see cli15 script
+sver="${version%.*}"
+name="julia-$version"
+file="$name-linux-x86_64.tar.gz"
+
+download() {
+    if [[ -r "$file" ]]; then
+      echo "File $file is already downloaded"
+      return 0
+    fi
+    curl -fLo "$file" "https://julialang-s3.julialang.org/bin/linux/x64/$sver/$file"
+}
+
+unpack() {
+  if [[ -d "$name" ]]; then
+    echo "$name is already unpacked"
+    return 0
+  fi
+  download
+  tar -xzf "$file"
+}
+
+main() {
+  if [[ -d "/opt/$name" ]]; then
+    echo "Julia $version is already installed in /opt/$name"
+    return 0
+  fi
+  unpack
+  mv "$name" /opt
+  select-julia "$name"
+  success "Julia $version is installed."
+}
+
+
+
+is_main && main
+

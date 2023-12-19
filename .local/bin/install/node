@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Install the recent Node.js in user environment
+# TODO move to a separate script
+# Ref: https://johnpapa.net/node-and-npm-without-sudo/
+. ~/.bash-functions.rc
+
+install_node() {
+  node_version="20.10.0"
+  target="node-v$node_version"
+  
+  [[ -d "$HOME/tools/$target" ]] && die "Directory already exists $HOME/tools/$target"
+  
+  folder="$target-linux-x64"
+  archive="$folder.tar.xz"
+
+  pushd $HOME/Downloads > /dev/null
+  [[ -f $archive ]] || wget "https://nodejs.org/dist/v$node_version/$archive"
+  mkdir -p $HOME/tools
+  # extract node to a custom directory, the directory should exist.
+  tar xvf "${archive}" --directory=$HOME/tools
+  popd > /dev/null
+  mv "$HOME/tools/${folder}" "$HOME/tools/${target}"
+  # assuming ~/bin/select-node is installed
+  export PATH="$HOME/tools/${target}/bin:$PATH"
+
+  command -v select-node && select-node "$target"
+  if [[ ! -x "$HOME/bin/node" ]]; then
+    ln -s $HOME/tools/$target/bin/node $HOME/bin/node
+  fi
+  
+}
+
+is_main && install_node "$@"
