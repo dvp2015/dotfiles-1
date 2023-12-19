@@ -26,10 +26,10 @@ add_source "$HOME/.cargo/env"
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
         . /sharedfolder/common/.profile
+        module add Python/3.10.8
 else
     export GOPATH=$HOME/.go
     insert_path "/usr/local/go/bin" "$GOPATH/bin"
 fi
 
- 
 # vim: set ts=4 sw=4 tw=100 ft=sh ss=0 et ai :

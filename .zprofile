@@ -1,9 +1,12 @@
 
 
 
+if [[ "$HOST" == "hpc-node-01" ]]; then
+    . /sharedfolder/common/.profile
+    module add Python/3.10.8
+fi
 
-# Added by Toolbox App
-export PATH="$PATH:/home/dvp/.local/share/JetBrains/Toolbox/scripts"
+
 
 # pip zsh completion start
 function _pip_completion {
@@ -17,6 +20,7 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
-if [[ "$HOST" == "hpc-node-01" ]]; then
-    . /sharedfolder/common/.profile
+if [[ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]]; then
+  # Added by Toolbox App
+  export PATH="$PATH:$HOME/dvp/.local/share/JetBrains/Toolbox/scripts"
 fi
