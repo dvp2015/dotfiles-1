@@ -27,6 +27,8 @@ export MCNP_DATA=$MCNP_HOME/MCNP_DATA
 export DATAPATH=$MCNP_DATA
 export MCNP_DEFAULT_XSDIR=$DATAPATH/xsdir
 
+[[ -r $MCNP_DEFAULT_XSDIR ]] || echo "ERROR: xsdir not found: $MCNP_DEFAULT_XSDIR"
+
 alias printpath='echo -e ${PATH//:/\\n}'
 
 . $HOME/.bash-functions.rc
