@@ -94,7 +94,7 @@ if [ "0.20.0" = "$(fzf --version)" ]; then  # TODO: remove on fzf update
 else
   eval "$(fzf --zsh)"
 fi
-# eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
