@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Show the recent available python versions not installed with pyenv yet.
+#
+# v1.0.0 dvp 2024
+#   select python 3.x.*, where x > 8
+#
+
+pyenv install --skip-existing --list | rg -e "^\s+3\.(9|[1-9]\d+)\.\d+$" | python select_max_patch_version.py 
