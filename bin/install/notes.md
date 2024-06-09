@@ -1,3 +1,10 @@
+## Shell
+
+Установка zsh
+
+chsh dvp
+... /bin/zsh
+
 ## bluetooth 
 
 ### Мышь

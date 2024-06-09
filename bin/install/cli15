@@ -36,5 +36,7 @@ sudo apt-get install ${APT[@]}
 cargo install ${CARGO[@]}
 npm install -g ${NPM[@]}
 
- 
+# zoxide - cd alternative
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
 # vim: set ts=4 sw=4 tw=92 ss:q=0 ft=sh et ai :
