@@ -33,18 +33,23 @@ zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
+zinit snippet OMZP::gitfast
+zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
 # zinit snippet OMZP::archlinux
 # zinit snippet OMZP::aws
 # zinit snippet OMZP::kubectl
 # zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::ssh-agent
 
 # Load completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
+# TODO: switch to ohmyposh
+# https://www.youtube.com/watch?v=9U8LCjuQzdc 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -72,7 +77,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
@@ -96,5 +101,9 @@ else
 fi
 eval "$(zoxide init zsh)"
 
+# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-env && source ~/.shell-env
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
