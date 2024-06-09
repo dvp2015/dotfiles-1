@@ -23,6 +23,7 @@ APT=(
     curl 
     fzf 
     git
+    glances
     mlocate
     tmux 
     wget 
