@@ -5,6 +5,8 @@ set -euxo pipefail
 # modification of https://devsday.ru/blog/details/38051
 
 # Utilities:
+# - bat: view files better than cat
+# https://www.hongkiat.com/blog/linux-command-bat/#:~:text=The%20bat%20command%20in%20Linux%2C,to%20interact%20with%20text%20files
 # - find/rertrieve last versiion of a packagehttps
 #   https://github.com/dvershinin/lastversion
 # - tldr, man pages replacement
@@ -15,7 +17,17 @@ PIP=(lastversion)
 # CARGO=(ripgrep bat fd-find tealdeer just)
 CARGO=(ripgrep fd-find git-delta)
 # APT=(fzf  autojump tig tmux neovim)
-APT=(curl wget git fzf autojump tmux xclip)
+APT=(
+    autojump 
+    bat 
+    curl 
+    fzf 
+    git
+    mlocate
+    tmux 
+    wget 
+    xclip
+)
 NPM="tldr"
 
 pip install ${PIP[@]}
