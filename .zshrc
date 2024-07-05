@@ -10,6 +10,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load completions
+autoload -Uz compinit && compinit
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -33,25 +36,17 @@ zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
-zinit snippet OMZP::gitfast
-zinit snippet OMZP::git-extras
+# zinit snippet OMZP::gitfast
+# zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
 # zinit snippet OMZP::archlinux
 # zinit snippet OMZP::aws
 # zinit snippet OMZP::kubectl
 # zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::command-not-found
 # zinit snippet OMZP::ssh-agent
 
-# Load completions
-autoload -Uz compinit && compinit
-
 zinit cdreplay -q
-
-# TODO: switch to ohmyposh
-# https://www.youtube.com/watch?v=9U8LCjuQzdc 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
 bindkey -e
@@ -105,5 +100,10 @@ eval "$(zoxide init zsh)"
 test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
+
+# TODO: switch to ohmyposh
+# https://www.youtube.com/watch?v=9U8LCjuQzdc 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
