@@ -3,13 +3,6 @@
 # https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 #
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -25,6 +18,9 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -35,24 +31,52 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
+zinit snippet OMZP::colorize
 zinit snippet OMZP::git
 # zinit snippet OMZP::gitfast
-# zinit snippet OMZP::git-extras
+zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
 # zinit snippet OMZP::archlinux
 # zinit snippet OMZP::aws
 # zinit snippet OMZP::kubectl
 # zinit snippet OMZP::kubectx
-# zinit snippet OMZP::command-not-found
-# zinit snippet OMZP::ssh-agent
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::pip
+# zinit snippet OMZP::poetry
+
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+zinit snippet OMZP::pyenv
+
+# zinit snippet OMZP::python
+# zinit snippet OMZP::ripgrep
+zinit snippet OMZP::ssh-agent
 
 zinit cdreplay -q
+
+#use with C-O, C-J or command 'ziconsole'
+# zinit wait lucid for zinit-zsh/zinit-console
+# requires authentification on github by password, but that is prohibited since
+# 2021
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Keybindings
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+
+#colorize
+ZSH_COLORIZE_CHROMA_FORMATTER=terminal256
+ZSH_COLORIZE_STYLE="paraiso-dark"
 
 # History
 HISTSIZE=5000

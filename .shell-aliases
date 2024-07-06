@@ -188,11 +188,10 @@ alias pry='poetry'
 alias pluto='julia --project=@. -t 4 -e "import Pluto; Pluto.run()"'
 alias 2j='cd ~/.julia/dev'
 
-# exa - modern ls replacement
-alias es='exa --icons --group-directories-first'
-alias e1='exa -1 --icons --group-directories-first'
-alias el='exa -l --icons --group-directories-first'
-alias ea='exa -a --icons --group-directories-first'
+# eza - modern ls replacement
+alias es='eza --icons --group-directories-first'
+alias e1='eza -1 --icons --group-directories-first'
+alias ea='eza -a --icons --group-directories-first'
 
 # filter to prettify json text
 alias prettyjson='python -m json.tool'
