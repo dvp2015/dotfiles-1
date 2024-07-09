@@ -1,16 +1,23 @@
 #!/bin/bash
 
+
+#
+# https://nvchad.com/docs/quickstart/install/
+#
+
 . $HOME/.bash-functions.rc
 
 backup() {
     mkdir ~/backup_nvim
     cp -r ~/.config/nvim ~/backup_nvim
     cp -r ~/.local/share/nvim ~/backup_nvim
+    cp -r ~/.local/state/nvim ~/backup_nvim
     cp -r ~/.cache/nvim ~/backup_nvim
 }
 
 clean() {
     rm -rf ~/.config/nvim
+    rm -rf ~/.local/state/nvim
     rm -rf ~/.local/share/nvim
     rm -rf ~/.cache/nvim   
 }
@@ -42,7 +49,7 @@ main() {
     fi
     backup
     clean
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+    git clone https://github.com/NvChad/starter ~/.config/nvim
     git clone git@github.com:dvp2015/nvchad-custom.git ~/.config/nvim/lua/custom --depth 1
 }
 
