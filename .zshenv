@@ -72,7 +72,6 @@ fi
 path=(
   $HOME/bin
   $HOME/.local/bin
-  /home/dvp/dev/ipython-latex
   $GOPATH/bin
   $path
 )
