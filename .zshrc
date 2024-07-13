@@ -8,6 +8,17 @@
 # Load completions
 autoload -Uz compinit && compinit
 
+# Add file manager functions to shell
+# http://www.bash2zsh.com/essays/essay1_file_manager.html
+zstyle :mime: mailcap ~/.mailcap /usr/local/etc/mailcap /etc/mailcap
+zstyle :mime: mime-types ~/.mime.types /usr/local/etc/mime.types /etc/mime.types
+autoload -U zsh-mime-setup
+zsh-mime-setup
+# ... to open HTML files in proper browser
+autoload -U pick-web-browser
+zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
+zstyle ':mime:.htm(|l):' flags ''
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -98,6 +109,46 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+export HIST_STAMPS="yyyy-mm-dd"
+export HISTORY_IGNORE="(&|[bf]g|ll|ls|lm|lk|l|la|lt|h|history|ev|ea|ek|exit|id|uptime|resize|clear|mc|cs|cd ..|ez|...|....)"
+
+# Compilation flags
+export ARCHFLAGS="-arch x86_64"
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/id_rsa"
+
+
+# From: https://www.codementor.io/linux/tutorial/configure-linux-toolset-zsh-tmux-vim
+
+
+# if you do a 'rm *', Zsh will give you a sanity check!
+setopt RM_STAR_WAIT
+
+# allows you to type Bash style comments on your command line
+# good 'ol Bash
+setopt interactivecomments
+
+# Zsh has a spelling corrector
+setopt CORRECT
+
+# make sure that if a program wants you to edit
+# text, that Vim is going to be there for you
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+
+# open file with a default associated program
+function o() {
+  for i in "$@"
+  do
+    xdg-open $i
+  done
+}
+
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -132,6 +183,25 @@ eval "$(zoxide init zsh)"
 test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
+
+# Updating environment
+
+# zinit
+function zinitup() {
+    echo "zinit update zsh..."
+    zinit self-update
+    zinit update
+}
+
+function pyenvup() {
+    echo "pyenv update..."
+    pyenv update
+}
+
+function allup() {
+    zinitup 
+    pyenvup 
+}
 
 # TODO: switch to ohmyposh
 # https://www.youtube.com/watch?v=9U8LCjuQzdc 
