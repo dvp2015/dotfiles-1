@@ -187,7 +187,7 @@ alias 2j='cd ~/.julia/dev'
 
 # eza - modern ls replacement
 alias es='eza --icons --group-directories-first'
-alias el='eza -1 --icons --group-directories-first'
+alias e1='eza -1 --icons --group-directories-first'
 alias ea='eza -a --icons --group-directories-first'
 alias el='eza -l --icons --group-directories-first'
 
