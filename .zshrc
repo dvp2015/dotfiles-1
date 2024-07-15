@@ -140,13 +140,16 @@ setopt CORRECT
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
+export BROWSER=yandex-browser
 
 # open file with a default associated program
 function o() {
-  for i in "$@"
-  do
-    xdg-open $i
-  done
+  if [[ -n "$BROWSER" && "$1" = (http|https)://* ]]; then
+    "$BROWSER" "$@"
+    return
+  fi
+  local open_cmd='nohup xdg-open'
+  ${=open_cmd} "$@" &>/dev/null
 }
 
 
