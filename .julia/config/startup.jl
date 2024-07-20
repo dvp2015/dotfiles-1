@@ -36,7 +36,8 @@ atreplinit() do repl
             editors = ["code", "vim"]
 			if Sys.iswindows()
                 push!(
-                    editors, 
+                    editors,
+					"$(homedir())\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
                     "C:\\Program Files\\Notepad++\\notepad++.exe",
                     "notepad.exe"
                 )
