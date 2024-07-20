@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# kitty
+# The fast, feature-rich, GPU based terminal emulator
+# https://sw.kovidgoyal.net/kitty/
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+sources=("kitty" "kitten")
+
+for e in ${sources[@]}; do
+  src="$HOME/.local/kitty.app/bin/$e"
+  lnk="$HOME/.local/bin/$e"
+  [[ -r $lnk ]] || echo "Creating symbolic link $lnk" && ln -s $src $lnk
+done

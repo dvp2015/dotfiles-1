@@ -1,7 +1,7 @@
 # vi:sw=2:sts=2:ts=2:expandtab
 [user]
     name = dvp
-    email = dmitri_portnov@yahoo.com
+    email = d.portnov@iterrf.ru
 
 [core]
     autocrlf = input
@@ -9,8 +9,9 @@
     excludesfile = ~/.gitignore
     whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
   # Use the best pager available
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
     quotePath = false
+
 [color]
     ui = auto
 
@@ -71,7 +72,7 @@
     conflictstyle = diff3
 
 [mergetool]
-	prompt = false
+    prompt = false
     keepBackup = false
 
 [mergetool "vimdiff"]
@@ -88,7 +89,8 @@
 ### Github specific
 ###
 [github]
-    user = DoomHammer
+    user = dvp2015         #  DoomHammer
+    email = dmitri_portnov@yahoo.com
 
 # read from given uri
 # push to writable one
@@ -126,3 +128,26 @@
 	prompt = false
 [mergetool "nbdime"]
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[gitlab]
+	user = dvp
+	email = d.portnov@iterrf.ru
+[init]
+  defaultBranch = master
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+#
+# https://obsidian.md
+#
+
+. $HOME/.bash-functions.rc
+
+OBSIDIAN_VER="$(lastversion obsidianmd)"
+BIN="$HOME/.local/bin"
+EXE="$BIN/obsidian"
+URL="https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/Obsidian-${OBSIDIAN_VER}.AppImage"
+
+main() {
+    mkdir --parents "$BIN"
+    curl -L "$URL" -o "$EXE"
+    chmod u+x $EXE
+}
+
+main
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

@@ -6,18 +6,19 @@ atreplinit() do repl
             colorscheme!("OneDark")
             OhMyREPL.enable_autocomplete_brackets(true)
             OhMyREPL.Passes.RainbowBrackets.activate_256colors()
-            OhMyREPL.input_prompt!("👠> ")
+            # On vscode terminal on windows this breaks prompt and input focus, the following is a solution 
+            let use_default_prompt = Sys.iswindows() && get(ENV, "TERM_PROGRAM", nothing) == "vscode"
+                use_default_prompt || OhMyREPL.input_prompt!("👠> ")  
+            end
         end
     catch e
-        display("Cannot use OhMyREPL: $e.msg")
+        @warn "Cannot use OhMyREPL: $e.msg"
     end
 
     try
-        @eval begin
-            using Revise
-        end
+        @eval using Revise
     catch e
-        display("Cannot use Revise: $e.msg")
+        @warn "Cannot use Revise: $e.msg"
     end
 
     # TODO dvp: check TerminalLoggers - precompile failed
@@ -37,20 +38,16 @@ atreplinit() do repl
 			if Sys.iswindows()
                 push!(
                     editors,
-					"$(homedir())\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+                    "$(homedir())\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
                     "C:\\Program Files\\Notepad++\\notepad++.exe",
                     "notepad.exe"
                 )
             end 
-            editor_idx = findfirst(Sys.isexecutable, editors)
-            if editor_idx !== nothing
-                editor = editors[editor_idx]
-                if ' ' ∈ editor
-                    editor = "\"$editor\""  # force to be a single entry on shell_split call
-                end
-			    ENV["JULIA_EDITOR"] = editor
-             
+            editor = something(map(Sys.which, editors)...)
+            if Sys.iswindows() && occursin(r"[ \\]", editor) 
+                editor = "\"$editor\""  # force to be a single entry on shell_split call
             end
+            ENV["JULIA_EDITOR"] = editor
         end
         myrepl() = joinpath(homedir(), ".myrepl.jl")
         imyrepl() = include(myrepl())
