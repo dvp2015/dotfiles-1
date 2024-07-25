@@ -12,6 +12,10 @@ chsh dvp
 
 ####  Logitech Pebble
 
+На LinuxMint 22.0 - все прошло без нижеописанных заморочек.
+
+Сохраняю на всякий случай.
+
 Чтобы подключить мышь logitech-pebl использовать bluetoothctl
 Комманды в сессии bluetoothctl:
   available ...
@@ -20,7 +24,8 @@ chsh dvp
 Дополнительная информация:
 https://askubuntu.com/questions/701978/how-can-a-bluetooth-keyboard-that-requires-a-code-entry-be-paired-in-the-termina
 
-## TOD
+
+## TODO
 - use Stow for dotfiles: 
 - use Pica Backup for backups: https://www.youtube.com/watch?v=W30wzKVwCHo
    - https://github.com/pika-backup/pika-backup

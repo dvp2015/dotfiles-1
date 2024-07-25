@@ -28,7 +28,7 @@ APT=(
     fzf 
     git
     glances
-    mlocate
+    locate
     tmux 
     wget 
     xclip

@@ -8,30 +8,21 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-add_source() {
-    for f in "$@"; do
-        [ -f "$f" ] && source "$f" || echo "ERROR: $f is not a file" && return 1
-    done
-}
-
-insert_path() {
-    for f in "$@"; do
-        [ -d "$f" ] && PATH="$f:$PATH" || echo "ERROR: $f is not a directory" && return 1
-    done
-}
-
-[ -n "$BASH_VERSION" ] && . "$HOME/.bashrc"
-insert_path "$HOME/bin" "$HOME/.local/bin"
-add_source "$HOME/.cargo/env"
-
-if [[ "$HOST" == "hpc-node-01" ]]; then
-        . /sharedfolder/common/.profile
-        module add Python/3.10.8
-else
-    export GOPATH=$HOME/.go
-    insert_path "/usr/local/go/bin" "$GOPATH/bin"
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
 fi
 
-export PATH
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
-# vim: set ts=4 sw=4 tw=100 ft=sh ss=0 et ai :
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+. "$HOME/.cargo/env"
