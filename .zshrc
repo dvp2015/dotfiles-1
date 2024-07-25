@@ -41,8 +41,14 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+# TODO: revise fzf completion plugins:
+# https://github.com/chitoku-k/fzf-zsh-completions?tab=readme-ov-file
+# https://github.com/Aloxaf/fzf-tab
 zinit light Aloxaf/fzf-tab
-
+# https://github.com/yuki-yano/zeno.zsh
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+#
 # Add in snippets
 zinit snippet OMZP::autojump
 zinit snippet OMZP::colorize
