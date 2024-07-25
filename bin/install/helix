@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#
+# Post-modern terminal editor (based on Rust).
+# Looks like NeoVim, but without support of vim, so, very fast and "modern"
+#
+
+# https://docs.helix-editor.com/install.html
+
+# not tested yet
+
+. $HOME/.bash-functions.rc
+
+[[ command -v cargo ]] || die "cargo is required (i.e. rust)"
+pushd $HOME/tools
+
+git clone https://github.com/helix-editor/helix
+cd helix
+cargo install --locked --path helix-term
+
+# This will install the hx binary to $HOME/.cargo/bin and build tree-sitter grammars in ./runtime/grammars.
+
+ln -s $PWD/runtime ~/.config/helix/runtime
+cp contrib/Helix.desktop ~/.local/share/applications
+
+popd
+
+echo "Check default language servers"
+hx --health
+
+echo build tree-sitter grammars.
+hx --grammar fetch
+hx --grammar build
+
+echo "Optional languages servers can be installed"
+echo "See: https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers"
+
+success "Helix is installed!"
+
+
+echo "Check alternatives:"
+echo "- Lapce: https://docs.lapce.dev - fast, looks like VSCode"

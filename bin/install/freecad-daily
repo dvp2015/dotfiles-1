@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Install freecad-daily using PPA
+# https://wiki.freecad.org/Installing_on_Linux#Development_PPA_.28Daily.29
+
+sudo add-apt-repository ppa:freecad-maintainers/freecad-daily
+sudo apt-get update
+sudo apt-get install freecad-daily
