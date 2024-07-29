@@ -171,21 +171,14 @@ alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 
-# Shell integrations
-# if [ "0.20.0" = "$(fzf --version)" ]; then  # TODO: remove on fzf update
-#   # for old fxf 0.20.0
-#   if [[ -x rg ]]; then
-#       export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-#       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#   elif [[ -x ag ]]; then
-#       export FZF_DEFAULT_COMMAND='ag -l -g ""'
-#       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#   fi
-#   export FZF_DEFAULT_OPTS="--extended-exact"
-#   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# else
-#   eval "$(fzf --zsh)"
-# fi
+if [[ -x rg ]]; then
+  export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+elif [[ -x ag ]]; then
+  export FZF_DEFAULT_COMMAND='ag -l -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+export FZF_DEFAULT_OPTS="--extended-exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(zoxide init zsh)"
