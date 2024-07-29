@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+# https://github.com/junegunn/fzf?tab=readme-ov-file
+
+if [[ -d ~/.fzf ]]; then
+    pushd ~/.fzf > /dev/null
+    git pull
+    popd > /dev/null
+else
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+fi
 ~/.fzf/install
