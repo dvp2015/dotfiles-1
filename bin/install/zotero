@@ -40,6 +40,7 @@ main() {
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
     popd > /dev/null
     /opt/zotero/set_launcher_icon
+    # TODO change Exec statement in desktop with sed to /opt/zotero/zotero, see set_launcher_icon as example
     success "Zotero $version is installed."
 }
 
