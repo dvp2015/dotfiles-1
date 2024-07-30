@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Obsidian
+Comment=Thoughts and knowledge manager
+Exec=/home/dvp/.local/bin/obsidian %u
+Icon=/home/dvp/.local/bin/obsidian.png
+Type=Application
+Terminal=false
+Categories=Office;Science;
+StartupWMClass=obsidian
+X-AppImage-Version=0.8.15
+MimeType=text/html;x-scheme-handler/obsidian;
+

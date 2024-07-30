@@ -16,6 +16,8 @@ main() {
     mkdir --parents "$BIN"
     curl -L "$URL" -o "$EXE"
     chmod u+x $EXE
+    cp obsidian.png $BIN
+    cp obsidian.desktop $HOME/.local/share/applications
 }
 
 main
