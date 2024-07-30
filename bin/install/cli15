@@ -23,7 +23,7 @@ CARGO=(
 )
 APT=(
     autojump 
-    bat 
+    bat  # actually installs batcat on Debian/Ubuntu
     curl 
     fzf 
     git

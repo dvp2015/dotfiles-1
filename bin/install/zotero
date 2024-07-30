@@ -39,6 +39,7 @@ main() {
     ln -s /opt/zotero/zotero $HOME/bin/zotero
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
     popd > /dev/null
+    /opt/zotero/set_launcher_icon
     success "Zotero $version is installed."
 }
 
