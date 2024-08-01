@@ -2,11 +2,24 @@
 
 . $HOME/.bash-functions.rc
 
+set -euxo pipefail
+
 version="6.0.35"
 file="Zotero-${version}_linux-x86_64.tar.bz2"
 url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
 dir="Zotero_linux-x86_64"
 
+usage() {
+cat <<EOF
+    ./zotero
+
+    Backup existing instance, if exists.
+    Install Zotero to /opt/zotero.
+    Create link ~/bin/zotero.
+    Create link to zotero.desktop.
+    Fix zotero.desktop
+EOF
+}
 
 backup() {
     [[ -d /opt/zotero ]] && sudo mv /opt/zotero /opt/zotero.bak
@@ -16,17 +29,11 @@ clean() {
     rm -f $HOME/bin/zotero $HOME/.local/share/applications/zotero.desktop
 }
 
-main() {
-    local usage="
-    ./zotero
 
-    Backup existing instance, if exists.
-    Install Zotero to /opt/zotero.
-    Create link ~/bin/zotero.
-    Create link to zotero.desktop.
-    "
-    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
-        echo $usage
+main() {
+    local cmd=$1
+    if [[ "$cmd" == "-h" ]] || [[ "$cmd" == "--help" ]]; then
+        usage >&2
         exit 0
     fi
     backup
@@ -35,13 +42,13 @@ main() {
     pushd ~/Downloads/install/zotero > /dev/null
     [[ -f $file ]] || wget "$url" -o $file
     [[ -f $file ]] && tar jxvf "$file" || die "Cannot find file $file"
-    [[ -d $dir ]] && sudo mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
+    [[ -d $dir ]] && mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
     ln -s /opt/zotero/zotero $HOME/bin/zotero
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
     popd > /dev/null
     /opt/zotero/set_launcher_icon
     # TODO change Exec statement in desktop with sed to /opt/zotero/zotero, see set_launcher_icon as example
-    success "Zotero $version is installed."
+    success "Zotero $version is installed." >&2
 }
 
 main $@
