@@ -1,5 +1,6 @@
 # vim:nowrap:tw=132:ts=2:sw=0:ft=sh:norl:et:fen:
 
+alias bat='batcat' # may conflict with some backup program available in Debian repository 
 alias dos2unix='sed "s/$//"'
 
 alias tmux='tmux -2'
