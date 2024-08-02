@@ -31,7 +31,7 @@ clean() {
 
 
 main() {
-    local cmd=$1
+    local cmd="$1"
     if [[ "$cmd" == "-h" ]] || [[ "$cmd" == "--help" ]]; then
         usage >&2
         exit 0

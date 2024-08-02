@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Install ParaView
+#
+# https://www.paraview.org
+#
+
+echo "Warning: not tested"
+
+. $HOME/.bash-functions.rc
+
+set -exuvo pipefail
+
+paraview_ver="$(lastversion https://gitlab.kitware.com/paraview/paraview/-/tree/master)"
+short_ver="${paraview_ver%.*}"
+python_ver="3.10"
+download_dir="$HOME/Downloads/install/paraview"
+archive_file="ParaView-${paraview_ver}-MPI-Linux-Python${python_ver}-x86_64.tar.gz"
+working_dir="${archive_file%.tar*}"
+install_dir="/opt"
+url="https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v${short_ver}&type=binary&os=Linux&downloadFile=${archive_file}"
+log_file="$(mydir)/install.log"
+
+download() {
+    [[ -f "$download_dir/$archive_file" ]] && echo "File $archive_file is already downloaded" && return 0
+    echo "Downloading file $archive_file" to "$(pwd)"
+    curl -fL --progress-bar "$url" -o "$archive_file" || die "Failed to download $url"
+}
+
+unpack() {
+    [[ -f "$archive_file" ]] || die "File $archive_file is not downloaded" 
+    [[ -d "$working_dir" ]] && echo "Archive $working_dir is already unpacked" && return 0
+    echo "Unpacking file $archive_file to $working_dir"
+    tar -xvf "$archive_file"
+}
+
+install() {
+    [[ -d "$working_dir" ]] || die "Working dir $working_dir is not created"
+    mv "$working_dir" "$install_dir"
+    [[ -f "$install_dir/paraview" ]] && rm -f "$install_dir/paraview"
+    ln -s "$install_dir/$working_dir" "$install_dir/paraview"
+}
+
+
+post_install() {
+    echo "Setup desktop entry and icon"
+    sed -e "s/Exec=paraview/Exec=\/opt\/paraview\/bin\/paraview/;s/Icon=paraview/\/opt\/paraview\/share\/icons\/hicolor\/96x96\/apps\/paraview.png/" \
+           "$install_dir/$working_dir/share/application/org.paraview.Paraview.desktop" >| "$HOME/.local/share/applications/paraview.desktop" 
+    echo "TODO: download docs"
+}
+
+main() {
+    pushd "$download_dir" > /dev/null
+    (
+        download
+        unpack
+        install
+    ) | tee -a "$log_file"
+    popd > /dev/null
+    post_install | tee -a "$log_file"
+    success "ParaView, v${paraview_ver} is installed in $install_dir/$working_dir" | tee -a "$log_file"
+}
+
+
+main
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :bin
