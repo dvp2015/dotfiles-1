@@ -8,6 +8,7 @@
 . $HOME/.bash-functions.rc
 
 backup() {
+    [[ -d ~/backup_nvim/ ]] && echo "nvim config backup already exists" && return 0
     mkdir ~/backup_nvim
     cp -r ~/.config/nvim ~/backup_nvim
     cp -r ~/.local/share/nvim ~/backup_nvim
@@ -49,8 +50,15 @@ main() {
     fi
     backup
     clean
-    git clone https://github.com/NvChad/starter ~/.config/nvim
-    git clone git@github.com:dvp2015/nvchad-custom.git ~/.config/nvim/lua/custom --depth 1
+    git clone git@github.com:dvp2015/custom-nvchad-starter.git ~/.config/nvim
+    pushd ~/.config/nvim > /dev/null
+    git checkout dvp
+    popd > /dev/null/
+    echo "See https://nvchad.com/docs/quickstart/install/ for details and updates"
+    echo "Start nvim, wait while Lazy installs plugins, then run :MasonInstallAll and :Lazy sync"
+    echo "If nvchad starter is changed, update the fork 'custom-nvchad-starter', then merge master branch to dvp branch"
+    # git clone https://github.com/NvChad/starter ~/.config/nvim
+    # git clone git@github.com:dvp2015/nvchad-custom.git ~/.config/nvim/lua/custom --depth 1
 }
 
 main
