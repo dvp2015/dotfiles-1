@@ -5,7 +5,7 @@
 # https://www.paraview.org
 #
 
-echo "Warning: not tested"
+echo "Warning: only partially tested"
 
 . $HOME/.bash-functions.rc
 
@@ -17,7 +17,6 @@ python_ver="3.10"
 download_dir="$HOME/Downloads/install/paraview"
 archive_file="ParaView-${paraview_ver}-MPI-Linux-Python${python_ver}-x86_64.tar.gz"
 working_dir="${archive_file%.tar*}"
-install_dir="/opt"
 url="https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v${short_ver}&type=binary&os=Linux&downloadFile=${archive_file}"
 log_file="$(mydir)/install.log"
 
@@ -36,20 +35,27 @@ unpack() {
 
 install() {
     [[ -d "$working_dir" ]] || die "Working dir $working_dir is not created"
-    mv "$working_dir" "$install_dir"
-    [[ -f "$install_dir/paraview" ]] && rm -f "$install_dir/paraview"
-    ln -s "$install_dir/$working_dir" "$install_dir/paraview"
+    mv "$working_dir" "/opt"
+    [[ -f "/opt/paraview" ]] && rm -f "/opt/paraview"
+    ln -s "/opt/$working_dir" "/opt/paraview"
+    if [[ ! -x $HOME/bin/paraview ]]; then
+        mkdir -p $HOME/bin
+        pushd $HOME/bin > /dev/null
+        ln -s /opt/paraview/bin/paraview paraview
+        popd > /dev/null
+    fi
 }
 
 
 post_install() {
     echo "Setup desktop entry and icon"
-    sed -e "s/Exec=paraview/Exec=\/opt\/paraview\/bin\/paraview/;s/Icon=paraview/\/opt\/paraview\/share\/icons\/hicolor\/96x96\/apps\/paraview.png/" \
-           "$install_dir/$working_dir/share/application/org.paraview.Paraview.desktop" >| "$HOME/.local/share/applications/paraview.desktop" 
-    echo "TODO: download docs"
+    sed -e "s/Exec=paraview/Exec=\/opt\/paraview\/bin\/paraview/;s/Icon=paraview/Icon=\/opt\/paraview\/share\/icons\/hicolor\/96x96\/apps\/paraview.png/" \
+           "/opt/paraview/share/applications/org.paraview.ParaView.desktop" >| "$HOME/.local/share/applications/paraview.desktop" 
+    echo "TODO: implement downloading of recent docs"
 }
 
 main() {
+    [[ -d "$download_dir" ]] || mkdir -p "$download_dir"
     pushd "$download_dir" > /dev/null
     (
         download
@@ -58,11 +64,10 @@ main() {
     ) | tee -a "$log_file"
     popd > /dev/null
     post_install | tee -a "$log_file"
-    success "ParaView, v${paraview_ver} is installed in $install_dir/$working_dir" | tee -a "$log_file"
+    success "ParaView, v${paraview_ver} is installed in /opt/$working_dir" | tee -a "$log_file"
 }
 
 
 main
-
 
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :bin
