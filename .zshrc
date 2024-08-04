@@ -49,6 +49,7 @@ zinit light Aloxaf/fzf-tab
 zinit ice lucid depth"1" blockf
 zinit light yuki-yano/zeno.zsh
 #
+
 # Add in snippets
 zinit snippet OMZP::autojump
 zinit snippet OMZP::colorize
@@ -62,6 +63,7 @@ zinit snippet OMZP::sudo
 # zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::pip
+
 
 # ZSH_WEB_SEARCH_ENGINES=(
 #     yandex "https://yandex.ru/search/?text="

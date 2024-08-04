@@ -194,3 +194,6 @@ alias el='eza -l --icons --group-directories-first'
 # filter to prettify json text
 alias prettyjson='python -m json.tool'
 
+alias '..'='cd ..'
+alias '...'='cd ../..'
+alias '....'='cd ../../..'
