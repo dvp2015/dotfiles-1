@@ -10,7 +10,7 @@ alias ealias='vim ~/.shell-aliases'
 alias eenv='vim ~/.shell-env'
 alias efuncs='vim ~/.bash-functions.rc'
 alias etmux='vim ~/.tmux.conf'
-alias evim='cd ~/.config/nvim/lua/custom && vim *'
+alias evim='cd ~/.config/nvim/lua && vim *'
 alias ezsh='vim ~/.zshrc'
 
 # Check if reboot is required

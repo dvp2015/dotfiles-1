@@ -11,11 +11,17 @@
 
 . $HOME/.bash-functions.rc
 
-[[ command -v cargo ]] || die "cargo is required (i.e. rust)"
+command -v cargo || die "cargo is required (i.e. rust)"
+
 pushd $HOME/tools
 
-git clone https://github.com/helix-editor/helix
-cd helix
+if [[ -d "helix" ]]; then
+  cd helix
+  git pull
+else
+  git clone https://github.com/helix-editor/helix
+  cd helix
+fi
 cargo install --locked --path helix-term
 
 # This will install the hx binary to $HOME/.cargo/bin and build tree-sitter grammars in ./runtime/grammars.
@@ -33,7 +39,7 @@ hx --grammar fetch
 hx --grammar build
 
 echo "Optional languages servers can be installed"
-echo "See: https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers"
+echo "See: https://github.com/helix-editor/helix/wiki/Language-Server-Configurations"
 
 success "Helix is installed!"
 
