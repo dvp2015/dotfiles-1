@@ -43,15 +43,12 @@ main() {
         # docs/source/conf.py
         #  docs/source/index.rst
         # qa
-        .flake8
         .pre-commit-config.yaml
         noxfile.py
         # build
         pyproject.toml
         tools/reset-pyenv
         tools/install-poetry
-        src/${pkg}/utils/resource.py
-        tests/utils/test_resource.py
     )
     echo "Target package $pkg"
     echo "Reference      $refpkg"
