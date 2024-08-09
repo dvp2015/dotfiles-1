@@ -41,4 +41,4 @@ GROUP "hpc-larionov-002"
   ENTRY "wrk-2" URL "/sftp://dvp@10.0.130.151/sharedfolder2/common/wrk"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
-
+ENTRY "/media/dvp" URL "/media/dvp"
