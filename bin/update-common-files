@@ -26,7 +26,7 @@ check_pair() {
 
 main() {
     local pkg="${1:-$(my_pkg)}"
-    local ref="${2:-mckit-nuclides}"
+    local ref="${2:-$HOME/dev/mckit-nuclides}"
     local ref_pkg="${ref//-/_}"
     local files_to_compare=(
         # ci
@@ -54,7 +54,7 @@ main() {
     echo "Reference      $refpkg"
     echo "----------------------"
     for f in "${files_to_compare[@]}"; do
-        check_pair $f "../${ref}/${f//$pkg/$ref_pkg}"
+        check_pair $f "${ref}/${f//$pkg/$ref_pkg}"
     done
 }
 
