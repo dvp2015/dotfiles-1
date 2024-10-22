@@ -279,3 +279,12 @@ function rgf() {
 
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/dvp/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

@@ -10,4 +10,4 @@ sudo add-apt-repository ppa:freecad-maintainers/freecad-stable
 # 2. Retrieve the updated package lists:
 sudo apt update
 # 3. Then install FreeCAD along with its offline documentation:
-sudo apt install calculix-ccx freecad freecad-doc
+sudo apt install calculix-ccx freecad
