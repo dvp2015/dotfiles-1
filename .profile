@@ -25,9 +25,19 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-export GOPATH=$HOME/.go
-export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+. "$HOME/.cargo/env"
 
+# >>> juliaup initialize >>>
 
-# Added by Toolbox App
-export PATH="$PATH:/home/dvp/.local/share/JetBrains/Toolbox/scripts"
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/dvp/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/dvp/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<

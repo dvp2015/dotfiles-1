@@ -1,0 +1,26 @@
+#!/bin/bash
+# How to turn off autologin
+# https://unix.stackexchange.com/questions/45573/how-to-disable-auto-login-in-linux-mint
+
+sudo xed /etc/lightdm/lightdm.conf
+
+# and remove the following lines
+# 
+# autologin-user=<user>
+# autologin-user-timeout=0
+
+# How to setup Unix prompt
+# https://ss64.com/bash/syntax-prompt.html
+
+# How to install yandex
+https://lumpics.ru/how-to-install-yandex-disk-in-ubuntu/
+
+# How to setup access to Yandex disk as a network driver (Windows only)
+https://lumpics.ru/how-to-install-yandex-disk-in-ubuntu/
+
+У yandex-disc проблемы с libproxy (<0.5.5, на Linux Mint 22 стоит 0.5.4), пробовал установить 0.5.7
+Пока только установил зависимости:п
+https://packages.ubuntu.com/source/oracular/libproxy
+Скачал deb libproxy-0.5.7, но не устанавливается (пишет не хватает dependency - не понятно какой).
+Попробую собрать и установить из исходников.
+

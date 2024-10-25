@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Update dependencies in projects.
+#
+# dvp 2023-04-14
+#
+#
+
+. $HOME/.bash-functions.rc
+
+set -o nounset
+# set -o errexit
+# set -o verbose
+# set -o xtrace
+
+main() {
+  local projects="$@"
+  if [[ 0 == "$#" ]]; then 
+      projects=(
+      mckit-nuclides
+      xpypact
+      mapstp
+      mckit-meshes
+      mckit
+      r2s-rfda
+    )
+  fi
+  pushd $HOME/dev  > /dev/null
+  for p in "${projects[@]}"; do
+    echo "---------------------------"
+    pushd "$p" > /dev/null
+    if [[ -n $(git status -s) ]]; then
+        echo "Cannot update $p - untracked changes in repo"
+    else
+        echo "Updating $p"
+        eval "$(pyenv init -)"
+        poetry config --local virtualenvs.create false
+        pyenv shell "$(select_first_local_pyenv)"
+        git pull
+        if [[ 0 < $? ]]; then
+            echo "Failed to pull $p changes"
+        else
+            poetry update 
+            poetry install
+            pre-commit run -a
+            pytest
+            git commit -am "dependencies: poetry update" 
+            git push
+        fi
+        pyenv shell --unset
+    fi
+    popd > /dev/null
+    echo "==========================="
+  done
+  popd > /dev/null
+  success "Projects are updated"
+}
+
+main "$@"

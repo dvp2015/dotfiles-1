@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+# modification of https://devsday.ru/blog/details/38051
+
+# Utilities:
+# - bat: view files better than cat
+# https://www.hongkiat.com/blog/linux-command-bat/#:~:text=The%20bat%20command%20in%20Linux%2C,to%20interact%20with%20text%20files
+# - find/rertrieve last versiion of a packagehttps
+#   https://github.com/dvershinin/lastversion
+# - tldr, man pages replacement
+#   https://github.com/tldr-pages/tldr
+
+PIP=(lastversion)
+CARGO=(
+    eza 
+    fd-find 
+    git-delta 
+    just 
+    ripgrep 
+    zoxide
+)
+APT=(
+    autojump 
+    bat  # actually installs batcat on Debian/Ubuntu
+    curl 
+    fzf 
+    git
+    glances
+    locate
+    tmux 
+    wget 
+    xclip
+)
+NPM="tldr"
+
+pip install ${PIP[@]}
+sudo apt-get install ${APT[@]}
+cargo install ${CARGO[@]}
+npm install -g ${NPM[@]}
+
+# # zoxide - cd alternative
+# curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+# vim: set ts=4 sw=4 tw=92 ss:q=0 ft=sh et ai :

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# fix error with Yandex key in apt
+
+wget https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG -O- | sudo tee /etc/apt/trusted.gpg.d/YANDEX-BROWSER-KEY.asc

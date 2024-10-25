@@ -12,3 +12,19 @@
 # often worked around by having the profile execute bashrc anyway.
 
 [[ -f $HOME/.profile ]] && source $HOME/.profile
+. "$HOME/.cargo/env"
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/dvp/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/dvp/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<

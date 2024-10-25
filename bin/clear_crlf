@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Clear Windows \r characters from the end of files
+
+mv $1 $1.~bak
+cat $1.~bak | sed 's/\r$//' >| $1

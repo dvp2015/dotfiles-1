@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -s /etc/debconf.conf ]]; then
+    sudo killall browser -w
+    sudo apt-get purge yandex-browser* -y
+else
+    su
+    killall browser -w
+    rpm -e yandex-browser* -y
+fi
+
+rm -rf /home/*/.yandex
+rm -rf /home/*/.config/yandex-browser*

@@ -9,4 +9,4 @@ else
   exit 1
 fi
 
-pygmentize -f 'terminal' -g "$file"
+pygmentize -O 'style=paraiso-dark' -f 'terminal16m' -g "$file"

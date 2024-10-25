@@ -19,17 +19,12 @@ install_libs(){
         libgdbm-dev
         liblzma-dev
         libncurses-dev
-        libncurses5-dev
-        libncursesw5-dev
         libreadline-dev
         libsqlite3-dev
-        libssl-dev
         llvm
         lzma
-        make
         python-openssl
         tk-dev
-        wget
         zlib1g-dev
     )
     sudo apt -y install ${libs[@]}

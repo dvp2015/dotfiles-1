@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+#
+# Rename iww-gvr generated files dropping the suffix "_2write" to simplify names.
+#
+# dvp, 2022
+#
+
 drop2write() {
     for f in $@; do
         local dst="${f%_2write}"

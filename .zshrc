@@ -1,36 +1,12 @@
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
-
-# Via https://tanguy.ortolo.eu/blog/article25/shrc
+# 
+# Original:
+# https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 #
-# Zsh always executes zshenv. Then, depending on the case:
-# - run as a login shell, it executes zprofile;
-# - run as an interactive, it executes zshrc;
-# - run as a login shell, it executes zlogin.
-#
-# At the end of a login session, it executes zlogout, but in reverse order, the
-# user-specific file first, then the system-wide one, constituting a chiasmus
-# with the zlogin files.
+# Check examples and borrow findings
+# https://www.joshuad.net/zshrc-config/  (2016)
 
-# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
-test -r ~/.shell-env && source ~/.shell-env
-test -r ~/.shell-common && source ~/.shell-common
-test -r ~/.shell-aliases && source ~/.shell-aliases
-
-fpath=(/usr/share/zsh/vendor-completions/ $fpath)
-fpath=($HOME/.local/zsh.completions $fpath)
-
-# To activate completions for zsh you need to have
-# bashcompinit enabled in zsh:
-autoload -U bashcompinit
-bashcompinit
-
-# TODO dvp:
-# - should I check if nox or nox file available?
-# - move to direnv?
-if [[ -e "$(which register-python-argcomplete)" ]]; then
-    # Enable completion for nox:
-    eval "$(register-python-argcomplete nox)"
-fi
+# Load completions
+autoload -Uz compinit && compinit
 
 # Add file manager functions to shell
 # http://www.bash2zsh.com/essays/essay1_file_manager.html
@@ -43,176 +19,109 @@ autoload -U pick-web-browser
 zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
 zstyle ':mime:.htm(|l):' flags ''
 
-export DEFAULT_USER=dvp
-TERM=xterm-256color
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Enable zplug
-# See http://codegist.net/snippet/shell/zshrc_cnsworder_shell and http://codegist.net/search/zplug-vs-antigen/5
-# Check if zplug is installed
-if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
-  source ~/.zplug/init.zsh && zplug update
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
-export ZSH_CUSTOM=$HOME/.config/zsh/custom
-source $ZSH/oh-my-zsh.sh
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-# TODO stop using plugin manager, update ohmyzsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Essential
-source ~/.zplug/init.zsh
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# https://github.com/zplug/zplug/issues/419
-# alias -g zplug="LC_MESSAGES=en_US.UTF-8 zplug"
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+# TODO: revise fzf completion plugins:
+# https://github.com/chitoku-k/fzf-zsh-completions?tab=readme-ov-file
+# https://github.com/Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
+# https://github.com/yuki-yano/zeno.zsh
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+#
 
-# Make sure to use double quotes to prevent shell expansion
-zplug "zplug/zplug", hook-build:"zplug --self-manage"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-# Load after ssh-agent
-zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
-zplug "djui/alias-tips"
-zplug "willghatch/zsh-snippets"
-zplug "supercrabtree/k"
-zplug "plugins/asdf", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/gitfast", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-# zplug "plugins/zsh_reload", from:oh-my-zsh
-zplug "plugins/z", from:oh-my-zsh
-zplug "plugins/autojump", from:oh-my-zsh
-zplug "plugins/poetry", from:oh-my-zsh
-zplug "plugins/python", from:oh-my-zsh
-# zplug "plugins/pylint", from:oh-my-zsh
-# zplug "plugins/tmux", from:oh-my-zsh
-# zplug "plugins/tmuxinator", from:oh-my-zsh
-# zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "mattberther/zsh-pyenv"
-# zplug "zlsun/solarized-man"
-zplug "joel-porquet/zsh-dircolors-solarized"
-# zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
-# zplug 'molovo/revolver', as:command, use:revolver
-# zplug 'zunit-zsh/zunit', as:command, use:zunit, hook-build:'./build.zsh'
-ZSH_THEME="powerlevel10k/powerleve10k"
-zplug romkatv/powerlevel10k, as:theme, depth:1
+# Add in snippets
+zinit snippet OMZP::autojump
+zinit snippet OMZP::colorize
+zinit snippet OMZP::git
+# zinit snippet OMZP::gitfast
+zinit snippet OMZP::git-extras
+zinit snippet OMZP::sudo
+# zinit snippet OMZP::archlinux
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::pip
 
-# Install packages that have not been installed yet
-if ! zplug check --verbose; then
-    printf "Install zsh plugins? [y/n]: "
-    if read -q; then
-        echo; zplug install
-    else
-        echo
-    fi
-fi
 
-zplug load # --verbose
+# ZSH_WEB_SEARCH_ENGINES=(
+#     yandex "https://yandex.ru/search/?text="
+# )
+# zinit snippet OMZP::web-search
+# zinit snippet OMZP::poetry
+
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+zinit snippet OMZP::pyenv
+
+# zinit snippet OMZP::python
+# zinit snippet OMZP::ripgrep
+zinit snippet OMZP::ssh-agent
+
+zinit cdreplay -q
+
+#use with C-O, C-J or command 'ziconsole'
+# zinit wait lucid for zinit-zsh/zinit-console
+# requires authentification on github by password, but that is prohibited since
+# 2021
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-bindkey '^j' snippet-expand
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
 
-function zplugup() {
-    echo "zplug update zsh..."
-    zplug update
-}
+#colorize
+ZSH_COLORIZE_CHROMA_FORMATTER=terminal256
+ZSH_COLORIZE_STYLE="paraiso-dark"
 
-function vimup() {
-    echo "vim-plug update..."
-    vim +PlugUpdate +qall
-}
-
-function pyenvup() {
-    echo "pyenv update..."
-    pyenv update
-}
-
-function allup() {
-    zplugup 
-    vimup 
-    pyenvup 
-}
-
-
-# Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="fino-time"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 export HIST_STAMPS="yyyy-mm-dd"
 export HISTORY_IGNORE="(&|[bf]g|ll|ls|lm|lk|l|la|lt|h|history|ev|ea|ek|exit|id|uptime|resize|clear|mc|cs|cd ..|ez|...|....)"
-
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# plugins=(git gitfast git-extras python pylint tmux tmuxinator)
-# source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='gvim'
-# fi
-export EDITOR='vim'
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -239,80 +148,143 @@ setopt CORRECT
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
+export BROWSER=yandex-browser
 
 # open file with a default associated program
 function o() {
-  for i in "$@"
-  do
-    xdg-open $i
-  done
+  if [[ -n "$BROWSER" && "$1" = (http|https)://* ]]; then
+    "$BROWSER" "$@"
+    return
+  fi
+  local open_cmd='nohup xdg-open'
+  ${=open_cmd} "$@" &>/dev/null
 }
 
-USE_TMUX="no" # DVP: while I don't use tmux
 
-if [[ "yes" == "$USE_TMUX" ]]; then
-    #                                          --- tmux
-    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-    # Teleconsole does not preserve TMUX env variable
-    if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
-        # Attempt to discover a detached session and attach it, else create a new
-        # session
-        CURRENT_USER=$(whoami)
-        if tmux has-session -t $CURRENT_USER 2>/dev/null; then
-            tmux attach-session -t $CURRENT_USER
-        else
-            tmux new-session -s $CURRENT_USER
-        fi
-    fi
-fi
-
-lg() {
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-
-    lazygit "$@"
-
-    if [[ -f $LAZYGIT_NEW_DIR_FILE ]]; then
-        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
-}
+# Aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
 
 if [[ -x rg ]]; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 elif [[ -x ag ]]; then
-    export FZF_DEFAULT_COMMAND='ag -l -g ""'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_COMMAND='ag -l -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
-export FZF_DEFAULT_OPTS="--extended-exact"
+# https://github.com/junegunn/fzf/blob/master/ADVANCED.md#using-fzf-as-interactive-ripgrep-launcher
+export FZF_DEFAULT_OPTS="--extended-exact --color=bg+:#3c3836,bg:#32302f,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+eval "$(zoxide init zsh)"
 
-[ -f ~/.bin/tmuxinator.zsh ] && source ~/.bin/tmuxinator.zsh
-[ -f ~/.local/build.zsh ] && source ~/.local/build.zsh
-[ -f ~/.invoke-completion.rc ] && source ~/.invoke-completion.rc
+# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-env && source ~/.shell-env
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
-command -v direnv > /dev/null && eval "$(direnv hook zsh)"
-command -v jump > /dev/null  && eval "$(jump shell zsh)"
+# Updating environment
 
-lg() {
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-
-    lazygit "$@"
-
-    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
+# zinit
+function zinitup() {
+    echo "zinit update zsh..."
+    zinit self-update
+    zinit update
 }
 
+function pyenvup() {
+    echo "pyenv update..."
+    pyenv update
+}
 
+function allup() {
+    zinitup 
+    pyenvup 
+}
+
+# Colorize help output iwth bat
+alias -g -- -h='-h 2>&1 | batcat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | batcat --language=help --style=plain'
+
+
+function rgi() {
+    # Interactive ripgrep
+    # 1. Search for text in files using Ripgrep
+    # 2. Interactively restart Ripgrep with reload action
+    # 3. Open the file in Vim
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    INITIAL_QUERY="${*:-}"
+    fzf --ansi --disabled --query "$INITIAL_QUERY" \
+        --bind "start:reload:$RG_PREFIX {q}" \
+        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+        --delimiter : \
+        --preview 'batcat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+        --bind 'enter:become(vim {1} +{2})'
+}
+
+function rgf() {
+    # Switch between Ripgrep mode and fzf filtering mode (CTRL-T)
+    rm -f /tmp/rg-fzf-{r,f}
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    INITIAL_QUERY="${*:-}"
+    fzf --ansi --disabled --query "$INITIAL_QUERY" \
+        --bind "start:reload:$RG_PREFIX {q}" \
+        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+        --bind 'ctrl-t:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
+          echo "rebind(change)+change-prompt(1. ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
+          echo "unbind(change)+change-prompt(2. fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
+        --color "hl:-1:underline,hl+:-1:underline:reverse" \
+        --prompt '1. ripgrep> ' \
+        --delimiter : \
+        --header 'CTRL-T: Switch between ripgrep/fzf' \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+        --bind 'enter:become(vim {1} +{2})'    
+}
+
+# moved to ~/bin/mamba.rc
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/dvp/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/dvp/miniforge3/etc/profile.d/conda.sh" ]; then
+#         . "/home/dvp/miniforge3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/dvp/miniforge3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+#
+# if [ -f "/home/dvp/miniforge3/etc/profile.d/mamba.sh" ]; then
+#     . "/home/dvp/miniforge3/etc/profile.d/mamba.sh"
+# fi
+
+
+# TODO: switch to ohmyposh
+# https://www.youtube.com/watch?v=9U8LCjuQzdc 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
-
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/dvp/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

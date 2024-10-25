@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Install Yandex browser
+
+# https://yandex.ru/support/browser-beta/about/install.html#up
+# corrected with: https://losst.pro/kak-ispravit-key-is-stored-in-legacy-trusted-gpg-keyring-v-ubuntu
+
+install() {
+  yandex-browser --version && echo "Yandex browser is alredy installed" && return 0
+
+  sudo add-apt-repository "deb https://repo.yandex.ru/yandex-browser/deb stable main"
+  curl https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG --output YANDEX-BROWSER-KEY.GPG
+#  sudo apt-key add YANDEX-BROWSER-KEY.GPG - deprecated
+  cat YANDEX-BROWSER-KEY.GPG | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/yandex-browser.gpg
+  wget https://browser.yandex.ru/download?banerid=6301000000&os=linux&package=deb&x64=1
+  sudo dpkg -i Yandex.deb
+}
+
+install $@

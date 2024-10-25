@@ -1,6 +1,6 @@
 #!/bin/bash
 
-my_package() {
+my_pkg() {
     local dir="$(basename $(readlink -e .))"
     local pkg="${dir//-/_}"
     echo "$pkg"
@@ -25,31 +25,39 @@ check_pair() {
 }
 
 main() {
-    local pkg="${1:$(my_package)}"
+    local pkg="${1:-$(my_pkg)}"
+    local ref="${2:-$HOME/dev/mckit-nuclides}"
+    local ref_pkg="${ref//-/_}"
+    local files_to_compare=(
+        # ci
+        .github/constraints.txt
+        .github/dependabot.yml
+        .github/release-drafter.yml
+        .github/workflows/labeler.yml
+        .github/workflows/release-drafter.yml
+        .github/workflows/release.yml
+        .github/workflows/stale.yml
+        .github/workflows/clean-workflow-logs.yml
+        .github/workflows/tests.yml
+        # docs
+        # docs/source/conf.py
+        #  docs/source/index.rst
+        # qa
+        .pre-commit-config.yaml
+        noxfile.py
+        # build
+        pyproject.toml
+        tools/reset-pyenv
+        tools/install-poetry
+    )
     echo "Target package $pkg"
+    echo "Reference      $refpkg"
     echo "----------------------"
-    check_pair .flake8 ../xpypact/.flake8
-    check_pair .github/constraints.txt ../xpypact/.github/constraints.txt
-    check_pair .github/dependabot.yml ../xpypact/.github/dependabot.yml
-    check_pair .github/release-drafter.yml ../xpypact/.github/release-drafter.yml
-    check_pair .github/workflows/labeler.yml ../xpypact/.github/workflows/labeler.yml
-    check_pair .github/workflows/release-drafter.yml ../xpypact/.github/workflows/release-drafter.yml
-    check_pair .github/workflows/release.yml ../xpypact/.github/workflows/release.yml
-    check_pair .github/workflows/stale.yml ../xpypact/.github/workflows/stale.yml
-    check_pair .github/workflows/tests.yml ../xpypact/.github/workflows/tests.yml
-    check_pair noxfile.py ../xpypact/noxfile.py
-    check_pair .pre-commit-config.yaml ../xpypact/.pre-commit-config.yaml
-    check_pair pyproject.toml ../xpypact/pyproject.toml
-    if [[ "$pkg" != "mckit" ]]; then
-        check_pair "src/${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
-        check_pair src/tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
-    else
-        check_pair "${pkg}/utils/resource.py" ../xpypact/src/xpypact/utils/resource.py
-        check_pair tests/utils/test_resource.py ../xpypact/src/tests/utils/test_resource.py
-    fi
+    for f in "${files_to_compare[@]}"; do
+        check_pair $f "${ref}/${f//$pkg/$ref_pkg}"
+    done
 }
 
-my_package
 main "$@"
 
 

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+
+# TODO select some fonts instead of installin all the fonts
+# TODO check the nerd-fonts site, is it obsolete?
+
+fonts=(
+  "DroidSansMono"
+  "Noto"
+  "JetBrainsMono"
+  "FiraCode"
+)
+
+function install_nerd_fonts() {
+    # https://github.com/ryanoasis/nerd-fonts
+  url_base="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2"
+  echo "Installing nerd fonts"
+  [[ -d ~/.local/share/fonts ]] || mkdir ~/.local/share/fonts
+  pushd ~/.local/share/fonts 
+  for ((i = 0; i < ${#fonts[@]}; i++)); do
+    f=${fonts[$i]}
+    echo "--- $f"
+    url="$url_base/$f.zip"
+    echo "--- $url"
+    curl -sOL "$url"
+    unzip "$f.zip"
+  done
+  popd
+}
+
+install_nerd_fonts && fc-cache -vf ~/.local/share/fonts/
+

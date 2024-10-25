@@ -15,6 +15,8 @@ catch
     using PkgTemplates
 end
 
+using LibGit2
+
 """
     mdcd(dir)
 
@@ -46,6 +48,7 @@ Use this to extract code snippets from REPL history to files.
 edit_history() = edit(REPL.find_hist_file())
 
 
+
 """
     gitlab_template() -> Template
 
@@ -55,7 +58,7 @@ Create template object with defaults appropriate for gitlab.iterrf.ru server.
 
 ```julia
     t = gitlab_template()
-    t.julia=v"1.7"
+    t.julia=v"1.9"
     t("MyPkg")
 ```
 """
@@ -67,11 +70,7 @@ function gitlab_template()::Template
         dir=Pkg.devdir(),
         host="gitlab.iterrf.ru",
         plugins=PkgTemplates.Plugin[
-            BlueStyleBadge(), # https://github.com/invenia/BlueStyle
             Citation(),
-            Codecov(),
-            ColPracBadge(),
-            CompatHelper(),
             Develop(),
             Documenter{GitLabCI}(),
             Git(; ignore=[".*", "wrk/", "~*"], ssh=true),
@@ -87,6 +86,15 @@ function gitlab_template()::Template
 end
 
 
+function gitkw!(kwargs, k, default, section)
+    res = pop!(kwargs, k, nothing)
+    res !== nothing && return res
+    LibGit2.getconfig("$(section).$(String(k))", default)
+end
+
+githubkw!(kwargs, k, default) = gitkw!(kwargs, k, default, "github")
+
+
 """
     github_template() -> Template
 
@@ -99,22 +107,21 @@ Create template object with defaults appropriate for github.com/dvp2015 reposito
     t("MyPkg")
 ```
 """
-function github_template()::Template
+function github_template(;kwargs...)::Template
+    kwargs = Dict(kwargs)
+    user = githubkw!(kwargs, :user, "dvp2015")
+    email = githubkw!(kwargs, :email, "dmitri_portnov@yahoo.com")
     return Template(;
-        julia=VERSION,
-        user="dvp2015",
-        authors=["dmitri_portnov@yahoo.com>"],
-        dir=Pkg.devdir(),
-        host="github.com",
+        julia=pop!(kwargs, :julia, "1.10.5"),  # stable version
+        user=user,
+        authors=githubkw!(kwargs, :authors, "$user <$email>"),
         plugins=PkgTemplates.Plugin[
-            BlueStyleBadge(), # https://github.com/invenia/BlueStyle
             Citation(),
             Codecov(),
-            ColPracBadge(),
             CompatHelper(),
             Develop(),
             Documenter{GitHubActions}(),
-            Git(; ignore=[".*", "wrk/", "~*"]),
+            Git(; ignore=[".*", "wrk/", "~*"], name=user, email=email, branch="master"),
             GitHubActions(),
             RegisterAction(),
             License(; name="MIT", destination="LICENSE"),
@@ -123,7 +130,8 @@ function github_template()::Template
             SrcDir(),
             TagBot(),
             Tests(; project=true),
-        ]
+        ],
+        kwargs...
     )
 end
 
@@ -141,7 +149,7 @@ end
 
 """
 	pretty_print_stacktrace(trace = stacktrace(catch_backtrace()))
-	
+
 	Print exception trace with numbered sections.
 	Borrowed from [1], p.335.
 """
@@ -151,21 +159,27 @@ function pretty_print_stacktrace(io::IO, trace=stacktrace(catch_backtrace()))
     end
 end
 
-pretty_print_stacktrace(trace=stacktrace(catch_backtrace())) = pretty_print_stacktrace(Base.stderr, stacktrace(catch_backtrace()))
+pretty_print_stacktrace(trace=stacktrace(catch_backtrace())) =
+    pretty_print_stacktrace(Base.stderr, stacktrace(catch_backtrace()))
 
-ls(path::AbstractString=pwd()) = foreach(println, sort(readdir(path)))
-cdev(subdir::AbstractString...) = cd(joinpath(Pkg.devdir(), subdir...))
+ls(path::AbstractString=pwd()) =
+    foreach(println, sort(readdir(path)))
+ls(f::Function, path::AbstractString=pwd()) =
+    foreach(println, sort(filter(f, readdir(path))))
+
+cdev(subdir::AbstractString...) =
+    cd(joinpath(Pkg.devdir(), subdir...))
 
 """
 	installed_packages()
-	
+
 Get list of all the installed packages.
 """
 installed_packages() = sort(map(x -> x.name, values(Pkg.dependencies())))
 
 """
 	installed_packages(filter)
-	
+
 Get list of the installed packages with names matching predicate `filter`.
 
 # Example
@@ -183,5 +197,5 @@ installed_packages(filter) = Base.filter(filter, installed_packages())
 
 
 
-nothing
 
+nothing

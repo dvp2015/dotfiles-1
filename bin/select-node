@@ -1,0 +1,68 @@
+#!/bin/bash
+
+. ~/.bash-functions.rc
+
+# set -eax
+
+usage() {
+    cat <<MSG
+Set link to a node executable.
+
+Usage:
+
+    select-node [version]
+
+Optional parameter "version" is a subfolder name of folder /opt with the desired node instance.
+Defaults to the most recent version.
+MSG
+    echo
+    show-available-versions
+    exit 0
+}
+
+TOOLS_ROOT="${TOOLS_ROOT:-$HOME/tools}"
+
+show-available-versions() {
+    versions=($(find-node-versions))
+    if [[ 0 < ${#versions} ]]; then
+        echo "Available versions:"
+        for v in ${versions[@]}; do
+            echo "    $v"
+        done
+        echo
+    else
+        echo "WARNING: no node subfolders found in $TOOLS_ROOT folder"
+    fi
+}
+
+find-node-versions() {
+    pushd "$TOOLS_ROOT" > /dev/null
+    ls -1 -d node-v* | sort
+    popd  > /dev/null
+}
+
+
+
+main() {
+    ([ "$1" == "-h" ] || [ "$1" == "--help" ]) && usage
+
+    local version="$1"
+
+    if [[ -z "$version" ]]; then
+        versions=($(find-node-versions))
+        [[ 0 < ${#versions} ]] || die "No node subfolders found in tools folder"
+        version="${versions[-1]}"
+    fi
+
+    if [[ ! -x "$TOOLS_ROOT/$version/bin/node" ]]; then
+        show-available-versions
+        die "$HOME/tools/$version is not a valid node folder"
+    fi
+
+    [[ -f ~/bin/node ]] && rm ~/bin/node
+    ln -s "$TOOLS_ROOT/$version/bin/node" ~/bin/node
+    success "node -> $(~/bin/node --version)"
+
+}
+
+main "${@}"
