@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Install juliaup - Julia version manager
+
+# https://github.com/JuliaLang/juliaup
+
+curl -fsSL https://install.julialang.org | sh -s -- --yes
+
+
