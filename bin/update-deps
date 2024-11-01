@@ -42,6 +42,7 @@ main() {
         else
             poetry update 
             poetry install
+            pre-commit autoupdate
             pre-commit run -a
             pytest
             git commit -am "dependencies: poetry update" 

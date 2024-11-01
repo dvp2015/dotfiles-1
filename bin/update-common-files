@@ -49,6 +49,7 @@ main() {
         pyproject.toml
         tools/reset-pyenv
         tools/install-poetry
+        tools/update
     )
     echo "Target package $pkg"
     echo "Reference      $refpkg"
