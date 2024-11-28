@@ -2,7 +2,7 @@
 
 # Update dependencies in projects.
 #
-# dvp 2024-11-18
+# dvp 2024-11-25
 #
 #
 
@@ -35,7 +35,9 @@ main() {
         echo "Updating $p"
         eval "$(pyenv init -)"
         poetry config --local virtualenvs.create false
-        pyenv shell "$(select_first_local_pyenv)"
+        local env="$(select_first_local_pyenv)"
+        pyenv activate "$env"
+        python --version
         git pull
         if [[ 0 < $? ]]; then
             echo "Failed to pull $p changes"
@@ -49,7 +51,6 @@ main() {
             git commit -am "dependencies: poetry update" 
             git push
         fi
-        pyenv shell --unset
     fi
     popd > /dev/null
     echo "==========================="

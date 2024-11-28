@@ -2,9 +2,14 @@
 
 . $HOME/.bash-functions.rc
 
-set -euxo pipefail
+# set -o errexit  # Exit when simple command fails               'set -e'                               
+# set -o errtrace # Exit on error inside any functions or subshells.                                    
+# set -o nounset  # Trigger error when expanding unset variables 'set -u'                                 
+# set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
+set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
-version="6.0.35"
+# define last version: https://github.com/dvershinin/lastversion
+version="$(lastversion zotero)"
 file="Zotero-${version}_linux-x86_64.tar.bz2"
 url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
 dir="Zotero_linux-x86_64"
@@ -13,7 +18,7 @@ usage() {
 cat <<EOF
     ./zotero
 
-    Backup existing instance, if exists.
+    Backup existing instance (/opt/zotero), if exists.
     Install Zotero to /opt/zotero.
     Create link ~/bin/zotero.
     Create link to zotero.desktop.
@@ -22,7 +27,7 @@ EOF
 }
 
 backup() {
-    [[ -d /opt/zotero ]] && sudo mv /opt/zotero /opt/zotero.bak
+    [[ -d /opt/zotero ]] && mv /opt/zotero /opt/zotero.bak
 }
 
 clean() {
@@ -31,8 +36,8 @@ clean() {
 
 
 main() {
-    local cmd="$1"
-    if [[ "$cmd" == "-h" ]] || [[ "$cmd" == "--help" ]]; then
+    local arg="$1"
+    if [[ "$arg" == "-h" ]] || [[ "$arg" == "--help" ]]; then
         usage >&2
         exit 0
     fi
@@ -46,8 +51,9 @@ main() {
     ln -s /opt/zotero/zotero $HOME/bin/zotero
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
     popd > /dev/null
+    # Fix zotero.desktop
     /opt/zotero/set_launcher_icon
-    # TODO change Exec statement in desktop with sed to /opt/zotero/zotero, see set_launcher_icon as example
+	sed -i -e "s@^Exec=.*@Exec=/opt/zotero/zotero@" /opt/zotero/zotero.desktop
     success "Zotero $version is installed." >&2
 }
 
