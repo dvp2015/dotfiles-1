@@ -6,7 +6,7 @@
 # set -o errtrace # Exit on error inside any functions or subshells.                                    
 # set -o nounset  # Trigger error when expanding unset variables 'set -u'                                 
 # set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
-set -o xtrace   # Display expanded command and arguments       'set -x'                               
+# set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
 # define last version: https://github.com/dvershinin/lastversion
 version="$(lastversion zotero)"
@@ -36,7 +36,7 @@ clean() {
 
 
 main() {
-    local arg="$1"
+    local arg="$1"  # doesn't work with set -p nounset
     if [[ "$arg" == "-h" ]] || [[ "$arg" == "--help" ]]; then
         usage >&2
         exit 0
@@ -45,6 +45,7 @@ main() {
     clean
     mkdir -p ~/Downloads/install/zotero
     pushd ~/Downloads/install/zotero > /dev/null
+    #TODO: wget on amarano interrupts and breaks the file, check or load mannually
     [[ -f $file ]] || wget "$url" -o $file
     [[ -f $file ]] && tar jxvf "$file" || die "Cannot find file $file"
     [[ -d $dir ]] && mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
