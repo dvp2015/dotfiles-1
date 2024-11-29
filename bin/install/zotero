@@ -6,23 +6,23 @@
 # set -o errtrace # Exit on error inside any functions or subshells.                                    
 # set -o nounset  # Trigger error when expanding unset variables 'set -u'                                 
 # set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
-# set -o xtrace   # Display expanded command and arguments       'set -x'                               
+set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
 # define last version: https://github.com/dvershinin/lastversion
+lastversion --version > /dev/null || pip install lastversion
 version="$(lastversion zotero)"
 file="Zotero-${version}_linux-x86_64.tar.bz2"
+# https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=7.0.10
 url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
 dir="Zotero_linux-x86_64"
 
 usage() {
 cat <<EOF
-    ./zotero
+    ./zotero [--force-download]
 
-    Backup existing instance (/opt/zotero), if exists.
-    Install Zotero to /opt/zotero.
-    Create link ~/bin/zotero.
-    Create link to zotero.desktop.
-    Fix zotero.desktop
+    Install Zotero.
+
+    Argument "--force-download" - forces downloading the archive. 
 EOF
 }
 
@@ -35,6 +35,14 @@ clean() {
 }
 
 
+# Install Zotero
+# 
+# Sequence:
+#   Backup existing instance (/opt/zotero), if exists.
+#   Install Zotero to /opt/zotero.
+#   Create link ~/bin/zotero.
+#   Create link to zotero.desktop.
+#   Fix zotero.desktop
 main() {
     local arg="$1"  # doesn't work with set -p nounset
     if [[ "$arg" == "-h" ]] || [[ "$arg" == "--help" ]]; then
@@ -45,9 +53,12 @@ main() {
     clean
     mkdir -p ~/Downloads/install/zotero
     pushd ~/Downloads/install/zotero > /dev/null
+    if [[ "$arg" == "--force-download" ]]; then
+        rm -f $file
+    fi
     #TODO: wget on amarano interrupts and breaks the file, check or load mannually
-    [[ -f $file ]] || wget "$url" -o $file
-    [[ -f $file ]] && tar jxvf "$file" || die "Cannot find file $file"
+    [[ -f $file ]] || wget -O "$file" --retry-on-host-error "$url" || die "Cannot download $url" 
+    tar jxvf "$file" || die "Cannot unpack file $file"
     [[ -d $dir ]] && mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
     ln -s /opt/zotero/zotero $HOME/bin/zotero
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
