@@ -1,0 +1,24 @@
+#!/bin/bash
+
+. $HOME/.bash-functions.rc
+
+set -o errexit  # Exit when simple command fails               'set -e'                               
+set -o errtrace # Exit on error inside any functions or subshells.                                    
+set -o nounset  # Trigger error when expanding unset variables 'set -u'                                 
+# set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
+# set -o xtrace   # Display expanded command and arguments       'set -x'                               
+
+lastversion --help > /dev/null || pip install lastversion
+
+check_package() {
+  local package=$1 
+  local version=$2
+  local ver="$(lastversion $package)"
+  if [[ "$ver" == "$version" ]]; then
+    echo "🥺 - no updates yet of $package"
+  else
+    success "There's new version $package-$ver"
+  fi
+}
+
+check_package msgspec 0.18.6
