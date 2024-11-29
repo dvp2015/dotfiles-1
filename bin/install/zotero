@@ -6,7 +6,7 @@
 # set -o errtrace # Exit on error inside any functions or subshells.                                    
 # set -o nounset  # Trigger error when expanding unset variables 'set -u'                                 
 # set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
-set -o xtrace   # Display expanded command and arguments       'set -x'                               
+# set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
 # define last version: https://github.com/dvershinin/lastversion
 lastversion --version > /dev/null || pip install lastversion
