@@ -4,14 +4,12 @@
 
 install_libs() {
     local libs=(
-        black
-        ipython
-        isort
         jupyterlab
+        jupytext
         matplotlib
+        ruff
         scipy
         seaborn
-        xarray
     )
     pip install ${libs[@]}
 }

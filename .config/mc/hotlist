@@ -2,6 +2,9 @@ GROUP "local"
   ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
   ENTRY "dev" URL "/home/dvp/dev"
 ENDGROUP
+GROUP "amarano"
+  ENTRY "obsidian-work" URL "/mnt/amarano-2tb/yandex/obsidian/work"
+ENDGROUP
 GROUP "hpc-001"
   ENTRY "~" URL "/sftp://cuser@10.0.130.111/"
   ENTRY "wrk" URL "/sftp://cuser@10.0.130.111/home/cuser/sharedfolder"
@@ -20,11 +23,9 @@ GROUP "tnt-ftp"
   ENTRY "dvp" URL "/ftps://dvp@tnt-ftp.iterrf.ru/public"
   ENTRY "public" URL "/ftps://public@tnt-ftp.iterrf.ru/public"
 ENDGROUP
-
 # Fix to use config entries from ~/.ssh/config
 # This is required to use the old RSA protocol (options in the config file)
 # https://unix.stackexchange.com/questions/29419/how-to-connect-through-sftp-to-a-non-standard-port-on-midnight-commander
-
 GROUP "hpc2"
 #  ENTRY "~" URL "/sftp://dvpab@ui2.computing.kiae.ru/"
 #  ENTRY "wrk" URL "/sftp://dvpab@ui2.computing.kiae.ru/s/ls2/groups/g0072/wrk"
@@ -33,7 +34,6 @@ GROUP "hpc2"
   ENTRY "wrk" URL "#sh:hpc2:/s/ls2/groups/g0072/wrk"
   ENTRY "bin" URL "#sh:hpc2:/s/ls2/g-sw/g0072"
 ENDGROUP
-
 GROUP "hpc4"
 #  ENTRY "~" URL "/sftp://dvpab@ui4.computing.kiae.ru/"
 #  ENTRY "wrk" URL "/sftp://dvpab@ui4.computing.kiae.ru/s/ls4/groups/g0072/wrk"
@@ -54,7 +54,6 @@ GROUP "hpc-larionov-002"
   ENTRY "wrk-2" URL "/sftp://dvp@10.0.130.151/sharedfolder2/common/wrk"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
-
 GROUP "local"
   ENTRY "upp@dev" URL "/home/dvp/dev/mcnp/up-24-08"
   ENTRY "/media/dvp" URL "/media/dvp"
