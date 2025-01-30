@@ -153,3 +153,9 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+
+# pyenv initialize
+if command -v pyenv 1>/dev/null 2>&1; then
+   eval "$(pyenv init - bash)" 
+fi
+
