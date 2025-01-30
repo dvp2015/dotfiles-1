@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# https://dzen.ru/a/ZiLx3xOmcS3QOu0D
+
+sudo apt install  gcc-multilib flex gettext python3-dev gdb 
+
+install_if_not_installed() {
+    for f in $@; do 
+        command -v "$f" > /dev/null || sudo apt install "$f"
+    done
+}
+install_if_not_in git make g++ cmake clang 
+
+cd
+
+# git clone git://gcc.gnu.org/git/gcc.git
+
+cd gcc
+
+./contrib/download_prerequisites
+
+./configure
+
+make
+
+sudo make install
