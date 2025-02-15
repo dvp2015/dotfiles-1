@@ -1,4 +1,5 @@
 GROUP "local"
+  ENTRY "yandex-disk" URL "/home/dvp/yandex-disk"
   ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
   ENTRY "dev" URL "/home/dvp/dev"
 ENDGROUP
