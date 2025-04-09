@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Инструмент для работы с LLM (Large Language Models)
+# https://ollama.com/download
+# Рекоменовано в статье "Как установить и использовать ИИ модель DeepSeek R-1 на вашем компьютере"
+
+curl -fsSL https://ollama.com/install.sh | sh --user
