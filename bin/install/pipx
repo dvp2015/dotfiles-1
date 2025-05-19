@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Install pipx
+# https://pipx.pypa.io/stable/
+
+sudo apt update
+sudo apt install pipx
+pipx ensurepath
