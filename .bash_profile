@@ -12,7 +12,7 @@
 # often worked around by having the profile execute bashrc anyway.
 
 [[ -f $HOME/.profile ]] && source $HOME/.profile
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # >>> juliaup initialize >>>
 
@@ -28,3 +28,4 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+

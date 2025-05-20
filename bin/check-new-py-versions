@@ -6,4 +6,5 @@
 #   select python 3.x.*, where x > 8
 #
 
-pyenv install --skip-existing --list | rg -e "^\s+3\.(9|[1-9]\d+)\.\d+$" | python ~/bin/select_max_patch_version.py 
+pyenv install --skip-existing --list | rg -e "^\s+3\.(9|[1-9]\d+)\.\d+?$" | python ~/bin/select_max_patch_version.py
+pyenv install --skip-existing --list | rg -e "^\s+3\.13\.\d+t"

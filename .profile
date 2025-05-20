@@ -40,3 +40,7 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+
+export GOPATH=$HOME/.go
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+. "$HOME/.cargo/env"

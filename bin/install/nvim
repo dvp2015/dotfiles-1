@@ -7,6 +7,8 @@
 
 . $HOME/.bash-functions.rc
 
+set -exu
+
 backup() {
     [[ -d ~/backup_nvim/ ]] && echo "nvim config backup already exists" && return 0
     mkdir ~/backup_nvim
@@ -24,7 +26,7 @@ clean() {
 }
 
 main() {
-    local usage = "
+    local usage="
         ./nvim [tar|image]
 
     Default image.
@@ -35,12 +37,13 @@ main() {
     "
     local mode="${1:-image}"
     mkdir -p $HOME/tools/ && cd $HOME/tools/
+    local img_file="nvim-linux-x86_64.appimage"
     if [[ $mode == "image" ]]; then
-        [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-        chmod u+x nvim.appimage
+        [[ -f "$img_file" ]] || curl -LO "https://github.com/neovim/neovim/releases/latest/download/$img_file"
+        chmod u+x "$img_file"
         mkdir --parents $HOME/.local/bin
-        mv -f nvim.appimage $HOME/.local/bin/nvim
-    elif [[ $mode == "source" ]]; then
+        mv -f "$img_file" $HOME/.local/bin/nvim
+    elif [[ $mode == "source" ]]; then # not tested since 2025-05-13
         wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
         tar zxvf nvim-linux64.tar.gz
         rm -f $HOME/.local/bin/nvim
@@ -53,7 +56,7 @@ main() {
     git clone git@github.com:dvp2015/custom-nvchad-starter.git ~/.config/nvim
     pushd ~/.config/nvim > /dev/null
     git checkout dvp
-    popd > /dev/null/
+    popd > /dev/null
     echo "See https://nvchad.com/docs/quickstart/install/ for details and updates"
     echo "If nvchad starter is changed, update the fork 'custom-nvchad-starter', then merge master branch to dvp branch"
     # git clone https://github.com/NvChad/starter ~/.config/nvim
