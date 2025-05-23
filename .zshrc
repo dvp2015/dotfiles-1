@@ -57,10 +57,6 @@ zinit snippet OMZP::git
 # zinit snippet OMZP::gitfast
 zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
-# zinit snippet OMZP::archlinux
-# zinit snippet OMZP::aws
-# zinit snippet OMZP::kubectl
-# zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::pip
 
@@ -208,9 +204,13 @@ function pyenvup() {
 function allup() {
     zinitup 
     pyenvup 
+    juliaup self update
+    juliaup update
+    rustup self-update
+    rustup update
 }
 
-# Colorize help output iwth bat
+# Colorize help output with bat
 alias -g -- -h='-h 2>&1 | batcat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | batcat --language=help --style=plain'
 
