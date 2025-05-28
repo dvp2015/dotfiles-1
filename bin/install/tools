@@ -1,8 +1,23 @@
 #!/bin/bash
 
+# Descriptions
+#
+# - bat: view files better than cat
+# https://www.hongkiat.com/blog/linux-command-bat/#:~:text=The%20bat%20command%20in%20Linux%2C,to%20interact%20with%20text%20files
+#
+
 packages=(
-    jq       # javascript query "sed for JSON" and formatter, https://stedolan.github.io/jq
-    bat      # 'cat' with syntax highlighting, https://github.com/sharkdp/bat
+    # autojump - use zoxide instead (rust)
+    bat  # batcat, 'cat' with syntax highlighting, https://github.com/sharkdp/bat
+    curl 
+    fzf 
+    git
+    glances
+    jq   # javascript query "sed for JSON" and formatter, https://stedolan.github.io/jq
+    locate
+    tmux 
+    wget 
+    xclip
 )
 
 for p in "${packages[@]}"; do

@@ -202,12 +202,16 @@ function pyenvup() {
 }
 
 function allup() {
+    pushd $HOME > /dev/null
     zinitup 
     pyenvup 
     juliaup self update
     juliaup update
-    rustup self-update
+    rustup self update
     rustup update
+    poetry self update
+    $HOME/bin/install/nvim
+    popd > /dev/null
 }
 
 # Colorize help output with bat
