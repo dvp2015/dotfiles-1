@@ -46,6 +46,7 @@ main() {
         .pre-commit-config.yaml
         noxfile.py
         # build
+        pylint.toml
         pyproject.toml
         tools/reset-pyenv
         tools/install-poetry
