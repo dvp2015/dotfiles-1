@@ -32,4 +32,6 @@ else
     insert_path "/usr/local/go/bin" "$GOPATH/bin"
 fi
 
+export PATH
+
 # vim: set ts=4 sw=4 tw=100 ft=sh ss=0 et ai :

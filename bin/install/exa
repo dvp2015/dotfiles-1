@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+# DEPRECATED: exa is not maintained, use eza instead
+# 
 # Install exa - modern ls replacement
 #
 # https://github.com/ogham/exa 

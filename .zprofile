@@ -2,6 +2,7 @@
 
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
+    export MCNP_VARIANT="MCNP6_2018"
     . /sharedfolder/common/.profile
     module add Python/3.10.8
 fi
@@ -24,3 +25,9 @@ if [[ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]]; then
   # Added by Toolbox App
   export PATH="$PATH:$HOME/dvp/.local/share/JetBrains/Toolbox/scripts"
 fi
+
+
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"

@@ -778,15 +778,3 @@ c.FileContentsManager.post_save_hook = post_save
 #
 #  By default, all installed kernels are allowed.
 #c.KernelSpecManager.whitelist = set()
-
-###JULIA-WEBIO-CONFIG-BEGIN
-import sys, os
-if os.path.isfile("/home/dvp/.julia/packages/WebIO/7G1ZY/deps/jlstaticserve.py"):
-    sys.path.append("/home/dvp/.julia/packages/WebIO/7G1ZY/deps")
-    c = get_config()
-    c.NotebookApp.nbserver_extensions = {
-        "jlstaticserve": True
-    }
-else:
-    print("WebIO config in ~/.jupyter/jupyter_notebook_config.py but WebIO plugin not found")
-###JULIA-WEBIO-CONFIG-END

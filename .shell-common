@@ -22,7 +22,7 @@ HISTFILESIZE=20000
 HISTIGNORE="&:[bf]g:ll:lx:ls:lm:lk:l:la:lt:h:el:ea:es:ek:pwd:exit:id:uptime:resize:clear:history"
 export HISTIGNORE="$HISTIGNORE:mc:mcc:cs:cd .."
 
-export QT_SELECT=5
+export QT_SELECT=5  # TODO (@dvp): QT6 is available, install and try
 
 
 if [[ -x /usr/games/fortune ]]; then

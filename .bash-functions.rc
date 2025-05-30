@@ -20,7 +20,7 @@ installed() {
 }
 
 check-prerequisites() {
-    for cmd in $*; do
+    for cmd in $@; do
         installed "$cmd" || die "Missing dependency: $cmd"
     done
 }
