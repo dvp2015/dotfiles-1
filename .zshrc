@@ -1,4 +1,4 @@
-# 
+#
 # Original:
 # https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 #
@@ -187,6 +187,8 @@ test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
+eval "$(zoxide init zsh)"
+
 # Updating environment
 
 # zinit
@@ -280,7 +282,7 @@ function rgf() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
 
 # >>> juliaup initialize >>>
 
@@ -290,3 +292,6 @@ path=('/home/dvp/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
+
+
+#  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :

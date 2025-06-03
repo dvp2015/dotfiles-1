@@ -14,7 +14,8 @@ set -euxo pipefail
 # kk
 # zoxide - cd alternative
 
-PIP=(lastversion)
+PIP=(pipx)
+PIPX=(lastversion)
 CARGO=(
     alacrity # terminal emulation using GPU
     du-dust  # improved du
@@ -38,6 +39,7 @@ APT=(
 NPM="tldr"
 
 pip install ${PIP[@]}
+pipx install ${PIPX[@]}
 sudo apt-get install ${APT[@]}
 cargo install ${CARGO[@]}
 npm install -g ${NPM[@]}

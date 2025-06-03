@@ -72,6 +72,7 @@ fi
 path=(
   $HOME/bin
   $HOME/.local/bin
+  $HOME/.cargo/bin
   $HOME/.fzf/bin
   $GOPATH/bin
   $path
