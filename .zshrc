@@ -19,6 +19,9 @@ autoload -U pick-web-browser
 zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
 zstyle ':mime:.htm(|l):' flags ''
 
+# Load completions
+autoload -Uz compinit && compinit
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
