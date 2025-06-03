@@ -36,8 +36,8 @@ atreplinit() do repl
 
     @eval begin
         if "JULIA_EDITOR" ∉ keys(ENV) 
-            editors = ["code", "vim"]
-			if Sys.iswindows()
+            editors = ["code", "neovim", "vim"]
+            if Sys.iswindows()
                 push!(
                     editors,
                     "$(homedir())\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
