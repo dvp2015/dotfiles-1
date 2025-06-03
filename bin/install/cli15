@@ -25,6 +25,7 @@ CARGO=(
     ripgrep 
     zoxide
 )
+# APT=(curl wget git fzf autojump tmux xclip)
 NPM="tldr"
 
 pip install ${PIP[@]}
