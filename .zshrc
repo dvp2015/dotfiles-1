@@ -5,6 +5,7 @@
 # Check examples and borrow findings
 # https://www.joshuad.net/zshrc-config/  (2016)
 
+<<<<<<< HEAD
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -19,6 +20,16 @@ autoload -U pick-web-browser
 zstyle ':mime:.htm(|l):' handler 'pick-web-browser %s'
 zstyle ':mime:.htm(|l):' flags ''
 
+||||||| parent of 0167ca5 (.zshrc + eza)
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+=======
+>>>>>>> 0167ca5 (.zshrc + eza)
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -54,12 +65,18 @@ zinit light yuki-yano/zeno.zsh
 #
 
 # Add in snippets
+<<<<<<< HEAD
 zinit snippet OMZP::autojump
 zinit snippet OMZP::colorize
+||||||| parent of 0167ca5 (.zshrc + eza)
+=======
+zinit snippet OMZP::colorize
+>>>>>>> 0167ca5 (.zshrc + eza)
 zinit snippet OMZP::git
 # zinit snippet OMZP::gitfast
 zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
+<<<<<<< HEAD
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::pip
 
@@ -79,6 +96,32 @@ zinit snippet OMZP::pyenv
 # zinit snippet OMZP::python
 # zinit snippet OMZP::ripgrep
 zinit snippet OMZP::ssh-agent
+||||||| parent of 0167ca5 (.zshrc + eza)
+# zinit snippet OMZP::archlinux
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+# zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::ssh-agent
+=======
+# zinit snippet OMZP::archlinux
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::pip
+# zinit snippet OMZP::poetry
+
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+zinit snippet OMZP::pyenv
+
+# zinit snippet OMZP::python
+# zinit snippet OMZP::ripgrep
+zinit snippet OMZP::ssh-agent
+>>>>>>> 0167ca5 (.zshrc + eza)
 
 zinit cdreplay -q
 
