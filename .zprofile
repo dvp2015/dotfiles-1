@@ -2,6 +2,7 @@
 
 
 if [[ "$HOST" == "hpc-node-01" ]]; then
+    export MCNP_VARIANT="MCNP6_2018"
     . /sharedfolder/common/.profile
     module add Python/3.10.8
 fi

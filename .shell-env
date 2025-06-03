@@ -22,12 +22,15 @@ export LESS='-iFMRSX -x4'
 ##
 export MAKEFLAGS="-j $(nproc)"
 
-export MCNP_HOME="${MCNP_HOME:-/opt/lanl}"
-export MCNP_DATA=$MCNP_HOME/MCNP_DATA
-export DATAPATH=$MCNP_DATA
-export MCNP_DEFAULT_XSDIR=$DATAPATH/xsdir
+if [[ -z "$MCNP_HOME" ]]; then
+    export MCNP_HOME="${MCNP_HOME:-/opt/lanl}"
+    export MCNP_BIN="$MCNP_HOME/mcnp6_2018"
+    export MCNP_DATA=$MCNP_HOME/MCNP_DATA
+    export DATAPATH=$MCNP_DATA
+    export MCNP_DEFAULT_XSDIR=$DATAPATH/xsdir
+    [[ -r $MCNP_DEFAULT_XSDIR ]] || echo "ERROR: xsdir not found: $MCNP_DEFAULT_XSDIR"
+fi 
 
-[[ -r $MCNP_DEFAULT_XSDIR ]] || echo "ERROR: xsdir not found: $MCNP_DEFAULT_XSDIR"
 
 alias printpath='echo -e ${PATH//:/\\n}'
 
@@ -39,7 +42,7 @@ update_path                  \
     "$HOME/.local/bin"       \
     $(dirname $(readlink -m $HOME/bin/node)) \
     "/opt/bin"               \
-    "${MCNP_HOME}/MCNP5/bin" \
+    "$MCNP_BIN" \
     "$HOME/misc/todo"        \
     "$PATH"                  \
     "/usr/local/bin"         \

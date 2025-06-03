@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 # How to turn off autologin
 # https://unix.stackexchange.com/questions/45573/how-to-disable-auto-login-in-linux-mint
@@ -24,3 +25,19 @@ https://packages.ubuntu.com/source/oracular/libproxy
 Скачал deb libproxy-0.5.7, но не устанавливается (пишет не хватает dependency - не понятно какой).
 Попробую собрать и установить из исходников.
 
+||||||| parent of a3e3f32 (feat: settings for hpc-002)
+=======
+#!/bin/bash
+# How to turn off autologin
+# https://unix.stackexchange.com/questions/45573/how-to-disable-auto-login-in-linux-mint
+
+sudo xed /etc/lightdm/lightdm.conf
+
+# and remove the following lines
+# 
+# autologin-user=<user>
+# autologin-user-timeout=0
+
+# How to setup Unix prompt
+# https://ss64.com/bash/syntax-prompt.html
+>>>>>>> a3e3f32 (feat: settings for hpc-002)

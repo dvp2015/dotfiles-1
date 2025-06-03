@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 
 
@@ -67,3 +68,65 @@ main
 
 
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+||||||| parent of a3e3f32 (feat: settings for hpc-002)
+=======
+#!/bin/bash
+
+
+#
+# https://nvchad.com/docs/quickstart/install/
+#
+
+. $HOME/.bash-functions.rc
+
+backup() {
+    mkdir ~/backup_nvim
+    cp -r ~/.config/nvim ~/backup_nvim
+    cp -r ~/.local/share/nvim ~/backup_nvim
+    cp -r ~/.local/state/nvim ~/backup_nvim
+    cp -r ~/.cache/nvim ~/backup_nvim
+}
+
+clean() {
+    rm -rf ~/.config/nvim
+    rm -rf ~/.local/state/nvim
+    rm -rf ~/.local/share/nvim
+    rm -rf ~/.cache/nvim   
+}
+
+main() {
+    local usage = "
+        ./nvim [tar|image]
+
+    Default image.
+    Install nvim.
+
+    In 'source' mode to nvim is installed to $HOME/tools and link is created in $HOME/.local/bin.
+    In 'image' mode the image is copied directly to $HOME/.local/bin.
+    "
+    local mode="${1:-image}"
+    mkdir -p $HOME/tools/ && cd $HOME/tools/
+    if [[ $mode == "image" ]]; then
+        [[ -f nvim.appimage ]] || curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        chmod u+x nvim.appimage
+        mkdir --parents $HOME/.local/bin
+        mv -f nvim.appimage $HOME/.local/bin/nvim
+    elif [[ $mode == "source" ]]; then
+        wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        tar zxvf nvim-linux64.tar.gz
+        rm -f $HOME/.local/bin/nvim
+        ln -s $HOME/tools/nvim-linux64/bin/nvim $HOME/.local/bin/nvim
+    else
+        die $usage
+    fi
+    backup
+    clean
+    git clone https://github.com/NvChad/starter ~/.config/nvim
+    git clone git@github.com:dvp2015/nvchad-custom.git ~/.config/nvim/lua/custom --depth 1
+}
+
+main
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+>>>>>>> a3e3f32 (feat: settings for hpc-002)

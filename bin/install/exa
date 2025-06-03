@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# DEPRECATED: exa is not maintained, use eza instead
+# 
+# Install exa - modern ls replacement
+#
+# https://github.com/ogham/exa 
+# https://ourcodeworld.com/articles/read/832/how-to-install-and-use-exa-a-modern-replacement-for-the-ls-command-in-ubuntu-16-04
+# https://github.com/ogham/exa/releases
+#
+set -ex
+version="0.10.1"
+zipfile="exa-linux-x86_64-v${version}.zip"
+zipurl="https://github.com/ogham/exa/releases/download/v${version}/${zipfile}"
+tmpdir=$(mktemp -d exa-inst.XXXXXXXXX)
+pushd $tmpdir
+wget -c $zipurl
+unzip -d exa $zipfile
+# Move the unziped binary with the name "exa-linux-x86_64" to "/usr/local/bin/" with the exa name
+mv -t $HOME/.local/bin exa/bin/*
+mkdir -p $HOME/.local/zsh.completions
+mv exa/completions/exa.zsh $HOME/.local/zsh.completions/_exa
+mkdir -p $HOME/.local/man
+mv -t $HOME/.local/man exa/man/*
+popd
+rm -fr $tmpdir
+
+# vim: set ts=4 sw=4 tw=92 ft=sh ss=0 et ai :

@@ -25,10 +25,20 @@ CARGO=(
     ripgrep 
     zoxide
 )
-# APT=(curl wget git fzf autojump tmux xclip)
+APT=(
+    bat 
+    curl 
+    git
+    glances
+    mlocate
+    tmux 
+    wget 
+    xclip
+)
 NPM="tldr"
 
 pip install ${PIP[@]}
+sudo apt-get install ${APT[@]}
 cargo install ${CARGO[@]}
 npm install -g ${NPM[@]}
 

@@ -210,7 +210,6 @@ function allup() {
     rustup self update
     rustup update
     poetry self update
-    $HOME/bin/install/nvim
     popd > /dev/null
 }
 
@@ -280,7 +279,6 @@ function rgf() {
 # https://www.youtube.com/watch?v=9U8LCjuQzdc 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 

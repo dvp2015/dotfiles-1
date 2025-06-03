@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 
 # Descriptions
@@ -27,3 +28,20 @@ for p in "${packages[@]}"; do
 done
 
 #  vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+||||||| parent of a3e3f32 (feat: settings for hpc-002)
+=======
+#!/bin/bash
+
+packages=(
+    jq       # javascript query "sed for JSON" and formatter, https://stedolan.github.io/jq
+    bat      # 'cat' with syntax highlighting, https://github.com/sharkdp/bat
+)
+
+for p in "${packages[@]}"; do
+    echo "Installing package $p"
+    sudo apt install "$p"
+    echo
+done
+
+#  vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+>>>>>>> a3e3f32 (feat: settings for hpc-002)

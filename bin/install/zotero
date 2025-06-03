@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 
 . $HOME/.bash-functions.rc
@@ -73,3 +74,54 @@ main $@
 
 
 # vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+||||||| parent of a3e3f32 (feat: settings for hpc-002)
+=======
+#!/bin/bash
+
+. $HOME/.bash-functions.rc
+
+version="6.0.26"
+file="Zotero-${version}_linux-x86_64.tar.bz2"
+url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
+dir="Zotero_linux-x86_64"
+
+
+backup() {
+    [[ -d /opt/zotero ]] && sudo mv /opt/zotero /opt/zotero.bak
+}
+
+clean() {
+    rm -f $HOME/bin/zotero $HOME/.local/share/applications/zotero.desktop
+}
+
+main() {
+    local usage = "
+    ./zotero
+
+    Backup existing instance, if exists.
+    Install Zotero to /opt/zotero.
+    Create link ~/bin/zotero.
+    Create link to zotero.desktop.
+    "
+    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+        echo $usage
+        exit 0
+    fi
+    backup
+    clean
+    mkdir -p ~/Downloads/install/zotero
+    pushd ~/Downloads/install/zotero > /dev/null
+    [[ -f $file ]] || wget "$url"
+    [[ -f $file ]] && tar jxvf "$file" || die "Cannot find file $file"
+    [[ -d $dir ]] && sudo mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
+    ln -s /opt/zotero/zotero $HOME/bin/zotero
+    ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
+    popd > /dev/null
+    success "Zoter $version is installed."
+}
+
+main $@
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+>>>>>>> a3e3f32 (feat: settings for hpc-002)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 
 # https://yandex.ru/support/disk-desktop-linux/start.html
@@ -8,3 +9,15 @@ cat YANDEX-DISK-KEY.GPG | sudo gpg --dearmor -o /etc/apt/keyrings/yandex-disk.gp
 echo "deb [signed-by=/etc/apt/keyrings/yandex-disk.gpg] http://repo.yandex.ru/yandex-disk/deb/ stable main" >> /etc/apt/sources.list.d/yandex-disk.list
 sudo apt-get update
 sudo apt-get install yandex-disk
+||||||| parent of a3e3f32 (feat: settings for hpc-002)
+=======
+#!/bin/bash
+
+# https://yandex.ru/support/disk-desktop-linux/start.html
+
+wget -O YANDEX-DISK-KEY.GPG http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
+apt-key add YANDEX-DISK-KEY.GPG
+echo "deb http://repo.yandex.ru/yandex-disk/deb/ stable main" >> /etc/apt/sources.list.d/yandex-disk.list
+apt-get update
+apt-get install yandex-disk
+>>>>>>> a3e3f32 (feat: settings for hpc-002)
