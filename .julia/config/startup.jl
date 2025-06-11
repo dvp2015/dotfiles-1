@@ -17,11 +17,13 @@ atreplinit() do repl
         @warn "Cannot use OhMyREPL: $e.msg"
     end
 
-    try
-        @eval using Revise
-    catch e
-        @warn "Cannot use Revise: $e.msg"
-    end
+    #  TODO dvp: Revise issues a lot of warnings on 1.11.5 when Pluto is precompile
+      #            Do I neeed Revise?
+    # try
+    #     @eval using Revise
+    # catch e
+    #     @warn "Cannot use Revise: $e.msg"
+    # end
 
     # TODO dvp: check TerminalLoggers - precompile failed
     # try
