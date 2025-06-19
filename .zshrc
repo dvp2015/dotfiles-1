@@ -232,6 +232,9 @@ function allup() {
 alias -g -- -h='-h 2>&1 | batcat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | batcat --language=help --style=plain'
 
+# See Obsidian or 
+# https://github.com/pyenv/pyenv/issues/688
+export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
 function rgi() {
     # Interactive ripgrep
@@ -306,5 +309,10 @@ export PATH
 
 # <<< juliaup initialize <<<
 
+# njoy 
+export NJOY_INSTALL_DIR="/opt/njoy2016/bin/"
+if [[ -d "$NJOY_INSTALL_DIR" ]]; then
+    path=("$NJOY_INSTALL_DIR" $path)
+fi
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
