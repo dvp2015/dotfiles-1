@@ -51,6 +51,7 @@ main() {
         tools/reset-pyenv
         tools/install-poetry
         tools/update
+        justfile
     )
     echo "Target package $pkg"
     echo "Reference      $refpkg"
