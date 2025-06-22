@@ -315,4 +315,9 @@ if [[ -d "$NJOY_INSTALL_DIR" ]]; then
     path=("$NJOY_INSTALL_DIR" $path)
 fi
 
+# pycharm
+if [[ -d /opt/pycharm ]]; then
+    export PATH="/opt/pycharm/bin:$PATH"
+fi
+
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
