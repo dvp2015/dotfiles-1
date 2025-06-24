@@ -197,3 +197,5 @@ alias prettyjson='python -m json.tool'
 alias '..'='cd ..'
 alias '...'='cd ../..'
 alias '....'='cd ../../..'
+
+alias etr='eliot-tree'
