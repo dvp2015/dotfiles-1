@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
