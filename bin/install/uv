@@ -1,6 +1,10 @@
 #!/bin/bash
 
+#
+# Install uv, fast Rust based Python project and environment manager
+# See https://github.com/astral-sh/uv
+#
+
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-
-# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :
+# vim: set ts=4 sw=4 tw=92 ft=sh ss=0 et ai :

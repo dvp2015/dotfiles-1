@@ -65,7 +65,6 @@ zinit light yuki-yano/zeno.zsh
 #
 
 # Add in snippets
-zinit snippet OMZP::autojump
 zinit snippet OMZP::colorize
 zinit snippet OMZP::git
 # zinit snippet OMZP::gitfast

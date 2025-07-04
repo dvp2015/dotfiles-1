@@ -255,4 +255,10 @@ select_first_local_pyenv() {
     echo "${envs[0]}"
 }
 
+
+function set-title(){
+  export PS1="\033]2;[\$(history 1 | sed 's/^[ ]*[0-9]*[ ]*//g')]\007$PS1"
+}
+
+
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :

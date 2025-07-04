@@ -48,6 +48,7 @@ main() {
         # build
         pylint.toml
         pyproject.toml
+        ruff.toml
         tools/reset-pyenv
         tools/install-poetry
         tools/update
