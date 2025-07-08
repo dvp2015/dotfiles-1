@@ -80,11 +80,11 @@ zinit snippet OMZP::pip
 # zinit snippet OMZP::web-search
 # zinit snippet OMZP::poetry
 
-#pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-zinit snippet OMZP::pyenv
+# #pyenv
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+# zinit snippet OMZP::pyenv
 
 # zinit snippet OMZP::python
 # zinit snippet OMZP::ripgrep
@@ -210,15 +210,15 @@ function zinitup() {
     zinit update
 }
 
-function pyenvup() {
-    echo "pyenv update..."
-    pyenv update
-}
+# function pyenvup() {
+#     echo "pyenv update..."
+#     pyenv update
+# }
 
 function allup() {
     pushd $HOME > /dev/null
     zinitup 
-    pyenvup 
+    # pyenvup 
     juliaup self update
     juliaup update
     rustup self update
@@ -231,9 +231,9 @@ function allup() {
 alias -g -- -h='-h 2>&1 | batcat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | batcat --language=help --style=plain'
 
-# See Obsidian or 
-# https://github.com/pyenv/pyenv/issues/688
-export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
+# # See Obsidian [[git submodule with pyenv issue]] 
+# # https://github.com/pyenv/pyenv/issues/688
+# export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
 function rgi() {
     # Interactive ripgrep

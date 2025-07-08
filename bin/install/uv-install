@@ -1,0 +1,11 @@
+#!/bin/bash
+
+uv tool install eliot-tree
+uv tool install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
+uv tool install ruff
+uv tool install ty
+uv tool install pyright
+uv tool install mypy
+uv tool install pylint
+uv tool list
+uv tool install poetry
