@@ -1,11 +1,19 @@
 #!/bin/bash
 
+uv tool install build
+uv tool install coverage --with toml
 uv tool install eliot-tree
 uv tool install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
-uv tool install ruff
-uv tool install ty
-uv tool install pyright
 uv tool install mypy
-uv tool install pylint
-uv tool list
 uv tool install poetry
+uv tool install pylint
+uv tool install pyright
+uv tool install pytest --with pytest-cov --with pytest-mock --with pytest-durations --with pytest-benchmark -with xdoctest
+uv tool install ruff
+uv tool install sphinx --with sphinx-autodoc-typehints
+uv tool install sphinx-autobuild
+uv tool install twine
+uv tool install ty
+uv tool install xdoctest --with colors
+uv tool list
+
