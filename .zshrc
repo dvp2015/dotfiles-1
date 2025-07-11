@@ -5,6 +5,7 @@
 # Check examples and borrow findings
 # https://www.joshuad.net/zshrc-config/  (2016)
 
+
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -254,6 +255,9 @@ function rgf() {
         --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
         --bind 'enter:become(vim {1} +{2})'    
 }
+
+[[ ! -f ~/.uv-completions ]] || source ~/.uv-completions
+[[ ! -f ~/.just-completions ]] || source ~/.just-completions
 
 # moved to ~/bin/mamba.rc
 # >>> conda initialize >>>
