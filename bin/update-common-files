@@ -44,14 +44,15 @@ main() {
         #  docs/source/index.rst
         # qa
         .pre-commit-config.yaml
-        noxfile.py
+        # noxfile.py
         # build
         pylint.toml
         pyproject.toml
         ruff.toml
-        tools/reset-pyenv
-        tools/install-poetry
-        tools/update
+        tests/test_package.py
+        # tools/reset-pyenv
+        # tools/install-poetry
+        # tools/update
         justfile
     )
     echo "Target package $pkg"

@@ -72,7 +72,6 @@ zinit snippet OMZP::git
 zinit snippet OMZP::git-extras
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::pip
 
 
 # ZSH_WEB_SEARCH_ENGINES=(
