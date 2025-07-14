@@ -16,5 +16,12 @@ uv tool install sphinx-autobuild
 uv tool install twine
 uv tool install ty
 uv tool install xdoctest --with colors
+# https://github.com/scientific-python/cookie
+uv tool install --with copier-templates-extensions copier
+# https://cruft.github.io/cruft/
+uv tool install cruft
+# https://pypi.org/project/sp-repo-review/
+uv tool install sp-repo-review --with click --with rich-click
+
 uv tool list
 
