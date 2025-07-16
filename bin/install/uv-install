@@ -22,6 +22,7 @@ uv tool install --with copier-templates-extensions copier
 uv tool install cruft
 # https://pypi.org/project/sp-repo-review/
 uv tool install sp-repo-review --with click --with rich-click
+uv tool install auditwheel --with patchelf
 
 uv tool list
 
