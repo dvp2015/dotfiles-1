@@ -306,4 +306,10 @@ if [[ -d /opt/pycharm ]]; then
     export PATH="/opt/pycharm/bin:$PATH"
 fi
 
+if [[ -d "/home/dvp/.pixi/bin" ]]; then
+    export PATH="/home/dvp/.pixi/bin:$PATH"
+    eval "$(pixi completion --shell zsh)"
+fi
+
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
+
