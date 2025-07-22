@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pixi global install pixi-pack pixi-unpack

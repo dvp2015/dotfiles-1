@@ -309,6 +309,8 @@ fi
 if [[ -d "/home/dvp/.pixi/bin" ]]; then
     export PATH="/home/dvp/.pixi/bin:$PATH"
     eval "$(pixi completion --shell zsh)"
+    eval "$(pixi pack completion --shell zsh)"
+    eval "$(pixi unpack completion --shell zsh)"
 fi
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
