@@ -1,3 +1,4 @@
 #!/bin/bash
 
 pixi global install pixi-pack pixi-unpack
+pixi global install direnv
