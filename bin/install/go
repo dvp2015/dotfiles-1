@@ -47,7 +47,7 @@ install_go() {
 # jj:  JSON stream editor, https://github.com/tidwall/jj (not packaged, install from source)
 
 packages=(
-    gsamokovarov/jump
+    # gsamokovarov/jump
     jesseduffield/lazygit
     nektos/act
     bazelbuild/bazelisk

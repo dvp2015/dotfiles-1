@@ -301,7 +301,6 @@ if [[ -d "$NJOY_INSTALL_DIR" ]]; then
     path=("$NJOY_INSTALL_DIR" $path)
 fi
 
-# pycharm
 if [[ -d /opt/pycharm ]]; then
     export PATH="/opt/pycharm/bin:$PATH"
 fi
@@ -312,6 +311,8 @@ if [[ -d "/home/dvp/.pixi/bin" ]]; then
     eval "$(pixi pack completion --shell zsh)"
     eval "$(pixi unpack completion --shell zsh)"
 fi
+
+command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
