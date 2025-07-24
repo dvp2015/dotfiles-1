@@ -1,28 +1,14 @@
 #!/bin/bash
 
+uv tool install lastversion
 uv tool install build
-uv tool install coverage --with toml
 uv tool install eliot-tree
-uv tool install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
-uv tool install mypy
-uv tool install pre-commit
 uv tool install poetry
-uv tool install pylint
-uv tool install pyright
-uv tool install pytest --with pytest-cov --with pytest-mock --with pytest-durations --with pytest-benchmark -with xdoctest
-uv tool install ruff
-uv tool install sphinx --with sphinx-autodoc-typehints
-uv tool install sphinx-autobuild
 uv tool install twine
 uv tool install ty
-uv tool install xdoctest --with colors
-# https://github.com/scientific-python/cookie
-uv tool install --with copier-templates-extensions copier
-# https://cruft.github.io/cruft/
-uv tool install cruft
 # https://pypi.org/project/sp-repo-review/
 uv tool install sp-repo-review --with click --with rich-click
 uv tool install auditwheel --with patchelf
-
-uv tool list
+uv tool install repairwheel
+#
 

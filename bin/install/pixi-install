@@ -2,3 +2,31 @@
 
 pixi global install pixi-pack pixi-unpack
 pixi global install direnv
+pixi global install cmake
+pixi global install coverage --with toml
+pixi global install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
+pixi global install mypy
+pixi global install pre-commit
+pixi global install pylint
+pixi global install pyright
+pixi global install pytest \
+  --with pytest-cov \
+  --with pytest-md \
+  --with pytest-mock \
+  --with pytest-benchmark \
+  --with xdoctest
+pixi global install xdoctest
+pixi global install ruff
+pixi global install sphinx --with sphinx-autodoc-typehints
+pixi global install sphinx-autobuild
+# https://github.com/scientific-python/cookie
+pixi global install --with copier-templates-extensions copier
+# https://cruft.github.io/cruft/
+pixi global install cruft
+
+
+# The following executables are newer at pypi
+# Install with `uv tool`
+# eliot-tree
+# ty - not available on pixi channels
+
