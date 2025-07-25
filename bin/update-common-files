@@ -30,7 +30,6 @@ main() {
     local ref_pkg="${ref//-/_}"
     local files_to_compare=(
         # ci
-        .github/constraints.txt
         .github/dependabot.yml
         .github/release-drafter.yml
         .github/workflows/labeler.yml
@@ -49,6 +48,8 @@ main() {
         pylint.toml
         pyproject.toml
         ruff.toml
+        pixi.toml
+        tests/conftest.py
         tests/test_package.py
         # tools/reset-pyenv
         # tools/install-poetry
