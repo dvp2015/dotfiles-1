@@ -101,8 +101,7 @@ alias ek="vim ~/misc/keys/generic.txt"
 alias chrome='/opt/google/chrome/chrome'
 
 # Jupyter
-alias jn='jupyter notebook'
-alias jl='jupyter lab'
+alias jl='jupyter-lab'
 
 # yEd https://www.yworks.com
 alias yed='java -jar /opt/java/extensions/yed-3.18.1/yed.jar'
@@ -122,10 +121,10 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 
-if which nvim >/dev/null 2>&1; then
+if [ hash nvim 2>/dev/null ]; then
   alias vim='nvim'
 fi
-if which vim >/dev/null 2>&1; then
+if [ hash vim 2>/dev/null ]; then
   alias vi='vim'
   # Run vim in no swap mode (for very big files)
   alias vin='vim -n'
