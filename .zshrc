@@ -211,7 +211,10 @@ function allup() {
     juliaup update
     rustup self update
     rustup update
-    poetry self update
+    uv self update
+    uv tool upgrade --all
+    pixi self-update
+    pixi global update
     popd > /dev/null
 }
 

@@ -7,7 +7,6 @@ pixi global install coverage --with toml
 pixi global install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
 pixi global install mypy
 pixi global install pre-commit
-pixi global install pylint
 pixi global install pyright
 pixi global install pytest \
   --with pytest-cov \
@@ -28,5 +27,6 @@ pixi global install cruft
 # The following executables are newer at pypi
 # Install with `uv tool`
 # eliot-tree
+# pylint - pylint-per-file-ignores is available only on pypi
 # ty - not available on pixi channels
 
