@@ -49,8 +49,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# # Add in Powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -90,12 +90,15 @@ zinit cdreplay -q
 # requires authentification on github by password, but that is prohibited since
 # 2021
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+
+
 
 # Keybindings
 bindkey -e
@@ -314,6 +317,10 @@ if [[ -d "/home/dvp/.pixi/bin" ]]; then
     eval "$(pixi pack completion --shell zsh)"
     eval "$(pixi unpack completion --shell zsh)"
 fi
+
+# Starship prompt
+# [ hash starship 2>/dev/null ] && 
+eval "$(starship init zsh)"
 
 command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
