@@ -22,7 +22,7 @@ pixi global install sphinx-autobuild
 pixi global install --with copier-templates-extensions copier
 # https://cruft.github.io/cruft/
 pixi global install cruft
-
+pixi global install starship  
 
 # The following executables are newer at pypi
 # Install with `uv tool`
