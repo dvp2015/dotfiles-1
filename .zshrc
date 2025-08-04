@@ -288,7 +288,7 @@ function rgf() {
 # TODO: switch to ohmyposh
 # https://www.youtube.com/watch?v=9U8LCjuQzdc 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 

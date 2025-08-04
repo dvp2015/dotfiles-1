@@ -23,6 +23,8 @@ pixi global install --with copier-templates-extensions copier
 # https://cruft.github.io/cruft/
 pixi global install cruft
 pixi global install starship  
+pixi global install ollama
+pixi global install clang clang-format clang-tools
 
 # The following executables are newer at pypi
 # Install with `uv tool`
