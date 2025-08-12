@@ -302,7 +302,7 @@ export PATH
 # <<< juliaup initialize <<<
 
 # njoy 
-export NJOY_INSTALL_DIR="/opt/njoy2016/bin/"
+export NJOY_INSTALL_DIR="/opt/njoy2016/bin"
 if [[ -d "$NJOY_INSTALL_DIR" ]]; then
     path=("$NJOY_INSTALL_DIR" $path)
 fi

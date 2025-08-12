@@ -58,7 +58,7 @@ export GOPATH=$HOME/.go
 
 # HDF5 
 if [[ "$HOST" == "amarano" ]]; then
-    HDF5_ROOT=/opt/HDF_Group/HDF5/1.14.1.2
+    HDF5_ROOT=/opt/hdf5
     if [[ -d $HDF5_ROOT ]]; then
       export HDF5_ROOT
       export HDF5_DIR="${HDF5_ROOT}/cmake"
