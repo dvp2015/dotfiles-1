@@ -5,7 +5,45 @@
 # http://asdf-vm.com/
 #
 
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+is_sudoer=$(sudo -l &> /dev/null && echo "true" || echo "false")
+if [[ "$is_sudoer" == "true" ]]; then
+# 1. Установим зависимости (git, curl, build-essential и т.д.)
+  sudo apt update 
+  sudo apt install -y git curl build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget llvm libncursesw5-dev \
+  xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+fi
+
+version="$(lastvertion asdf-vm)"
+
+if [[ -d "$HOME/.asdf" ]];
+  echo "INFO: ASDF is already installed"
+  curr_version="$(asdf --version)"
+  if [[ "$curr_version" != "$version" ]]; then 
+    echo "WARNING: Current version $curr_version != last version $version"
+    exit 1
+  fi
+  exit 0
+fi
+
+# 2. Клонируем репозиторий ASDF в домашнюю директорию
+git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v${version}
+
+# 3. Добавим ASDF в .bashrc или .zshrc (для автозагрузки)
+# echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+# echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
+
+# Для zsh:
+echo '. "$HOME/.asdf/asdf.sh"' >> ~/.zshrc
+echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.zshrc
+
+# 4. Перезапускаем терминал или подгружаем конфиг
+# source ~/.bashrc
+# или
+source ~/.zshrc
+
+# 5. Проверяем, что всё работает
+asdf --version
 
 
 
