@@ -41,20 +41,16 @@ main() {
         # docs
         # docs/source/conf.py
         #  docs/source/index.rst
-        # qa
+        # dev 
+        .envrc
         .pre-commit-config.yaml
-        # noxfile.py
-        # build
+        justfile
+        pixi.toml
         pylint.toml
         pyproject.toml
         ruff.toml
-        pixi.toml
         tests/conftest.py
         tests/test_package.py
-        # tools/reset-pyenv
-        # tools/install-poetry
-        # tools/update
-        justfile
     )
     echo "Target package $pkg"
     echo "Reference      $refpkg"
