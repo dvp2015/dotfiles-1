@@ -25,7 +25,7 @@ pixi global install cruft
 pixi global install starship  
 pixi global install ollama
 pixi global install clang clang-format clang-tools
-
+pixi global install btop
 # The following executables are newer at pypi
 # Install with `uv tool`
 # eliot-tree
