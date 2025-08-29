@@ -7,7 +7,7 @@
 
 . $HOME/.bash-functions.rc
 
-OBSIDIAN_VER="$(lastversion obsidianmd)"
+OBSIDIAN_VER="$(lastversion --at github ObsidianMd)"
 BIN="$HOME/.local/bin"
 EXE="$BIN/obsidian"
 URL="https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/Obsidian-${OBSIDIAN_VER}.AppImage"
