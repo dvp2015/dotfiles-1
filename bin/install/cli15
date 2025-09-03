@@ -20,7 +20,8 @@ CARGO=(
     alacrity # terminal emulation using GPU
     du-dust  # improved du
     eza      # ... ll
-    fd-find 
+    fd-find
+    felix    
     git-delta 
     just 
     ripgrep 
@@ -28,6 +29,7 @@ CARGO=(
 )
 APT=(
     bat 
+    chafa
     curl 
     git
     glances
