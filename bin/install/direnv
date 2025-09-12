@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Install direnv as standalone package.
+# Use this if pixi global is not for you.
+# See ./pixi-install
+curl -sfL https://direnv.net/install.sh | bash
