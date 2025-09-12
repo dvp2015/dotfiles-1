@@ -3,6 +3,13 @@
     name = dvp
     email = d.portnov@iterrf.ru
 
+[pull]
+    rebase = true
+
+[pretty]
+    slog = format:%C(yellow)%h 📅 %Cred%as ❇️ %Cblue%an%Cgreen%d %Creset%s
+    bw = format:%h | %as | %>(20,trunc)%d%x09%s
+
 [core]
     autocrlf = input
     editor = vim
@@ -46,6 +53,9 @@
 
 [alias]
     a = add
+    aa = !git add -u && git add . && git status
+    c = commit -m
+    cn = commit --no-verify -m
     s = status
     st = status
     ci = commit
@@ -54,10 +64,24 @@
     re = remote
     d = diff
     dc = diff --cached
+
+  # list my aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+  # log
+    last = log --name-status -1 HEAD --pretty=slog
+
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ls = ls-files
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    l1 = log -1 --pretty=slog
+    l5 = log -5 --pretty=slog 
+    slog = log --pretty=slog
+    slogbw = log --pretty=bw
+    glog = log --graph --pretty=slog 
+    outgoing = log --pretty=slog @{u}..
+
   # Pull Upstream
     pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
   # Commit Amend Reuse Message HEAD
@@ -66,6 +90,10 @@
     pc = !"f() { remote=\"${1:-origin}\"; git push -u \"$remote\" $(git rev-parse --abbrev-ref HEAD); }; f"
   # Push Current Force
     pcf = !"f() { echo git pc \"$@\" -f; }; f"
+    s = status --short
+    st = status
+    undo = reset HEAD~1 --mixed
+
 
 [merge]
     tool = vimdiff
