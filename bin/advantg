@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Load advantg environment and run advantg
+# dvp, 2025-09-25
+
+export ADVANTG_HOME=${ADVANTG_HOME:-"/opt/advantg"}
+source ${ADVANTG_HOME}/advantg.rc
+advantg $@
+

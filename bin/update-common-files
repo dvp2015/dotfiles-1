@@ -40,9 +40,10 @@ main() {
         .github/workflows/tests.yml
         # docs
         # docs/source/conf.py
-        #  docs/source/index.rst
+        docs/source/index.rst
         # dev 
         .envrc
+        .readthedocs.yaml
         .pre-commit-config.yaml
         justfile
         pixi.toml
