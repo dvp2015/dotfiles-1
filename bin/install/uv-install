@@ -7,6 +7,8 @@ uv tool install poetry
 uv tool install pylint --with pylint-per-file-ignores 
 uv tool install twine
 uv tool install ty
+# https://github.com/sharkdp/shell-functools
+uv tool install shell-functools  
 # https://pypi.org/project/sp-repo-review/
 uv tool install sp-repo-review --with click --with rich-click
 uv tool install auditwheel --with patchelf
