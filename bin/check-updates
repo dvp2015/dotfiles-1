@@ -15,11 +15,11 @@ check_package() {
   local version=$2
   local ver="$(lastversion $package)"
   if [[ "$ver" == "$version" ]]; then
-    echo "🥺 - no updates yet of $package"
+    echo "🥺 - there's no updates for $package"
   else
     success "There's new version $package-$ver"
   fi
 }
 
-# check_package msgspec 0.19.0
-echo "Укажите, что нужно проверить."
+check_package connector-x 0.4.4
+# echo "Укажите, что нужно проверить."

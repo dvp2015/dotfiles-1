@@ -255,5 +255,36 @@ select_first_local_pyenv() {
     echo "${envs[0]}"
 }
 
+function get_cpu_number() {
+    # Return all CPUs including hyperthreading
+    grep -c "^processor" /proc/cpuinfo
+}
+
+function get_cores_number() {
+    # Return number of physical CPUs
+    grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}'
+}
+
+function get_free_mem() {
+    # Return free memory in bytes
+    free -b | grep "Mem:" | awk '{print $4}'
+}
+
+function min() {
+    if [[ 0 < $# ]]; then
+        local a=$0
+        for i in $@; do
+            if [[ $i < $a ]]; then
+                a=$i
+            fi
+        done
+        echo $a
+    fi
+}
+
+function get_mem_restricted_cpu_number() {
+    local max_mem_per_cpu=${1:-4000000000}  # default 4Gb per CPU
+    min "$(get_cpu_number)" "$(($(get_free_mem) / $max_mem_per_cpu))"
+}
 
 # vim: set ts=4 sw=0 tw=88 ss=0 ft=sh et ai :
