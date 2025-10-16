@@ -47,7 +47,7 @@ main() {
         .pre-commit-config.yaml
         justfile
         pixi.toml
-        pylint.toml
+        pylintrc.toml
         pyproject.toml
         ruff.toml
         tests/conftest.py
