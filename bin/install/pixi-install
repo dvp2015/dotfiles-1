@@ -5,16 +5,8 @@ pixi global install direnv
 pixi global install cmake
 pixi global install coverage --with toml
 pixi global install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib
-pixi global install mypy
 pixi global install pre-commit
 pixi global install pyright
-pixi global install pytest \
-  --with pytest-cov \
-  --with pytest-md \
-  --with pytest-mock \
-  --with pytest-benchmark \
-  --with xdoctest
-pixi global install xdoctest
 pixi global install ruff
 pixi global install sphinx --with sphinx-autodoc-typehints
 pixi global install sphinx-autobuild
@@ -28,7 +20,9 @@ pixi global install clang clang-format clang-tools
 pixi global install btop
 # The following executables are newer at pypi
 # Install with `uv tool`
-# eliot-tree
-# pylint - pylint-per-file-ignores is available only on pypi
-# ty - not available on pixi channels
-
+#   eliot-tree
+#   pylint - pylint-per-file-ignores is available only on pypi
+#   ty - not available on pixi channels
+# The following should run from local environment
+#   mypy - global instance gives different results to the local one
+#   pytest - plugins set is specific for local configuration 
