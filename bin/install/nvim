@@ -6,7 +6,7 @@
 
 . $HOME/.bash-functions.rc
 
-set -exu
+# set -exu
 
 backup() {
     [[ -d ~/backup_nvim/ ]] && echo "nvim config backup already exists" && return 0
