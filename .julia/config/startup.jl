@@ -8,9 +8,9 @@ atreplinit() do repl
             colorscheme!("OneDark")
             OhMyREPL.enable_autocomplete_brackets(true)
             OhMyREPL.Passes.RainbowBrackets.activate_256colors()
-            # On vscode terminal on windows this breaks prompt and input focus, the following is a solution 
+            # On vscode terminal on windows this breaks prompt and input focus, the following is a solution
             let use_default_prompt = Sys.iswindows() && get(ENV, "TERM_PROGRAM", nothing) == "vscode"
-                use_default_prompt || OhMyREPL.input_prompt!("👠> ")  
+                use_default_prompt || OhMyREPL.input_prompt!("👠> ")
             end
         end
     catch e
@@ -37,7 +37,7 @@ atreplinit() do repl
     # end
 
     @eval begin
-        if "JULIA_EDITOR" ∉ keys(ENV) 
+        if "JULIA_EDITOR" ∉ keys(ENV)
             editors = ["code", "neovim", "vim"]
             if Sys.iswindows()
                 push!(
@@ -46,9 +46,9 @@ atreplinit() do repl
                     "C:\\Program Files\\Notepad++\\notepad++.exe",
                     "notepad.exe"
                 )
-            end 
+            end
             editor = something(map(Sys.which, editors)...)
-            if Sys.iswindows() && occursin(r"[ \\]", editor) 
+            if Sys.iswindows() && occursin(r"[ \\]", editor)
                 editor = "\"$editor\""  # force to be a single entry on shell_split call
             end
             ENV["JULIA_EDITOR"] = editor
@@ -59,6 +59,3 @@ atreplinit() do repl
     end
 
 end
-
-
-

@@ -33,22 +33,12 @@ main() {
         echo "Cannot update $p - untracked changes in repo"
     else
         echo "Updating $p"
-        eval "$(pyenv init -)"
-        poetry config --local virtualenvs.create false
-        local env="$(select_first_local_pyenv)"
-        pyenv activate "$env"
-        python --version
         git pull
         if [[ 0 < $? ]]; then
             echo "Failed to pull $p changes"
         else
-            poetry update 
-            poetry install
-            poetry build
-            pre-commit autoupdate
-            pre-commit run -a
-            pytest
-            git commit -am "dependencies: poetry update" 
+            just up
+            git commit -am "dependencies: update" 
             git push
         fi
     fi
