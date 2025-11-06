@@ -5,7 +5,7 @@
 
 [core]
     autocrlf = input
-    editor = vim
+	editor = \"d:\\tools\\vscode\\bin\\code\" --wait
     excludesfile = ~/.gitignore
     whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
   # Use the best pager available
