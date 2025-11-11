@@ -43,6 +43,7 @@ main() {
         docs/source/index.rst
         # dev 
         .envrc
+        .gitattributes
         .readthedocs.yaml
         .pre-commit-config.yaml
         justfile
