@@ -44,8 +44,8 @@ main() {
         # dev 
         .envrc
         .gitattributes
-        .readthedocs.yaml
         .pre-commit-config.yaml
+        .readthedocs.yaml
         justfile
         pixi.toml
         pylintrc.toml
@@ -53,6 +53,7 @@ main() {
         ruff.toml
         tests/conftest.py
         tests/test_package.py
+        ty.toml
     )
     echo "Target package $pkg"
     echo "Reference      $refpkg"
