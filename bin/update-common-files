@@ -50,6 +50,7 @@ main() {
         pixi.toml
         pylintrc.toml
         pyproject.toml
+        pytest.toml
         ruff.toml
         tests/conftest.py
         tests/test_package.py

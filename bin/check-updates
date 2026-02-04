@@ -8,7 +8,7 @@ set -o nounset  # Trigger error when expanding unset variables 'set -u'
 # set -o pipefail # Do not hide errors within pipes              'set -o pipefail'                      
 # set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
-# lastversion --help > /dev/null || pip install lastversion
+# lastversion --help > /dev/null || uv tool install lastversion
 
 check_package() {
   local package=$1 
@@ -23,6 +23,5 @@ check_package() {
 
 echo "Check for packages updates to Python 3.14"
 
-check_package connector-x 0.4.4
-check_package msgspec 0.19.0
-# echo "Укажите, что нужно проверить."
+# check_package connector-x 0.4.5
+echo "Укажите, что нужно проверить."
