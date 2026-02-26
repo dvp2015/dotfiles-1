@@ -1,17 +1,18 @@
 #!/bin/bash
 
-uv tool install lastversion
-uv tool install build
-uv tool install eliot-tree
-uv tool install poetry
-uv tool install pylint --with pylint-per-file-ignores 
-uv tool install twine
-uv tool install ty
+uv tool install lastversion --reinstall
+uv tool install build --reinstall
+uv tool install eliot-tree --reinstall
+uv tool install nox --with nox-uv --with jinja2 --reinstall
+uv tool install poetry --reinstall
+uv tool install pylint --with pylint-per-file-ignores  --reinstall
+uv tool install twine  --reinstall
+uv tool install ty  --reinstall
 # https://github.com/sharkdp/shell-functools
-uv tool install shell-functools  
+uv tool install shell-functools  --reinstall  
 # https://pypi.org/project/sp-repo-review/
-uv tool install sp-repo-review --with click --with rich-click
-uv tool install auditwheel --with patchelf
-uv tool install repairwheel
+uv tool install sp-repo-review --with click --with rich-click  --reinstall
+uv tool install auditwheel --with patchelf  --reinstall
+uv tool install repairwheel  --reinstall
 #
 
