@@ -264,33 +264,6 @@ function rgf() {
 [[ ! -f ~/.uv-completions ]] || source ~/.uv-completions
 [[ ! -f ~/.just-completions ]] || source ~/.just-completions
 
-# moved to ~/bin/mamba.rc
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/dvp/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/dvp/miniforge3/etc/profile.d/conda.sh" ]; then
-#         . "/home/dvp/miniforge3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/dvp/miniforge3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
-#
-# if [ -f "/home/dvp/miniforge3/etc/profile.d/mamba.sh" ]; then
-#     . "/home/dvp/miniforge3/etc/profile.d/mamba.sh"
-# fi
-
-
-# TODO: switch to ohmyposh
-# https://www.youtube.com/watch?v=9U8LCjuQzdc 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
 
 # >>> juliaup initialize >>>
 
@@ -301,7 +274,6 @@ export PATH
 
 # <<< juliaup initialize <<<
 
-# njoy 
 export NJOY_INSTALL_DIR="/opt/njoy2016/bin"
 if [[ -d "$NJOY_INSTALL_DIR" ]]; then
     path=("$NJOY_INSTALL_DIR" $path)
@@ -318,10 +290,7 @@ if [[ -d "/home/dvp/.pixi/bin" ]]; then
     eval "$(pixi unpack completion --shell zsh)"
 fi
 
-# Starship prompt
-# [ hash starship 2>/dev/null ] && 
-eval "$(starship init zsh)"
-
+command -v starship  > /dev/null && eval "$(starship init zsh)"
 command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
