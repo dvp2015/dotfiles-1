@@ -41,6 +41,7 @@ alias manmcnp3='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_III.pdf'
 alias misc='~/misc'
 alias ne='~/dev/python/ne'
 alias sshcs='ssh dvp@gitlab.iterrf.ru'
+alias ssh-gitlab2='ssh dvp@gitlab2.iterrf.ru'
 alias upp='~/dev/mcnp/upp'
 
 alias md='mkdir -p'

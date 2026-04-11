@@ -15,6 +15,10 @@ GROUP "hpc-002"
   ENTRY "shared" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/local"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
+GROUP "gitlab2"
+  ENTRY "~" URL "/sftp://dvp@gitlab2.iterrf.ru/"
+  ENTRY "common" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common"
+ENDGROUP
 GROUP "cs"
   ENTRY "up-24-08@cs" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp/projects/mcnp/up-24-08"
   ENTRY "~" URL "/sftp://dvp@gitlab.iterrf.ru/"
