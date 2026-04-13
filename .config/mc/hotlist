@@ -17,6 +17,7 @@ GROUP "hpc-002"
 ENDGROUP
 GROUP "gitlab2"
   ENTRY "~" URL "/sftp://dvp@gitlab2.iterrf.ru/"
+  ENTRY "common" URL "/sftp://jgv@gitlab2.iterrf.ru/data/ftpdata/common"
   ENTRY "common" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common"
 ENDGROUP
 GROUP "cs"
