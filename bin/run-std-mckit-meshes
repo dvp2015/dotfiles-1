@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Run "standard" workflow for mckit-meshes
+# 
+# Assumptions:
+# - there's the only one mestal file
+#
+# 2024-04-14 dvp
+#
+
+. ~/.bash-functions.rc
+
+. ~/dev//mckit-meshes/.venv/bin/activate
+mckit-meshes mesh2npz 
+mckit-meshes npz2vtk -p vtk npz/*.npz
+bzip2 *.m
+
+success "Done!"
