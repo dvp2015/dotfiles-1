@@ -1,10 +1,16 @@
 GROUP "local"
-  ENTRY "yandex-disk" URL "/home/dvp/yandex-disk"
-  ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
+  ENTRY "/media/dvp" URL "/media/dvp"
   ENTRY "dev" URL "/home/dvp/dev"
 ENDGROUP
+GROUP "lenovo"
+  ENTRY "yandex-disk" URL "/home/dvp/yandex-disk"
+  ENTRY "obsidian/work" URL "/home/dvp/yandex-disk/obsidian/work"
+ENDGROUP
 GROUP "amarano"
-  ENTRY "obsidian-work" URL "/mnt/amarano-2tb/yandex/obsidian/work"
+  ENTRY "yandex-disk" URL "/mnt/amarano-2tb/yandex"
+  ENTRY "obsidian/work" URL "/mnt/amarano-2tb/yandex/obsidian/work"
+  ENTRY "MCNP docs" URL "/opt/lanl/MCNP5/docfiles"
+  ENTRY "upp@amarano2tb" URL "/mnt/amarano-2tb/dev/mcnp/up8/from-ard1/UPP#08"
 ENDGROUP
 GROUP "hpc-001"
   ENTRY "~" URL "/sftp://cuser@10.0.130.111/"
@@ -16,12 +22,13 @@ GROUP "hpc-002"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
 GROUP "gitlab2"
-  ENTRY "~" URL "/sftp://dvp@gitlab2.iterrf.ru/"
-  ENTRY "common" URL "/sftp://jgv@gitlab2.iterrf.ru/data/ftpdata/common"
+  ENTRY "projects" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common/projects"
   ENTRY "common" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common"
+  ENTRY "dvp@ftp" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/dvp"
+  ENTRY "~" URL "/sftp://dvp@gitlab2.iterrf.ru/home/dvp"
 ENDGROUP
-GROUP "cs"
-  ENTRY "up-24-08@cs" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp/projects/mcnp/up-24-08"
+GROUP "gitlab1"
+  ENTRY "trt-hall@cs" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp/projects/mcnp/trt-hall"
   ENTRY "~" URL "/sftp://dvp@gitlab.iterrf.ru/"
   ENTRY "sftp" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp"
 ENDGROUP
@@ -34,17 +41,11 @@ ENDGROUP
 # This is required to use the old RSA protocol (options in the config file)
 # https://unix.stackexchange.com/questions/29419/how-to-connect-through-sftp-to-a-non-standard-port-on-midnight-commander
 GROUP "hpc2"
-#  ENTRY "~" URL "/sftp://dvpab@ui2.computing.kiae.ru/"
-#  ENTRY "wrk" URL "/sftp://dvpab@ui2.computing.kiae.ru/s/ls2/groups/g0072/wrk"
-#  ENTRY "bin" URL "/sftp://dvpab@ui2.computing.kiae.ru/s/ls2/g-sw/g0072"
   ENTRY "~" URL "#sh:hpc2:"
   ENTRY "wrk" URL "#sh:hpc2:/s/ls2/groups/g0072/wrk"
   ENTRY "bin" URL "#sh:hpc2:/s/ls2/g-sw/g0072"
 ENDGROUP
 GROUP "hpc4"
-#  ENTRY "~" URL "/sftp://dvpab@ui4.computing.kiae.ru/"
-#  ENTRY "wrk" URL "/sftp://dvpab@ui4.computing.kiae.ru/s/ls4/groups/g0072/wrk"
-#  ENTRY "bin" URL "/sftp://dvpab@ui4.computing.kiae.ru/s/ls4/groups/g0072/bin"
   ENTRY "~" URL "#sh:hpc4:"
   ENTRY "wrk" URL "#sh:hpc4:/s/ls4/groups/g0072/wrk"
   ENTRY "bin" URL "#sh:hpc4:/s/ls4/groups/g0072/bin"
@@ -60,11 +61,4 @@ GROUP "hpc-larionov-002"
   ENTRY "~" URL "/sftp://dvp@10.0.130.151/home/dvp"
   ENTRY "wrk-2" URL "/sftp://dvp@10.0.130.151/sharedfolder2/common/wrk"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
-ENDGROUP
-GROUP "local"
-  ENTRY "upp@dev" URL "/home/dvp/dev/mcnp/up-24-08"
-  ENTRY "/media/dvp" URL "/media/dvp"
-  GROUP "amarano"
-    ENTRY "upp@amarano2tb" URL "/mnt/amarano-2tb/dev/mcnp/up8/from-ard1/UPP#08"
-  ENDGROUP
 ENDGROUP
