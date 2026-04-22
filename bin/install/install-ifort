@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Install intel fortran 
+# https://gist.github.com/SomajitDey/aeb6eb4c8083185e06800e1ece4be1bd
+
+curl -Lo- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | sudo gpg --dearmor -o /usr/share/keyrings/oneapi-archive-keyring.gpg
+sudo tee /etc/apt/sources.list.d/oneAPI.list <<< "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main"
+sudo apt update
+sudo apt install intel-oneapi-compiler-fortran
+sudo apt install intel-oneapi-mkl
+
+echo "# Intel ifort" >> ~/.zshrc
+echo ". /opt/intel/oneapi/setvars.sh > /dev/null" >> ~/.zshrc

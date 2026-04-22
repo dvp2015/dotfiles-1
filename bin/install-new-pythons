@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Install new python versions
-
-new_pythons=($(check-new-py-versions))
-
-pyenv install "${new_pythons[@]}"

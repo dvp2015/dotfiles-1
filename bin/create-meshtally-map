@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#  scan with meshtally files proudced
+#  with 'mckit-meshes --split' and  extract 
+#  comments
+#  print <tally_number>:<comment> table
+files="$@"
+[[ -z "$files" ]] && files=(*.m)
+rg -e "\d+\s*\=+" -m 5 ${files[@]} | sed "s/4 === //;s/.m//"

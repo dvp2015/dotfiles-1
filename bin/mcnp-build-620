@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Build script with options for MCNP 6.2
+# see https://github.com/ljacobson64/MCNP_CMake
+
+set -exu
+
+install_prefix="/opt/lanl/mcnp620-d1s"
+cmake -S ../src -B . \
+   -DBUILD_MCNP514=OFF \
+   -DBUILD_MCNP515=OFF \
+   -DBUILD_MCNP516=OFF \
+   -DBUILD_MCNP602=OFF \
+   -DBUILD_MCNP610=OFF \
+   -DBUILD_MCNP611=OFF \
+   -DBUILD_MCNP620=ON \
+   -DBUILD_MCNPX27=OFF \
+   -DBUILD_MPI=ON \
+   -DBUILD_OPENMP=ON \
+   -DBUILD_PIC=ON \
+   -DBUILD_PLOT=ON \
+   -DBUILD_STATIC_EXE=OFF \
+   -DCMAKE_BUILD_TYPE=Release \
+   -DCMAKE_CXX_COMPILER=g++ \
+   -DCMAKE_C_COMPILER=gcc \
+   -DCMAKE_Fortran_COMPILER=ifx \
+   -DCMAKE_INSTALL_PREFIX=${install_prefix} \
+   -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+   -DMCNP620_DATAPATH:PATH="$DATAPATH" 
+
+make
+make install

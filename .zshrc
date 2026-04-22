@@ -209,16 +209,22 @@ function zinitup() {
 
 function allup() {
     pushd $HOME > /dev/null
+    echo ------------------------  zinit 
     zinitup 
+    echo ------------------------  julia 
     juliaup self update
     juliaup update
+    echo ------------------------  rust 
     rustup self update
     rustup update
+    echo ------------------------  uv 
     uv self update
     uv tool upgrade --all
+    echo ------------------------  pixi 
     pixi self-update
     pixi global update
     popd > /dev/null
+    success "updates done"
 }
 
 # Colorize help output with bat
@@ -295,3 +301,7 @@ command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
+# Intel ifort
+if [[ -r "/opt/intel/oneapi/setvars.sh" ]]; then
+    source /opt/intel/oneapi/setvars.sh > /dev/null
+fi
