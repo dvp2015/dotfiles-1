@@ -6,4 +6,5 @@
 # https://calibre-ebook.com/download_linux
 #
 
-sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+# sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+wget --show-progress -v -o calibre-linux-installer https://download.calibre-ebook.com/linux-installer.sh
