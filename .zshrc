@@ -205,8 +205,8 @@ function zinitup() {
 
 function allup() {
     pushd $HOME > /dev/null
-    echo ------------------------  zinit 
-    zinitup 
+    # echo ------------------------  zinit 
+    # zinitup 
     echo ------------------------  julia 
     juliaup self update
     juliaup update
