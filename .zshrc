@@ -49,9 +49,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# # Add in Powerlevel10k
-# zinit ice depth=1; zinit light romkatv/powerlevel10k
-
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
@@ -66,22 +63,19 @@ zinit light yuki-yano/zeno.zsh
 #
 
 # Add in snippets
-# zinit snippet OMZP::colorize
+zinit snippet OMZP::colorize
 zinit snippet OMZP::git
-# zinit snippet OMZP::git-extras
-# zinit snippet OMZP::sudo
-# zinit snippet OMZP::command-not-found
+zinit snippet OMZP::command-not-found
 
 
-# ZSH_WEB_SEARCH_ENGINES=(
+# ZSH_WEB_SEARCH_ENGINES=(``
 #     yandex "https://yandex.ru/search/?text="
 # )
 # zinit snippet OMZP::web-search
-# zinit snippet OMZP::poetry
 
 # zinit snippet OMZP::python
 # zinit snippet OMZP::ripgrep
-# zinit snippet OMZP::ssh-agent
+zinit snippet OMZP::ssh-agent lazy yes
 zinit cdreplay -q
 
 #use with C-O, C-J or command 'ziconsole'
