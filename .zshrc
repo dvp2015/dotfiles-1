@@ -75,7 +75,7 @@ zinit snippet OMZP::command-not-found
 
 # zinit snippet OMZP::python
 # zinit snippet OMZP::ripgrep
-zinit snippet OMZP::ssh-agent lazy yes
+zinit snippet OMZP::ssh-agent
 zinit cdreplay -q
 
 #use with C-O, C-J or command 'ziconsole'
