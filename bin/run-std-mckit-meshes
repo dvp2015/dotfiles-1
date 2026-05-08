@@ -13,6 +13,6 @@
 . ~/dev//mckit-meshes/.venv/bin/activate
 mckit-meshes mesh2npz 
 mckit-meshes npz2vtk -p vtk npz/*.npz
-bzip2 *.m
+# bzip2 *.m
 
 success "Done!"

@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# Show ZSH loading time
+# https://github.com/zdharma-continuum/zinit/issues/337
+
+
+for i in {0..10}; do time zsh -i -c exit; done

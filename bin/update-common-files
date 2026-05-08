@@ -46,10 +46,12 @@ main() {
         .gitattributes
         .pre-commit-config.yaml
         .readthedocs.yaml
+        .taplo.toml
         justfile
         pixi.toml
         pylintrc.toml
         pyproject.toml
+        pyproject-fmt.toml
         pytest.toml
         ruff.toml
         tests/conftest.py

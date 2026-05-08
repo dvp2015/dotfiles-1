@@ -66,12 +66,11 @@ zinit light yuki-yano/zeno.zsh
 #
 
 # Add in snippets
-zinit snippet OMZP::colorize
+# zinit snippet OMZP::colorize
 zinit snippet OMZP::git
-# zinit snippet OMZP::gitfast
-zinit snippet OMZP::git-extras
-zinit snippet OMZP::sudo
-zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::git-extras
+# zinit snippet OMZP::sudo
+# zinit snippet OMZP::command-not-found
 
 
 # ZSH_WEB_SEARCH_ENGINES=(
@@ -82,7 +81,7 @@ zinit snippet OMZP::command-not-found
 
 # zinit snippet OMZP::python
 # zinit snippet OMZP::ripgrep
-zinit snippet OMZP::ssh-agent
+# zinit snippet OMZP::ssh-agent
 zinit cdreplay -q
 
 #use with C-O, C-J or command 'ziconsole'
@@ -98,7 +97,10 @@ zinit cdreplay -q
 # fi
 
 
-
+# Do nothing, but remove zinit's zi alias -- conflicts with z.lua and zoxide
+# https://github.com/zdharma-continuum/zinit/issues/706
+zinit ice wait"0" atinit"unalias zi zini zpl zplg"
+zinit snippet > /dev/null
 
 # Keybindings
 bindkey -e
