@@ -9,11 +9,14 @@
 # set -o xtrace   # Display expanded command and arguments       'set -x'                               
 
 # define last version: https://github.com/dvershinin/lastversion
-lastversion --version > /dev/null || pipx install lastversion
-version="$(lastversion zotero)"
-file="Zotero-${version}_linux-x86_64.tar.bz2"
+lastversion --version > /dev/null || uv tool install lastversion
+# version="$(lastversion zotero)"
+# file="Zotero-${version}_linux-x86_64.tar.bz2"
+file="zotero.tar.xz"
 # https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=7.0.10
-url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
+# https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64
+# url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=$version"
+url="https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64"
 dir="Zotero_linux-x86_64"
 
 usage() {
@@ -54,11 +57,11 @@ main() {
     mkdir -p ~/Downloads/install/zotero
     pushd ~/Downloads/install/zotero > /dev/null
     if [[ "$arg" == "--force-download" ]]; then
-        rm -f $file
+        rm -f $file 
     fi
     #TODO: wget on amarano interrupts and breaks the file, check or load mannually
     [[ -f $file ]] || wget -O "$file" --retry-on-host-error "$url" || die "Cannot download $url" 
-    tar jxvf "$file" || die "Cannot unpack file $file"
+    tar Jxvf "$file" || die "Cannot unpack file $file"
     [[ -d $dir ]] && mv "$dir" "/opt/zotero" || die "Directory $dir is not available"
     ln -s /opt/zotero/zotero $HOME/bin/zotero
     ln -s /opt/zotero/zotero.desktop $HOME/.local/share/applications/zotero.desktop
