@@ -4,7 +4,7 @@
 #
 # 2026-06-05 dvp
 #
-version="0.1.0"
+version="0.2.0"
 
 set -e
 
@@ -33,7 +33,11 @@ main() {
     usage
     return 1
   else
-    git remote rename origin old-origin
+    old_origin="$2"
+    if [[ -z "$old_origin" ]]; then
+      old_origin="old-origin"
+    fi
+    git remote | grep "$old_origin" && echo "❗ $old_origin already exists" || git remote rename origin "$old_origin"
     git remote add origin "$1"
     git push --set-upstream origin --all
     git push --set-upstream origin --tags
