@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Swith origin to a new url
+#
+# 2026-06-05 dvp
+#
+version="0.1.0"
+
+set -e
+
+# git@gitlab2.iterrf.ru:dvp/dvp-misc.git 
+
+me=$(basename $0)
+
+
+usage() {
+    echo "$me"
+    echo 
+    echo "Цель: установить origin проекта на новый url"
+    echo
+    echo "Пример:"
+    echo "    $me git@gitlab2.iterrf.ru:<user>/<project>.git"
+    echo 
+}
+
+main() {
+  if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    usage
+  elif [[ -z "$1" ]]; then
+    echo "🤔🔗 укажите новый url для origin"
+    echo
+    echo -n "Использование "
+    usage
+    return 1
+  else
+    git remote rename origin old-origin
+    git remote add origin "$1"
+    git push --set-upstream origin --all
+    git push --set-upstream origin --tags
+    echo "🌟 origin установлен на $1"
+  fi
+}
+
+main "$@"
