@@ -263,6 +263,12 @@ function rgf() {
         --bind 'enter:become(vim {1} +{2})'    
 }
 
+function title() {
+  echo -ne "\e]0;"
+  echo -n "$@"
+  echo -ne "\a"
+}
+
 [[ ! -f ~/.uv-completions ]] || source ~/.uv-completions
 [[ ! -f ~/.just-completions ]] || source ~/.just-completions
 
@@ -273,6 +279,8 @@ function rgf() {
 
 path=('/home/dvp/.juliaup/bin' $path)
 export PATH
+# Tab completion for juliaup and julia channel selection
+[ -f "/home/dvp/.julia/juliaup/completions/zsh.zsh" ] && source "/home/dvp/.julia/juliaup/completions/zsh.zsh"
 
 # <<< juliaup initialize <<<
 
@@ -301,3 +309,4 @@ command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 if [[ -r "/opt/intel/oneapi/setvars.sh" ]]; then
     source /opt/intel/oneapi/setvars.sh > /dev/null
 fi
+eval "$(_MARIMO_COMPLETE=zsh_source marimo)"
