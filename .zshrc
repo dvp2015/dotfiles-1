@@ -200,7 +200,7 @@ eval "$(zoxide init zsh)"
 function zinitup() {
     echo "zinit update zsh..."
     zinit self-update
-    zinit update
+    zinit update --parallel 40
 }
 
 function allup() {
@@ -300,7 +300,19 @@ if [[ -d "/home/dvp/.pixi/bin" ]]; then
     eval "$(pixi unpack completion --shell zsh)"
 fi
 
-command -v starship  > /dev/null && eval "$(starship init zsh)"
+# as recommended by pixi
+# command -v starship  > /dev/null && eval "$(starship init zsh)"
+
+# as recommende in zinit README
+# Load starship theme
+# line 1: `starship` binary as command, from github release
+# line 2: starship setup at clone(create init.zsh, completion)
+# line 3: pull behavior same as clone, source init.zsh
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
 command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
@@ -309,4 +321,5 @@ command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 if [[ -r "/opt/intel/oneapi/setvars.sh" ]]; then
     source /opt/intel/oneapi/setvars.sh > /dev/null
 fi
-eval "$(_MARIMO_COMPLETE=zsh_source marimo)"
+command -v marimo  > /dev/null && eval "$(_MARIMO_COMPLETE=zsh_source marimo)"
+
