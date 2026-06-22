@@ -1,5 +1,5 @@
 GROUP "local"
-  ENTRY "/media/dvp" URL "/media/dvp"
+  ENTRY "usb" URL "/media/dvp"
   ENTRY "dev" URL "/home/dvp/dev"
 ENDGROUP
 GROUP "lenovo"
@@ -22,10 +22,10 @@ GROUP "hpc-002"
   ENTRY "wrk" URL "/sftp://dvp@10.0.130.151/sharedfolder/common/wrk"
 ENDGROUP
 GROUP "gitlab2"
-  ENTRY "projects" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common/projects"
-  ENTRY "common" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/common"
-  ENTRY "dvp@ftp" URL "/sftp://dvp@gitlab2.iterrf.ru/data/ftpdata/dvp"
-  ENTRY "~" URL "/sftp://dvp@gitlab2.iterrf.ru/home/dvp"
+  ENTRY "projects" URL "/sh://dvp@gitlab2.iterrf.ru/data/ftpdata/common/projects"
+  ENTRY "common" URL "/sh://dvp@gitlab2.iterrf.ru/data/ftpdata/common"
+  ENTRY "dvp@ftp" URL "/sh://dvp@gitlab2.iterrf.ru/data/ftpdata/dvp"
+  ENTRY "~" URL "/sh://dvp@gitlab2.iterrf.ru/home/dvp"
 ENDGROUP
 GROUP "gitlab1"
   ENTRY "trt-hall@cs" URL "/sftp://dvp@gitlab.iterrf.ru/mnt/DataVol2/ftp/projects/mcnp/trt-hall"
@@ -52,6 +52,7 @@ GROUP "hpc4"
 ENDGROUP
 GROUP "config"
   ENTRY "mc config" URL "/home/dvp/.config/mc"
+  ENTRY "ssh config" URL "/home/dvp/.ssh"
 ENDGROUP
 GROUP "hpc-larionov-001"
   ENTRY "/home/dvp" URL "/sftp://dvp@10.0.130.111/home/dvp"
