@@ -86,7 +86,7 @@ _fix-omz-plugin() {
 }
 
 # Add in snippets
-zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for OMZP::{alias-finder,colorize,command-not-found,git}
+zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for OMZP::{alias-finder,colorize,command-not-found,extract,git}
 # zinit snippet OMZP::colorize
 # zinit snippet OMZP::git
 # zinit snippet OMZP::command-not-found
