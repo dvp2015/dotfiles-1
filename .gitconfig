@@ -162,6 +162,7 @@
 [init]
   defaultBranch = master
 
+#  https://crates.io/crates/git-delta
 [interactive]
     diffFilter = delta --color-only --features=interactive
 
