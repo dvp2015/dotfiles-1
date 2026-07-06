@@ -97,7 +97,7 @@
 
 [merge]
     tool = vimdiff
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [mergetool]
     prompt = false
@@ -167,7 +167,8 @@
     diffFilter = delta --color-only --features=interactive
 
 [delta]
-    features = decorations
+  navigate = true  # use n and N to move between diff sections
+  features = decorations
 
 [delta "interactive"]
     keep-plus-minus-markers = false

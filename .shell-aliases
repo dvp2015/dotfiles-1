@@ -35,9 +35,15 @@ alias hpc2='ssh dvpab@ui2.computing.kiae.ru'
 alias hpc4='ssh dvpab@ui4.computing.kiae.ru'
 alias manadvantg0='/opt/advantg/doc/ADVANTG-3.0.pdf'
 alias manadvantg1='/opt/advantg/doc/ADVANTG-3.2.pdf'
-alias manmcnp1='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_I.pdf'
-alias manmcnp2='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_II.pdf'
-alias manmcnp3='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_III.pdf'
+if [[ "$HOST" == "amarano" ]]; then
+  alias manmcnp1='/mnt/amarano-2tb/docs/mcnp-docfiles/MCNP5_manual_VOL_I.pdf'
+  alias manmcnp2='/mnt/amarano-2tb/docs/mcnp-docfiles/MCNP5_manual_VOL_II.pdf'
+  alias manmcnp3='/mnt/amarano-2tb/docs/mcnp-docfiles/MCNP5_manual_VOL_III.pdf'
+else
+  alias manmcnp1='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_I.pdf'
+  alias manmcnp2='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_II.pdf'
+  alias manmcnp3='/opt/lanl/MCNP5/docfiles/MCNP5_manual_VOL_III.pdf'
+fi
 alias misc='~/misc'
 alias ne='~/dev/python/ne'
 alias sshcs='ssh dvp@gitlab.iterrf.ru'

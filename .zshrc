@@ -339,11 +339,15 @@ zinit light starship/starship
 
 command -v direnv  > /dev/null && eval "$(direnv hook zsh)"
 
+# Intel ifort 
+# commented out because this conflicts with newer versions of mkl in local environments
+# if [[ -r "/opt/intel/oneapi/setvars.sh" ]]; then
+#     source /opt/intel/oneapi/setvars.sh > /dev/null
+# fi
+
+# marimo
+command -v marimo  > /dev/null && eval "$(_MARIMO_COMPLETE=zsh_source marimo)"
+
 #  vim: set ts=4 sw=0 tw=79 ss=0 ft=zsh et ai :
 
-# Intel ifort
-if [[ -r "/opt/intel/oneapi/setvars.sh" ]]; then
-    source /opt/intel/oneapi/setvars.sh > /dev/null
-fi
-command -v marimo  > /dev/null && eval "$(_MARIMO_COMPLETE=zsh_source marimo)"
 
