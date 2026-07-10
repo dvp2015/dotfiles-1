@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Convert Jupyter notebooks to mariom python files.
+#
+# 2026-07-10 dvp
+#
+
+set -eu
+
+main() {
+  for f in $@; do 
+    local target="${f%.*}"
+    marimo convert "$f" -o "${target}.py" 
+  done
+  echo "✨ Success!"
+}
+
+main ${@:-*.ipynb}
