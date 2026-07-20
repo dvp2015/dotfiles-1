@@ -1,11 +1,11 @@
 #!/bin/bash
 
-uv tool install lastversion --reinstall
+uv tool install --with requests[socks] --force lastversion
 uv tool install build --reinstall
 uv tool install eliot-tree --reinstall
-uv tool install nox --with nox-uv --with jinja2 --reinstall
-uv tool install poetry --reinstall
-uv tool install pylint --with pylint-per-file-ignores  --reinstall
+# uv tool install nox --with nox-uv --with jinja2 --reinstall
+# uv tool install poetry --reinstall
+# uv tool install pylint --with pylint-per-file-ignores  --reinstall
 uv tool install twine  --reinstall
 uv tool install ty  --reinstall
 # https://github.com/sharkdp/shell-functools

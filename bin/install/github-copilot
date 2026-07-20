@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Install github copilot.
+#
+# 2026-07-20 dvp
+#
+# see Obsidian [[Github Copilot]] or https://github.com/features/copilot
+
+
+npm install -g @github/copilot
