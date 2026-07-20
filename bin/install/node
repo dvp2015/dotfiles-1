@@ -31,4 +31,6 @@ install_node() {
   
 }
 
-is_main && install_node "$@"
+# is_main && install_node "$@"
+
+echo "Deprecated: use 'nvm' instead"
