@@ -52,6 +52,8 @@ main() {
         pylintrc.toml
         pyproject.toml
         pyproject-fmt.toml
+        pyrefly.toml
+        pyrightconfig.json
         pytest.toml
         ruff.toml
         tests/conftest.py
