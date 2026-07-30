@@ -18,32 +18,21 @@ fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+    PATH="$HOME/bin${PATH:+:${PATH}}"
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    PATH="$HOME/.local/bin${PATH:+:${PATH}}"
+
 fi
-
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-case ":$PATH:" in
-    *:/home/dvp/.juliaup/bin:*)
-        ;;
-
-    *)
-        export PATH=/home/dvp/.juliaup/bin${PATH:+:${PATH}}
-        ;;
-esac
-
-# <<< juliaup initialize <<<
 
 export GOPATH=$HOME/.go
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
-. "$HOME/.cargo/env"
+if [[ -f $HOME/.cargo/env ]]; then
+  echo "Loading cargo env"
+  . "$HOME/.cargo/env"
+fi
 
 # >>> juliaup initialize >>>
 

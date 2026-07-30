@@ -163,4 +163,4 @@ esac
 #    eval "$(pyenv init - bash)" 
 # fi
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
