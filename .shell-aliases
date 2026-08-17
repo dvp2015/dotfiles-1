@@ -33,8 +33,8 @@ alias hpc-001='ssh dvp@10.0.130.111'
 alias hpc-002='ssh dvp@10.0.130.151'
 alias hpc2='ssh hpc2'
 alias hpc4='ssh hpc4'
-alias hpc4-myq='ssh hpc4 "sqeue -u dvpab | grep dvpab'
-alias hpc4-myqc='ssh hpc4 "sqeue -u dvpab | grep dvpab | wc -l'
+alias myq='ssh hpc4 "squeue -u dvpab" | rg dvpab'
+alias myqc='ssh hpc4 "squeue -u dvpab" | rg dvpab | wc -l'
 alias manadvantg0='/opt/advantg/doc/ADVANTG-3.0.pdf'
 alias manadvantg1='/opt/advantg/doc/ADVANTG-3.2.pdf'
 if [[ "$HOST" == "amarano" ]]; then
@@ -182,8 +182,6 @@ if [[ $(uname) =~ MINGW ]]; then
   alias gst='git status'
 fi
 
-alias pnv='pyenv'
-alias pry='poetry'
 
 # File extension aliases
 # http://www.bash2zsh.com/essays/essay1_file_manager.html
