@@ -13,7 +13,7 @@ set -exuvo pipefail
 
 paraview_ver="$(lastversion https://gitlab.kitware.com/paraview/paraview/-/tree/master)"
 short_ver="${paraview_ver%.*}"
-python_ver="3.10"
+python_ver="3.12"
 download_dir="$HOME/Downloads/install/paraview"
 archive_file="ParaView-${paraview_ver}-MPI-Linux-Python${python_ver}-x86_64.tar.gz"
 working_dir="${archive_file%.tar*}"
