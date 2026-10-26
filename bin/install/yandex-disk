@@ -1,23 +1,12 @@
-<<<<<<< HEAD
 #!/bin/bash
 
 # https://yandex.ru/support/disk-desktop-linux/start.html
-# dvp: obsolete - don't use apt-key
+# dvp: the above instruction is obsolete - don't use apt-key
+#      the following fixes this
 
 wget -O YANDEX-DISK-KEY.GPG http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
-cat YANDEX-DISK-KEY.GPG | sudo gpg --dearmor -o /etc/apt/keyrings/yandex-disk.gpg
-echo "deb [signed-by=/etc/apt/keyrings/yandex-disk.gpg] http://repo.yandex.ru/yandex-disk/deb/ stable main" >> /etc/apt/sources.list.d/yandex-disk.list
+cat YANDEX-DISK-KEY.GPG | sudo gpg --dearmor -q -o /etc/apt/keyrings/yandex-disk.gpg
+record="deb [signed-by=/etc/apt/keyrings/yandex-disk.gpg] http://repo.yandex.ru/yandex-disk/deb/ stable main"
+sudo echo "$record" | sudo tee -a /etc/apt/sources.list.d/yandex-disk.list
 sudo apt-get update
 sudo apt-get install yandex-disk
-||||||| parent of a3e3f32 (feat: settings for hpc-002)
-=======
-#!/bin/bash
-
-# https://yandex.ru/support/disk-desktop-linux/start.html
-
-wget -O YANDEX-DISK-KEY.GPG http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
-apt-key add YANDEX-DISK-KEY.GPG
-echo "deb http://repo.yandex.ru/yandex-disk/deb/ stable main" >> /etc/apt/sources.list.d/yandex-disk.list
-apt-get update
-apt-get install yandex-disk
->>>>>>> a3e3f32 (feat: settings for hpc-002)

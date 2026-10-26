@@ -4,17 +4,17 @@ pixi global install pixi-pack pixi-unpack
 pixi global install direnv
 pixi global install cmake
 # pixi global install coverage --with toml
-pixi global install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib --with xlsxwriter
-pixi global install pre-commit
-pixi global install pyright
-pixi global install ruff
-pixi global install sphinx --with sphinx-autodoc-typehints
-pixi global install sphinx-autobuild
+# pixi global install jupyterlab --with polars --with duckdb --with altair --with jupytext --with jupysql --with numpy --with scipy --with jax --with matplotlib --with xlsxwriter
+# pixi global install pre-commit
+# pixi global install pyright
+# pixi global install ruff
+# pixi global install sphinx --with sphinx-autodoc-typehints
+# pixi global install sphinx-autobuild
 # https://github.com/scientific-python/cookie
 pixi global install --with copier-templates-extensions copier
 # https://cruft.github.io/cruft/
 pixi global install cruft
-pixi global install starship  
+# pixi global install starship  
 pixi global install ollama
 pixi global install clang clang-format clang-tools
 pixi global install btop
