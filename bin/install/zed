@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Install zed - AI oriented, Rust based editor
+# https://zed.dev/docs/installation
+
+curl -f https://zed.dev/install.sh | sh
