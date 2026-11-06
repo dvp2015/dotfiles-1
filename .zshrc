@@ -87,9 +87,6 @@ _fix-omz-plugin() {
 
 # Add in snippets
 zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for OMZP::{alias-finder,colorize,command-not-found,extract,git}
-# zinit snippet OMZP::colorize
-# zinit snippet OMZP::git
-# zinit snippet OMZP::command-not-found
 
 
 # ZSH_WEB_SEARCH_ENGINES=(``
@@ -97,23 +94,8 @@ zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for OMZP::{alias-find
 # )
 # zinit snippet OMZP::web-search
 
-# zinit snippet OMZP::python
-# zinit snippet OMZP::ripgrep
 zinit snippet OMZP::ssh-agent
 zinit cdreplay -q
-
-#use with C-O, C-J or command 'ziconsole'
-# zinit wait lucid for zinit-zsh/zinit-console
-# requires authentification on github by password, but that is prohibited since
-# 2021
-
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# # Initialization code that may require console input (password prompts, [y/n]
-# # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 
 # Do nothing, but remove zinit's zi alias -- conflicts with z.lua and zoxide
 # https://github.com/zdharma-continuum/zinit/issues/706
@@ -301,10 +283,10 @@ function title() {
 
 # !! Contents within this block are managed by juliaup !!
 
-path=('/home/dvp/.juliaup/bin' $path)
+path=("${HOME}/.juliaup/bin" $path)
 export PATH
 # Tab completion for juliaup and julia channel selection
-[ -f "/home/dvp/.julia/juliaup/completions/zsh.zsh" ] && source "/home/dvp/.julia/juliaup/completions/zsh.zsh"
+[ -f "${HOME}/.julia/juliaup/completions/zsh.zsh" ] && source "${HOME}/.julia/juliaup/completions/zsh.zsh"
 
 # <<< juliaup initialize <<<
 
@@ -357,3 +339,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="/home/dvp/.pixi/bin:$PATH"
+
+# opencode
+export PATH=/home/dvp/.opencode/bin:$PATH

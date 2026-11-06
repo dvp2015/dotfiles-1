@@ -146,15 +146,15 @@ fi
 # !! Contents within this block are managed by juliaup !!
 
 case ":$PATH:" in
-    *:/home/dvp/.juliaup/bin:*)
+    *:"${HOME}/.juliaup/bin":*)
         ;;
 
     *)
-        export PATH=/home/dvp/.juliaup/bin${PATH:+:${PATH}}
+        export PATH="${HOME}/.juliaup/bin"${PATH:+:${PATH}}
         ;;
 esac
 # Tab completion for juliaup and julia channel selection
-[ -f "/home/dvp/.julia/juliaup/completions/bash.sh" ] && source "/home/dvp/.julia/juliaup/completions/bash.sh"
+[ -f "${HOME}/.julia/juliaup/completions/bash.sh" ] && source "${HOME}/.julia/juliaup/completions/bash.sh"
 
 # <<< juliaup initialize <<<
 

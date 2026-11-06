@@ -39,11 +39,11 @@ fi
 # !! Contents within this block are managed by juliaup !!
 
 case ":$PATH:" in
-    *:/home/dvp/.juliaup/bin:*)
+    *:"${HOME}/.juliaup/bin":*)
         ;;
 
     *)
-        export PATH=/home/dvp/.juliaup/bin${PATH:+:${PATH}}
+        export PATH="${HOME}/.juliaup/bin"${PATH:+:${PATH}}
         ;;
 esac
 
