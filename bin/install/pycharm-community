@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+#
+# Install pycharm
+#
+
+. $HOME/.bash-functions.rc
+
+set -exu 
+
+PYCHARM_VER="$(lastversion --at github intellij-community)"
+DIR="/opt/pycharm-$PYCHARM_VER"
+ARCHIVE="pycharm-$PYCHARM_VER.tar.gz"
+URL="https://github.com/JetBrains/intellij-community/releases/download/pycharm%2F${PYCHARM_VER}/${ARCHIVE}"
+
+
+main() {
+    if [[ -f "$ARCHIVE" ]]; then 
+        echo "$ARCHIVE is already downloaded. Stop"
+        return 0
+    fi
+    echo "Downloading Pycharm v$PYCHARM_VER"
+    pushd /opt > /dev/null
+    curl -L "$URL" --output "$ARCHIVE"
+    tar xzf $ARCHIVE
+    rm -f pycharm
+    ln -s $DIR pycharm
+    popd > /dev/null
+}
+
+main
+
+
+
+# vim: set ts=4 sw=4 tw=92 ss=0 ft=sh et ai :

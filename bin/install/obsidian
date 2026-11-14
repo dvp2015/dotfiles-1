@@ -7,14 +7,18 @@
 
 . $HOME/.bash-functions.rc
 
-OBSIDIAN_VER="$(lastversion --at github ObsidianMd)"
+set -exu 
+
+OBSIDIAN_VER="$(lastversion --at github obsidian-releases)"
 BIN="$HOME/.local/bin"
 EXE="$BIN/obsidian"
 URL="https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VER}/Obsidian-${OBSIDIAN_VER}.AppImage"
 
+
 main() {
+    echo "Downloading Obsidiian v$OBSIDIAN_VER"
     mkdir --parents "$BIN"
-    curl -L "$URL" -o "$EXE"
+    curl -L "$URL" -o "$EXE" && echo "Saved to $EXE" || echo "ERROR: Failed to load $URL" && return 1
     chmod u+x $EXE
     cp obsidian.png $BIN
     cp obsidian.desktop $HOME/.local/share/applications
